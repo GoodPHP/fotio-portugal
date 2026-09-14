@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { setRequestLocale, getMessages } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { routing } from '@/i18n/routing';
@@ -49,7 +49,6 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const messages = await getMessages();
   const fontVars = `${inter.variable} ${jetbrains.variable} ${fraunces.variable}`;
 
   return (
@@ -62,8 +61,20 @@ export default async function LocaleLayout({
             these by @id (provider/parentOrganization/publisher), so emitting them
             once globally keeps those references resolvable across the site. */}
         <JsonLd data={graph([organizationNode(), websiteNode(locale as Locale)])} />
-        <NextIntlClientProvider messages={messages}>
-          <NavBar />
+        {/*
+          The provider stays, but without `messages`.
+
+          Its two jobs are separable: it supplies the locale to client
+          components — next-intl's own <Link> calls useLocale(), so every
+          internal link on the site depends on it — and it serializes the
+          message catalogue for client components that translate. After the
+          masthead became a server component nothing does the second thing, so
+          the catalogue was being written into the RSC payload of every page
+          for no reader. Dropping the prop keeps the links working and stops
+          shipping the dictionary.
+        */}
+        <NextIntlClientProvider locale={locale as Locale}>
+          <NavBar locale={locale as Locale} />
           <div className="flex-1">{children}</div>
           <Footer />
         </NextIntlClientProvider>

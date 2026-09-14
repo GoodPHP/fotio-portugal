@@ -1,10 +1,8 @@
 'use client';
 
-import { Fragment, useEffect, useState, useTransition } from 'react';
-import { useParams } from 'next/navigation';
-import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/lib/locales';
+import { Fragment, useEffect, useState } from 'react';
+import { LOCALES, type Locale } from '@/lib/locales';
 import { META_ALT_PREFIX } from '@/lib/site';
-import { localizedPath } from '@/lib/urls';
 
 const LOCALE_LABELS: Record<Locale, { short: string; full: string }> = {
   en: { short: 'EN', full: 'English' },
@@ -23,6 +21,13 @@ function publishedPath(locale: Locale): string | null {
   return content && content.startsWith('/') ? content : null;
 }
 
+interface LocaleSwitcherProps {
+  /** The locale being viewed, resolved on the server. */
+  current: Locale;
+  /** Each language's home page, as a fallback destination. */
+  homeHrefs: Record<Locale, string>;
+}
+
 /**
  * Both languages, side by side, the current one marked.
  *
@@ -36,11 +41,13 @@ function publishedPath(locale: Locale): string | null {
  * "mariage" cannot be computed on the client without shipping the catalogue to
  * it. A page that publishes no path for a language does not exist in that
  * language, and the switcher says so instead of offering a dead link.
+ *
+ * The current locale and the per-language home pages arrive as props rather
+ * than being derived here. Deriving them cost `useParams` and, worse, an
+ * import of `localizedPath` — which drags the entire route table into the
+ * client bundle to answer a question the server already knew the answer to.
  */
-export default function LocaleSwitcher() {
-  const params = useParams();
-  const current = (params.locale as Locale) ?? DEFAULT_LOCALE;
-  const [isPending, startTransition] = useTransition();
+export default function LocaleSwitcher({ current, homeHrefs }: LocaleSwitcherProps) {
 
   // Read after mount, not during render: the server cannot know what the
   // client's DOM says, and disagreeing with it would be a hydration mismatch.
@@ -55,17 +62,15 @@ export default function LocaleSwitcher() {
 
   function selectLocale(next: Locale) {
     if (next === current) return;
-    startTransition(() => {
-      // Falls back to that language's home page, which always exists, rather
-      // than to a guess at this page's address.
-      const path = publishedPath(next) ?? localizedPath(next, '/');
-      // The middleware negotiates locale from NEXT_LOCALE, and a plain
-      // navigation does not touch it. Without this the cookie still names the
-      // old language and the request is redirected straight back — so once you
-      // switched to French you could never switch out of it.
-      document.cookie = `NEXT_LOCALE=${next};path=/;max-age=31536000;samesite=lax`;
-      window.location.assign(path);
-    });
+    // Falls back to that language's home page, which always exists, rather
+    // than to a guess at this page's address.
+    const path = publishedPath(next) ?? homeHrefs[next];
+    // The middleware negotiates locale from NEXT_LOCALE, and a plain
+    // navigation does not touch it. Without this the cookie still names the
+    // old language and the request is redirected straight back — so once you
+    // switched to the prefixed language you could never switch out of it.
+    document.cookie = `NEXT_LOCALE=${next};path=/;max-age=31536000;samesite=lax`;
+    window.location.assign(path);
   }
 
   return (
@@ -96,10 +101,9 @@ export default function LocaleSwitcher() {
               <button
                 type="button"
                 onClick={() => selectLocale(locale)}
-                disabled={isPending}
                 lang={locale}
                 aria-label={full}
-                className="text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep disabled:opacity-50"
+                className="text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
               >
                 {short}
               </button>

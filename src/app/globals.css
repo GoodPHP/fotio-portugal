@@ -176,6 +176,48 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+ * Masthead.
+ *
+ * The active-link styling is a class rather than a prop because the masthead
+ * renders on the server, which has no pathname; <NavActive> adds the class
+ * after mount. Declaring it here keeps the two halves of that arrangement in
+ * one place each rather than spread through a template literal.
+ * ------------------------------------------------------------------------- */
+
+.nav-link-active {
+  color: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+  font-weight: 500;
+}
+
+/* In the mobile panel the links are large and unbordered, so the cue differs. */
+.nav-menu .nav-link-active {
+  color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-rule);
+  font-weight: 600;
+}
+
+/* The <details> disclosure: suppress the native marker in every engine. */
+.nav-menu > summary {
+  list-style: none;
+}
+.nav-menu > summary::-webkit-details-marker {
+  display: none;
+}
+.nav-menu > summary::marker {
+  content: '';
+}
+
+/* One icon, two paths, whichever matches the open state. */
+.nav-menu .nav-menu-open,
+.nav-menu[open] .nav-menu-closed {
+  display: none;
+}
+.nav-menu[open] .nav-menu-open {
+  display: inline;
+}
+
+/* ---------------------------------------------------------------------------
  * Entrance animations.
  *
  * Driven by each element's own progress through the scrollport, so there is no
