@@ -18,13 +18,13 @@ import BookingWidget, {
 } from '@/components/BookingWidget';
 
 const COPY = {
-  title: { en: 'Book your session', fr: 'Réservez votre séance' },
-  eyebrow: { en: 'Free quote', fr: 'Devis gratuit' },
+  title: { en: 'Book your session', pt: 'PT_TODO: Book your session' },
+  eyebrow: { en: 'Free quote', pt: 'PT_TODO: Free quote' },
   intro: {
     en: 'Tell us about your session and we’ll send a tailored price on WhatsApp within minutes. Every quote is personalised.',
-    fr: 'Parlez-nous de votre séance : nous vous envoyons un prix sur mesure sur WhatsApp en quelques minutes. Chaque devis est personnalisé.',
+    pt: 'PT_TODO: Tell us about your session and we’ll send a tailored price o',
   },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

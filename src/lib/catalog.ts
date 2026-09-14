@@ -1,6 +1,6 @@
 import { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS } from './data';
 import type { City, Service, BlogPost, Review, ServiceCategory } from './types';
-import { LOCALES, type Locale } from './locales';
+import { LOCALES, tx, type Locale } from './locales';
 import {
   isServicePublished,
   isCityPublished,
@@ -101,6 +101,18 @@ export function getServiceByAnySlug(slug: string): Service | undefined {
 /** Services offered in `locale`, in catalogue order. */
 export function servicesFor(locale: Locale): readonly Service[] {
   return SERVICES_BY_LOCALE[locale];
+}
+
+/**
+ * A city's name as `locale` writes it.
+ *
+ * `City.name` is the Portuguese form and the canonical one — it keys the
+ * JSON-LD @ids, the image paths and the publish schedule — so it cannot also
+ * be the thing shown to an English reader who searches for Lisbon, not Lisboa.
+ * France never forced this distinction, because Paris is Paris.
+ */
+export function localizedCityName(city: City, locale: Locale): string {
+  return city.nameLocalized ? tx(city.nameLocalized, locale) : city.name;
 }
 
 export function getBlogPost(slug: string): BlogPost | undefined {

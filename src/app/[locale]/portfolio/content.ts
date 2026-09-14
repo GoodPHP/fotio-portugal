@@ -7,10 +7,10 @@ import { tx, type Locale, type Localized } from '@/lib/locales';
  * English is authored; French falls back to it via `tx()` until translated.
  */
 
-/** ≤60 chars once the layout appends " | Ylala". */
+/** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
   en: 'Photography Portfolio — Real Sessions in France',
-  fr: 'Portfolio photo — séances réelles en France',
+  pt: 'PT_TODO: Photography Portfolio — Real Sessions in France',
 };
 
 /**
@@ -19,7 +19,7 @@ export const META_TITLE: Localized = {
  */
 const DESCRIPTION_TEMPLATE: Localized = {
   en: 'Browse {count} photographs from real sessions across 22 French cities — weddings, portraits, families, corporate. Filter by category and book the same shoot.',
-  fr: '{count} photographies de séances réelles dans 22 villes françaises — mariage, portrait, famille, corporate. Filtrez par catégorie et réservez la même séance.',
+  pt: 'PT_TODO: Browse {count} photographs from real sessions across 22 Fren',
 };
 
 export function metaDescription(locale: Locale, photoCount: number): string {
@@ -28,14 +28,14 @@ export function metaDescription(locale: Locale, photoCount: number): string {
 
 export const OG_IMAGE_ALT: Localized = {
   en: 'A frame from the Ylala portfolio — real client sessions photographed across France',
-  fr: 'Une image du portfolio Ylala — séances clients réelles photographiées en France',
+  pt: 'PT_TODO: A frame from the Ylala portfolio — real client sessions phot',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'About this gallery', fr: 'À propos de cette galerie' } as Localized,
+  eyebrow: { en: 'About this gallery', pt: 'PT_TODO: About this gallery' } as Localized,
   heading: {
     en: 'Work from the network, not a stock library',
-    fr: 'Le travail du réseau, pas une banque d’images',
+    pt: 'PT_TODO: Work from the network, not a stock library',
   } as Localized,
   paragraphs: {
     en: [
@@ -44,25 +44,25 @@ export const SEO_PROSE = {
       'It is also the fastest way to brief a session. Most people arrive knowing the occasion but not the treatment, and pointing at three photographs settles more than a paragraph of description will. Note what you like — the hour, the light, how close the camera sits, whether the frame is posed or caught — and send it with your enquiry. The photographer will tell you what it takes to get there in your city, and whether the location works at the time you had in mind.',
       'Every session shown was booked at a fixed price agreed in writing, and delivered as a private online gallery within forty-eight to seventy-two hours.',
     ],
-    fr: [
-      'Tout ce qui précède provient de séances réellement photographiées par le réseau : des commandes clients dans vingt-deux villes et destinations françaises, regroupées par la catégorie sous laquelle elles ont été réservées. Filtrez par portrait, couple, famille, mariage, voyage, entreprise, commercial ou mode, et touchez une image pour l’ouvrir en plein écran.',
-      'Cette galerie se lit comme une grille tarifaire en images. Le rendu que vous voyez est celui que le tarif achète — mêmes photographes, même retouche, même livraison. L’étalonnage est volontairement sobre : la peau reste de la peau, et un après-midi provençal a le droit d’en avoir l’air. Nous ne remplaçons pas les ciels, n’affinons pas les visages et ne déplaçons personne d’une image à l’autre ; rien ici n’a été retouché au-delà de ce qu’un client a reçu.',
-      'C’est aussi la façon la plus rapide de préparer une séance. La plupart des gens connaissent l’occasion mais pas le traitement, et montrer trois photographies règle plus de questions qu’un paragraphe de description. Relevez ce qui vous plaît — l’heure, la lumière, la distance de l’appareil, l’image posée ou saisie — et joignez-le à votre demande. Le photographe vous dira ce qu’il faut pour y parvenir dans votre ville, et si le lieu tient à l’heure envisagée.',
-      'Chaque séance présentée a été réservée à un prix fixé par écrit et livrée en galerie privée sous quarante-huit à soixante-douze heures.',
-    ],
+    pt: [
+    'PT_TODO: Everything above comes from sessions the network actually sh',
+    'PT_TODO: The gallery is worth reading as a price list in pictures. Th',
+    'PT_TODO: It is also the fastest way to brief a session. Most people a',
+    'PT_TODO: Every session shown was booked at a fixed price agreed in wr',
+  ],
   } as Localized<string[]>,
   facts: {
     en: [
       { label: 'Photographs shown', value: '{count}' },
       { label: 'Categories', value: '9' },
-      { label: 'Cities covered', value: '22' },
-      { label: 'Stock imagery', value: 'None' },
+      { label: 'Cities covered', value: '12' },
+      { label: 'Photo credits', value: 'Published' },
     ],
-    fr: [
-      { label: 'Photographies', value: '{count}' },
-      { label: 'Catégories', value: '9' },
-      { label: 'Villes couvertes', value: '22' },
-      { label: 'Images de banque', value: 'Aucune' },
+    pt: [
+      { label: 'Fotografias mostradas', value: '{count}' },
+      { label: 'Categorias', value: '9' },
+      { label: 'Cidades cobertas', value: '12' },
+      { label: 'Créditos das fotos', value: 'Publicados' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

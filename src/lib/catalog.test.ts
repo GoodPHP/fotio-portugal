@@ -30,13 +30,13 @@ describe('serviceSlug', () => {
   test('falls back to the canonical slug when a locale has none', () => {
     const s = make({ slug: 'portrait' });
     assert.equal(serviceSlug(s, 'en'), 'portrait');
-    assert.equal(serviceSlug(s, 'fr'), 'portrait');
+    assert.equal(serviceSlug(s, 'pt'), 'portrait');
   });
 
   test('uses the localized slug where one is authored', () => {
-    const s = make({ slug: 'wedding', slugs: { fr: 'mariage' } });
+    const s = make({ slug: 'wedding', slugs: { pt: 'casamento' } });
     assert.equal(serviceSlug(s, 'en'), 'wedding');
-    assert.equal(serviceSlug(s, 'fr'), 'mariage');
+    assert.equal(serviceSlug(s, 'pt'), 'casamento');
   });
 });
 
@@ -46,9 +46,9 @@ describe('availability', () => {
   });
 
   test('availableIn restricts the locales a service is offered in', () => {
-    const frOnly = make({ slug: 'bapteme', availableIn: ['fr'] });
-    assert.equal(serviceExistsIn(frOnly, 'fr'), true);
-    assert.equal(serviceExistsIn(frOnly, 'en'), false);
+    const ptOnly = make({ slug: 'batizado', availableIn: ['pt'] });
+    assert.equal(serviceExistsIn(ptOnly, 'pt'), true);
+    assert.equal(serviceExistsIn(ptOnly, 'en'), false);
   });
 });
 
@@ -84,7 +84,7 @@ describe('curated leaves', () => {
     const [first] = CURATED_LEAVES;
     assert.ok(first, 'expected the curated list to be non-empty');
     assert.equal(isCuratedLeaf(first.service, first.city, 'en'), true);
-    assert.equal(isCuratedLeaf(first.service, first.city, 'fr'), true);
+    assert.equal(isCuratedLeaf(first.service, first.city, 'pt'), true);
   });
 
   test('a combination nobody wrote is not curated', () => {

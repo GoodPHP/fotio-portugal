@@ -48,7 +48,7 @@ export function clampDescription(description: string, max: number = DESCRIPTION_
  * Splits on the first brand separator (` | `, ` · `, ` — ` followed by the brand)
  * and truncates only the dynamic part so `"<dynamic> <sep> <brand>"` stays within
  * `max`. When `brandSuffixLen` is given (the brand the layout appends to
- * non-absolute titles, e.g. ` | Ylala`), the dynamic part is trimmed so the
+ * non-absolute titles), the dynamic part is trimmed so the
  * eventual rendered title — dynamic + that suffix — also fits.
  */
 export function clampTitle(

@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import type { Locale } from '@/lib/locales';
+import { LOCALES, type Locale } from '@/lib/locales';
 import { Link } from '@/i18n/navigation';
 import { SITE_NAME } from '@/lib/site';
 import { localizedPath } from '@/lib/urls';
@@ -42,7 +42,7 @@ export default async function NavBar({ locale }: { locale: Locale }) {
   // Resolved here so the switcher does not have to import the route table.
   // That import was the single largest thing it contributed to the bundle.
   const homeHrefs = Object.fromEntries(
-    (['en', 'fr'] as const).map((l) => [l, localizedPath(l, '/')]),
+    LOCALES.map((l) => [l, localizedPath(l, '/')]),
   ) as Record<Locale, string>;
 
   return (

@@ -2,14 +2,20 @@
  * Localized URL segments.
  *
  * The App Router tree is English — one physical set of folders — and next-intl
- * rewrites the French URLs onto it. So `/fr/photographe/mariage/paris` and
- * `/services/wedding/paris` are the same route key, `/services/[service]/[city]`,
- * and there is no `photographe/` directory anywhere on disk.
+ * rewrites the Portuguese URLs onto it. So `/pt/fotografo/casamento/lisboa` and
+ * `/services/wedding/lisboa` are the same route key,
+ * `/services/[service]/[city]`, and there is no `fotografo/` directory anywhere
+ * on disk.
  *
  * The segment is data here rather than a literal spread across the pages, for
  * one reason: the canonical URL, the hreflang alternates, the sitemap and every
  * internal link all have to agree on it, and four independent implementations
  * of the same string is three too many.
+ *
+ * Every segment is ASCII, deliberately. Portuguese words with diacritics are
+ * legal in a URL as percent-encoded UTF-8, but they render as `%C3%A7` in a
+ * search result, survive copy-paste badly, and have to be decoded before any
+ * comparison here can match. `precos`, not `preços`.
  *
  * This module imports nothing. `scripts/generate-sitemap.ts` runs under plain
  * tsx before the Next build, with no request context and no bundler, and it
@@ -17,34 +23,39 @@
  */
 
 export const pathnames = {
-  '/': { en: '/', fr: '/' },
+  '/': { en: '/', pt: '/' },
 
-  '/services': { en: '/services', fr: '/photographe' },
-  '/services/[service]': { en: '/services/[service]', fr: '/photographe/[service]' },
+  // "fotógrafo em Lisboa" is the shape of the Portuguese query, so the hub is
+  // the profession rather than the abstraction: /fotografo, not /servicos.
+  '/services': { en: '/services', pt: '/fotografo' },
+  '/services/[service]': { en: '/services/[service]', pt: '/fotografo/[service]' },
   '/services/[service]/[city]': {
     en: '/services/[service]/[city]',
-    fr: '/photographe/[service]/[city]',
+    pt: '/fotografo/[service]/[city]',
   },
 
-  '/cities': { en: '/cities', fr: '/villes' },
-  '/cities/[city]': { en: '/cities/[city]', fr: '/villes/[city]' },
+  '/cities': { en: '/cities', pt: '/cidades' },
+  '/cities/[city]': { en: '/cities/[city]', pt: '/cidades/[city]' },
 
-  '/pricing': { en: '/pricing', fr: '/tarifs' },
-  '/portfolio': { en: '/portfolio', fr: '/portfolio' },
-  '/reviews': { en: '/reviews', fr: '/avis' },
-  '/about': { en: '/about', fr: '/a-propos' },
-  '/contact': { en: '/contact', fr: '/contact' },
-  '/book': { en: '/book', fr: '/reservation' },
+  '/pricing': { en: '/pricing', pt: '/precos' },
+  '/portfolio': { en: '/portfolio', pt: '/portfolio' },
+  '/reviews': { en: '/reviews', pt: '/avaliacoes' },
+  '/about': { en: '/about', pt: '/sobre' },
+  '/contact': { en: '/contact', pt: '/contacto' },
+  '/book': { en: '/book', pt: '/reservar' },
 
-  '/blog': { en: '/blog', fr: '/blog' },
-  '/blog/[slug]': { en: '/blog/[slug]', fr: '/blog/[slug]' },
+  '/blog': { en: '/blog', pt: '/blog' },
+  '/blog/[slug]': { en: '/blog/[slug]', pt: '/blog/[slug]' },
 
-  // Legal pages keep the names French readers expect to see in a footer.
-  '/legal/notice': { en: '/legal/notice', fr: '/mentions-legales' },
-  '/legal/privacy': { en: '/legal/privacy', fr: '/confidentialite' },
-  '/legal/terms': { en: '/legal/terms', fr: '/cgv' },
-  '/legal/image-rights': { en: '/legal/image-rights', fr: '/droit-a-l-image' },
-  '/legal/photo-credits': { en: '/legal/photo-credits', fr: '/credits-photos' },
+  // Legal pages keep the names a Portuguese reader expects in a footer.
+  '/legal/notice': { en: '/legal/notice', pt: '/informacao-legal' },
+  '/legal/privacy': { en: '/legal/privacy', pt: '/politica-de-privacidade' },
+  '/legal/terms': { en: '/legal/terms', pt: '/termos-e-condicoes' },
+  '/legal/image-rights': { en: '/legal/image-rights', pt: '/direito-a-imagem' },
+  '/legal/photo-credits': { en: '/legal/photo-credits', pt: '/creditos-fotograficos' },
+  // Portugal obliges a consumer-facing service provider to publish the
+  // electronic complaints book. See `src/lib/legal.ts`.
+  '/legal/complaints': { en: '/legal/complaints', pt: '/livro-de-reclamacoes' },
 } as const;
 
 /** Every route the site serves, named by its English path. */

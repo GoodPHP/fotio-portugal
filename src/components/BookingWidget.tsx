@@ -22,44 +22,44 @@ interface BookingWidgetProps {
 }
 
 const DURATION_OPTIONS = [
-  { value: 'standard', label: { en: 'Standard', fr: 'Standard' } },
-  { value: 'extended', label: { en: 'Extended', fr: 'Étendue' } },
-  { value: 'fullday', label: { en: 'Full day', fr: 'Journée entière' } },
+  { value: 'standard', label: { en: 'Standard', pt: 'PT_TODO: Standard' } },
+  { value: 'extended', label: { en: 'Extended', pt: 'PT_TODO: Extended' } },
+  { value: 'fullday', label: { en: 'Full day', pt: 'PT_TODO: Full day' } },
 ] as const;
 
 const UI = {
-  service: { en: 'Service', fr: 'Service' },
-  from: { en: 'from', fr: 'à partir de' },
-  city: { en: 'City', fr: 'Ville' },
-  date: { en: 'Date', fr: 'Date' },
-  time: { en: 'Time (optional)', fr: 'Heure (optionnelle)' },
-  duration: { en: 'Session duration', fr: 'Durée de la séance' },
-  addons: { en: 'Add-ons', fr: 'Options' },
-  express: { en: 'Express 24h delivery', fr: 'Livraison express 24h' },
-  second: { en: 'Second photographer', fr: 'Second photographe' },
-  name: { en: 'Full name', fr: 'Nom complet' },
-  email: { en: 'Email', fr: 'E-mail' },
-  phone: { en: 'Phone', fr: 'Téléphone' },
-  remarks: { en: 'Notes (optional)', fr: 'Remarques (optionnelles)' },
-  quoteTitle: { en: 'Tailored quote', fr: 'Devis sur mesure' },
+  service: { en: 'Service', pt: 'PT_TODO: Service' },
+  from: { en: 'from', pt: 'PT_TODO: from' },
+  city: { en: 'City', pt: 'PT_TODO: City' },
+  date: { en: 'Date', pt: 'PT_TODO: Date' },
+  time: { en: 'Time (optional)', pt: 'PT_TODO: Time (optional)' },
+  duration: { en: 'Session duration', pt: 'PT_TODO: Session duration' },
+  addons: { en: 'Add-ons', pt: 'PT_TODO: Add-ons' },
+  express: { en: 'Express 24h delivery', pt: 'PT_TODO: Express 24h delivery' },
+  second: { en: 'Second photographer', pt: 'PT_TODO: Second photographer' },
+  name: { en: 'Full name', pt: 'PT_TODO: Full name' },
+  email: { en: 'Email', pt: 'PT_TODO: Email' },
+  phone: { en: 'Phone', pt: 'PT_TODO: Phone' },
+  remarks: { en: 'Notes (optional)', pt: 'PT_TODO: Notes (optional)' },
+  quoteTitle: { en: 'Tailored quote', pt: 'PT_TODO: Tailored quote' },
   quoteBody: {
     en: 'We reply on WhatsApp within minutes with a price tailored to your session.',
-    fr: 'Nous répondons sur WhatsApp en quelques minutes avec un prix adapté à votre séance.',
+    pt: 'PT_TODO: We reply on WhatsApp within minutes with a price tailored to',
   },
-  perk1: { en: 'No obligation', fr: 'Sans engagement' },
-  perk2: { en: 'Personalised price', fr: 'Prix personnalisé' },
-  perk3: { en: 'Fast reply', fr: 'Réponse rapide' },
-  reference: { en: 'Reference', fr: 'Référence' },
-  submit: { en: 'Send request', fr: 'Envoyer la demande' },
-  sending: { en: 'Sending…', fr: 'Envoi…' },
-  successTitle: { en: 'Request received!', fr: 'Demande reçue !' },
-  successBody: { en: 'We are opening WhatsApp to confirm the details with you.', fr: 'Nous ouvrons WhatsApp pour confirmer les détails.' },
-  whatsapp: { en: 'Open WhatsApp', fr: 'Ouvrir WhatsApp' },
-  errName: { en: 'Enter your name.', fr: 'Saisissez votre nom.' },
-  errEmail: { en: 'Invalid email.', fr: 'E-mail invalide.' },
-  errPhone: { en: 'Invalid phone.', fr: 'Téléphone invalide.' },
-  errDate: { en: 'Choose a date.', fr: 'Choisissez une date.' },
-  errSubmit: { en: 'Submission error. Try again or use WhatsApp.', fr: 'Erreur d’envoi. Réessayez ou utilisez WhatsApp.' },
+  perk1: { en: 'No obligation', pt: 'PT_TODO: No obligation' },
+  perk2: { en: 'Personalised price', pt: 'PT_TODO: Personalised price' },
+  perk3: { en: 'Fast reply', pt: 'PT_TODO: Fast reply' },
+  reference: { en: 'Reference', pt: 'PT_TODO: Reference' },
+  submit: { en: 'Send request', pt: 'PT_TODO: Send request' },
+  sending: { en: 'Sending…', pt: 'PT_TODO: Sending…' },
+  successTitle: { en: 'Request received!', pt: 'PT_TODO: Request received!' },
+  successBody: { en: 'We are opening WhatsApp to confirm the details with you.', pt: 'PT_TODO: We are opening WhatsApp to confirm the details with you.' },
+  whatsapp: { en: 'Open WhatsApp', pt: 'PT_TODO: Open WhatsApp' },
+  errName: { en: 'Enter your name.', pt: 'PT_TODO: Enter your name.' },
+  errEmail: { en: 'Invalid email.', pt: 'PT_TODO: Invalid email.' },
+  errPhone: { en: 'Invalid phone.', pt: 'PT_TODO: Invalid phone.' },
+  errDate: { en: 'Choose a date.', pt: 'PT_TODO: Choose a date.' },
+  errSubmit: { en: 'Submission error. Try again or use WhatsApp.', pt: 'PT_TODO: Submission error. Try again or use WhatsApp.' },
 } as const;
 
 /**
@@ -72,7 +72,7 @@ const UI = {
  */
 const GREETING: Record<Locale, (reference: string) => string> = {
   en: (reference) => `Hi ${SITE_NAME}! [${reference}]`,
-  fr: (reference) => `Bonjour ${SITE_NAME} ! [${reference}]`,
+  pt: (reference) => `Olá ${SITE_NAME}! [${reference}]`,
 };
 
 function t(key: keyof typeof UI, locale: Locale): string {

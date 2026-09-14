@@ -74,7 +74,7 @@ export const COPY = {
   },
   cta: { en: 'Book now' },
   ctaContact: { en: 'Talk to us' },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } satisfies Record<string, Localized>;
 
 export interface Step {
@@ -212,27 +212,27 @@ export const ABOUT_FAQ: AboutFaq[] = [
 // passage that closes the page.
 // ---------------------------------------------------------------------------
 
-/** ≤60 chars once the layout appends " | Ylala". */
+/** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
   en: 'About Ylala — Vetted Photographers in France',
-  fr: 'À propos d’Ylala — photographes vérifiés en France',
+  pt: 'PT_TODO: About Ylala — Vetted Photographers in France',
 };
 
 export const META_DESCRIPTION: Localized = {
   en: 'How Ylala works: local photographers vetted on published work, one fixed price agreed in writing, a private gallery in 48–72h, and a full refund if not.',
-  fr: 'Comment fonctionne Ylala : photographes locaux vérifiés sur travaux publiés, prix fixé par écrit, galerie privée en 48–72 h, remboursement intégral sinon.',
+  pt: 'PT_TODO: How Ylala works: local photographers vetted on published wor',
 };
 
 export const OG_IMAGE_ALT: Localized = {
   en: 'Paris photographed by the Ylala network, which covers 22 French cities and destinations',
-  fr: 'Paris photographiée par le réseau Ylala, présent dans 22 villes et destinations françaises',
+  pt: 'PT_TODO: Paris photographed by the Ylala network, which covers 22 Fre',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'How the network works', fr: 'Comment fonctionne le réseau' } as Localized,
+  eyebrow: { en: 'How the network works', pt: 'PT_TODO: How the network works' } as Localized,
   heading: {
     en: 'What we check before a photographer joins',
-    fr: 'Ce que nous vérifions avant d’admettre un photographe',
+    pt: 'PT_TODO: What we check before a photographer joins',
   } as Localized,
   paragraphs: {
     en: [
@@ -241,25 +241,25 @@ export const SEO_PROSE = {
       'What we hold ourselves to is narrower and easier to check. The price is agreed in writing before the session and does not move afterwards. Editing is included, and there is no charge per extra photograph. The private gallery arrives within forty-eight to seventy-two hours in full resolution, with a licence to print and post it. Enquiring costs nothing and requires no deposit, and if the weather turns we move the session at no cost.',
       'If the work is not what you were promised, we refund it in full rather than argue about taste. That guarantee is the reason the vetting is strict: a network that pays for its own mistakes has to be careful about who it lets in.',
     ],
-    fr: [
-      'Ylala est un réseau de réservation, pas un studio. Nous n’employons pas de photographes et n’en envoyons pas depuis un siège : nous sélectionnons des professionnels qui travaillent déjà dans leur propre ville, et nous prenons en charge ce qui, dans une réservation, tourne habituellement mal — le prix, le calendrier et la livraison.',
-      'L’admission repose sur des travaux publiés, pas sur un portfolio monté pour nous. Nous cherchons un ensemble de séances clients rémunérées dans les catégories demandées, une régularité sur une galerie entière plutôt que cinq belles images, et un étalonnage qui tient sur des carnations ordinaires dans une lumière ordinaire. Nous demandons comment ils gèrent ce que personne ne photographie exprès : la pluie un matin de mariage, un enfant de deux ans qui ne tient pas en place, une salle de réunion avec une seule fenêtre et une échéance.',
-      'Ce à quoi nous nous engageons est plus étroit et plus facile à vérifier. Le prix est fixé par écrit avant la séance et ne bouge plus. La retouche est comprise et aucune photo supplémentaire n’est facturée. La galerie privée arrive sous quarante-huit à soixante-douze heures en pleine résolution, avec le droit de l’imprimer et de la publier. La demande est gratuite et sans acompte, et si le temps tourne, la séance est déplacée sans frais.',
-      'Si le travail n’est pas celui qui vous a été promis, nous remboursons intégralement plutôt que de discuter des goûts. Cette garantie explique la sévérité de la sélection : un réseau qui paie ses propres erreurs a intérêt à choisir qui il admet.',
-    ],
+    pt: [
+    'PT_TODO: Ylala is a booking network rather than a studio. We do not e',
+    'PT_TODO: Admission turns on published work rather than on a portfolio',
+    'PT_TODO: What we hold ourselves to is narrower and easier to check. T',
+    'PT_TODO: If the work is not what you were promised, we refund it in f',
+  ],
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'Cities & destinations', value: '22' },
-      { label: 'Session types', value: '33' },
+      { label: 'Cities & destinations', value: '12' },
+      { label: 'Session types', value: '22' },
       { label: 'Gallery delivery', value: '48–72h' },
       { label: 'Refund guarantee', value: '100%' },
     ],
-    fr: [
-      { label: 'Villes & destinations', value: '22' },
-      { label: 'Types de séance', value: '33' },
-      { label: 'Livraison galerie', value: '48–72 h' },
-      { label: 'Garantie de remboursement', value: '100 %' },
+    pt: [
+      { label: 'Cidades & destinos', value: '12' },
+      { label: 'Tipos de sessão', value: '22' },
+      { label: 'Entrega da galeria', value: '48–72h' },
+      { label: 'Garantia de reembolso', value: '100%' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

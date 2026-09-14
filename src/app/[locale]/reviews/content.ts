@@ -17,12 +17,12 @@ import { tx, type Locale, type Localized } from '@/lib/locales';
  */
 const TITLE_TEMPLATE: Localized = {
   en: 'Photographer Reviews in France — Rated {rating}/5',
-  fr: 'Avis sur nos photographes en France — {rating}/5',
+  pt: 'PT_TODO: Photographer Reviews in France — Rated {rating}/5',
 };
 
 const DESCRIPTION_TEMPLATE: Localized = {
   en: 'What couples, families and companies said after their session in France, rated {rating}/5. Every review names the city and the type of shoot it covers.',
-  fr: 'Ce que couples, familles et entreprises ont dit après leur séance en France, noté {rating}/5. Chaque avis précise la ville et le type de séance.',
+  pt: 'PT_TODO: What couples, families and companies said after their sessio',
 };
 
 function fill(template: Localized, locale: Locale, rating: number, count: number): string {
@@ -41,14 +41,14 @@ export function metaDescription(locale: Locale, rating: number, count: number): 
 
 export const OG_IMAGE_ALT: Localized = {
   en: 'A couple session on the French Riviera, one of the shoots reviewed on this page',
-  fr: 'Une séance couple sur la Côte d’Azur, l’une des séances commentées sur cette page',
+  pt: 'PT_TODO: A couple session on the French Riviera, one of the shoots re',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'About these reviews', fr: 'À propos de ces avis' } as Localized,
+  eyebrow: { en: 'About these reviews', pt: 'PT_TODO: About these reviews' } as Localized,
   heading: {
     en: 'Published as written, including the awkward ones',
-    fr: 'Publiés tels quels, y compris les moins flatteurs',
+    pt: 'PT_TODO: Published as written, including the awkward ones',
   } as Localized,
   paragraphs: {
     en: [
@@ -57,12 +57,12 @@ export const SEO_PROSE = {
       'Ratings feed the aggregate score shown at the top of the page, and that score is arithmetic rather than editorial: it moves when the reviews move. If a photographer’s work slips, it shows here before it shows anywhere else, which is precisely why the number is published rather than summarised.',
       'If your own session did not go the way it should have, tell us rather than the internet first — the money-back guarantee is not conditional on staying quiet, and a refund and an honest review can perfectly well coexist.',
     ],
-    fr: [
-      'Chaque avis de cette page provient d’une personne qui a réservé et payé une séance via le réseau. Nous demandons une fois, après la livraison de la galerie, et nous publions ce qui revient — sans trier pour flatter, et sans retirer un avis parce qu’il est critique.',
-      'Chacun précise la ville et le type de séance, car c’est ce qui rend un avis utile. « Super photographe » ne dit rien ; une séance famille à Marseille en août, ou une journée de portraits corporate pour une équipe de douze à Lyon, vous dit si l’expérience ressemble à celle que vous vous apprêtez à réserver.',
-      'Les notes alimentent le score global affiché en haut de page, et ce score relève de l’arithmétique, pas de l’éditorial : il bouge quand les avis bougent. Si le travail d’un photographe faiblit, cela se voit ici avant ailleurs — raison précise pour laquelle le chiffre est publié plutôt que résumé.',
-      'Si votre séance ne s’est pas passée comme elle aurait dû, dites-le-nous avant de le dire à internet : la garantie de remboursement n’est pas conditionnée à votre silence, et un remboursement et un avis honnête peuvent parfaitement coexister.',
-    ],
+    pt: [
+    'PT_TODO: Every review on this page comes from someone who booked and',
+    'PT_TODO: Each one names the city and the type of shoot, because that',
+    'PT_TODO: Ratings feed the aggregate score shown at the top of the pag',
+    'PT_TODO: If your own session did not go the way it should have, tell',
+  ],
   } as Localized<string[]>,
   facts: {
     en: [
@@ -71,11 +71,11 @@ export const SEO_PROSE = {
       { label: 'Removed for criticism', value: '0' },
       { label: 'Money-back guarantee', value: '100%' },
     ],
-    fr: [
-      { label: 'Note moyenne', value: '{rating}/5' },
-      { label: 'Avis publiés', value: '{count}' },
-      { label: 'Retirés pour critique', value: '0' },
-      { label: 'Garantie remboursement', value: '100 %' },
+    pt: [
+      { label: 'Avaliação média', value: '{rating}/5' },
+      { label: 'Avaliações publicadas', value: '{count}' },
+      { label: 'Removidas por serem críticas', value: '0' },
+      { label: 'Garantia de reembolso', value: '100%' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

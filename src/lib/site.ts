@@ -29,12 +29,12 @@ export const SITE_NAME = 'Fotio';
 
 /** Sits under the brand in the default <title> and in OG descriptions. */
 export const SITE_TAGLINE: Record<Locale, string> = {
-  en: 'Professional photographers across France',
-  fr: 'Photographes professionnels partout en France',
+  en: 'Professional photographers across Portugal',
+  pt: 'Fotógrafos profissionais em todo o Portugal',
 };
 
 /** Absolute site origin without trailing slash. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.ylala.art').replace(/\/+$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.fotio.pt').replace(/\/+$/, '');
 
 /**
  * Prefix for the `<meta>` tags the language switcher reads.
@@ -49,7 +49,7 @@ export const META_ALT_PREFIX = 'x-alt';
 // -------------------------------------------------------------------- country
 
 /** ISO 3166-1 alpha-2, for JSON-LD `addressCountry`. */
-export const SITE_COUNTRY = 'FR';
+export const SITE_COUNTRY = 'PT';
 
 /** ISO 4217, for every `priceCurrency` and `priceSpecification` in the graph. */
 export const CURRENCY = 'EUR';
@@ -59,25 +59,27 @@ export const CURRENCY = 'EUR';
 /** BCP 47 tag for `<html lang>`. Regional, because "pt" alone reads as pt-BR. */
 export const HTML_LANG: Record<Locale, string> = {
   en: 'en-GB',
-  fr: 'fr-FR',
+  // pt-PT, not a bare "pt": unqualified, the tag reads as Brazilian Portuguese
+  // to most consumers, and the copy on this site is deliberately European.
+  pt: 'pt-PT',
 };
 
 /** Open Graph's underscored variant of the same thing. */
 export const OG_LOCALE: Record<Locale, string> = {
   en: 'en_GB',
-  fr: 'fr_FR',
+  pt: 'pt_PT',
 };
 
 /** What `Intl` should group and punctuate numbers as. */
 export const NUMBER_LOCALE: Record<Locale, string> = {
   en: 'en-GB',
-  fr: 'fr-FR',
+  pt: 'pt-PT',
 };
 
 // -------------------------------------------------------------------- contact
 
 /** WhatsApp business number, international format; non-digits are stripped. */
-export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '33000000000').replace(/[^0-9]/g, '');
+export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '351000000000').replace(/[^0-9]/g, '');
 
 /**
  * GA4 measurement ID. Absent means no analytics script is loaded at all, which
@@ -101,14 +103,14 @@ export function whatsappLink(message: string): string {
 /**
  * Where the currency symbol goes, per reader.
  *
- * English puts it first and closed up (€1,600); French and Portuguese put it
- * last, after a space (1 600 €). `Intl.NumberFormat` has a currency mode that
+ * English puts it first and closed up (€1,600); Portuguese puts it last,
+ * after a space (1 600 €). `Intl.NumberFormat` has a currency mode that
  * would do this, but it also insists on its own idea of the symbol and of the
  * space before it, and the two conventions here are stable enough to state.
  */
 const PRICE_FORMAT: Record<Locale, (grouped: string) => string> = {
   en: (grouped) => `€${grouped}`,
-  fr: (grouped) => `${grouped} €`,
+  pt: (grouped) => `${grouped} €`,
 };
 
 /**
@@ -119,7 +121,7 @@ const PRICE_FORMAT: Record<Locale, (grouped: string) => string> = {
  */
 const DURATION_FORMAT: Record<Locale, (hours: number, rest: number) => string> = {
   en: (hours, rest) => (rest ? `${hours}h ${rest}min` : `${hours} hours`),
-  fr: (hours, rest) => (rest ? `${hours} h ${rest}` : `${hours} heures`),
+  pt: (hours, rest) => (rest ? `${hours}h${rest}` : `${hours} horas`),
 };
 
 /**

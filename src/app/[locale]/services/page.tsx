@@ -19,13 +19,13 @@ import ServiceFilter, {
 } from '@/components/ServiceFilter';
 
 const COPY = {
-  title: { en: 'Photography services', fr: 'Services photographiques' },
+  title: { en: 'Photography services', pt: 'PT_TODO: Photography services' },
   intro: {
     en: 'From individual portraits to weddings, corporate to food: choose the perfect service at a fixed, locked price. Private gallery delivered in 48-72 hours.',
-    fr: 'Du portrait individuel au mariage, du corporate au food : choisissez le service parfait à prix fixe. Galerie privée livrée en 48-72 heures.',
+    pt: 'PT_TODO: From individual portraits to weddings, corporate to food: ch',
   },
-  eyebrow: { en: 'Full catalogue', fr: 'Catalogue complet' },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  eyebrow: { en: 'Full catalogue', pt: 'PT_TODO: Full catalogue' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

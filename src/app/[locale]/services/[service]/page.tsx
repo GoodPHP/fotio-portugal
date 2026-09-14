@@ -63,7 +63,7 @@ export function generateStaticParams({ params }: { params: { locale: string } })
 function serviceMetaTitle(service: Service, name: string, locale: Locale): string {
   const authored = SERVICE_SEO[service.slug]?.title;
   if (authored) return tx(authored, locale);
-  return { en: `${name} — Photographer in France`, fr: `${name} — Photographe en France` }[locale];
+  return { en: `${name} — Photographer in France`, pt: 'PT_TODO' }[locale];
 }
 
 function serviceMetaDescription(service: Service, name: string, locale: Locale): string {
@@ -76,7 +76,7 @@ function serviceDescription(name: string, locale: Locale, fallback?: string): st
   if (fallback) return fallback;
   return {
     en: `Professional ${name} photography with vetted local photographers. Fixed pricing and private gallery in 48-72h.`,
-    fr: `Photographie professionnelle de ${name} avec des photographes vérifiés. Prix fixe et galerie privée en 48-72h.`,
+    pt: 'PT_TODO',
   }[locale];
 }
 
@@ -96,7 +96,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     ogImage: serviceImage(service.slug),
     ogImageAlt: {
       en: `A ${name.toLowerCase()} photographed by the ${SITE_NAME} network in France`,
-      fr: `Une séance ${name.toLowerCase()} photographiée par le réseau ${SITE_NAME} en France`,
+      pt: 'PT_TODO',
     }[locale],
   });
 }
@@ -121,19 +121,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const cities = publishedCitiesForService(service.slug);
 
   const labels = {
-    breadcrumbHome: { en: 'Home', fr: 'Accueil' }[locale],
-    breadcrumbServices: { en: 'Services', fr: 'Services' }[locale],
-    includedTitle: { en: 'What’s included', fr: 'Ce qui est inclus' }[locale],
-    citiesTitle: { en: `Book ${name} in your city`, fr: `Réservez ${name} dans votre ville` }[locale],
-    citiesIntro: { en: `Available in ${cities.length} French cities and destinations. Choose yours.`, fr: `Disponible dans ${cities.length} villes et destinations françaises. Choisissez la vôtre.` }[locale],
-    faqTitle: { en: `Frequently asked questions about ${name}`, fr: `Questions fréquentes sur ${name}` }[locale],
-    portfolioEyebrow: { en: 'Portfolio', fr: 'Portfolio' }[locale],
-    portfolioTitle: { en: `${name} portfolio`, fr: `Portfolio ${name}` }[locale],
-    portfolioSubtitle: { en: `A selection of ${name.toLowerCase()} shots to inspire your shoot.`, fr: `Une sélection d’images de la catégorie ${name.toLowerCase()}, pour inspirer votre séance.` }[locale],
-    from: { en: 'Starting from', fr: 'À partir de' }[locale],
-    duration: { en: 'Duration', fr: 'Durée' }[locale],
-    photos: { en: 'Edited photos', fr: 'Photos retouchées' }[locale],
-    book: { en: 'Book now', fr: 'Réserver' }[locale],
+    breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' }[locale],
+    breadcrumbServices: { en: 'Services', pt: 'PT_TODO: Services' }[locale],
+    includedTitle: { en: 'What’s included', pt: 'PT_TODO: What’s included' }[locale],
+    citiesTitle: { en: `Book ${name} in your city`, pt: 'PT_TODO' }[locale],
+    citiesIntro: { en: `Available in ${cities.length} French cities and destinations. Choose yours.`, pt: 'PT_TODO' }[locale],
+    faqTitle: { en: `Frequently asked questions about ${name}`, pt: 'PT_TODO' }[locale],
+    portfolioEyebrow: { en: 'Portfolio', pt: 'PT_TODO: Portfolio' }[locale],
+    portfolioTitle: { en: `${name} portfolio`, pt: 'PT_TODO' }[locale],
+    portfolioSubtitle: { en: `A selection of ${name.toLowerCase()} shots to inspire your shoot.`, pt: 'PT_TODO' }[locale],
+    from: { en: 'Starting from', pt: 'PT_TODO: Starting from' }[locale],
+    duration: { en: 'Duration', pt: 'PT_TODO: Duration' }[locale],
+    photos: { en: 'Edited photos', pt: 'PT_TODO: Edited photos' }[locale],
+    book: { en: 'Book now', pt: 'PT_TODO: Book now' }[locale],
   };
 
   const faqEntries = (service.faqs ?? []).map((f) => ({
@@ -306,7 +306,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       {seoProse && (
         <SeoProse
           headingId="service-seo-heading"
-          eyebrow={{ en: 'About this session', fr: 'À propos de cette séance' }[locale]}
+          eyebrow={{ en: 'About this session', pt: 'PT_TODO: About this session' }[locale]}
           heading={tx(seoProse.heading, locale)}
           paragraphs={tx(seoProse.paragraphs, locale)}
           facts={[
@@ -314,7 +314,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             { label: labels.duration, value: formatDuration(service.durationMinutes, locale) },
             { label: labels.photos, value: `${service.editedPhotos}` },
             {
-              label: { en: 'Cities', fr: 'Villes' }[locale],
+              label: { en: 'Cities', pt: 'PT_TODO: Cities' }[locale],
               value: `${cities.length}`,
             },
           ]}

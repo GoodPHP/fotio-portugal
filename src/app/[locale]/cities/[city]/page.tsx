@@ -3,7 +3,13 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getCity, getServiceById, publishedCities, publishedServicesForCity } from '@/lib/catalog';
+import {
+  getCity,
+  getServiceById,
+  localizedCityName,
+  publishedCities,
+  publishedServicesForCity,
+} from '@/lib/catalog';
 import { isCityPublished } from '@/lib/publishSchedule';
 import type { City } from '@/lib/types';
 import { type Locale, tx } from '@/lib/locales';
@@ -20,7 +26,7 @@ import {
   itemListNode,
 } from '@/lib/jsonld';
 import { CITY_SEO } from '@/lib/data/city-seo';
-import { frName, frAt, frOf, frWith } from '@/lib/city-name';
+import { ptName, ptAt, ptOf, ptWith, upperFirst } from '@/lib/pt-grammar';
 import JsonLd from '@/components/JsonLd';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { cityAlternateParams, leafHref } from '@/lib/routes';
@@ -73,8 +79,8 @@ function cityMetaDescription(city: City, locale: Locale): string {
   if (authored) return tx(authored, locale);
   const region = tx(city.region, locale);
   return {
-    en: `Find a professional photographer in ${city.name} (${region}). Fixed pricing, private gallery in 48-72h and the best local photo spots.`,
-    fr: `Trouvez un photographe professionnel ${frAt(city)} (${region}). Prix fixe, galerie privée en 48-72h et les meilleurs spots photo.`,
+    en: `Find a professional photographer in ${localizedCityName(city, 'en')} (${region}). Fixed pricing, private gallery in 48-72h and the best local photo spots.`,
+    pt: `Encontre um fotógrafo profissional ${ptAt(city)} (${region}). Preço fixo, galeria privada em 48-72 h e os melhores locais para fotografar.`,
   }[locale];
 }
 
@@ -82,17 +88,17 @@ function cityMetaDescription(city: City, locale: Locale): string {
 function cityOgImageAlt(city: City, locale: Locale): string {
   const region = tx(city.region, locale);
   return {
-    en: `${city.name}, ${region} — photographed by the ${SITE_NAME} network`,
-    fr: `${city.name}, ${region} — photographié par le réseau ${SITE_NAME}`,
+    en: `${localizedCityName(city, 'en')}, ${region} — photographed by the ${SITE_NAME} network`,
+    pt: `${city.name}, ${region} — fotografado pela rede ${SITE_NAME}`,
   }[locale];
 }
 
 function cityHeading(city: City, locale: Locale): string {
   return {
-    en: `Photographer in ${city.name}`,
-    // "Photographe à Mont-Saint-Michel" was wrong French on one page in
-    // twenty-two; `frAt` contracts it to "au Mont-Saint-Michel".
-    fr: `Photographe ${frAt(city)}`,
+    en: `Photographer in ${localizedCityName(city, 'en')}`,
+    // "Fotógrafo em Porto" is wrong; `ptAt` contracts it to "no Porto", and
+    // "na Madeira", "nos Açores" for the places that are not cities at all.
+    pt: `Fotógrafo ${ptAt(city)}`,
   }[locale];
 }
 
@@ -121,24 +127,41 @@ export default async function CityPage({ params }: CityPageProps) {
     ...liveServices.filter((s) => !topSet.has(s.slug)),
   ];
 
+  const name = localizedCityName(city, locale);
+
   const labels = {
-    spotsTitle: { en: 'The best photo spots', fr: 'Les meilleurs spots photo' }[locale],
-    spotsIntro: { en: `Here is where to shoot in ${city.name}, with ideal times and permit notes.`, fr: `Voici où photographier ${frAt(city)}, avec les meilleurs horaires et les permis.` }[locale],
-    bestTime: { en: 'Best time', fr: 'Meilleur moment' }[locale],
-    permit: { en: 'Permits', fr: 'Permis' }[locale],
-    galleryTitle: { en: 'Photographs of this city', fr: 'Photographies de cette ville' }[locale],
-    seasonTitle: { en: `When to visit ${city.name} for photos?`, fr: `Quand visiter ${frName(city)} pour les photos ?` }[locale],
-    servicesTitle: { en: `Photography services in ${city.name}`, fr: `Services photo ${frAt(city)}` }[locale],
-    faqTitle: { en: `Frequently asked questions about ${city.name}`, fr: `Questions fréquentes ${frWith('sur', city)}` }[locale],
-    coverageTitle: { en: `Also covered from ${city.name}`, fr: `Également couvert ${frWith('depuis', city)}` }[locale],
-    coverageIntro: {
-      en: `These come under the ${city.name} rate: a photographer travels out from the city at no extra charge, and the session is priced exactly as it would be in ${city.name} itself.`,
-      fr: `Ces communes relèvent du tarif ${frOf(city)} : le photographe s’y déplace sans supplément, et la séance est facturée exactement comme ${frAt(city)}.`,
+    spotsTitle: { en: 'The best photo spots', pt: 'Os melhores locais para fotografar' }[locale],
+    spotsIntro: {
+      en: `Here is where to shoot in ${name}, with ideal times and permit notes.`,
+      pt: `Onde fotografar ${ptAt(city)}, com as horas certas e as autorizações a ter em conta.`,
     }[locale],
-    breadcrumbHome: { en: 'Home', fr: 'Accueil' }[locale],
-    breadcrumbCities: { en: 'Cities', fr: 'Villes' }[locale],
-    from: { en: 'from', fr: 'dès' }[locale],
-    popular: { en: 'Popular', fr: 'Populaire' }[locale],
+    bestTime: { en: 'Best time', pt: 'Melhor hora' }[locale],
+    permit: { en: 'Permits', pt: 'Autorizações' }[locale],
+    galleryTitle: { en: 'Photographs of this city', pt: 'Fotografias deste sítio' }[locale],
+    seasonTitle: {
+      en: `When to visit ${name} for photos?`,
+      pt: `Quando vir ${ptWith('a', city)} para fotografar?`,
+    }[locale],
+    servicesTitle: {
+      en: `Photography services in ${name}`,
+      pt: `Serviços de fotografia ${ptAt(city)}`,
+    }[locale],
+    faqTitle: {
+      en: `Frequently asked questions about ${name}`,
+      pt: `Perguntas frequentes sobre ${ptName(city)}`,
+    }[locale],
+    coverageTitle: {
+      en: `Also covered from ${name}`,
+      pt: `${upperFirst(ptOf(city))}, também cobrimos`,
+    }[locale],
+    coverageIntro: {
+      en: `These come under the ${name} rate: a photographer travels out from the city at no extra charge, and the session is priced exactly as it would be in ${name} itself.`,
+      pt: `Ficam ao preço ${ptOf(city)}: o fotógrafo desloca-se sem custo adicional e a sessão custa exactamente o mesmo que custaria ${ptAt(city)}.`,
+    }[locale],
+    breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
+    breadcrumbCities: { en: 'Cities', pt: 'Cidades' }[locale],
+    from: { en: 'from', pt: 'desde' }[locale],
+    popular: { en: 'Popular', pt: 'Popular' }[locale],
   };
 
   const faqEntries = city.faqs.map((f) => ({
@@ -187,7 +210,7 @@ export default async function CityPage({ params }: CityPageProps) {
     breadcrumbNode([
       { name: labels.breadcrumbHome, url: absoluteUrl(locale, '/') },
       { name: labels.breadcrumbCities, url: absoluteUrl(locale, '/cities') },
-      { name: city.name, url: cityUrl },
+      { name, url: cityUrl },
     ]),
   ]);
 
@@ -205,7 +228,7 @@ export default async function CityPage({ params }: CityPageProps) {
               <li aria-hidden="true">/</li>
               <li><Link href="/cities" className="hover:text-brand-orange-deep">{labels.breadcrumbCities}</Link></li>
               <li aria-hidden="true">/</li>
-              <li className="font-medium text-brand-dark" aria-current="page">{city.name}</li>
+              <li className="font-medium text-brand-dark" aria-current="page">{name}</li>
             </ol>
           </nav>
 
@@ -234,9 +257,9 @@ export default async function CityPage({ params }: CityPageProps) {
 
           {(city.stats.visitors || city.stats.weddings || city.stats.stays) && (
             <FadeIn instant delay={0.1} className="mt-8 flex flex-wrap gap-4 pb-4">
-              {city.stats.visitors && <StatPill value={city.stats.visitors} label={{ en: 'visitors/year', fr: 'visiteurs/an' }[locale]} />}
-              {city.stats.weddings && <StatPill value={city.stats.weddings} label={{ en: 'weddings/year', fr: 'mariages/an' }[locale]} />}
-              {city.stats.stays && <StatPill value={city.stats.stays} label={{ en: 'stays/year', fr: 'séjours/an' }[locale]} />}
+              {city.stats.visitors && <StatPill value={city.stats.visitors} label={{ en: 'visitors/year', pt: 'visitantes/ano' }[locale]} />}
+              {city.stats.weddings && <StatPill value={city.stats.weddings} label={{ en: 'weddings/year', pt: 'casamentos/ano' }[locale]} />}
+              {city.stats.stays && <StatPill value={city.stats.stays} label={{ en: 'stays/year', pt: 'dormidas/ano' }[locale]} />}
             </FadeIn>
           )}
         </div>

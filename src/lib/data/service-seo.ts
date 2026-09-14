@@ -18,7 +18,7 @@ import { LIFESTYLE_SERVICE_SEO } from './service-seo-lifestyle';
  * is missing an entry here.
  */
 export interface ServiceSeo {
-  /** ≤52 chars: the layout appends " | Ylala" to reach the 60-char limit. */
+  /** ≤52 chars: the layout appends the brand suffix to reach the 60-char limit. */
   title: Localized;
   /** 150–160 chars. */
   description: Localized;

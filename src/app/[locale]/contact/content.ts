@@ -7,27 +7,27 @@ import type { Localized } from '@/lib/locales';
  * English is authored; French falls back to it via `tx()` until translated.
  */
 
-/** ≤60 chars once the layout appends " | Ylala". */
+/** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
   en: 'Contact a Photographer in France — Reply in 2h',
-  fr: 'Contacter un photographe en France — réponse 2 h',
+  pt: 'PT_TODO: Contact a Photographer in France — Reply in 2h',
 };
 
 export const META_DESCRIPTION: Localized = {
   en: 'Ask about a shoot in any of 22 French cities. Reply within two hours by email or WhatsApp, a written quote, and no deposit to ask the question.',
-  fr: 'Posez votre question sur une séance dans 22 villes françaises. Réponse sous deux heures par e-mail ou WhatsApp, devis écrit, sans acompte.',
+  pt: 'PT_TODO: Ask about a shoot in any of 22 French cities. Reply within t',
 };
 
 export const OG_IMAGE_ALT: Localized = {
   en: 'Lyon, one of the 22 French cities you can enquire about through the Ylala network',
-  fr: 'Lyon, l’une des 22 villes françaises sur lesquelles vous pouvez nous interroger',
+  pt: 'PT_TODO: Lyon, one of the 22 French cities you can enquire about thro',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'Before you write', fr: 'Avant d’écrire' } as Localized,
+  eyebrow: { en: 'Before you write', pt: 'PT_TODO: Before you write' } as Localized,
   heading: {
     en: 'What to tell us, and what happens next',
-    fr: 'Ce qu’il faut nous dire, et ce qui suit',
+    pt: 'PT_TODO: What to tell us, and what happens next',
   } as Localized,
   paragraphs: {
     en: [
@@ -36,25 +36,25 @@ export const SEO_PROSE = {
       'We reply within two hours during the working day, and WhatsApp is the fastest route if you are already travelling and need an answer between one thing and the next. Nothing in this stage costs anything and nothing commits you: there is no deposit to ask a question, and no charge until a session is confirmed in writing.',
       'For anything outside the standard catalogue — a multi-day assignment, several cities in one trip, a company shoot across offices, or a session for a venue that has its own rules — write rather than use the booking form. Those are quoted individually and are easier to get right in a sentence or two of description.',
     ],
-    fr: [
-      'Quatre éléments suffisent à obtenir une vraie réponse plutôt qu’une question en retour : la ville, le type de séance, une date ou une période approximative, et le nombre de personnes devant l’objectif. Le reste est utile mais facultatif — un lieu en tête, des photographies dont le rendu vous plaît, une heure imposée par une cérémonie ou la sieste d’un enfant.',
-      'Ce qui revient : un devis écrit à prix fixe, le nom du photographe qui prendrait la séance, et son avis sur votre demande — si le lieu fonctionne à cette heure-là, s’il exige une autorisation, et quelle est l’alternative dans le cas contraire. Si nous ne pouvons pas couvrir la date, nous le disons tout de suite plutôt que de laisser la demande ouverte.',
-      'Nous répondons sous deux heures en journée, et WhatsApp reste le canal le plus rapide si vous êtes déjà en déplacement et cherchez une réponse entre deux rendez-vous. Rien à ce stade ne coûte quoi que ce soit et rien ne vous engage : aucun acompte pour poser une question, aucun paiement avant qu’une séance ne soit confirmée par écrit.',
-      'Pour tout ce qui sort du catalogue standard — mission sur plusieurs jours, plusieurs villes dans un même voyage, prises de vue d’entreprise sur plusieurs sites, ou séance dans un lieu doté de ses propres règles — écrivez-nous plutôt que d’utiliser le formulaire de réservation. Ces demandes sont chiffrées au cas par cas et se traitent mieux en deux phrases de description.',
-    ],
+    pt: [
+    'PT_TODO: Four things get you a real answer instead of a follow-up que',
+    'PT_TODO: What comes back is a written quote with a fixed price, the n',
+    'PT_TODO: We reply within two hours during the working day, and WhatsA',
+    'PT_TODO: For anything outside the standard catalogue — a multi-day as',
+  ],
   } as Localized<string[]>,
   facts: {
     en: [
       { label: 'Typical reply', value: 'Under 2h' },
-      { label: 'Cities covered', value: '22' },
+      { label: 'Cities covered', value: '12' },
       { label: 'Deposit to enquire', value: '€0' },
       { label: 'Quote format', value: 'In writing' },
     ],
-    fr: [
-      { label: 'Réponse type', value: 'Moins de 2 h' },
-      { label: 'Villes couvertes', value: '22' },
-      { label: 'Acompte pour un devis', value: '0 €' },
-      { label: 'Format du devis', value: 'Par écrit' },
+    pt: [
+      { label: 'Resposta habitual', value: 'Menos de 2h' },
+      { label: 'Cidades cobertas', value: '12' },
+      { label: 'Sinal para orçamento', value: '0 €' },
+      { label: 'Orçamento', value: 'Por escrito' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

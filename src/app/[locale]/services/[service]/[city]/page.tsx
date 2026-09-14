@@ -2,9 +2,11 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import {  CITIES,
+import {
+  CITIES,
   getCity,
   getServiceById,
+  localizedCityName,
   getServiceBySlug,
   serviceSlug,
   publishedCuratedLeafParams,
@@ -29,7 +31,7 @@ import { FadeIn } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { portfolioImages } from '@/lib/portfolio';
 import { leafAlternateParams, leafHref, serviceHref } from '@/lib/routes';
-import { frAt } from '@/lib/city-name';
+import { ptAt } from '@/lib/pt-grammar';
 import CityTheme from '@/components/CityTheme';
 
 export const dynamicParams = true;
@@ -89,30 +91,53 @@ export default async function LeafPage({ params }: LeafPageProps) {
   const region = tx(city.region, locale);
   const content = generateProgrammaticContent(city, service, locale);
 
+  const cityLabel = localizedCityName(city, locale);
+
   const labels = {
-    answerEyebrow: { en: 'In short', fr: 'En bref' }[locale],
-    breadcrumbHome: { en: 'Home', fr: 'Accueil' }[locale],
-    breadcrumbServices: { en: 'Services', fr: 'Services' }[locale],
-    aboutTitle: { en: `Why choose ${serviceName} in ${city.name}?`, fr: `Pourquoi choisir ${serviceName} ${frAt(city)} ?` }[locale],
-    routeTitle: { en: `What does the session in ${city.name} look like?`, fr: `Comment se déroule la séance ${frAt(city)} ?` }[locale],
-    detailsTitle: { en: 'What does the package include?', fr: 'Que comprend le forfait ?' }[locale],
-    faqTitle: { en: `FAQ — ${serviceName} in ${city.name}`, fr: `FAQ — ${serviceName} ${frAt(city)}` }[locale],
-    from: { en: 'Starting from', fr: 'À partir de' }[locale],
-    duration: { en: 'Duration', fr: 'Durée' }[locale],
-    photos: { en: 'Edited photos', fr: 'Photos retouchées' }[locale],
-    book: { en: 'Book online', fr: 'Réserver en ligne' }[locale],
-    whatsapp: { en: 'Ask on WhatsApp', fr: 'Demander sur WhatsApp' }[locale],
-    portfolioEyebrow: { en: 'Portfolio', fr: 'Portfolio' }[locale],
-    portfolioTitle: { en: `${serviceName} in ${city.name}`, fr: `${serviceName} ${frAt(city)}` }[locale],
-    portfolioSubtitle: { en: `A selection of ${serviceName.toLowerCase()} shots to inspire your session.`, fr: `Une sélection d’images de la catégorie ${serviceName.toLowerCase()}, pour inspirer votre séance.` }[locale],
-    relatedServicesTitle: { en: `Other services in ${city.name}`, fr: `Autres services ${frAt(city)}` }[locale],
-    nearbyTitle: { en: `${serviceName} in other cities`, fr: `${serviceName} dans d’autres villes` }[locale],
+    answerEyebrow: { en: 'In short', pt: 'Em resumo' }[locale],
+    breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
+    breadcrumbServices: { en: 'Services', pt: 'Serviços' }[locale],
+    aboutTitle: {
+      en: `Why choose ${serviceName} in ${cityLabel}?`,
+      pt: `Porquê ${serviceName.toLowerCase()} ${ptAt(city)}?`,
+    }[locale],
+    routeTitle: {
+      en: `What does the session in ${cityLabel} look like?`,
+      pt: `Como decorre a sessão ${ptAt(city)}?`,
+    }[locale],
+    detailsTitle: { en: 'What does the package include?', pt: 'O que inclui o pacote?' }[locale],
+    faqTitle: {
+      en: `FAQ — ${serviceName} in ${cityLabel}`,
+      pt: `Perguntas frequentes — ${serviceName.toLowerCase()} ${ptAt(city)}`,
+    }[locale],
+    from: { en: 'Starting from', pt: 'Desde' }[locale],
+    duration: { en: 'Duration', pt: 'Duração' }[locale],
+    photos: { en: 'Edited photos', pt: 'Fotografias editadas' }[locale],
+    book: { en: 'Book online', pt: 'Reservar online' }[locale],
+    whatsapp: { en: 'Ask on WhatsApp', pt: 'Perguntar no WhatsApp' }[locale],
+    portfolioEyebrow: { en: 'Portfolio', pt: 'Portefólio' }[locale],
+    portfolioTitle: {
+      en: `${serviceName} in ${cityLabel}`,
+      pt: `${serviceName} ${ptAt(city)}`,
+    }[locale],
+    portfolioSubtitle: {
+      en: `A selection of ${serviceName.toLowerCase()} shots to inspire your session.`,
+      pt: `Uma selecção de fotografias de ${serviceName.toLowerCase()} para inspirar a sua sessão.`,
+    }[locale],
+    relatedServicesTitle: {
+      en: `Other services in ${cityLabel}`,
+      pt: `Outros serviços ${ptAt(city)}`,
+    }[locale],
+    nearbyTitle: {
+      en: `${serviceName} in other cities`,
+      pt: `${serviceName} noutras cidades`,
+    }[locale],
   };
 
   // WhatsApp prefilled message naming service + city.
   const waMessage = {
-    en: `Hi ${SITE_NAME}! I’d like to book ${serviceName} in ${city.name}. Could you share more details?`,
-    fr: `Bonjour ${SITE_NAME} ! Je souhaite réserver : ${serviceName} ${frAt(city)}. Pouvez-vous m’en dire plus ?`,
+    en: `Hi ${SITE_NAME}! I’d like to book ${serviceName} in ${cityLabel}. Could you share more details?`,
+    pt: `Olá ${SITE_NAME}! Gostaria de reservar: ${serviceName} ${ptAt(city)}. Pode dar-me mais informações?`,
   }[locale];
 
   // Related: other tailored services in the same city (published leaves only).
@@ -166,7 +191,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       { name: labels.breadcrumbHome, url: absoluteUrl(locale, '/') },
       { name: labels.breadcrumbServices, url: absoluteUrl(locale, '/services') },
       { name: serviceName, url: absoluteUrl(locale, '/services/[service]', { service: serviceSlug(service, locale) }) },
-      { name: city.name, url },
+      { name: cityLabel, url },
     ]),
   ]);
 
@@ -184,7 +209,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
             <li aria-hidden="true">/</li>
             <li><Link href={serviceHref(service, locale)} className="hover:text-brand-orange-deep">{serviceName}</Link></li>
             <li aria-hidden="true">/</li>
-            <li className="font-medium text-brand-dark" aria-current="page">{city.name}</li>
+            <li className="font-medium text-brand-dark" aria-current="page">{cityLabel}</li>
           </ol>
         </nav>
       </div>
@@ -195,7 +220,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
           <FadeIn instant>
             <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">{region}</p>
             <h1 className="mt-3 font-display text-4xl font-bold leading-[1.08] tracking-tight text-brand-dark sm:text-5xl">
-              {serviceName} <span className="text-brand-muted">·</span> {city.name}
+              {serviceName} <span className="text-brand-muted">·</span> {cityLabel}
             </h1>
           </FadeIn>
 
@@ -292,7 +317,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
         eyebrow={labels.portfolioEyebrow}
         title={labels.portfolioTitle}
         subtitle={labels.portfolioSubtitle}
-        alt={`${serviceName} · ${city.name}`}
+        alt={`${serviceName} · ${cityLabel}`}
         locale={locale}
       />
 

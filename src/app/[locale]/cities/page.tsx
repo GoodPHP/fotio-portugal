@@ -15,13 +15,13 @@ const OG_CITY_SLUG = 'paris';
 import CityFilter, { type CityFilterItem } from '@/components/CityFilter';
 
 const COPY = {
-  title: { en: 'Our cities', fr: 'Nos villes' },
+  title: { en: 'Our cities', pt: 'PT_TODO: Our cities' },
   intro: {
     en: 'Vetted local photographers in twenty-two French cities and destinations. They know which hour a place is still empty and what the permits actually cost.',
-    fr: 'Photographes locaux vérifiés dans vingt-deux villes et destinations françaises. Ils savent à quelle heure un lieu est encore vide et ce que coûtent réellement les autorisations.',
+    pt: 'PT_TODO: Vetted local photographers in twenty-two French cities and d',
   },
-  eyebrow: { en: 'Nationwide coverage', fr: 'Couverture nationale' },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  eyebrow: { en: 'Nationwide coverage', pt: 'PT_TODO: Nationwide coverage' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

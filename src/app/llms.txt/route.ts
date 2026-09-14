@@ -41,7 +41,7 @@ export function GET(): Response {
 
   push('## Languages');
   push(`- English is the default and is served without a prefix: ${SITE_URL}/services`);
-  push(`- French is served under /fr with translated segments: ${absoluteUrl('fr', '/services')}`);
+  push(`- French is served under /fr with translated segments: ${absoluteUrl('pt', '/services')}`);
   push(
     '- The two are not mirror images. Some services are offered in one language only, because ' +
       'the audiences differ: English covers inbound destination work, French covers domestic ' +
@@ -109,7 +109,7 @@ export function GET(): Response {
     ['Service', '/services/[service]'],
     ['Service in a city', '/services/[service]/[city]'],
   ] as const) {
-    push(`- ${label}: ${pattern(route, 'en')} · ${pattern(route, 'fr')}`);
+    push(`- ${label}: ${pattern(route, 'en')} · ${pattern(route, 'pt')}`);
   }
   push(
     '- Service slugs are translated. /services/wedding/paris and ' +

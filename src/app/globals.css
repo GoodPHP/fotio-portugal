@@ -315,14 +315,21 @@ body {
   color: var(--color-brand-dark);
 }
 
-/* Paris — Haussmann limestone, zinc and brass, re-cut for the editorial system. */
-[data-city-theme='paris'] {
-  --color-brand-sand: #EFEEEA;
-  --color-brand-cream: #DEDFDD;
-  --color-brand-dark: #14181D;
-  --color-brand-muted: #55595F;
-  --color-brand-orange-deep: #6E5214;
-  --color-brand-orange: #A98A3E;
-  --color-brand-rule: #D2D3D0;
-  --color-brand-rule-strong: #B2B4B2;
+/*
+ * Lisboa — lime render, glazed tile and the ochre a south-west facade takes in
+ * the afternoon, re-cut for the editorial system.
+ *
+ * Contrast for every pairing is asserted in src/lib/theme.test.ts, which parses
+ * this file. A palette that fails AA fails the build, so these values are not
+ * free to be prettier than they are legible.
+ */
+[data-city-theme='lisboa'] {
+  --color-brand-sand: #F4F2EC;
+  --color-brand-cream: #E4E6E4;
+  --color-brand-dark: #15191C;
+  --color-brand-muted: #545A5E;
+  --color-brand-orange-deep: #1C4C63;
+  --color-brand-orange: #3E7C96;
+  --color-brand-rule: #D4D6D3;
+  --color-brand-rule-strong: #B3B7B5;
 }

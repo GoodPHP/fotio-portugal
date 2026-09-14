@@ -6,7 +6,7 @@ import { META_ALT_PREFIX } from '@/lib/site';
 
 const LOCALE_LABELS: Record<Locale, { short: string; full: string }> = {
   en: { short: 'EN', full: 'English' },
-  fr: { short: 'FR', full: 'Français' },
+  pt: { short: 'PT', full: 'Português' },
 };
 
 /** Where this page lives in `locale`, as published by `buildMetadata`. */

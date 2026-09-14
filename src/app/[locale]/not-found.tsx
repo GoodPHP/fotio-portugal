@@ -11,12 +11,12 @@ const COPY = {
     cities: 'Browse cities',
     services: 'Browse services',
   },
-  fr: {
-    heading: 'Page introuvable',
-    body: 'Cette page n’existe pas ou a été déplacée. Les liens ci-dessous mènent quelque part.',
-    home: 'Retour à l’accueil',
-    cities: 'Voir les villes',
-    services: 'Voir les prestations',
+  pt: {
+    heading: 'Página não encontrada',
+    body: 'Esta página não existe, ou mudou de endereço. As ligações abaixo levam a algum lado.',
+    home: 'Voltar à página inicial',
+    cities: 'Ver as cidades',
+    services: 'Ver os serviços',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

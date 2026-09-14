@@ -12,9 +12,10 @@
  * module only carries the identity and what a human needs to know about it.
  */
 export const CITY_THEMES = {
-  paris: {
-    name: 'Haussmann',
-    description: 'Limestone, zinc rooftops and brass — squarer corners, flatter shadows, a serif for headings.',
+  lisboa: {
+    name: 'Azulejo',
+    description:
+      'Lime-washed render, glazed tile blue and the ochre the afternoon sun puts on a south-west facade.',
   },
 } as const;
 

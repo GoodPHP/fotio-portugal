@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "cities": "Cidades",
+    "pricing": "Preços",
+    "portfolio": "Portefólio",
+    "blog": "Blog",
+    "about": "Sobre",
+    "contact": "Contacto",
+    "book": "Reservar",
+    "menu": "Menu"
+  },
+  "common": {
+    "from": "desde",
+    "bookNow": "Reservar",
+    "discover": "Saber mais",
+    "viewAll": "Ver tudo",
+    "search": "Pesquisar",
+    "loading": "A carregar…"
+  },
+  "home": {
+    "heroBadge": "Profissionais locais verificados",
+    "heroTitle": "O seu fotógrafo em Portugal",
+    "heroSubtitle": "Fotógrafos profissionais verificados em 12 cidades e destinos portugueses. Preço fixo acordado antes de reservar. Galeria privada em 48 a 72 horas."
+  }
+}

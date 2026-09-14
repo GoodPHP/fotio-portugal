@@ -51,21 +51,17 @@ const BANNED: { pattern: RegExp; why: string }[] = [
  */
 const ALLOWED = new Set<string>([
   'src/lib/site.ts',
-  // --- Class A: France prose, emptied by the locale flip. Shrinks to nothing.
+  // --- Hub-page copy still describing France, pending the Portugal rewrite.
+  // Each entry is expected to be deleted rather than kept, and the script
+  // fails on an allowance nobody needs, so the list cannot rot.
   'src/app/[locale]/content.ts',
   'src/app/[locale]/about/content.ts',
   'src/app/[locale]/blog/content.ts',
   'src/app/[locale]/book/content.ts',
-  'src/app/[locale]/cities/content.ts',
   'src/app/[locale]/contact/content.ts',
   'src/app/[locale]/portfolio/content.ts',
   'src/app/[locale]/pricing/content.ts',
   'src/app/[locale]/services/content.ts',
-  'src/lib/blog/types.ts',
-  'src/lib/data/city-seo.ts',
-  'src/lib/data/leaf-seo.ts',
-  'src/lib/data/service-seo.ts',
-  'src/lib/seo-text.ts',
 ]);
 
 function walk(dir: string, out: string[] = []): string[] {

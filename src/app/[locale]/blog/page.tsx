@@ -20,14 +20,14 @@ import {
 } from './content';
 
 const COPY = {
-  title: { en: 'Blog & guides', fr: 'Blog & guides' },
-  eyebrow: { en: 'Tips from our photographers', fr: 'Conseils de nos photographes' },
+  title: { en: 'Blog & guides', pt: 'PT_TODO: Blog & guides' },
+  eyebrow: { en: 'Tips from our photographers', pt: 'PT_TODO: Tips from our photographers' },
   intro: {
     en: 'Where the light falls, what the permits cost, which hour a place is still empty — written by the photographers who work these cities every week.',
-    fr: 'Où tombe la lumière, ce que coûtent les autorisations, à quelle heure un lieu est encore vide — écrit par les photographes qui y travaillent chaque semaine.',
+    pt: 'PT_TODO: Where the light falls, what the permits cost, which hour a p',
   },
-  readMore: { en: 'Read the article', fr: 'Lire l’article' },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  readMore: { en: 'Read the article', pt: 'PT_TODO: Read the article' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

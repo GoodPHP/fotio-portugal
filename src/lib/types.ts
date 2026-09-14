@@ -1,4 +1,5 @@
 import type { Locale, Localized } from './locales';
+import type { PtArticle } from './pt-grammar';
 import type { CityThemeId } from './theme';
 
 /** What the light does at a spot in one season. */
@@ -8,7 +9,7 @@ export interface SeasonNote {
 }
 
 export interface PhotoSpot {
-  /** Proper noun — written the same in both languages. */
+  /** Proper noun, in Portuguese. Place names are not translated. */
   name: string;
   bestTime: Localized;
   permitCost: Localized;
@@ -39,17 +40,45 @@ export interface GalleryImage {
 }
 
 export interface City {
+  /**
+   * URL slug, identity, image path and schedule key. Portuguese and ASCII:
+   * `lisboa`, `acores`, `evora`. Shared across locales — unlike a service,
+   * a place has one address on this site in every language.
+   */
   slug: string;
-  /** Proper noun — written the same in both languages. */
+  /**
+   * The Portuguese name, and the canonical one. Used wherever the name is not
+   * being shown to a reader: JSON-LD @ids, sorting, the article lookup.
+   */
   name: string;
   /**
-   * The definite article the French name takes: "le Mont-Saint-Michel", but
-   * plain "Paris". Absent for almost every city, which is why it is optional
-   * rather than a required field nobody would fill in correctly. Drives the
-   * contractions in `src/lib/city-name.ts` — à + le = au, de + le = du.
+   * The name as each language writes it, when they differ.
+   *
+   * France never needed this — Paris is Paris — and the old comment here
+   * claimed a proper noun is "written the same in both languages", which is
+   * simply false for Portugal: Lisbon and Lisboa, Azores and Açores. Absent
+   * when the two agree, which is most of them.
    */
-  frArticle?: 'le' | 'la' | 'les';
+  nameLocalized?: Localized;
+  /**
+   * What kind of place this is. Drives the JSON-LD `areaServed` type, which
+   * was hardcoded to `City` and is wrong for a wine region or an archipelago
+   * — a distinction a search engine will forgive and an answer engine reading
+   * the graph will not.
+   */
+  kind?: 'city' | 'region' | 'island';
+  /**
+   * The definite article the Portuguese name takes: "o Porto", "a Madeira",
+   * "os Açores", but plain "Lisboa". Absent for most names, which is why it is
+   * optional rather than a required field nobody would fill in correctly.
+   * Drives the contractions in `src/lib/pt-grammar.ts` — em + o = no,
+   * de + o = do.
+   */
+  ptArticle?: PtArticle;
   region: Localized;
+  /** The article `region` takes, when the region name is not already listed
+   * in `PLACE_ARTICLES`. */
+  regionArticle?: PtArticle;
   /** The one line that has to earn the rest of the page. */
   lede: Localized;
   narrative: Localized;
@@ -113,7 +142,7 @@ export interface Service {
   /**
    * Per-locale URL slug. A missing locale falls back to `slug`. Values must be
    * unique within a locale — `catalog.ts` asserts that at module load.
-   *   wedding -> { fr: 'mariage' }
+   *   wedding -> { pt: 'casamento' }
    */
   slugs?: Partial<Record<Locale, string>>;
   /**

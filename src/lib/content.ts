@@ -1,6 +1,7 @@
 import type { City, Service } from './types';
 import { type Locale, tx } from './locales';
-import { frAt, frOf } from './city-name';
+import { localizedCityName } from './catalog';
+import { ptAt, ptOf, ptRegionAt } from './pt-grammar';
 import { LEAF_SEO } from './data/leaf-seo';
 import { TITLE_MAX } from './seo-text';
 import { formatDuration, formatPrice } from './site';
@@ -42,7 +43,7 @@ export function generateProgrammaticContent(
   service: Service,
   locale: Locale,
 ): ProgrammaticContent {
-  const cityName = city.name;
+  const cityName = localizedCityName(city, locale);
   const serviceName = tx(service.name, locale);
   const regionName = tx(city.region, locale);
   const startingPrice = service.initialPrice;
@@ -62,7 +63,7 @@ export function generateProgrammaticContent(
   // are not worth listing, so only the constraints are named.
   const permitNotes = spots
     .map((s) => ({ name: s.name, cost: tx(s.permitCost, locale) }))
-    .filter((s) => !/^(free|gratuit)\b/i.test(s.cost));
+    .filter((s) => !/^(free|gr[aá]tis|gratuito|livre|sem custo)\b/i.test(s.cost));
   const authored = LEAF_SEO[`${service.slug}--${city.slug}`];
 
   const durationLabel = formatDuration(duration, locale);
@@ -71,53 +72,54 @@ export function generateProgrammaticContent(
   // between two locations, and describing it as a route reads as nonsense.
   const isCoverage = duration >= 240;
 
-  if (locale === 'fr') {
+  if (locale === 'pt') {
     return {
-      answerBox: `${serviceName} ${frAt(city)} : à partir de ${priceLabel}. ${durationLabel} sur place avec un photographe local vérifié, et ${photoCount} photos retouchées livrées dans une galerie privée sous 48 à 72 heures. Le tarif est annoncé avant la réservation et ne bouge pas.`,
+      answerBox: `${serviceName} ${ptAt(city)} — desde ${priceLabel}. ${durationLabel} no local com um fotógrafo local verificado e ${photoCount} fotografias editadas entregues numa galeria privada em 48 a 72 horas. O preço é acordado antes de reservar e não muda.`,
 
       introParagraph: authored
         ? tx(authored.angle, locale)
-        : `${lede} C’est ce qui décide de la façon dont une séance ${serviceName} se prépare ici : le photographe qui vous accompagne habite ${cityName} et travaille en ${regionName} toute l’année, il ne découvre donc pas le lieu en même temps que vous. Cette connaissance préalable sépare une séance qui tient son horaire d’une séance passée à chercher un cadre.`,
+        : `${lede} É isso que decide como se prepara aqui uma sessão de ${serviceName.toLowerCase()}: o fotógrafo que vai consigo vive ${ptAt(city)} e trabalha ${ptRegionAt(regionName)} o ano inteiro, por isso não está a conhecer o sítio ao mesmo tempo que você. Esse conhecimento prévio é a diferença entre uma sessão que cumpre o horário e uma sessão passada à procura de enquadramento.`,
 
-      // Spot names carry their own articles — "Le Panier", "La Petite France" —
-      // so no preposition can be glued in front of them. Hence "Point de départ".
+      // Portuguese place names carry their own article — "a Ribeira", "o
+      // Miradouro da Graça" — so no preposition can be glued in front of one.
+      // Hence "Ponto de partida:" rather than "Começamos em…".
       sampleRoute: isCoverage
-        ? `La couverture s’étend sur ${durationLabel} et suit votre déroulé plutôt qu’un parcours fixe. Quand un créneau se libère pour des images posées, nous sortons vers ${keySpotName}${secondSpot ? ` ou ${secondSpot.name}` : ''} : quelques minutes de marche suffisent, et c’est autant de temps qui n’est pas pris sur la journée.`
+        ? `A cobertura dura ${durationLabel} e segue o seu programa, não um percurso fixo. Quando abre um intervalo para fotografias compostas, saímos até ${keySpotName}${secondSpot ? ` ou ${secondSpot.name}` : ''} — poucos minutos a pé, que é outro tanto que não se tira ao dia.`
         : secondSpot
-          ? `Le parcours type dure ${durationLabel} et reste à pied. Point de départ : ${keySpotName}, puis ${secondSpot.name}. Deux lieux plutôt qu’un donnent deux arrière-plans distincts sans trajet en voiture, et le passage de l’un à l’autre fournit les images prises en marchant — souvent les plus justes de la série.`
-          : `Le parcours type dure ${durationLabel} et reste à pied. Point de départ : ${keySpotName}. Nous alternons des cadres composés et des séquences plus libres en marchant, de façon à obtenir plusieurs registres sans changer de quartier ni perdre de temps en trajet.`,
+          ? `O percurso habitual dura ${durationLabel} e faz-se a pé. Ponto de partida: ${keySpotName}, depois ${secondSpot.name}. Dois locais em vez de um dão dois fundos distintos sem entrar no carro, e o caminho entre eles produz as fotografias feitas em movimento — muitas vezes as mais verdadeiras do conjunto.`
+          : `O percurso habitual dura ${durationLabel} e faz-se a pé. Ponto de partida: ${keySpotName}. Alternamos enquadramentos compostos com sequências mais soltas a andar, para ter vários registos sem mudar de zona nem perder tempo em deslocações.`,
 
       timingParagraph: keySpotTime
-        ? `L’heure compte plus que le lieu. Créneau à viser pour ${keySpotName} : ${keySpotTime}. La séance dure ${durationLabel} et se cale sur ce créneau plutôt que sur votre agenda — c’est la seule variable qui change vraiment les images, et elle est gratuite.`
-        : `L’heure compte plus que le lieu. La séance dure ${durationLabel} et se place ${frAt(city)} au lever du jour ou dans l’heure qui précède le coucher du soleil, quand la lumière est basse et la fréquentation faible.`,
+        ? `A hora conta mais do que o sítio. Janela a apanhar para ${keySpotName}: ${keySpotTime.toLowerCase()}. A sessão dura ${durationLabel} e organiza-se à volta dessa janela, não da sua agenda — é a única variável que muda mesmo as fotografias, e não custa nada.`
+        : `A hora conta mais do que o sítio. A sessão dura ${durationLabel} e marca-se ${ptAt(city)} ao nascer do dia ou na hora antes do pôr do sol, quando a luz é baixa e há pouca gente.`,
 
-      detailsText: `Le forfait ${serviceName} ${frAt(city)} comprend : ${deliverables.join(' ; ')}. Aucun supplément n’apparaît après la séance. ${
+      detailsText: `O pacote de ${serviceName.toLowerCase()} ${ptAt(city)} inclui: ${deliverables.join('; ')}. Não há suplementos depois da sessão. ${
         permitNotes.length > 0
-          ? `Autorisations à connaître : ${permitNotes.map((p) => `${p.name} — ${p.cost}`).join(' ; ')}.`
-          : `Les lieux retenus sont sur voirie publique et n’exigent aucune autorisation payante.`
+          ? `Autorizações a ter em conta: ${permitNotes.map((p) => `${p.name} — ${p.cost}`).join('; ')}.`
+          : `Os locais que usamos são via pública e não exigem autorização paga.`
       }`,
 
       customFAQs: [
         {
-          question: `${serviceName} ${frAt(city)} : à quelle heure prévoir la séance ?`,
+          question: `${serviceName} ${ptAt(city)}: a que horas marcar a sessão?`,
           answer: keySpotTime
-            ? `Pour ${keySpotName}, visez ${keySpotTime.toLowerCase()}. Sur un lieu fréquenté, deux heures d’écart changent complètement ce qu’il est possible de cadrer.`
-            : `Au lever du jour ou dans l’heure qui précède le coucher du soleil. Deux heures d’écart changent complètement ce qu’il est possible de cadrer.`,
+            ? `Para ${keySpotName}, aponte para ${keySpotTime.toLowerCase()}. Num local movimentado, duas horas para um lado ou para o outro mudam por completo o que é possível enquadrar.`
+            : `Ao nascer do dia, ou na hora antes do pôr do sol. Duas horas para um lado ou para o outro mudam por completo o que é possível enquadrar.`,
         },
         {
-          question: `Faut-il une autorisation pour photographier ${frAt(city)} ?`,
+          question: `É preciso autorização para fotografar ${ptAt(city)}?`,
           answer:
             permitNotes.length > 0
-              ? `Sur certains lieux, oui : ${permitNotes.map((p) => `${p.name} (${p.cost})`).join(' ; ')}. Le photographe s’en occupe et vous le dit à la réservation, pas le jour même.`
-              : `Pas sur les lieux que nous utilisons pour cette séance : ils sont sur voirie ou espace public libre d’accès. Si votre demande sort de ce cadre, nous vous le disons avant de réserver.`,
+              ? `Nalguns locais, sim: ${permitNotes.map((p) => `${p.name} (${p.cost})`).join('; ')}. O fotógrafo trata disso e diz-lhe na reserva, não no próprio dia.`
+              : `Não nos locais que usamos para esta sessão: são via pública e espaço aberto. Se o seu pedido sair desse âmbito, dizemos-lhe antes de reservar.`,
         },
         {
-          question: `Que se passe-t-il s’il pleut ${frAt(city)} ?`,
-          answer: `Nous décalons la séance à un autre créneau ou à un autre jour, sans frais. Si vous n’êtes sur place que peu de temps, nous basculons sur des lieux couverts repérés à l’avance plutôt que d’annuler.`,
+          question: `O que acontece se chover ${ptAt(city)}?`,
+          answer: `Passamos a sessão para outra hora ou outro dia, sem custo. Se estiver cá pouco tempo, mudamos para locais abrigados já reconhecidos em vez de cancelar.`,
         },
         {
-          question: `Quand recevons-nous les photos ${frOf(city)} ?`,
-          answer: `Sous 48 à 72 heures, dans une galerie privée en ligne : ${photoCount} images retouchées, téléchargeables en pleine résolution depuis n’importe quel pays.`,
+          question: `Quando recebemos as fotografias ${ptOf(city)}?`,
+          answer: `Em 48 a 72 horas, numa galeria privada online: ${photoCount} imagens editadas, para descarregar em resolução máxima a partir de qualquer país.`,
         },
       ],
     };
@@ -189,23 +191,23 @@ export function getSeoMetadata(
     return { title: tx(authored.title, locale), description: tx(authored.description, locale) };
   }
 
-  const cityName = city.name;
+  const cityName = localizedCityName(city, locale);
   const serviceName = tx(service.name, locale);
   const priceLabel = formatPrice(service.initialPrice, locale);
   const photoCount = service.editedPhotos;
   const durationLabel = formatDuration(service.durationMinutes, locale);
 
-  if (locale === 'fr') {
-    // "Photographe Photo culinaire et restaurant à Marseille" is both too long
-    // and badly written: some service names already begin with the noun. Where
-    // the prefix does not fit or would double up, the name carries the title
-    // alone — the H1 and the description still say photographe.
-    const suffix = `${serviceName} ${frAt(city)} | ${SITE_NAME}`;
-    const prefixed = `Photographe ${suffix}`;
-    const doublesUp = /^photo/i.test(serviceName);
+  if (locale === 'pt') {
+    // "Fotógrafo de Fotografia gastronómica no Porto" is both too long and
+    // badly written: some service names already begin with the noun. Where the
+    // prefix does not fit or would double up, the name carries the title alone
+    // — the H1 and the description still say fotógrafo.
+    const plain = `${serviceName} ${ptAt(city)} | ${SITE_NAME}`;
+    const prefixed = `Fotógrafo de ${serviceName.toLowerCase()} ${ptAt(city)} | ${SITE_NAME}`;
+    const doublesUp = /^fot[oó]/i.test(serviceName);
     return {
-      title: !doublesUp && prefixed.length <= TITLE_MAX ? prefixed : suffix,
-      description: `${serviceName} ${frAt(city)} avec un photographe local vérifié. Dès ${priceLabel}, ${durationLabel} sur place, ${photoCount} photos retouchées, galerie privée sous 48-72 h.`,
+      title: !doublesUp && prefixed.length <= TITLE_MAX ? prefixed : plain,
+      description: `${serviceName} ${ptAt(city)} com um fotógrafo local verificado. Desde ${priceLabel}, ${durationLabel} no local, ${photoCount} fotografias editadas, galeria privada em 48-72 h.`,
     };
   }
 

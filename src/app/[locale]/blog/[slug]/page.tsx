@@ -16,14 +16,14 @@ import ArticleBody from '@/components/ArticleBody';
 import { blogAlternateParams } from '@/lib/routes';
 
 const COPY = {
-  blog: { en: 'Blog', fr: 'Blog' },
-  back: { en: 'All articles', fr: 'Tous les articles' },
-  ctaTitle: { en: 'Turn inspiration into real photos', fr: 'Transformez l’inspiration en vraies photos' },
-  cta: { en: 'Book a session', fr: 'Réserver une séance' },
-  home: { en: 'Home', fr: 'Accueil' },
-  toc: { en: 'In this guide', fr: 'Dans ce guide' },
-  faq: { en: 'Frequently asked questions', fr: 'Questions fréquentes' },
-  updated: { en: 'Updated on', fr: 'Mis à jour le' },
+  blog: { en: 'Blog', pt: 'PT_TODO: Blog' },
+  back: { en: 'All articles', pt: 'PT_TODO: All articles' },
+  ctaTitle: { en: 'Turn inspiration into real photos', pt: 'PT_TODO: Turn inspiration into real photos' },
+  cta: { en: 'Book a session', pt: 'PT_TODO: Book a session' },
+  home: { en: 'Home', pt: 'PT_TODO: Home' },
+  toc: { en: 'In this guide', pt: 'PT_TODO: In this guide' },
+  faq: { en: 'Frequently asked questions', pt: 'PT_TODO: Frequently asked questions' },
+  updated: { en: 'Updated on', pt: 'PT_TODO: Updated on' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

@@ -15,15 +15,15 @@ import { SITE_NAME } from '@/lib/site';
 const OG_SERVICE_SLUG = 'couple';
 
 const COPY = {
-  title: { en: 'Reviews', fr: 'Avis' },
-  eyebrow: { en: 'In our clients’ words', fr: 'Paroles de clients' },
+  title: { en: 'Reviews', pt: 'PT_TODO: Reviews' },
+  eyebrow: { en: 'In our clients’ words', pt: 'PT_TODO: In our clients’ words' },
   intro: {
     en: `Couples, families and companies who booked ${SITE_NAME} in France, in their own words — real ratings, real sessions, no selection for flattery.`,
-    fr: `Couples, familles et entreprises ayant choisi ${SITE_NAME} partagent leur expérience. La transparence avant tout.`,
+    pt: 'PT_TODO',
   },
-  basedOn: { en: 'based on', fr: 'sur' },
-  reviewsWord: { en: 'reviews', fr: 'avis' },
-  breadcrumbHome: { en: 'Home', fr: 'Accueil' },
+  basedOn: { en: 'based on', pt: 'PT_TODO: based on' },
+  reviewsWord: { en: 'reviews', pt: 'PT_TODO: reviews' },
+  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

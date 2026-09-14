@@ -100,9 +100,14 @@ describe('dark surfaces', () => {
   // tuned for paper fall to 3.7:1 and 2.7:1 on ink. This is the regression that
   // a colour sweep across the codebase introduces without anyone seeing it.
   const dark = { ...BASE, ...tokensOf("[data-surface='dark'],\n.bento-card-dark") };
+  // Derived from the registry rather than named here: a theme added or renamed
+  // must be covered without anyone remembering to add it to this list, which is
+  // exactly what a hardcoded 'paris' failed to do.
   const grounds: Array<[string, string]> = [
     ['house ink', BASE['--color-brand-dark']],
-    ['Paris ink', resolved('paris')['--color-brand-dark']],
+    ...(Object.keys(CITY_THEMES) as CityThemeId[]).map(
+      (id): [string, string] => [`${id} ink`, resolved(id)['--color-brand-dark']],
+    ),
   ];
 
   for (const [name, ground] of grounds) {

@@ -11,22 +11,22 @@ export default async function Footer() {
 
   const tagline = {
     en: 'Vetted professional photographers across France. Fixed pricing, private gallery in 48–72h.',
-    fr: 'Photographes professionnels vérifiés partout en France. Prix fixe, galerie privée sous 48 à 72 h.',
+    pt: 'PT_TODO: Vetted professional photographers across France. Fixed prici',
   }[locale];
 
   const labels = {
-    services: { en: 'Services', fr: 'Services' }[locale],
-    cities: { en: 'Cities', fr: 'Villes' }[locale],
-    company: { en: 'Company', fr: 'Entreprise' }[locale],
-    reviews: { en: 'Reviews', fr: 'Avis' }[locale],
-    legal: { en: 'Legal', fr: 'Informations légales' }[locale],
-    legalNotice: { en: 'Legal notice', fr: 'Mentions légales' }[locale],
-    privacy: { en: 'Privacy', fr: 'Confidentialité' }[locale],
-    terms: { en: 'Terms of sale', fr: 'CGV' }[locale],
-    imageRights: { en: 'Image rights', fr: 'Droit à l’image' }[locale],
-    photoCredits: { en: 'Photo credits', fr: 'Crédits photos' }[locale],
-    whatsapp: { en: 'Message us on WhatsApp', fr: 'WhatsApp' }[locale],
-    rights: { en: 'All rights reserved.', fr: 'Tous droits réservés.' }[locale],
+    services: { en: 'Services', pt: 'PT_TODO: Services' }[locale],
+    cities: { en: 'Cities', pt: 'PT_TODO: Cities' }[locale],
+    company: { en: 'Company', pt: 'PT_TODO: Company' }[locale],
+    reviews: { en: 'Reviews', pt: 'PT_TODO: Reviews' }[locale],
+    legal: { en: 'Legal', pt: 'PT_TODO: Legal' }[locale],
+    legalNotice: { en: 'Legal notice', pt: 'PT_TODO: Legal notice' }[locale],
+    privacy: { en: 'Privacy', pt: 'PT_TODO: Privacy' }[locale],
+    terms: { en: 'Terms of sale', pt: 'PT_TODO: Terms of sale' }[locale],
+    imageRights: { en: 'Image rights', pt: 'PT_TODO: Image rights' }[locale],
+    photoCredits: { en: 'Photo credits', pt: 'PT_TODO: Photo credits' }[locale],
+    whatsapp: { en: 'Message us on WhatsApp', pt: 'PT_TODO: Message us on WhatsApp' }[locale],
+    rights: { en: 'All rights reserved.', pt: 'PT_TODO: All rights reserved.' }[locale],
   };
 
   // Footer links appear site-wide, so only surface published pages.
@@ -36,7 +36,7 @@ export default async function Footer() {
 
   const waMessage = {
     en: `Hi ${SITE_NAME}! I would like information about a photoshoot.`,
-    fr: `Bonjour ${SITE_NAME} ! Je voudrais des informations sur une séance photo.`,
+    pt: 'PT_TODO',
   }[locale];
 
   return (

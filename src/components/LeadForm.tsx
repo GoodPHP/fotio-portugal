@@ -20,25 +20,25 @@ interface LeadFormProps {
 }
 
 const UI = {
-  name: { en: 'Full name', fr: 'Nom complet' },
-  email: { en: 'Email', fr: 'E-mail' },
-  phone: { en: 'Phone', fr: 'Téléphone' },
-  service: { en: 'Service (optional)', fr: 'Service (optionnel)' },
-  city: { en: 'City (optional)', fr: 'Ville (optionnelle)' },
-  message: { en: 'Message', fr: 'Message' },
-  choose: { en: 'Select…', fr: 'Sélectionner…' },
-  submit: { en: 'Send request', fr: 'Envoyer la demande' },
-  sending: { en: 'Sending…', fr: 'Envoi…' },
-  successTitle: { en: 'Request sent!', fr: 'Demande envoyée !' },
-  successBody: { en: 'We will reply within a few hours. For an instant reply, message us on WhatsApp.', fr: 'Nous répondrons sous quelques heures. Pour une réponse immédiate, écrivez-nous sur WhatsApp.' },
-  whatsapp: { en: 'Continue on WhatsApp', fr: 'Continuer sur WhatsApp' },
-  errName: { en: 'Enter your name (min. 2 characters).', fr: 'Saisissez votre nom (min. 2 caractères).' },
-  errEmail: { en: 'Enter a valid email address.', fr: 'Saisissez une adresse e-mail valide.' },
-  errPhone: { en: 'Enter a valid phone number.', fr: 'Saisissez un numéro de téléphone valide.' },
-  errMessage: { en: 'Write a short message.', fr: 'Écrivez un court message.' },
-  errSubmit: { en: 'Something went wrong. Try again or message us on WhatsApp.', fr: 'Une erreur est survenue. Réessayez ou écrivez-nous sur WhatsApp.' },
-  waService: { en: 'Service', fr: 'Service' },
-  waCity: { en: 'City', fr: 'Ville' },
+  name: { en: 'Full name', pt: 'PT_TODO: Full name' },
+  email: { en: 'Email', pt: 'PT_TODO: Email' },
+  phone: { en: 'Phone', pt: 'PT_TODO: Phone' },
+  service: { en: 'Service (optional)', pt: 'PT_TODO: Service (optional)' },
+  city: { en: 'City (optional)', pt: 'PT_TODO: City (optional)' },
+  message: { en: 'Message', pt: 'PT_TODO: Message' },
+  choose: { en: 'Select…', pt: 'PT_TODO: Select…' },
+  submit: { en: 'Send request', pt: 'PT_TODO: Send request' },
+  sending: { en: 'Sending…', pt: 'PT_TODO: Sending…' },
+  successTitle: { en: 'Request sent!', pt: 'PT_TODO: Request sent!' },
+  successBody: { en: 'We will reply within a few hours. For an instant reply, message us on WhatsApp.', pt: 'PT_TODO: We will reply within a few hours. For an instant reply, mess' },
+  whatsapp: { en: 'Continue on WhatsApp', pt: 'PT_TODO: Continue on WhatsApp' },
+  errName: { en: 'Enter your name (min. 2 characters).', pt: 'PT_TODO: Enter your name (min. 2 characters).' },
+  errEmail: { en: 'Enter a valid email address.', pt: 'PT_TODO: Enter a valid email address.' },
+  errPhone: { en: 'Enter a valid phone number.', pt: 'PT_TODO: Enter a valid phone number.' },
+  errMessage: { en: 'Write a short message.', pt: 'PT_TODO: Write a short message.' },
+  errSubmit: { en: 'Something went wrong. Try again or message us on WhatsApp.', pt: 'PT_TODO: Something went wrong. Try again or message us on WhatsApp.' },
+  waService: { en: 'Service', pt: 'PT_TODO: Service' },
+  waCity: { en: 'City', pt: 'PT_TODO: City' },
 } as const;
 
 /**
@@ -51,7 +51,7 @@ const UI = {
  */
 const GREETING: Record<Locale, (sender: string) => string> = {
   en: (sender) => `Hi ${SITE_NAME}! I’m ${sender}.`,
-  fr: (sender) => `Bonjour ${SITE_NAME} ! Je suis ${sender}.`,
+  pt: (sender) => `Olá ${SITE_NAME}! Chamo-me ${sender}.`,
 };
 
 function t(key: keyof typeof UI, locale: Locale): string {

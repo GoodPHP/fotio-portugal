@@ -30,12 +30,12 @@ interface PortfolioGalleryProps {
 }
 
 const UI = {
-  all: { en: 'All', fr: 'Toutes' },
-  photos: { en: 'photos', fr: 'photos' },
-  loadMore: { en: 'Load more photos', fr: 'Voir plus de photos' },
-  showing: { en: 'Showing', fr: 'Affichées' },
-  of: { en: 'of', fr: 'sur' },
-  zoom: { en: 'Open full screen', fr: 'Ouvrir en plein écran' },
+  all: { en: 'All', pt: 'PT_TODO: All' },
+  photos: { en: 'photos', pt: 'PT_TODO: photos' },
+  loadMore: { en: 'Load more photos', pt: 'PT_TODO: Load more photos' },
+  showing: { en: 'Showing', pt: 'PT_TODO: Showing' },
+  of: { en: 'of', pt: 'PT_TODO: of' },
+  zoom: { en: 'Open full screen', pt: 'PT_TODO: Open full screen' },
 } as const;
 
 function t(key: keyof typeof UI, locale: Locale): string {

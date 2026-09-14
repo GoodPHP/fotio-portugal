@@ -66,79 +66,79 @@ export default async function HomePage({ params }: HomePageProps) {
   const topCities = publishedCities().slice(0, 9);
 
   const copy = {
-    servicesEyebrow: { en: 'Photography services', fr: 'Services photo' }[locale],
-    servicesTitle: { en: 'A shoot for every story', fr: 'Une séance pour chaque histoire' }[locale],
-    citiesEyebrow: { en: 'Where we shoot', fr: 'Où nous photographions' }[locale],
-    citiesTitle: { en: 'The most loved cities', fr: 'Les villes les plus aimées' }[locale],
-    howEyebrow: { en: 'How it works', fr: 'Comment ça marche' }[locale],
-    howTitle: { en: 'From booking to gallery in 3 steps', fr: 'De la réservation à la galerie en 3 étapes' }[locale],
-    faqTitle: { en: 'Frequently asked questions', fr: 'Questions fréquentes' }[locale],
-    ctaTitle: { en: 'Ready to photograph your time in France?', fr: 'Prêt à photographier votre séjour en France ?' }[locale],
-    ctaSub: { en: 'Reply within 2 hours. No deposit required to enquire.', fr: 'Réponse sous 2 heures. Aucun acompte pour demander un devis.' }[locale],
-    ratingLabel: { en: 'from real clients', fr: 'de vrais clients' }[locale],
-    trustHeading: { en: `Why book through ${SITE_NAME}`, fr: `Pourquoi réserver via ${SITE_NAME}` }[locale],
-    heroEyebrow: { en: 'Photographers across France', fr: 'Photographes partout en France' }[locale],
-    heroImageAlt: { en: 'A photograph from one of the cities we cover', fr: 'Une photographie de l’une des villes que nous couvrons' }[locale],
-    statCities: { en: 'Cities covered', fr: 'Villes couvertes' }[locale],
-    statServices: { en: 'Session types', fr: 'Types de séance' }[locale],
-    statDelivery: { en: 'Gallery delivery', fr: 'Livraison galerie' }[locale],
-    statRating: { en: 'Client rating', fr: 'Note clients' }[locale],
-    explore: { en: 'Explore services', fr: 'Voir les services' }[locale],
+    servicesEyebrow: { en: 'Photography services', pt: 'PT_TODO: Photography services' }[locale],
+    servicesTitle: { en: 'A shoot for every story', pt: 'PT_TODO: A shoot for every story' }[locale],
+    citiesEyebrow: { en: 'Where we shoot', pt: 'PT_TODO: Where we shoot' }[locale],
+    citiesTitle: { en: 'The most loved cities', pt: 'PT_TODO: The most loved cities' }[locale],
+    howEyebrow: { en: 'How it works', pt: 'PT_TODO: How it works' }[locale],
+    howTitle: { en: 'From booking to gallery in 3 steps', pt: 'PT_TODO: From booking to gallery in 3 steps' }[locale],
+    faqTitle: { en: 'Frequently asked questions', pt: 'PT_TODO: Frequently asked questions' }[locale],
+    ctaTitle: { en: 'Ready to photograph your time in France?', pt: 'PT_TODO: Ready to photograph your time in France?' }[locale],
+    ctaSub: { en: 'Reply within 2 hours. No deposit required to enquire.', pt: 'PT_TODO: Reply within 2 hours. No deposit required to enquire.' }[locale],
+    ratingLabel: { en: 'from real clients', pt: 'PT_TODO: from real clients' }[locale],
+    trustHeading: { en: `Why book through ${SITE_NAME}`, pt: 'PT_TODO' }[locale],
+    heroEyebrow: { en: 'Photographers across France', pt: 'PT_TODO: Photographers across France' }[locale],
+    heroImageAlt: { en: 'A photograph from one of the cities we cover', pt: 'PT_TODO: A photograph from one of the cities we cover' }[locale],
+    statCities: { en: 'Cities covered', pt: 'PT_TODO: Cities covered' }[locale],
+    statServices: { en: 'Session types', pt: 'PT_TODO: Session types' }[locale],
+    statDelivery: { en: 'Gallery delivery', pt: 'PT_TODO: Gallery delivery' }[locale],
+    statRating: { en: 'Client rating', pt: 'PT_TODO: Client rating' }[locale],
+    explore: { en: 'Explore services', pt: 'PT_TODO: Explore services' }[locale],
   };
 
   const trust = [
     {
-      title: { en: '2-hour response', fr: 'Réponse en 2h' }[locale],
-      desc: { en: 'A real coordinator replies right away.', fr: 'Un coordinateur réel répond aussitôt.' }[locale],
+      title: { en: '2-hour response', pt: 'PT_TODO: 2-hour response' }[locale],
+      desc: { en: 'A real coordinator replies right away.', pt: 'PT_TODO: A real coordinator replies right away.' }[locale],
     },
     {
-      title: { en: 'Locked fixed price', fr: 'Prix fixe garanti' }[locale],
-      desc: { en: 'No hidden costs, ever.', fr: 'Aucun coût caché, jamais.' }[locale],
+      title: { en: 'Locked fixed price', pt: 'PT_TODO: Locked fixed price' }[locale],
+      desc: { en: 'No hidden costs, ever.', pt: 'PT_TODO: No hidden costs, ever.' }[locale],
     },
     {
-      title: { en: 'Gallery in 48-72h', fr: 'Galerie en 48-72h' }[locale],
-      desc: { en: 'Edited photos, delivery guaranteed.', fr: 'Photos retouchées, livraison garantie.' }[locale],
+      title: { en: 'Gallery in 48-72h', pt: 'PT_TODO: Gallery in 48-72h' }[locale],
+      desc: { en: 'Edited photos, delivery guaranteed.', pt: 'PT_TODO: Edited photos, delivery guaranteed.' }[locale],
     },
     {
-      title: { en: 'Vetted photographers', fr: 'Photographes vérifiés' }[locale],
-      desc: { en: 'Only selected local pros.', fr: 'Uniquement des pros locaux sélectionnés.' }[locale],
+      title: { en: 'Vetted photographers', pt: 'PT_TODO: Vetted photographers' }[locale],
+      desc: { en: 'Only selected local pros.', pt: 'PT_TODO: Only selected local pros.' }[locale],
     },
   ];
 
   const steps = [
     {
       n: '01',
-      title: { en: 'Choose & book', fr: 'Choisir & réserver' }[locale],
-      desc: { en: 'Pick city, service and date. Confirm in seconds.', fr: 'Choisissez ville, service et date. Confirmé en quelques secondes.' }[locale],
+      title: { en: 'Choose & book', pt: 'PT_TODO: Choose & book' }[locale],
+      desc: { en: 'Pick city, service and date. Confirm in seconds.', pt: 'PT_TODO: Pick city, service and date. Confirm in seconds.' }[locale],
     },
     {
       n: '02',
-      title: { en: 'Shoot with a local pro', fr: 'Photographiez avec un pro local' }[locale],
-      desc: { en: 'Meet a vetted photographer at the best spots.', fr: 'Retrouvez un photographe vérifié aux meilleurs endroits.' }[locale],
+      title: { en: 'Shoot with a local pro', pt: 'PT_TODO: Shoot with a local pro' }[locale],
+      desc: { en: 'Meet a vetted photographer at the best spots.', pt: 'PT_TODO: Meet a vetted photographer at the best spots.' }[locale],
     },
     {
       n: '03',
-      title: { en: 'Get your gallery', fr: 'Recevez votre galerie' }[locale],
-      desc: { en: 'Edited photos in your private gallery within 48-72h.', fr: 'Photos retouchées dans votre galerie privée en 48-72h.' }[locale],
+      title: { en: 'Get your gallery', pt: 'PT_TODO: Get your gallery' }[locale],
+      desc: { en: 'Edited photos in your private gallery within 48-72h.', pt: 'PT_TODO: Edited photos in your private gallery within 48-72h.' }[locale],
     },
   ];
 
   const faqs = [
     {
-      q: { en: 'How much does a photoshoot cost?', fr: 'Combien coûte une séance photo ?' }[locale],
-      a: { en: `Prices are fixed and transparent, starting at ${formatPrice(150, locale)}. Every package includes the session, professional editing and a private gallery, with no hidden fees.`, fr: `Les prix sont fixes et transparents, à partir de ${formatPrice(150, locale)}. Chaque forfait inclut la séance, la retouche professionnelle et une galerie privée, sans frais cachés.` }[locale],
+      q: { en: 'How much does a photoshoot cost?', pt: 'PT_TODO: How much does a photoshoot cost?' }[locale],
+      a: { en: `Prices are fixed and transparent, starting at ${formatPrice(150, locale)}. Every package includes the session, professional editing and a private gallery, with no hidden fees.`, pt: 'PT_TODO' }[locale],
     },
     {
-      q: { en: 'How soon do I get my photos?', fr: 'Quand vais-je recevoir mes photos ?' }[locale],
-      a: { en: 'We deliver your private online gallery with all edited photos within 48-72 hours of the session.', fr: 'Nous livrons votre galerie privée avec toutes les photos retouchées sous 48-72 heures.' }[locale],
+      q: { en: 'How soon do I get my photos?', pt: 'PT_TODO: How soon do I get my photos?' }[locale],
+      a: { en: 'We deliver your private online gallery with all edited photos within 48-72 hours of the session.', pt: 'PT_TODO: We deliver your private online gallery with all edited photo' }[locale],
     },
     {
-      q: { en: 'Do the photographers speak my language?', fr: 'Les photographes parlent-ils ma langue ?' }[locale],
-      a: { en: 'Yes. We match you with local photographers by language — just tell us your preference when booking.', fr: 'Oui. Nous vous mettons en relation selon la langue — indiquez votre préférence à la réservation.' }[locale],
+      q: { en: 'Do the photographers speak my language?', pt: 'PT_TODO: Do the photographers speak my language?' }[locale],
+      a: { en: 'Yes. We match you with local photographers by language — just tell us your preference when booking.', pt: 'PT_TODO: Yes. We match you with local photographers by language — jus' }[locale],
     },
     {
-      q: { en: 'What happens if the weather is bad?', fr: 'Que se passe-t-il en cas de mauvais temps ?' }[locale],
-      a: { en: 'We reschedule at no extra cost, or use arcades and indoor spots for moody shots.', fr: 'Nous reprogrammons sans frais, ou utilisons arcades et lieux couverts pour des clichés d’ambiance.' }[locale],
+      q: { en: 'What happens if the weather is bad?', pt: 'PT_TODO: What happens if the weather is bad?' }[locale],
+      a: { en: 'We reschedule at no extra cost, or use arcades and indoor spots for moody shots.', pt: 'PT_TODO: We reschedule at no extra cost, or use arcades and indoor sp' }[locale],
     },
   ];
 

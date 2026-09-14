@@ -12,7 +12,7 @@ export interface ArticleFaq {
 }
 
 export interface ArticleLocale {
-  /** ≤46 chars: the metadata title appends " · Ylala" and clamps at 60. */
+  /** ≤46 chars: the metadata title appends the brand and clamps at 60. */
   title: string;
   /** Meta description: 110–160 chars. */
   summary: string;

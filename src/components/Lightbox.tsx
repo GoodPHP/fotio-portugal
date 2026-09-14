@@ -40,10 +40,10 @@ const NextIcon = () => (
 );
 
 const LABELS = {
-  dialog: { en: 'Gallery', fr: 'Galerie' },
-  close: { en: 'Close', fr: 'Fermer' },
-  prev: { en: 'Previous', fr: 'Précédent' },
-  next: { en: 'Next', fr: 'Suivant' },
+  dialog: { en: 'Gallery', pt: 'PT_TODO: Gallery' },
+  close: { en: 'Close', pt: 'PT_TODO: Close' },
+  prev: { en: 'Previous', pt: 'PT_TODO: Previous' },
+  next: { en: 'Next', pt: 'PT_TODO: Next' },
 } as const;
 
 interface LightboxProps {
