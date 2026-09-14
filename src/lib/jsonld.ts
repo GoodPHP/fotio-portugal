@@ -189,6 +189,11 @@ export function aggregateRatingWithReviewsNodes(
   reviewCount: number,
   reviews: ReviewLike[],
 ): Node[] {
+  // An AggregateRating with a reviewCount of zero is not a modest claim, it is
+  // an invalid one: Google rejects it, and a rating averaged over no reviews is
+  // structured data asserting something nobody said. Emit nothing instead.
+  if (reviewCount === 0) return [];
+
   const aggregate: Node = {
     '@type': 'AggregateRating',
     '@id': `${ORG_ID}-rating`,

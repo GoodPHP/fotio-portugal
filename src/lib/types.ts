@@ -103,7 +103,14 @@ export interface City {
   gallery?: GalleryImage[];
   spots: PhotoSpot[];
   faqs: CityFAQ[];
-  quote: {
+  /**
+   * A line from the photographer who works here.
+   *
+   * Optional, and absent until there is a real one. The field exists because
+   * the page has a place for it, which is not a reason to invent a named
+   * person and attribute a sentence to them.
+   */
+  quote?: {
     text: Localized;
     author: string;
     role: Localized;

@@ -420,7 +420,8 @@ export default async function CityPage({ params }: CityPageProps) {
         </section>
       )}
 
-      {/* Quote */}
+      {/* Quote — only where a real one exists; see City.quote. */}
+      {city.quote && (
       <section aria-label="Photographer note" className="bg-brand-sand py-16">
         <div className="mx-auto max-w-4xl px-6">
           <FadeIn>
@@ -438,6 +439,7 @@ export default async function CityPage({ params }: CityPageProps) {
           </FadeIn>
         </div>
       </section>
+      )}
 
       {/* FAQ */}
       {faqEntries.length > 0 && (
