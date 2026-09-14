@@ -4,44 +4,44 @@ import type { Localized } from '@/lib/locales';
  * Search-facing copy for the contact page: SERP title and description, plus the
  * long-form passage that closes the page below the form.
  *
- * English is authored; French falls back to it via `tx()` until translated.
+ * Both languages are authored rather than translated.
  */
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'Contact a Photographer in France — Reply in 2h',
-  pt: 'PT_TODO: Contact a Photographer in France — Reply in 2h',
+  en: 'Contact a Photographer in Portugal',
+  pt: 'Contactar um fotógrafo em Portugal',
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'Ask about a shoot in any of 22 French cities. Reply within two hours by email or WhatsApp, a written quote, and no deposit to ask the question.',
-  pt: 'PT_TODO: Ask about a shoot in any of 22 French cities. Reply within t',
+  en: 'Ask about a session in any of twelve places across Portugal. Reply within two hours by email or WhatsApp, a written quote, and no deposit to ask.',
+  pt: 'Pergunte sobre uma sessão em qualquer um dos doze sítios em Portugal. Resposta em duas horas por e-mail ou WhatsApp, orçamento por escrito, sem sinal.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'Lyon, one of the 22 French cities you can enquire about through the Ylala network',
-  pt: 'PT_TODO: Lyon, one of the 22 French cities you can enquire about thro',
+  en: 'Porto, one of the twelve places across Portugal you can enquire about',
+  pt: 'Porto, um dos doze sítios de Portugal sobre os quais pode perguntar',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'Before you write', pt: 'PT_TODO: Before you write' } as Localized,
+  eyebrow: { en: 'Before you write', pt: 'Antes de escrever' } as Localized,
   heading: {
     en: 'What to tell us, and what happens next',
-    pt: 'PT_TODO: What to tell us, and what happens next',
+    pt: 'O que nos dizer, e o que acontece a seguir',
   } as Localized,
   paragraphs: {
     en: [
-      'Four things get you a real answer instead of a follow-up question: the city, the kind of session, a date or a rough window, and how many people will be in front of the camera. Anything else is useful but optional — a location you have in mind, photographs whose look you like, a time of day that has to work around a ceremony or a toddler’s nap.',
-      'What comes back is a written quote with a fixed price, the name of the photographer who would take the session, and their read on what you asked for: whether the location works at that hour, whether it needs an authorisation, and what the alternative is if it does not. If we cannot cover the date, we say so straight away rather than holding the enquiry open.',
-      'We reply within two hours during the working day, and WhatsApp is the fastest route if you are already travelling and need an answer between one thing and the next. Nothing in this stage costs anything and nothing commits you: there is no deposit to ask a question, and no charge until a session is confirmed in writing.',
-      'For anything outside the standard catalogue — a multi-day assignment, several cities in one trip, a company shoot across offices, or a session for a venue that has its own rules — write rather than use the booking form. Those are quoted individually and are easier to get right in a sentence or two of description.',
+      'Three things make a quote possible in one exchange rather than four: where, roughly when, and what kind of session. Everything else can be decided later. If the date is not fixed yet, say which week — for several places on this site that is the more useful answer anyway, because the Açores and the Douro are booked as a window rather than as a day.',
+      'Replies come within about two hours during the working day, by email or on WhatsApp, whichever you used. The quote is written down, it covers the editing and the gallery, and it does not move afterwards. Asking costs nothing and commits you to nothing.',
+      'For anything outside the standard catalogue — a multi-day assignment, several places in one trip, a company shoot across offices, or a session somewhere with its own rules — write rather than use the booking form. Those are quoted individually and are far easier to get right from a sentence or two of description.',
+      'If your question is about whether a location is possible at all — a palace interior in Sintra, a working quinta during the Douro harvest, a levada on Madeira — ask before you plan around it. Those answers change, and getting the current one is the point of asking a local.',
     ],
     pt: [
-    'PT_TODO: Four things get you a real answer instead of a follow-up que',
-    'PT_TODO: What comes back is a written quote with a fixed price, the n',
-    'PT_TODO: We reply within two hours during the working day, and WhatsA',
-    'PT_TODO: For anything outside the standard catalogue — a multi-day as',
-  ],
+      'Três coisas tornam possível orçamentar numa só troca de mensagens em vez de quatro: onde, mais ou menos quando, e que tipo de sessão. O resto decide-se depois. Se a data ainda não estiver marcada, diga a semana — para vários sítios deste site essa é aliás a resposta mais útil, porque os Açores e o Douro reservam-se por janela e não por dia.',
+      'Respondemos em cerca de duas horas durante o dia útil, por e-mail ou WhatsApp, consoante o que tiver usado. O orçamento fica por escrito, cobre a edição e a galeria, e não muda depois. Perguntar não custa nada e não o compromete a nada.',
+      'Para tudo o que saia do catálogo normal — um trabalho de vários dias, vários sítios na mesma viagem, uma sessão de empresa em vários escritórios, ou uma sessão num local com regras próprias — escreva em vez de usar o formulário de reserva. Esses são orçamentados caso a caso e é muito mais fácil acertar a partir de duas frases de descrição.',
+      'Se a sua dúvida for se um local é sequer possível — um interior de palácio em Sintra, uma quinta em plena vindima no Douro, uma levada na Madeira — pergunte antes de planear à volta disso. Essas respostas mudam, e obter a actual é precisamente a razão para perguntar a quem está cá.',
+    ],
   } as Localized<string[]>,
   facts: {
     en: [

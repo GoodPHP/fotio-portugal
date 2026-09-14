@@ -7,18 +7,18 @@ import { tx, type Locale, type Localized } from '@/lib/locales';
  * The article count is interpolated from the catalogue rather than typed out,
  * so publishing a post cannot leave the copy claiming an old figure.
  *
- * English is authored; French falls back to it via `tx()` until translated.
+ * Both languages are authored rather than translated.
  */
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'France Photography Guides — Spots, Permits, Seasons',
-  pt: 'PT_TODO: France Photography Guides — Spots, Permits, Seasons',
+  en: 'Portugal Photography Guides — Spots, Permits, Seasons',
+  pt: 'Guias de fotografia em Portugal',
 };
 
 const DESCRIPTION_TEMPLATE: Localized = {
-  en: '{count} guides from photographers who work these cities weekly: Paris spots, permit rules, Provence lavender dates, Mont-Saint-Michel tides, what to wear.',
-  pt: 'PT_TODO: {count} guides from photographers who work these cities week',
+  en: '{count} guides from photographers who work these places weekly: Lisbon spots, Sintra permits, Douro harvest dates, Algarve tides, what to wear on calçada.',
+  pt: '{count} guias de quem fotografa estes sítios todas as semanas: locais em Lisboa, autorizações em Sintra, datas da vindima, marés no Algarve, o que calçar.',
 };
 
 export function metaDescription(locale: Locale, postCount: number): string {
@@ -26,29 +26,29 @@ export function metaDescription(locale: Locale, postCount: number): string {
 }
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'Paris photographed at the hour our guides recommend, from the Ylala photography guides',
-  pt: 'PT_TODO: Paris photographed at the hour our guides recommend, from th',
+  en: 'Lisbon photographed at the hour these guides recommend',
+  pt: 'Lisboa fotografada à hora que estes guias recomendam',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'About these guides', pt: 'PT_TODO: About these guides' } as Localized,
+  eyebrow: { en: 'About these guides', pt: 'Sobre estes guias' } as Localized,
   heading: {
     en: 'Written by the people who shoot these places',
-    pt: 'PT_TODO: Written by the people who shoot these places',
+    pt: 'Escritos por quem fotografa estes sítios',
   } as Localized,
   paragraphs: {
     en: [
-      'These are working notes rather than travel writing. Each guide is written by a photographer in the network who shoots the city or the subject it covers, and the questions they answer are the ones clients actually ask before a session: which hour a location is still empty, what a permit costs and whether you need one, what the weather does to a plan in February.',
-      'Several of them save real money. Photography rules in France vary by site and by commune — some châteaux and museums require written authorisation, drone work is restricted almost everywhere, and a commercial shoot on public land is not the same permission as a private one. Reading that before you book beats discovering it on the morning of the shoot.',
-      'Others are about timing, which is the thing people most often get wrong. Provence lavender has a window of a few weeks and it moves year to year. The tide decides what Mont-Saint-Michel looks like more than the forecast does. The Riviera in September is a different photograph from the Riviera in July, and quite a different crowd.',
-      'The practical guides — what to wear, what to expect from a corporate headshot day, what a château venue decides for you — are there because the same questions arrive in almost every enquiry. If yours is not answered here, ask us directly; the answer usually turns into the next article.',
+      'These are working notes rather than travel writing. Each one exists because the same question kept arriving in enquiries, and the answer was long enough to be worth writing down once: which direction a viewpoint faces, what a permit actually costs, which hour a place is still empty.',
+      'Several of them save real money. Photography rules in Portugal are set per site rather than nationally, and Sintra alone has two separate regimes because Quinta da Regaleira is not run by Parques de Sintra. Knowing that before you plan a morning around a palace is worth more than any amount of advice about composition.',
+      'Others are about timing, which is the thing people most often get wrong and the thing that costs nothing to get right. The Douro harvest is a week nobody can name in March. Madeira’s Fanal only works in fog. The Algarve’s best month is February and its worst is the one everybody books. Lisbon’s miradouros are finished by nine in July.',
+      'If your question is not answered here, ask it directly — the answer usually turns into the next article.',
     ],
     pt: [
-    'PT_TODO: These are working notes rather than travel writing. Each gui',
-    'PT_TODO: Several of them save real money. Photography rules in France',
-    'PT_TODO: Others are about timing, which is the thing people most ofte',
-    'PT_TODO: The practical guides — what to wear, what to expect from a c',
-  ],
+      'Isto são notas de trabalho e não literatura de viagens. Cada uma existe porque a mesma pergunta continuava a chegar nos pedidos de orçamento, e a resposta era longa o suficiente para valer a pena escrevê-la uma vez: para onde está virado um miradouro, quanto custa de facto uma autorização, a que hora um sítio ainda está vazio.',
+      'Várias poupam dinheiro a sério. As regras de fotografia em Portugal são definidas local a local e não a nível nacional, e só Sintra tem dois regimes distintos porque a Quinta da Regaleira não é gerida pela Parques de Sintra. Saber isso antes de planear uma manhã à volta de um palácio vale mais do que qualquer conselho sobre composição.',
+      'Outras são sobre horários, que é aquilo em que as pessoas mais se enganam e aquilo que não custa nada acertar. A vindima no Douro é uma semana que ninguém consegue nomear em Março. O Fanal, na Madeira, só resulta com nevoeiro. O melhor mês do Algarve é Fevereiro e o pior é aquele que toda a gente marca. Os miradouros de Lisboa acabam às nove, em Julho.',
+      'Se a sua pergunta não estiver aqui respondida, faça-a directamente — a resposta costuma dar o artigo seguinte.',
+    ],
   } as Localized<string[]>,
   facts: {
     en: [

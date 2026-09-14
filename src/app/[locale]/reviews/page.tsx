@@ -24,6 +24,10 @@ const COPY = {
   basedOn: { en: 'based on', pt: 'com base em' },
   reviewsWord: { en: 'reviews', pt: 'avaliações' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
+  empty: {
+    en: 'No reviews published yet. They appear here as sessions are delivered — asked for once, published as written.',
+    pt: 'Ainda não há avaliações publicadas. Aparecem aqui à medida que as sessões são entregues — pedidas uma vez, publicadas tal como são escritas.',
+  },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {
@@ -109,16 +113,27 @@ export default async function ReviewsPage({
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>
 
-        <div className="mt-8 inline-flex items-center gap-4 rounded-card-sm border border-brand-rule bg-white px-6 py-4">
-          <span className="font-display text-4xl font-bold text-neutral-900">{ratingValue}</span>
-          <span className="h-10 w-px bg-black/10" />
-          <span>
-            <Stars count={Math.round(ratingValue)} />
-            <span className="mt-1 block text-sm text-brand-muted">
-              {c('basedOn', locale)} {reviewCount} {c('reviewsWord', locale)}
+        {/*
+          No reviews, no score. "0/5" beside five empty stars is worse than
+          saying nothing, and filling the space with invented reviews would be
+          worse than both — the same number is emitted as an AggregateRating.
+        */}
+        {reviewCount > 0 ? (
+          <div className="mt-8 inline-flex items-center gap-4 rounded-card-sm border border-brand-rule bg-white px-6 py-4">
+            <span className="font-display text-4xl font-bold text-neutral-900">{ratingValue}</span>
+            <span className="h-10 w-px bg-black/10" />
+            <span>
+              <Stars count={Math.round(ratingValue)} />
+              <span className="mt-1 block text-sm text-brand-muted">
+                {c('basedOn', locale)} {reviewCount} {c('reviewsWord', locale)}
+              </span>
             </span>
-          </span>
-        </div>
+          </div>
+        ) : (
+          <p className="mt-8 rounded-card-sm border border-brand-rule bg-white px-6 py-4 text-brand-muted">
+            {c('empty', locale)}
+          </p>
+        )}
       </header>
 
       <section className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3">

@@ -15,6 +15,7 @@
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
+import { SITE_NAME } from '../src/lib/site';
 
 const ROOT = process.cwd();
 
@@ -34,6 +35,13 @@ const EXTENSIONS = new Set(['.ts', '.tsx', '.js', '.mjs', '.jsonc', '.json', '.c
  * up as a broken page.
  */
 const BANNED: { pattern: RegExp; why: string }[] = [
+  // The current brand, not only the previous one. Otherwise the rule decays
+  // into "the brand we already renamed lives in one place", and the next
+  // rename is the same hunt through eighteen files.
+  {
+    pattern: new RegExp(`\\b${SITE_NAME}\\b`),
+    why: 'the brand name — import SITE_NAME from src/lib/site.ts',
+  },
   { pattern: /\bylala\b/i, why: 'old brand name — import SITE_NAME from src/lib/site.ts' },
   { pattern: /\bylala\.art\b/i, why: 'old domain — set NEXT_PUBLIC_SITE_URL instead' },
   { pattern: /\bfotio-france\b/, why: 'the France worker — this deployment is fotio-portugal' },
@@ -42,26 +50,17 @@ const BANNED: { pattern: RegExp; why: string }[] = [
 ];
 
 /**
- * Files allowed to carry a banned term, and why.
+ * Files allowed to carry a banned term.
  *
- * `src/lib/site.ts` and the env files are the definitions. Everything else in
- * this list is French content awaiting replacement in the locale flip, and
- * each entry is expected to be deleted rather than kept: when the list is
- * empty the conversion is done.
+ * `src/lib/site.ts` defines the brand, so it is the one place that may spell
+ * it. The list is otherwise empty, and that is the finished state — the France
+ * content that used to be listed here has all been replaced.
  */
 const ALLOWED = new Set<string>([
   'src/lib/site.ts',
   // --- Hub-page copy still describing France, pending the Portugal rewrite.
   // Each entry is expected to be deleted rather than kept, and the script
   // fails on an allowance nobody needs, so the list cannot rot.
-  'src/app/[locale]/content.ts',
-  'src/app/[locale]/about/content.ts',
-  'src/app/[locale]/blog/content.ts',
-  'src/app/[locale]/book/content.ts',
-  'src/app/[locale]/contact/content.ts',
-  'src/app/[locale]/portfolio/content.ts',
-  'src/app/[locale]/pricing/content.ts',
-  'src/app/[locale]/services/content.ts',
 ]);
 
 function walk(dir: string, out: string[] = []): string[] {
@@ -129,11 +128,12 @@ function main(): void {
     process.exit(1);
   }
 
-  const remaining = usedAllowances.size;
+  // src/lib/site.ts is the definition, not an exception, so it is not counted.
+  const remaining = [...usedAllowances].filter((f) => f !== 'src/lib/site.ts').length;
   console.log(
     remaining === 0
       ? '[check-brand] clean — the brand lives only in src/lib/site.ts'
-      : `[check-brand] clean, with ${remaining} file(s) still holding France content (see ALLOWED)`,
+      : `[check-brand] clean, with ${remaining} file(s) still allowed to name it (see ALLOWED)`,
   );
 }
 

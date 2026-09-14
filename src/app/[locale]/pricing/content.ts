@@ -4,44 +4,44 @@ import type { Localized } from '@/lib/locales';
  * Search-facing copy for the pricing page: SERP title and description, plus the
  * long-form passage that closes the page below the price table.
  *
- * English is authored; French falls back to it via `tx()` until translated.
+ * Both languages are authored rather than translated.
  */
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'Photo Session Prices in France — From €150',
-  pt: 'PT_TODO: Photo Session Prices in France — From €150',
+  en: 'Photography Prices in Portugal',
+  pt: 'Preços de fotografia em Portugal',
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'What a photographer costs in France: from €150 for a portrait to €2,200 for a wedding day. Editing and a private gallery included, no hidden extras.',
-  pt: 'PT_TODO: What a photographer costs in France: from €150 for a portrai',
+  en: 'Published starting prices for every session type, from €150. The quote is confirmed in writing before you book and does not move afterwards. No deposit to ask.',
+  pt: 'Preços de partida publicados para cada tipo de sessão, desde 150 €. O orçamento é confirmado por escrito antes de reservar e não muda depois.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'A family session photographed by the Ylala network, priced from a fixed published rate',
-  pt: 'PT_TODO: A family session photographed by the Ylala network, priced f',
+  en: 'A family session photographed in Portugal, priced from a fixed published rate',
+  pt: 'Uma sessão de família fotografada em Portugal, a partir de um preço fixo publicado',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'How pricing works', pt: 'PT_TODO: How pricing works' } as Localized,
+  eyebrow: { en: 'About the pricing', pt: 'Sobre os preços' } as Localized,
   heading: {
-    en: 'What the number covers, and what moves it',
-    pt: 'PT_TODO: What the number covers, and what moves it',
+    en: 'Why the price is published at all',
+    pt: 'Porque é que o preço está publicado',
   } as Localized,
   paragraphs: {
     en: [
-      'Every figure in the table is a starting price for that session type, and it is the same in all twenty-two cities: a portrait in Lille costs what a portrait in Nice costs. Prices run from €150 for a short portrait or a surprise proposal to €2,200 for a full wedding day, with couples, families, maternity and corporate work in between.',
-      'The price covers the photographer’s time on the shoot, the selection, the colour and light editing, and a private online gallery in full resolution with a personal licence to print and share. There is no charge per additional photograph, no retouching sold as an upgrade, and no travel supplement inside the city you booked.',
-      'Three things move the number, and all three are agreed before the shoot rather than after it. Length: a session run at one-and-a-half or two times the standard duration is priced accordingly. A second photographer, which most full wedding days want and few other sessions need. And express delivery, if you need the gallery in twenty-four hours rather than the usual forty-eight to seventy-two.',
-      'What does not move it is anything discovered on the day. If a location turns out to need a paid authorisation, we say so when you book, not when you arrive. Enquiring costs nothing and requires no deposit, the quote is confirmed in writing, and if you are not satisfied with the work you are refunded in full.',
+      'Most photography is quoted after a conversation, which means the number depends on what the photographer thinks you will pay. Publishing a starting price for every session removes that, and it is the reason the figures here are lower than they would be if you had to ask: a published price has to be defensible to everyone reading it, not just to the person in front of you.',
+      'The starting price covers the photographer’s time on the session, the selection, the colour work, and a private gallery in full resolution with a licence to print and post. The number of edited photographs is stated per service rather than described as "a selection". There is no per-image charge and no retouching sold separately afterwards.',
+      'What moves the price is time and scope rather than anything hidden. A longer session, a second photographer, twenty-four-hour delivery: each of those is listed as an option and quoted before you book. Travel inside the area you booked is included, and the towns covered from each place are listed on its page so there is nothing to discover afterwards.',
+      'Nothing is due to get a quote. If the weather turns, the session moves at no cost; if what you receive is not what was described, you are refunded. Those two sentences are the whole of the guarantee and they are not conditional on anything.',
     ],
     pt: [
-    'PT_TODO: Every figure in the table is a starting price for that sessi',
-    'PT_TODO: The price covers the photographer’s time on the shoot, the s',
-    'PT_TODO: Three things move the number, and all three are agreed befor',
-    'PT_TODO: What does not move it is anything discovered on the day. If',
-  ],
+      'A maior parte da fotografia é orçamentada depois de uma conversa, o que quer dizer que o valor depende do que o fotógrafo acha que você paga. Publicar um preço de partida para cada sessão elimina isso, e é a razão por que estes números são mais baixos do que seriam se tivesse de perguntar: um preço publicado tem de se justificar perante toda a gente que o lê, e não só perante quem está à frente.',
+      'O preço de partida cobre o tempo do fotógrafo na sessão, a selecção, o tratamento de cor e uma galeria privada em resolução máxima com licença para imprimir e publicar. O número de fotografias editadas está indicado em cada serviço, em vez de se falar numa "selecção". Não há cobrança por imagem nem retoque vendido à parte no fim.',
+      'O que faz mexer o preço é tempo e âmbito, não coisas escondidas. Uma sessão mais longa, um segundo fotógrafo, entrega em vinte e quatro horas: cada uma dessas opções está listada e é orçamentada antes de reservar. A deslocação dentro da área reservada está incluída, e as localidades cobertas a partir de cada sítio estão na respectiva página, para não haver nada a descobrir depois.',
+      'Pedir um orçamento não custa nada. Se o tempo mudar, a sessão passa para outro dia sem custo; se o que receber não for o que foi descrito, é reembolsado. Estas duas frases são toda a garantia e não dependem de mais nada.',
+    ],
   } as Localized<string[]>,
   facts: {
     en: [

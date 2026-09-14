@@ -4,44 +4,44 @@ import type { Localized } from '@/lib/locales';
  * Search-facing copy for the booking page: SERP title and description, plus the
  * long-form passage that closes the page below the booking widget.
  *
- * English is authored; French falls back to it via `tx()` until translated.
+ * Both languages are authored rather than translated.
  */
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'Book a Photo Session in France — Free Quote',
-  pt: 'PT_TODO: Book a Photo Session in France — Free Quote',
+  en: 'Book a Photo Session in Portugal',
+  pt: 'Reservar uma sessão fotográfica em Portugal',
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'Pick a city, a session and a date, and get a fixed price on WhatsApp in minutes. No deposit to request a quote, and nothing is charged until you confirm.',
-  pt: 'PT_TODO: Pick a city, a session and a date, and get a fixed price on',
+  en: 'Pick a place, a session and a date, and get a fixed price on WhatsApp in minutes. No deposit to request a quote, and nothing is charged until you confirm.',
+  pt: 'Escolha o sítio, a sessão e a data, e receba um preço fixo no WhatsApp em minutos. Sem sinal para pedir orçamento e sem nada a pagar até confirmar.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'A surprise proposal session in Paris, one of the shoots you can book through Ylala',
-  pt: 'PT_TODO: A surprise proposal session in Paris, one of the shoots you',
+  en: 'A surprise proposal session in Lisbon, one of the sessions you can book here',
+  pt: 'Um pedido de casamento surpresa em Lisboa, uma das sessões que pode reservar aqui',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'How booking works', pt: 'PT_TODO: How booking works' } as Localized,
+  eyebrow: { en: 'How booking works', pt: 'Como funciona a reserva' } as Localized,
   heading: {
     en: 'From this form to a confirmed photographer',
-    pt: 'PT_TODO: From this form to a confirmed photographer',
+    pt: 'Deste formulário a um fotógrafo confirmado',
   } as Localized,
   paragraphs: {
     en: [
-      'The form above collects four things — city, session type, date and group size — and turns them into a quote. You are not booking a slot at this point and nothing is charged: what you get back is a fixed price and the name of the photographer who would take the session, usually within a couple of hours on a working day.',
-      'The price you are quoted is the price you pay. It covers the shoot, the editing, and a private online gallery in full resolution delivered within forty-eight to seventy-two hours, with a licence to print and share it. Extra photographs are not billed separately. The only things that change the figure are ones you choose in advance: a longer session, a second photographer, or express twenty-four-hour delivery.',
-      'Once you confirm in writing, the photographer takes over the practical side — where to meet, which hour suits the location, whether an authorisation is needed and who obtains it. They live in the city they shoot, so this is settled from experience rather than researched from somewhere else.',
-      'If the weather turns, the session moves at no cost. If you need to cancel, tell us as early as you can and we will work with it. And if the gallery is not what you were promised, you are refunded in full — the guarantee is why the quote can afford to be a fixed number rather than an estimate.',
+      'The form above collects four things — place, session type, date and how to reach you — and that is enough to quote. You are not choosing a package or paying a deposit at this stage; you are asking a question, and the answer arrives on WhatsApp, usually within a couple of hours.',
+      'The price you are quoted is the price you pay. It covers the photographer’s time, the editing and a private gallery in full resolution. Options that change it — a longer session, a second photographer, twenty-four-hour delivery — are priced before you agree to anything, not added afterwards.',
+      'Once you confirm in writing, the photographer takes over the scheduling. That conversation is where the useful detail happens: what hour the location works, whether a permit is needed and who arranges it, what the tide is doing, where to meet. It is the part a booking form cannot do and the part that decides whether the session works.',
+      'If the weather turns, the session moves at no cost. If you need to cancel, say so as early as you can. And if the gallery is not what was promised, you are refunded in full — that guarantee is why the quote can afford to be a fixed number rather than an estimate.',
     ],
     pt: [
-    'PT_TODO: The form above collects four things — city, session type, da',
-    'PT_TODO: The price you are quoted is the price you pay. It covers the',
-    'PT_TODO: Once you confirm in writing, the photographer takes over the',
-    'PT_TODO: If the weather turns, the session moves at no cost. If you n',
-  ],
+      'O formulário acima recolhe quatro coisas — sítio, tipo de sessão, data e como o contactar — e isso chega para orçamentar. Nesta fase não está a escolher um pacote nem a pagar sinal; está a fazer uma pergunta, e a resposta chega por WhatsApp, normalmente em duas horas.',
+      'O preço que lhe for indicado é o preço que paga. Cobre o tempo do fotógrafo, a edição e uma galeria privada em resolução máxima. As opções que o alteram — sessão mais longa, segundo fotógrafo, entrega em vinte e quatro horas — são orçamentadas antes de concordar com o que quer que seja, não acrescentadas depois.',
+      'Depois de confirmar por escrito, é o fotógrafo que trata do horário. É nessa conversa que aparece o detalhe útil: a que hora o local funciona, se é preciso autorização e quem a trata, o que está a maré a fazer, onde nos encontramos. É a parte que um formulário não faz e a parte que decide se a sessão resulta.',
+      'Se o tempo mudar, a sessão passa para outro dia sem custo. Se precisar de cancelar, diga-nos o mais cedo possível. E se a galeria não for o que foi prometido, é reembolsado na totalidade — é essa garantia que permite que o orçamento seja um número fixo e não uma estimativa.',
+    ],
   } as Localized<string[]>,
   facts: {
     en: [

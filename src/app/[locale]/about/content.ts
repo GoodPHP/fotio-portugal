@@ -4,7 +4,7 @@ import type { Localized } from '@/lib/locales';
  * Localized copy and structured content for the About (chi-siamo) page.
  * Kept out of the page component to keep that file focused on layout.
  *
- * Prose is authored in English and French; `tx()` falls back to English where a
+ * Prose is authored in both languages; `tx()` falls back to English where a
  * locale has no authored value (see src/lib/locales.ts), matching the catalogue
  * convention used across the site.
  */
@@ -13,7 +13,7 @@ export const COPY = {
   eyebrow: { en: 'Our story' },
   title: { en: 'About us' },
   lead: {
-    en: 'Ylala began with one complaint we kept hearing: booking a photographer in a city you do not live in is slow, opaque and priced after the fact. We fixed the order — the price is agreed first, in writing, and it does not move.',
+    en: 'This began with one complaint we kept hearing: booking a photographer in a place you do not live in is slow, opaque and priced after the fact. We fixed the order — the price is agreed first, in writing, and it does not move.',
   },
   body: {
     en: 'We hand-pick local photographers who know each city inside out. We set a clear price from the start and guarantee gallery delivery in 48-72 hours. If you are not satisfied, we refund you 100%.',
@@ -23,7 +23,7 @@ export const COPY = {
   storyEyebrow: { en: 'Our mission' },
   storyTitle: { en: 'Travel photography, without compromise' },
   storyBody1: {
-    en: 'It started on a trip. Finding someone reliable in an unfamiliar city meant three days of email, no clear price and no idea whether the person had ever worked there before. So we built the opposite: a vetted network across France, and a booking that takes minutes rather than a week.',
+    en: 'It started on a trip. Finding someone reliable in an unfamiliar city meant three days of email, no clear price and no idea whether the person had ever worked there before. So we built the opposite: a vetted network across Portugal, and a booking that takes minutes rather than a week.',
   },
   storyBody2: {
     en: 'Every photographer on the network lives in the city they shoot in. That is the whole point: they know which hour a place is still empty, what the local permit regime actually is, and where to move when the weather turns. None of that can be researched from somewhere else.',
@@ -74,7 +74,7 @@ export const COPY = {
   },
   cta: { en: 'Book now' },
   ctaContact: { en: 'Talk to us' },
-  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
+  breadcrumbHome: { en: 'Home', pt: 'Início' },
 } satisfies Record<string, Localized>;
 
 export interface Step {
@@ -175,7 +175,7 @@ export const ABOUT_FAQ: AboutFaq[] = [
   {
     q: { en: 'How do you choose your photographers?' },
     a: {
-      en: 'We hand-pick local professionals, reviewing portfolio, experience and reviews. Only those who truly know the city and keep high standards join the Ylala network.',
+      en: 'We hand-pick local professionals, reviewing published work, experience and reviews. Only those who genuinely know the place and keep high standards join the network.',
     },
   },
   {
@@ -214,39 +214,39 @@ export const ABOUT_FAQ: AboutFaq[] = [
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'About Ylala — Vetted Photographers in France',
-  pt: 'PT_TODO: About Ylala — Vetted Photographers in France',
+  en: 'About — Vetted Photographers in Portugal',
+  pt: 'Sobre — fotógrafos verificados em Portugal',
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'How Ylala works: local photographers vetted on published work, one fixed price agreed in writing, a private gallery in 48–72h, and a full refund if not.',
-  pt: 'PT_TODO: How Ylala works: local photographers vetted on published wor',
+  en: 'How it works: local photographers vetted on published work, one fixed price agreed in writing, a private gallery in 48–72h, and a full refund if not.',
+  pt: 'Como funciona: fotógrafos locais verificados pelo trabalho publicado, um preço fixo acordado por escrito, galeria privada em 48–72 h e reembolso total se não.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'Paris photographed by the Ylala network, which covers 22 French cities and destinations',
-  pt: 'PT_TODO: Paris photographed by the Ylala network, which covers 22 Fre',
+  en: 'Lisbon photographed by the network, which covers twelve places across Portugal',
+  pt: 'Lisboa fotografada pela rede, que cobre doze sítios em todo o Portugal',
 };
 
 export const SEO_PROSE = {
-  eyebrow: { en: 'How the network works', pt: 'PT_TODO: How the network works' } as Localized,
+  eyebrow: { en: 'How the network works', pt: 'Como funciona a rede' } as Localized,
   heading: {
-    en: 'What we check before a photographer joins',
-    pt: 'PT_TODO: What we check before a photographer joins',
+    en: 'What is checked before a photographer joins',
+    pt: 'O que se verifica antes de um fotógrafo entrar',
   } as Localized,
   paragraphs: {
     en: [
-      'Ylala is a booking network rather than a studio. We do not employ photographers or send them out from a head office; we vet people who already work professionally in their own city, and we take responsibility for the parts of a booking that usually go wrong — the price, the schedule and the delivery.',
-      'Admission turns on published work rather than on a portfolio assembled for us. We look for a body of paid client sessions in the categories being applied for, consistency across a whole gallery instead of five strong frames, and colour work that holds up on ordinary skin in ordinary light. We ask how they handle the things nobody photographs on purpose: rain on a wedding morning, a two-year-old who will not sit, a conference room with one window and a deadline.',
-      'What we hold ourselves to is narrower and easier to check. The price is agreed in writing before the session and does not move afterwards. Editing is included, and there is no charge per extra photograph. The private gallery arrives within forty-eight to seventy-two hours in full resolution, with a licence to print and post it. Enquiring costs nothing and requires no deposit, and if the weather turns we move the session at no cost.',
-      'If the work is not what you were promised, we refund it in full rather than argue about taste. That guarantee is the reason the vetting is strict: a network that pays for its own mistakes has to be careful about who it lets in.',
+      'This is a booking network rather than a studio. Nobody is employed here and nobody is sent out from a head office; the people who answer already work professionally in the place you are going to be. What the network takes responsibility for is the part of a booking that usually goes wrong — the price, the schedule and the delivery.',
+      'Admission turns on published work rather than on a portfolio assembled for the occasion. A portfolio shows what someone can do on their best day with unlimited time; published client work shows what they deliver on an ordinary one. The second is the useful question, and it is the harder one to fake.',
+      'What is promised is deliberately narrow and easy to check. The price is agreed in writing before anything is booked and does not move. The number of edited photographs is stated per service. The gallery arrives within forty-eight to seventy-two hours. If the weather turns, the session moves at no cost.',
+      'If the work is not what was promised, it is refunded in full rather than argued about. That guarantee is the reason the vetting is strict: a network that pays for its own mistakes has to be careful about who it lets in.',
     ],
     pt: [
-    'PT_TODO: Ylala is a booking network rather than a studio. We do not e',
-    'PT_TODO: Admission turns on published work rather than on a portfolio',
-    'PT_TODO: What we hold ourselves to is narrower and easier to check. T',
-    'PT_TODO: If the work is not what you were promised, we refund it in f',
-  ],
+      'Isto é uma rede de reservas, não um estúdio. Ninguém aqui é empregado e ninguém é enviado a partir de uma sede; quem responde já trabalha profissionalmente no sítio onde vai estar. O que a rede assume é a parte de uma reserva que costuma correr mal — o preço, o horário e a entrega.',
+      'A entrada depende do trabalho publicado e não de um portefólio montado para a ocasião. Um portefólio mostra o que alguém consegue fazer no melhor dia e com tempo ilimitado; o trabalho publicado para clientes mostra o que entrega num dia normal. A segunda é a pergunta útil, e é a mais difícil de falsear.',
+      'O que se promete é propositadamente estreito e fácil de verificar. O preço é acordado por escrito antes de se reservar e não muda. O número de fotografias editadas está indicado em cada serviço. A galeria chega em quarenta e oito a setenta e duas horas. Se o tempo mudar, a sessão passa para outro dia sem custo.',
+      'Se o trabalho não for o que foi prometido, é reembolsado na totalidade em vez de se discutir gosto. É essa garantia que obriga a selecção a ser exigente: uma rede que paga os próprios erros tem de ter cuidado com quem deixa entrar.',
+    ],
   } as Localized<string[]>,
   facts: {
     en: [
