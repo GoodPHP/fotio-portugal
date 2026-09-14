@@ -20,10 +20,10 @@ test.describe('locale routing', () => {
     expect(await canonical(page)).not.toContain('/en/');
   });
 
-  test('French is served under /fr', async ({ page }) => {
-    await page.goto('/fr');
+  test('Portuguese is served under /pt', async ({ page }) => {
+    await page.goto('/pt');
     await expect(page.locator('h1')).toBeVisible();
-    expect(await canonical(page)).toContain('/fr');
+    expect(await canonical(page)).toContain('/pt');
   });
 
   test('/en redirects to the unprefixed URL', async ({ page }) => {
@@ -31,60 +31,74 @@ test.describe('locale routing', () => {
     await expect(page).toHaveURL(/\/services$/);
   });
 
-  test('French segments are translated', async ({ page }) => {
-    for (const [path, heading] of [
-      ['/fr/photographe', 'h1'],
-      ['/fr/villes', 'h1'],
-      ['/fr/tarifs', 'h1'],
-      ['/fr/a-propos', 'h1'],
+  test('Portuguese segments are translated', async ({ page }) => {
+    for (const path of [
+      '/pt/fotografo',
+      '/pt/cidades',
+      '/pt/precos',
+      '/pt/sobre',
+      '/pt/reservar',
+      '/pt/politica-de-privacidade',
+      '/pt/livro-de-reclamacoes',
     ] as const) {
       const response = await page.goto(path);
       expect(response?.status(), `${path} should be 200`).toBe(200);
-      await expect(page.locator(heading).first()).toBeVisible();
+      await expect(page.locator('h1').first()).toBeVisible();
+    }
+  });
+
+  test('no URL the site publishes carries a percent escape', async ({ page }) => {
+    // Accented segments are legal as percent-encoded UTF-8 and render as
+    // %C3%A7 in a search result, so the route table is deliberately ASCII.
+    await page.goto('/pt/precos');
+    expect(await canonical(page)).not.toContain('%');
+    for (const href of Object.values(await alternates(page))) {
+      expect(href).not.toContain('%');
     }
   });
 });
 
 test.describe('translated slugs', () => {
   test('a leaf is reachable in both languages', async ({ page }) => {
-    expect((await page.goto('/services/wedding/paris'))?.status()).toBe(200);
-    expect((await page.goto('/fr/photographe/mariage/paris'))?.status()).toBe(200);
+    expect((await page.goto('/services/wedding/lisboa'))?.status()).toBe(200);
+    expect((await page.goto('/pt/fotografo/casamento/lisboa'))?.status()).toBe(200);
   });
 
   test('hreflang between the two is reciprocal', async ({ page }) => {
-    await page.goto('/services/wedding/paris');
+    await page.goto('/services/wedding/lisboa');
     const fromEn = await alternates(page);
-    await page.goto('/fr/photographe/mariage/paris');
-    const fromFr = await alternates(page);
+    await page.goto('/pt/fotografo/casamento/lisboa');
+    const fromPt = await alternates(page);
 
-    expect(fromEn.en).toContain('/services/wedding/paris');
-    expect(fromEn.fr).toContain('/fr/photographe/mariage/paris');
+    expect(fromEn.en).toContain('/services/wedding/lisboa');
+    expect(fromEn.pt).toContain('/pt/fotografo/casamento/lisboa');
     // Each side must publish the same cluster, or Google discards both.
-    expect(fromFr.en).toBe(fromEn.en);
-    expect(fromFr.fr).toBe(fromEn.fr);
+    expect(fromPt.en).toBe(fromEn.en);
+    expect(fromPt.pt).toBe(fromEn.pt);
     expect(fromEn['x-default']).toBe(fromEn.en);
+    expect(fromEn['x-default']).not.toContain('/pt/');
   });
 
-  test('a French slug under an English path is not a page', async ({ page }) => {
+  test('a Portuguese slug under an English path is not a page', async ({ page }) => {
     // Serving it would put one page at two URLs with no canonical between them.
-    const response = await page.goto('/services/mariage/paris');
+    const response = await page.goto('/services/casamento/lisboa');
     expect(response?.status()).toBe(404);
   });
 });
 
 test.describe('asymmetric catalogue', () => {
-  test('an English-only service advertises no French alternate', async ({ page }) => {
-    await page.goto('/services/eiffel-tower-session');
+  test('an English-only service advertises no Portuguese alternate', async ({ page }) => {
+    await page.goto('/services/destination-wedding');
     const alt = await alternates(page);
     expect(alt.en).toBeTruthy();
-    expect(alt.fr).toBeUndefined();
+    expect(alt.pt).toBeUndefined();
     expect(alt['x-default']).toBe(alt.en);
   });
 
-  test('a French-only service advertises no English alternate', async ({ page }) => {
-    await page.goto('/fr/photographe/evjf');
+  test('a Portuguese-only service advertises no English alternate', async ({ page }) => {
+    await page.goto('/pt/fotografo/finalistas');
     const alt = await alternates(page);
-    expect(alt.fr).toBeTruthy();
+    expect(alt.pt).toBeTruthy();
     expect(alt.en).toBeUndefined();
   });
 
@@ -96,7 +110,7 @@ test.describe('asymmetric catalogue', () => {
    * the next test covers.
    */
   test('the missing half of the catalogue is 404 to a crawler', async ({ request }) => {
-    for (const url of ['/services/evjf', '/fr/photographe/eiffel-tower-session']) {
+    for (const url of ['/services/finalistas', '/pt/fotografo/destination-wedding']) {
       const response = await request.get(url, {
         headers: { 'Accept-Language': 'en-GB,en;q=0.9' },
         maxRedirects: 0,
@@ -106,46 +120,43 @@ test.describe('asymmetric catalogue', () => {
   });
 
   /**
-   * A French-speaking visitor who lands on the English URL is sent to the page
-   * they can actually use, rather than shown a 404. This is next-intl's locale
-   * negotiation and it applies only to requests that carry a language
+   * A Portuguese-speaking visitor who lands on the English URL is sent to the
+   * page they can actually use, rather than shown a 404. This is next-intl's
+   * locale negotiation and it applies only to requests carrying a language
    * preference, so it never affects what is indexed.
    */
-  test('a French-speaking visitor is redirected rather than refused', async ({ request }) => {
-    const response = await request.get('/services/evjf', {
-      headers: { 'Accept-Language': 'fr-FR,fr;q=0.9' },
+  test('a Portuguese-speaking visitor is redirected rather than refused', async ({ request }) => {
+    const response = await request.get('/services/finalistas', {
+      headers: { 'Accept-Language': 'pt-PT,pt;q=0.9' },
       maxRedirects: 0,
     });
     expect(response.status()).toBe(307);
-    expect(response.headers()['location']).toBe('/fr/photographe/evjf');
+    expect(response.headers()['location']).toBe('/pt/fotografo/finalistas');
   });
 });
 
 test.describe('indexation', () => {
   test('a curated leaf is indexable and fully linked', async ({ page }) => {
-    await page.goto('/services/vacation/nice');
+    await page.goto('/services/couple/porto');
     expect(await page.locator('meta[name="robots"]').count()).toBe(0);
     const alt = await alternates(page);
     expect(alt.en).toBeTruthy();
-    expect(alt.fr).toBeTruthy();
+    expect(alt.pt).toBeTruthy();
   });
 
   test('an uncurated leaf renders but is noindex and unlinked', async ({ page }) => {
-    const response = await page.goto('/services/model-portfolio/carcassonne');
+    const response = await page.goto('/services/portrait/lisboa');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
-      'content',
-      /noindex/,
-    );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
     // follow, so the links out still pass equity to the pages that earned it.
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /follow/);
     expect(await alternates(page)).toEqual({});
     // Its canonical points at itself, not at a different page.
-    expect(await canonical(page)).toContain('/services/model-portfolio/carcassonne');
+    expect(await canonical(page)).toContain('/services/portrait/lisboa');
   });
 
   test('legal pages are noindex', async ({ page }) => {
-    await page.goto('/fr/mentions-legales');
+    await page.goto('/pt/informacao-legal');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   });
 });
@@ -156,9 +167,9 @@ test.describe('not found', () => {
     expect(en?.status()).toBe(404);
     await expect(page.locator('h1')).toContainText('Page not found');
 
-    const fr = await page.goto('/fr/aucune-page');
-    expect(fr?.status()).toBe(404);
-    await expect(page.locator('h1')).toContainText('Page introuvable');
+    const pt = await page.goto('/pt/nenhuma-pagina');
+    expect(pt?.status()).toBe(404);
+    await expect(page.locator('h1')).toContainText('não encontrada');
   });
 });
 
@@ -174,50 +185,121 @@ test.describe('language switch', () => {
   // rendered on demand keeps a connection open long enough that 'networkidle'
   // never arrives, and the switch it is meant to be observing has by then
   // already happened.
-  const clickTo = async (page: import('@playwright/test').Page, label: string) => {
+  const clickTo = async (page: Page, label: string) => {
     const before = page.url();
     await page.getByRole('button', { name: label, exact: true }).click();
     await page.waitForURL((url) => url.href !== before);
   };
 
   test('round-trips on a curated leaf', async ({ page }) => {
-    await page.goto('/services/wedding/paris');
-    await clickTo(page, 'Français');
-    await expect(page).toHaveURL(/\/fr\/photographe\/mariage\/paris$/);
+    await page.goto('/services/wedding/lisboa');
+    await clickTo(page, 'Português');
+    await expect(page).toHaveURL(/\/pt\/fotografo\/casamento\/lisboa$/);
     await clickTo(page, 'English');
-    await expect(page).toHaveURL(/\/services\/wedding\/paris$/);
+    await expect(page).toHaveURL(/\/services\/wedding\/lisboa$/);
   });
 
   test('round-trips on a noindex leaf, which publishes no hreflang', async ({ page }) => {
-    await page.goto('/services/portrait/paris');
+    await page.goto('/services/portrait/lisboa');
     expect(await alternates(page)).toEqual({});
-    await clickTo(page, 'Français');
-    await expect(page).toHaveURL(/\/fr\/photographe\/portrait-studio-book\/paris$/);
-    await expect(page.locator('h1')).not.toContainText('introuvable');
+    await clickTo(page, 'Português');
+    await expect(page).toHaveURL(/\/pt\/fotografo\/retrato-estudio\/lisboa$/);
+    await expect(page.locator('h1')).not.toContainText('não encontrada');
     await clickTo(page, 'English');
-    await expect(page).toHaveURL(/\/services\/portrait\/paris$/);
+    await expect(page).toHaveURL(/\/services\/portrait\/lisboa$/);
   });
 
   test('stays on the current origin', async ({ page }) => {
     // The regression this guards: reading the destination from hreflang, whose
     // URLs are absolute and built from NEXT_PUBLIC_SITE_URL, sent anyone on a
     // preview deployment or localhost straight to the production site.
-    await page.goto('/cities/annecy');
+    await page.goto('/cities/madeira');
     const origin = new URL(page.url()).origin;
-    await clickTo(page, 'Français');
+    await clickTo(page, 'Português');
     expect(new URL(page.url()).origin).toBe(origin);
-    await expect(page).toHaveURL(/\/fr\/villes\/annecy$/);
+    await expect(page).toHaveURL(/\/pt\/cidades\/madeira$/);
   });
 
   test('offers no dead link for a service that exists in one language only', async ({ page }) => {
-    await page.goto('/fr/photographe/evjf');
+    await page.goto('/pt/fotografo/finalistas');
     await expect(page.getByRole('button', { name: 'English', exact: true })).toHaveCount(0);
     await expect(page.locator('[aria-disabled="true"]')).toContainText('EN');
   });
 
   test('falls back to the other language’s home from a 404', async ({ page }) => {
     await page.goto('/services/wedding/nowhere-at-all');
-    await clickTo(page, 'Français');
-    await expect(page).toHaveURL(/\/fr$/);
+    await clickTo(page, 'Português');
+    await expect(page).toHaveURL(/\/pt$/);
+  });
+});
+
+test.describe('what the server sends', () => {
+  /**
+   * The regression this exists to prevent cost roughly 0.9s of LCP for months.
+   * The entrance animations used to be a client library that emitted
+   * `opacity: 0` into the server HTML and waited for hydration to reveal
+   * anything, which made the animation itself the largest contentful paint.
+   */
+  test('no page renders hidden content in the server HTML', async ({ request }) => {
+    for (const url of ['/', '/pt', '/cities/lisboa', '/services/wedding/lisboa']) {
+      const html = await (await request.get(url)).text();
+      expect(html, `${url} must not ship hidden content`).not.toMatch(
+        /opacity:\s*0[^.\d]|visibility:\s*hidden/,
+      );
+    }
+  });
+
+  /**
+   * A legal obligation, and exactly the kind of thing a footer refactor drops
+   * without anyone noticing: a provider of services to consumers in Portugal
+   * must make the electronic complaints book available.
+   */
+  test('the complaints book is linked from every page', async ({ page }) => {
+    for (const url of ['/', '/pt', '/cities/porto', '/pt/precos']) {
+      await page.goto(url);
+      const link = page.locator('footer a[href$="livro-de-reclamacoes"], footer a[href$="/legal/complaints"]');
+      await expect(link, `${url} must link the complaints book`).toHaveCount(1);
+    }
+  });
+
+  /**
+   * Every `{'@id': x}` reference in the structured data has to resolve to a
+   * node that is actually defined, on the page or in the site-wide graph the
+   * layout emits. A dangling reference is a graph a machine cannot follow.
+   */
+  test('every JSON-LD @id reference resolves', async ({ page }) => {
+    for (const url of ['/', '/cities/lisboa', '/services/wedding/lisboa', '/pt/avaliacoes']) {
+      await page.goto(url);
+      const blocks = await page.$$eval('script[type="application/ld+json"]', (nodes) =>
+        nodes.map((n) => n.textContent ?? ''),
+      );
+      const defined = new Set<string>();
+      const referenced: string[] = [];
+
+      const walk = (value: unknown, isRef: boolean): void => {
+        if (Array.isArray(value)) {
+          for (const item of value) walk(item, false);
+          return;
+        }
+        if (!value || typeof value !== 'object') return;
+        const node = value as Record<string, unknown>;
+        const id = typeof node['@id'] === 'string' ? node['@id'] : undefined;
+        if (id) {
+          // A bare {'@id': …} is a reference; anything else defines the node.
+          if (Object.keys(node).length === 1 || isRef) referenced.push(id);
+          else defined.add(id);
+        }
+        for (const [key, child] of Object.entries(node)) {
+          if (key === '@id') continue;
+          walk(child, false);
+        }
+      };
+
+      for (const block of blocks) walk(JSON.parse(block), false);
+
+      for (const id of referenced) {
+        expect(defined.has(id), `${url}: @id "${id}" is referenced but never defined`).toBe(true);
+      }
+    }
   });
 });
