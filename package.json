@@ -19,7 +19,10 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "check:brand": "tsx scripts/check-brand.ts",
     "check:legal": "tsx scripts/check-legal.ts",
-    "check:pt-todo": "tsx scripts/check-pt-todo.ts"
+    "check:pt-todo": "tsx scripts/check-pt-todo.ts",
+    "photos:search": "tsx scripts/photos/search.ts",
+    "photos:select": "tsx scripts/photos/select.ts",
+    "photos:fetch": "tsx scripts/photos/fetch.ts"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.20.6",
@@ -37,6 +40,7 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.5.4",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
