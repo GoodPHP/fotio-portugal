@@ -11,7 +11,7 @@ import {
   publishedServices,
 } from '@/lib/catalog';
 import { type Locale, tx } from '@/lib/locales';
-import { formatPrice } from '@/lib/site';
+import { SITE_NAME, formatPrice } from '@/lib/site';
 import { cityImage, serviceImage } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
@@ -76,7 +76,7 @@ export default async function HomePage({ params }: HomePageProps) {
     ctaTitle: { en: 'Ready to photograph your time in France?', fr: 'Prêt à photographier votre séjour en France ?' }[locale],
     ctaSub: { en: 'Reply within 2 hours. No deposit required to enquire.', fr: 'Réponse sous 2 heures. Aucun acompte pour demander un devis.' }[locale],
     ratingLabel: { en: 'from real clients', fr: 'de vrais clients' }[locale],
-    trustHeading: { en: 'Why book through Ylala', fr: 'Pourquoi réserver via Ylala' }[locale],
+    trustHeading: { en: `Why book through ${SITE_NAME}`, fr: `Pourquoi réserver via ${SITE_NAME}` }[locale],
     heroEyebrow: { en: 'Photographers across France', fr: 'Photographes partout en France' }[locale],
     heroImageAlt: { en: 'A photograph from one of the cities we cover', fr: 'Une photographie de l’une des villes que nous couvrons' }[locale],
     statCities: { en: 'Cities covered', fr: 'Villes couvertes' }[locale],

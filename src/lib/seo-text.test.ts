@@ -7,6 +7,7 @@ import {
   TITLE_MAX,
   DESCRIPTION_MAX,
 } from './seo-text';
+import { SITE_NAME } from './site';
 
 test('truncateAtWord returns text unchanged when within the limit', () => {
   // Arrange
@@ -53,24 +54,24 @@ test('clampDescription caps at the SERP description limit', () => {
 });
 
 test('clampTitle preserves a brand already inside the title and trims the lead', () => {
-  const brand = 'Ylala';
-  const title = 'Wedding Photographer in Bordeaux — Professional Photography Services | Ylala';
+  const brand = SITE_NAME;
+  const title = `Wedding Photographer in Bordeaux — Professional Photography Services | ${brand}`;
   const result = clampTitle(title, { brand, max: TITLE_MAX });
   assert.ok(result.length <= TITLE_MAX, `length ${result.length} exceeds ${TITLE_MAX}`);
   assert.ok(result.endsWith(`| ${brand}`), `brand must be preserved: "${result}"`);
 });
 
 test('clampTitle accounts for a brand suffix the layout will append', () => {
-  // Non-absolute title; layout appends " | Ylala" (14 chars) later.
+  // Non-absolute title; the layout appends " | <brand>" later.
   const title = 'Professional Wedding Photography Session — Professional photographer in France';
-  const suffix = ' | Ylala';
+  const suffix = ` | ${SITE_NAME}`;
   const result = clampTitle(title, { brandSuffixLen: suffix.length, max: TITLE_MAX });
   assert.ok(result.length + suffix.length <= TITLE_MAX,
     `rendered length ${result.length + suffix.length} exceeds ${TITLE_MAX}`);
 });
 
 test('clampTitle leaves a short branded title untouched', () => {
-  const brand = 'Ylala';
-  const title = 'Photographer in Paris | Ylala';
+  const brand = SITE_NAME;
+  const title = `Photographer in Paris | ${brand}`;
   assert.equal(clampTitle(title, { brand, max: TITLE_MAX }), title);
 });

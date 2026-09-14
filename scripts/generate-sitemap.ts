@@ -2,7 +2,7 @@
  * Build-time sitemap generator.
  *
  * Emits a plain static `public/sitemap.xml` (served verbatim by the CDN at
- * https://pavaphotos.com/sitemap.xml) instead of a Next.js dynamic/ISR metadata
+ * `<origin>/sitemap.xml`) instead of a Next.js dynamic/ISR metadata
  * route. A flat static file removes every moving part Google's fetcher can trip
  * on: no edge function, no on-demand revalidation, no `Vary` negotiation —
  * just `200 application/xml`.

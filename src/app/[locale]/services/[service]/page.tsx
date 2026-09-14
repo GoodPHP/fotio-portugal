@@ -13,7 +13,7 @@ import {
 } from '@/lib/catalog';
 import { isServicePublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { formatPrice, formatDuration } from '@/lib/site';
+import { SITE_NAME, formatPrice, formatDuration } from '@/lib/site';
 import { serviceImage, absoluteOgImage } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
@@ -95,8 +95,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     description: serviceMetaDescription(service, name, locale),
     ogImage: serviceImage(service.slug),
     ogImageAlt: {
-      en: `A ${name.toLowerCase()} photographed by the Ylala network in France`,
-      fr: `Une séance ${name.toLowerCase()} photographiée par le réseau Ylala en France`,
+      en: `A ${name.toLowerCase()} photographed by the ${SITE_NAME} network in France`,
+      fr: `Une séance ${name.toLowerCase()} photographiée par le réseau ${SITE_NAME} en France`,
     }[locale],
   });
 }

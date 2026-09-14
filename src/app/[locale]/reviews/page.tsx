@@ -9,6 +9,7 @@ import { serviceImage, absoluteOgImage } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { OG_IMAGE_ALT, SEO_PROSE, metaTitle, metaDescription, seoFacts } from './content';
+import { SITE_NAME } from '@/lib/site';
 
 /** The session that fronts the review wall on social previews. */
 const OG_SERVICE_SLUG = 'couple';
@@ -17,8 +18,8 @@ const COPY = {
   title: { en: 'Reviews', fr: 'Avis' },
   eyebrow: { en: 'In our clients’ words', fr: 'Paroles de clients' },
   intro: {
-    en: 'Couples, families and companies who booked Ylala in France, in their own words — real ratings, real sessions, no selection for flattery.',
-    fr: 'Couples, familles et entreprises ayant choisi Ylala partagent leur expérience. La transparence avant tout.',
+    en: `Couples, families and companies who booked ${SITE_NAME} in France, in their own words — real ratings, real sessions, no selection for flattery.`,
+    fr: `Couples, familles et entreprises ayant choisi ${SITE_NAME} partagent leur expérience. La transparence avant tout.`,
   },
   basedOn: { en: 'based on', fr: 'sur' },
   reviewsWord: { en: 'reviews', fr: 'avis' },

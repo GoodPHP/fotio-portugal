@@ -35,8 +35,8 @@ export default async function Footer() {
   const year = new Date().getFullYear();
 
   const waMessage = {
-    en: 'Hi Ylala! I would like information about a photoshoot.',
-    fr: 'Bonjour ! Je voudrais des informations sur une séance photo.',
+    en: `Hi ${SITE_NAME}! I would like information about a photoshoot.`,
+    fr: `Bonjour ${SITE_NAME} ! Je voudrais des informations sur une séance photo.`,
   }[locale];
 
   return (

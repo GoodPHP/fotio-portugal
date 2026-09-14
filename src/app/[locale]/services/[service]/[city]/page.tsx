@@ -12,7 +12,7 @@ import {  CITIES,
 } from '@/lib/catalog';
 import { isLeafPublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { formatPrice, formatDuration, whatsappLink } from '@/lib/site';
+import { SITE_NAME, formatPrice, formatDuration, whatsappLink } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import { serviceImage, cityImage, absoluteOgImage } from '@/lib/images';
@@ -111,8 +111,8 @@ export default async function LeafPage({ params }: LeafPageProps) {
 
   // WhatsApp prefilled message naming service + city.
   const waMessage = {
-    en: `Hi Ylala! I’d like to book ${serviceName} in ${city.name}. Could you share more details?`,
-    fr: `Bonjour Ylala ! Je souhaite réserver : ${serviceName} ${frAt(city)}. Pouvez-vous m’en dire plus ?`,
+    en: `Hi ${SITE_NAME}! I’d like to book ${serviceName} in ${city.name}. Could you share more details?`,
+    fr: `Bonjour ${SITE_NAME} ! Je souhaite réserver : ${serviceName} ${frAt(city)}. Pouvez-vous m’en dire plus ?`,
   }[locale];
 
   // Related: other tailored services in the same city (published leaves only).

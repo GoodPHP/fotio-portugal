@@ -48,7 +48,7 @@ def search(slug: str, query: str, per_page: int = 12) -> dict:
 def download(url: str, dest: Path, width: int) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     full = f"{url}&w={width}&q=80&fm=jpg&fit=max"
-    req = urllib.request.Request(full, headers={"User-Agent": "ylala/1.0"})
+    req = urllib.request.Request(full, headers={"User-Agent": "fotio/1.0"})
     with urllib.request.urlopen(req, context=CTX) as r:
         dest.write_bytes(r.read())
 

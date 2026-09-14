@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useState, useTransition } from 'react';
 import { useParams } from 'next/navigation';
 import { LOCALES, DEFAULT_LOCALE, type Locale } from '@/lib/locales';
+import { META_ALT_PREFIX } from '@/lib/site';
 import { localizedPath } from '@/lib/urls';
 
 const LOCALE_LABELS: Record<Locale, { short: string; full: string }> = {
@@ -13,8 +14,11 @@ const LOCALE_LABELS: Record<Locale, { short: string; full: string }> = {
 /** Where this page lives in `locale`, as published by `buildMetadata`. */
 function publishedPath(locale: Locale): string | null {
   if (typeof document === 'undefined') return null;
+  // The prefix is imported rather than spelled here: `lib/seo.ts` writes these
+  // tags and this reads them, and a disagreement between the two sends every
+  // language switch to the home page instead of to the translated page.
   const content = document.querySelector<HTMLMetaElement>(
-    `meta[name="ylala-alt-${locale}"]`,
+    `meta[name="${META_ALT_PREFIX}-${locale}"]`,
   )?.content;
   return content && content.startsWith('/') ? content : null;
 }

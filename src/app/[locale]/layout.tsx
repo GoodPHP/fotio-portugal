@@ -6,8 +6,8 @@ import { setRequestLocale, getMessages } from 'next-intl/server';
 import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { routing } from '@/i18n/routing';
-import type { Locale } from '@/lib/locales';
-import { SITE_URL, GA_MEASUREMENT_ID } from '@/lib/site';
+import { DEFAULT_LOCALE, type Locale } from '@/lib/locales';
+import { GA_MEASUREMENT_ID, HTML_LANG, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 import { graph, organizationNode, websiteNode } from '@/lib/jsonld';
 import JsonLd from '@/components/JsonLd';
 import NavBar from '@/components/NavBar';
@@ -27,8 +27,8 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ylala — Professional photographers across France',
-    template: '%s | Ylala',
+    default: `${SITE_NAME} — ${SITE_TAGLINE[DEFAULT_LOCALE]}`,
+    template: `%s | ${SITE_NAME}`,
   },
 };
 
@@ -53,7 +53,7 @@ export default async function LocaleLayout({
   const fontVars = `${inter.variable} ${jetbrains.variable} ${fraunces.variable}`;
 
   return (
-    <html lang={locale} className={fontVars}>
+    <html lang={HTML_LANG[locale as Locale]} className={fontVars}>
       <body
         className="flex min-h-screen flex-col bg-brand-sand text-brand-dark antialiased"
         suppressHydrationWarning

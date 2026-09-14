@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react';
 import type { Locale } from '@/lib/locales';
-import { whatsappLink } from '@/lib/site';
+import { SITE_NAME, whatsappLink } from '@/lib/site';
 
 export interface LeadFormServiceOption {
   slug: string;
@@ -37,7 +37,22 @@ const UI = {
   errPhone: { en: 'Enter a valid phone number.', fr: 'Saisissez un numéro de téléphone valide.' },
   errMessage: { en: 'Write a short message.', fr: 'Écrivez un court message.' },
   errSubmit: { en: 'Something went wrong. Try again or message us on WhatsApp.', fr: 'Une erreur est survenue. Réessayez ou écrivez-nous sur WhatsApp.' },
+  waService: { en: 'Service', fr: 'Service' },
+  waCity: { en: 'City', fr: 'Ville' },
 } as const;
+
+/**
+ * Opening line of the WhatsApp message, per reader.
+ *
+ * This greeted every visitor in Italian, on a site served in English and
+ * French only. It survived because nothing renders the string: it is handed
+ * straight to WhatsApp, so it never appeared in a page, a test or a
+ * screenshot. `scripts/check-brand.ts` now fails the build on the phrasing.
+ */
+const GREETING: Record<Locale, (sender: string) => string> = {
+  en: (sender) => `Hi ${SITE_NAME}! I’m ${sender}.`,
+  fr: (sender) => `Bonjour ${SITE_NAME} ! Je suis ${sender}.`,
+};
 
 function t(key: keyof typeof UI, locale: Locale): string {
   return (UI[key] as Record<Locale, string>)[locale] ?? UI[key].en;
@@ -78,9 +93,9 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
   function buildWhatsAppMessage(): string {
     const svc = services.find((s) => s.slug === serviceSlug)?.name;
     const city = cities.find((c) => c.slug === citySlug)?.name;
-    const parts = [`Ciao Ylala, sono ${name}.`];
-    if (svc) parts.push(`Service: ${svc}.`);
-    if (city) parts.push(`City: ${city}.`);
+    const parts = [GREETING[locale](name)];
+    if (svc) parts.push(`${t('waService', locale)}: ${svc}.`);
+    if (city) parts.push(`${t('waCity', locale)}: ${city}.`);
     if (message.trim()) parts.push(message.trim());
     return parts.join(' ');
   }

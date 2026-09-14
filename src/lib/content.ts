@@ -4,6 +4,7 @@ import { frAt, frOf } from './city-name';
 import { LEAF_SEO } from './data/leaf-seo';
 import { TITLE_MAX } from './seo-text';
 import { formatDuration, formatPrice } from './site';
+import { SITE_NAME } from './site';
 
 export interface ProgrammaticFAQ {
   question: string;
@@ -199,7 +200,7 @@ export function getSeoMetadata(
     // and badly written: some service names already begin with the noun. Where
     // the prefix does not fit or would double up, the name carries the title
     // alone — the H1 and the description still say photographe.
-    const suffix = `${serviceName} ${frAt(city)} | Ylala`;
+    const suffix = `${serviceName} ${frAt(city)} | ${SITE_NAME}`;
     const prefixed = `Photographe ${suffix}`;
     const doublesUp = /^photo/i.test(serviceName);
     return {
@@ -211,12 +212,12 @@ export function getSeoMetadata(
   // "Riviera honeymoon session Photographer in Saint-Tropez" reads badly and
   // overruns; the shorter form keeps the city and the service intact, which is
   // what the query actually contains.
-  const withPhotographer = `${serviceName} Photographer in ${cityName} | Ylala`;
+  const withPhotographer = `${serviceName} Photographer in ${cityName} | ${SITE_NAME}`;
   return {
     title:
       withPhotographer.length <= TITLE_MAX
         ? withPhotographer
-        : `${serviceName} in ${cityName} | Ylala`,
+        : `${serviceName} in ${cityName} | ${SITE_NAME}`,
     description: `${serviceName} in ${cityName} with a vetted local photographer. From ${priceLabel}, ${durationLabel} on location, ${photoCount} edited photos, gallery in 48-72h.`,
   };
 }

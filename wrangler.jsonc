@@ -1,15 +1,18 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	// Deliberately the same worker name the Astro implementation used, so this
-	// deploy replaces that worker in place and keeps the routes and the custom
-	// domain, rather than standing up a second worker beside it and leaving
-	// ylala.art pointed at the old one.
+	// A new worker, beside the France one rather than replacing it: the two
+	// sites are separate deployments on separate domains, and a rename here
+	// would orphan the France worker's routes.
 	//
-	// Secrets do not carry over with the script and are not in this file. They
-	// live on the worker itself (`wrangler secret list` to see which):
+	// `services[0].service` below is this worker calling itself, so the two
+	// names have to stay identical. A mismatch is accepted by the build and
+	// fails at deploy, which is the expensive place to find out.
+	//
+	// Secrets are not in this file. They live on the worker itself
+	// (`wrangler secret list` to see which):
 	//   npx wrangler secret put TELEGRAM_BOT_TOKEN
 	//   npx wrangler secret put TELEGRAM_CHAT_ID
-	"name": "fotio-france",
+	"name": "fotio-portugal",
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2026-08-01",
 	// nodejs_compat: the Next.js server and the lead route need Node builtins.
@@ -27,14 +30,14 @@
 	// deploy overwrites the remote configuration with this file, so a route that
 	// lives only in the dashboard is one bad deploy away from being dropped.
 	"routes": [
-		{ "pattern": "ylala.art", "zone_name": "ylala.art", "custom_domain": true },
-		{ "pattern": "www.ylala.art", "zone_name": "ylala.art", "custom_domain": true }
+		{ "pattern": "fotio.pt", "zone_name": "fotio.pt", "custom_domain": true },
+		{ "pattern": "www.fotio.pt", "zone_name": "fotio.pt", "custom_domain": true }
 	],
 	// The worker calls itself for ISR revalidation.
 	"services": [
 		{
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "fotio-france"
+			"service": "fotio-portugal"
 		}
 	],
 	// Revalidation queue. SQLite-backed, so it needs the new_sqlite_classes

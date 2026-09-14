@@ -3,15 +3,16 @@
  * card — from the design tokens, using the site's own display face.
  *
  * They are generated rather than drawn so they cannot drift from the masthead:
- * the "Y" here is the same Fraunces cut, at the same optical settings, as the
- * "Ylala" wordmark in the header. Re-run after changing the palette or the
- * display font:
+ * the initial here is the same Fraunces cut, at the same optical settings, as
+ * the wordmark in the header. Re-run after changing the brand name, the
+ * palette or the display font:
  *
  *   npx tsx scripts/generate-brand-assets.ts
  *
  * Writing the .ico needs Pillow (`python3 -m pip install pillow`).
  */
 import { chromium, type Page } from 'playwright';
+import { SITE_NAME } from '../src/lib/site';
 import { execFile } from 'node:child_process';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -63,7 +64,7 @@ function mark(size: number): string {
 function logo(size: number): string {
   return page(`<div style="width:${size}px;height:${size}px;background:${PAPER};
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${size * 0.055}px;">
-    <div style="${DISPLAY}font-size:${size * 0.235}px;color:${INK};">Ylala</div>
+    <div style="${DISPLAY}font-size:${size * 0.235}px;color:${INK};">${SITE_NAME}</div>
     <div style="width:${size * 0.30}px;height:${Math.round(size * 0.014)}px;background:${SIENNA};"></div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:${size * 0.052}px;
       letter-spacing:0.18em;text-transform:uppercase;color:${INK};opacity:0.62;">France</div>
@@ -80,7 +81,7 @@ function ogCard(w: number, h: number): string {
     <div style="font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:0.2em;
       text-transform:uppercase;color:${SIENNA};">Photographers across France</div>
     <div style="width:100%;height:1px;background:#D8D5CF;margin:34px 0 38px;"></div>
-    <div style="${DISPLAY}font-size:150px;line-height:0.9;color:${INK};">Ylala</div>
+    <div style="${DISPLAY}font-size:150px;line-height:0.9;color:${INK};">${SITE_NAME}</div>
     <div style="font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 0,'WONK' 1;
       font-size:31px;line-height:1.35;color:#5A554A;margin-top:34px;max-width:820px;">
       Vetted local photographers in 22 cities. Fixed prices, agreed before you book.</div>
@@ -99,7 +100,7 @@ async function shoot(p: Page, html: string, out: string, w: number, h: number) {
 async function main() {
   const browser = await chromium.launch();
   const p = await browser.newPage({ deviceScaleFactor: 1 });
-  const tmp = await mkdtemp(join(tmpdir(), 'ylala-icons-'));
+  const tmp = await mkdtemp(join(tmpdir(), 'brand-icons-'));
 
   console.log('[brand] rendering');
   await shoot(p, mark(512), 'src/app/icon.png', 512, 512);

@@ -7,7 +7,7 @@ import { getCity, getServiceById, publishedCities, publishedServicesForCity } fr
 import { isCityPublished } from '@/lib/publishSchedule';
 import type { City } from '@/lib/types';
 import { type Locale, tx } from '@/lib/locales';
-import { formatPrice } from '@/lib/site';
+import { SITE_NAME, formatPrice } from '@/lib/site';
 import { cityImage, absoluteOgImage } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
@@ -82,8 +82,8 @@ function cityMetaDescription(city: City, locale: Locale): string {
 function cityOgImageAlt(city: City, locale: Locale): string {
   const region = tx(city.region, locale);
   return {
-    en: `${city.name}, ${region} — photographed by the Ylala network`,
-    fr: `${city.name}, ${region} — photographié par le réseau Ylala`,
+    en: `${city.name}, ${region} — photographed by the ${SITE_NAME} network`,
+    fr: `${city.name}, ${region} — photographié par le réseau ${SITE_NAME}`,
   }[locale];
 }
 

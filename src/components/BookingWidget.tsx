@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useId, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import type { Locale } from '@/lib/locales';
-import { formatPrice, whatsappLink } from '@/lib/site';
+import { SITE_NAME, formatPrice, whatsappLink } from '@/lib/site';
 
 export interface BookingServiceOption {
   slug: string;
@@ -61,6 +61,19 @@ const UI = {
   errDate: { en: 'Choose a date.', fr: 'Choisissez une date.' },
   errSubmit: { en: 'Submission error. Try again or use WhatsApp.', fr: 'Erreur d’envoi. Réessayez ou utilisez WhatsApp.' },
 } as const;
+
+/**
+ * Opening line of the WhatsApp message, per reader.
+ *
+ * Was Italian, on an English/French site. Nothing renders this string; it is
+ * handed straight to WhatsApp, which is why it went unnoticed for so long.
+ * The booking reference follows the greeting so an enquiry can be matched to
+ * the Telegram alert raised by the same submission.
+ */
+const GREETING: Record<Locale, (reference: string) => string> = {
+  en: (reference) => `Hi ${SITE_NAME}! [${reference}]`,
+  fr: (reference) => `Bonjour ${SITE_NAME} ! [${reference}]`,
+};
 
 function t(key: keyof typeof UI, locale: Locale): string {
   return (UI[key] as Record<Locale, string>)[locale] ?? UI[key].en;
@@ -139,7 +152,7 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
     if (express) extras.push(t('express', locale));
     if (secondPhotographer) extras.push(t('second', locale));
     const parts = [
-      `Ciao Ylala! [${reference}]`,
+      GREETING[locale](reference),
       `${svc} — ${city}`,
       date ? `${date}${time ? ` ${time}` : ''}` : '',
       `${t('duration', locale)}: ${durationLabel(durationPref, locale)}`,

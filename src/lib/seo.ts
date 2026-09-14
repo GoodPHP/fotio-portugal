@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { Locale } from './locales';
 import { PUBLIC_IMAGES } from './data/public-images';
-import { SITE_NAME, SITE_URL } from './site';
+import { META_ALT_PREFIX, OG_LOCALE, SITE_NAME, SITE_URL } from './site';
 import {
   absoluteUrl,
   languageAlternates,
@@ -42,7 +42,7 @@ function resolvePublicImage(relPath: string, fallback: string = DEFAULT_OG_IMAGE
   return PUBLIC_IMAGE_SET.has(normalized) ? relPath : fallback;
 }
 
-/** Brand suffix the layout's `%s | Ylala` template appends to non-absolute titles. */
+/** Brand suffix the layout's `%s | <brand>` template appends to non-absolute titles. */
 const BRAND_SUFFIX = ` | ${SITE_NAME}`;
 
 export interface BuildMetadataInput {
@@ -109,7 +109,10 @@ export function buildMetadata({
   // it guesses wrong — /services/portrait/paris would switch to a French prefix
   // still carrying the English slug, which 404s.
   const switcherAlternates = Object.fromEntries(
-    Object.entries(localizedPaths(route, alternates)).map(([l, path]) => [`ylala-alt-${l}`, path]),
+    Object.entries(localizedPaths(route, alternates)).map(([l, path]) => [
+      `${META_ALT_PREFIX}-${l}`,
+      path,
+    ]),
   );
 
   // Two title shapes: brand already inside (absolute) vs. layout will append it.
@@ -118,7 +121,7 @@ export function buildMetadata({
     ? clampTitle(title, { brand: SITE_NAME, max: TITLE_MAX })
     : clampTitle(title, { brandSuffixLen: BRAND_SUFFIX.length, max: TITLE_MAX });
   // What Next sets as <title>: absolute when brand is baked in, else let the
-  // layout template add " | Ylala".
+  // layout template append the brand.
   const resolvedTitle = hasBrand ? { absolute: clampedTitle } : clampedTitle;
   // Full branded title for OG/Twitter (the template doesn't apply to these).
   const ogTitle = hasBrand ? clampedTitle : `${clampedTitle}${BRAND_SUFFIX}`;
@@ -161,7 +164,7 @@ export function buildMetadata({
       title: ogTitle,
       description: clampedDescription,
       siteName: SITE_NAME,
-      locale,
+      locale: OG_LOCALE[locale],
       images: ogImages,
     },
     twitter: {

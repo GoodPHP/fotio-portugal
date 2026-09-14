@@ -107,10 +107,8 @@ export function getBlogPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((b) => b.slug === slug);
 }
 
-const CATEGORY_LABEL_MAP = CATEGORY_LABELS as Record<string, Record<ServiceCategory, string>>;
-
 export function getCategoryLabel(category: ServiceCategory, locale: Locale): string {
-  return CATEGORY_LABEL_MAP[locale]?.[category] ?? CATEGORY_LABEL_MAP.en[category];
+  return CATEGORY_LABELS[locale][category];
 }
 
 /** Services grouped by category, preserving SERVICES order. */

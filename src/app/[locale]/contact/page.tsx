@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
 import { cityImage, absoluteOgImage } from '@/lib/images';
-import { whatsappLink } from '@/lib/site';
+import { SITE_NAME, whatsappLink } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
@@ -27,7 +27,7 @@ const COPY = {
   },
   whatsappTitle: { en: 'Instant reply', fr: 'Réponse immédiate' },
   whatsappCta: { en: 'Message us on WhatsApp', fr: 'Écrivez-nous sur WhatsApp' },
-  whatsappMsg: { en: 'Hi Ylala! I would like information about a photo service.', fr: 'Bonjour Ylala ! Je souhaite des informations sur un service photo.' },
+  whatsappMsg: { en: `Hi ${SITE_NAME}! I would like information about a photo service.`, fr: `Bonjour ${SITE_NAME} ! Je souhaite des informations sur un service photo.` },
   breadcrumbHome: { en: 'Home', fr: 'Accueil' },
 } as const;
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
+import { SITE_NAME } from '@/lib/site';
 import LocaleSwitcher from './LocaleSwitcher';
 
 const NAV_LINKS = [
@@ -54,10 +55,10 @@ export default function NavBar() {
         <Link
           href="/"
           className="group shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
-          aria-label="Ylala — home"
+          aria-label={`${SITE_NAME} — home`}
         >
           <span className="font-display text-2xl font-semibold tracking-[-0.03em] text-brand-dark transition-colors group-hover:text-brand-orange-deep">
-            Ylala
+            {SITE_NAME}
           </span>
         </Link>
 

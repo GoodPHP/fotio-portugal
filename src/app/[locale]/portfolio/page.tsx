@@ -93,7 +93,7 @@ export default async function PortfolioPage({
   const rating = getAggregateRating();
   const wa = whatsappLink(
     {
-      en: 'Hi Ylala! I saw your portfolio and would like to book a photo session.',
+      en: `Hi ${SITE_NAME}! I saw your portfolio and would like to book a photo session.`,
       fr: 'Bonjour ! J’ai vu votre portfolio et je voudrais réserver une séance photo.',
     }[locale],
   );

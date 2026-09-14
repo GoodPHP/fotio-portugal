@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getCity, getServiceByAnySlug } from '@/lib/catalog';
 import { LOCALES } from '@/lib/locales';
+import { SITE_NAME } from '@/lib/site';
 import { sendTelegramAlert } from '@/lib/telegram';
 
 export const runtime = 'nodejs';
@@ -65,7 +66,7 @@ export async function POST(request: Request): Promise<Response> {
   if (data.addons?.secondPhotographer) addonList.push('Second photographer');
 
   const lines = [
-    `<b>📸 New Ylala enquiry</b>`,
+    `<b>New ${SITE_NAME} enquiry</b>`,
     `<b>Type:</b> ${data.source === 'booking' ? 'Booking' : 'Contact'}`,
     `<b>Service:</b> ${escapeHtml(serviceName)}`,
     `<b>City:</b> ${escapeHtml(cityName)}`,

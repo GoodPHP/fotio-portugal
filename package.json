@@ -1,11 +1,11 @@
 {
-  "name": "ylala",
+  "name": "fotio-portugal",
   "private": true,
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "opennextjs-cloudflare build",
-    "build:next": "NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
+    "build:next": "NODE_ENV=production tsx scripts/check-brand.ts && NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
     "start": "next start",
     "preview": "npm run build && opennextjs-cloudflare preview",
     "deploy": "npm run build && opennextjs-cloudflare deploy --cacheChunkSize 5",
@@ -16,7 +16,8 @@
     "check:seo": "NODE_ENV=production tsx scripts/check-seo.ts",
     "build:e2e": "ROLLOUT_ENABLED=false next build",
     "start:e2e": "ROLLOUT_ENABLED=false next start",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "check:brand": "tsx scripts/check-brand.ts"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.9",
