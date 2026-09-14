@@ -10,23 +10,23 @@ export default async function Footer() {
   const t = await getTranslations('nav');
 
   const tagline = {
-    en: 'Vetted professional photographers across France. Fixed pricing, private gallery in 48–72h.',
-    pt: 'PT_TODO: Vetted professional photographers across France. Fixed prici',
+    en: 'Vetted professional photographers across Portugal. Fixed pricing, private gallery in 48–72h.',
+    pt: 'Fotógrafos profissionais verificados em todo o Portugal. Preço fixo, galeria privada em 48–72 h.',
   }[locale];
 
   const labels = {
-    services: { en: 'Services', pt: 'PT_TODO: Services' }[locale],
-    cities: { en: 'Cities', pt: 'PT_TODO: Cities' }[locale],
-    company: { en: 'Company', pt: 'PT_TODO: Company' }[locale],
-    reviews: { en: 'Reviews', pt: 'PT_TODO: Reviews' }[locale],
-    legal: { en: 'Legal', pt: 'PT_TODO: Legal' }[locale],
-    legalNotice: { en: 'Legal notice', pt: 'PT_TODO: Legal notice' }[locale],
-    privacy: { en: 'Privacy', pt: 'PT_TODO: Privacy' }[locale],
-    terms: { en: 'Terms of sale', pt: 'PT_TODO: Terms of sale' }[locale],
-    imageRights: { en: 'Image rights', pt: 'PT_TODO: Image rights' }[locale],
-    photoCredits: { en: 'Photo credits', pt: 'PT_TODO: Photo credits' }[locale],
-    whatsapp: { en: 'Message us on WhatsApp', pt: 'PT_TODO: Message us on WhatsApp' }[locale],
-    rights: { en: 'All rights reserved.', pt: 'PT_TODO: All rights reserved.' }[locale],
+    services: { en: 'Services', pt: 'Serviços' }[locale],
+    cities: { en: 'Cities', pt: 'Cidades' }[locale],
+    company: { en: 'Company', pt: 'Empresa' }[locale],
+    reviews: { en: 'Reviews', pt: 'Avaliações' }[locale],
+    legal: { en: 'Legal', pt: 'Legal' }[locale],
+    legalNotice: { en: 'Legal notice', pt: 'Informação legal' }[locale],
+    privacy: { en: 'Privacy', pt: 'Privacidade' }[locale],
+    terms: { en: 'Terms of sale', pt: 'Termos e condições' }[locale],
+    imageRights: { en: 'Image rights', pt: 'Direito à imagem' }[locale],
+    photoCredits: { en: 'Photo credits', pt: 'Créditos fotográficos' }[locale],
+    whatsapp: { en: 'Message us on WhatsApp', pt: 'Escreva-nos no WhatsApp' }[locale],
+    rights: { en: 'All rights reserved.', pt: 'Todos os direitos reservados.' }[locale],
   };
 
   // Footer links appear site-wide, so only surface published pages.
@@ -36,7 +36,7 @@ export default async function Footer() {
 
   const waMessage = {
     en: `Hi ${SITE_NAME}! I would like information about a photoshoot.`,
-    pt: 'PT_TODO',
+    pt: `Olá ${SITE_NAME}! Gostaria de informações sobre uma sessão fotográfica.`,
   }[locale];
 
   return (

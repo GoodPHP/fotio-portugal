@@ -20,11 +20,11 @@ interface CityFilterProps {
 }
 
 const UI = {
-  searchLabel: { en: 'Search a city', pt: 'PT_TODO: Search a city' },
-  searchPlaceholder: { en: 'E.g. Rome, Venice…', pt: 'PT_TODO: E.g. Rome, Venice…' },
-  empty: { en: 'No cities found.', pt: 'PT_TODO: No cities found.' },
-  results: { en: 'cities', pt: 'PT_TODO: cities' },
-  explore: { en: 'Explore', pt: 'PT_TODO: Explore' },
+  searchLabel: { en: 'Search a city', pt: 'Procurar um sítio' },
+  searchPlaceholder: { en: 'E.g. Lisbon, Porto…', pt: 'Ex.: Lisboa, Porto…' },
+  empty: { en: 'No cities found.', pt: 'Nenhum resultado.' },
+  results: { en: 'cities', pt: 'sítios' },
+  explore: { en: 'Explore', pt: 'Ver' },
 } as const;
 
 function label(key: keyof typeof UI, locale: Locale): string {

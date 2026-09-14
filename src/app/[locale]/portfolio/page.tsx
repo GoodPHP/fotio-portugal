@@ -27,36 +27,36 @@ import PortfolioGallery, { type GalleryCategory } from '@/components/PortfolioGa
 import PortfolioStickyCta from '@/components/PortfolioStickyCta';
 
 const COPY = {
-  title: { en: 'Portfolio', pt: 'PT_TODO: Portfolio' },
-  eyebrow: { en: 'Real work', pt: 'PT_TODO: Real work' },
+  title: { en: 'Portfolio', pt: 'Portefólio' },
+  eyebrow: { en: 'Real work', pt: 'Trabalho real' },
   heroTitle: {
     en: 'Every frame is a story we can capture for you too',
-    pt: 'PT_TODO: Every frame is a story we can capture for you too',
+    pt: 'Cada imagem é uma história que também podemos fazer para si',
   },
   intro: {
-    en: 'Real sessions from across France, made by the photographers in our network. Filter by category and tap any image to see it full screen.',
-    pt: 'PT_TODO: Real sessions from across France, made by the photographers',
+    en: 'Real sessions from across Portugal, made by the photographers in our network. Filter by category and tap any image to see it full screen.',
+    pt: 'Sessões reais feitas por todo o Portugal, pelos fotógrafos da nossa rede. Filtre por categoria e toque numa imagem para a ver em ecrã inteiro.',
   },
-  book: { en: 'Book now', pt: 'PT_TODO: Book now' },
-  whatsapp: { en: 'Chat on WhatsApp', pt: 'PT_TODO: Chat on WhatsApp' },
+  book: { en: 'Book now', pt: 'Reservar' },
+  whatsapp: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' },
   trustLine: {
     en: 'Flat transparent pricing · 48-72h delivery · 100% money-back guarantee',
-    pt: 'PT_TODO: Flat transparent pricing · 48-72h delivery · 100% money-back',
+    pt: 'Preço fixo e anunciado · entrega em 48-72 h · garantia de reembolso a 100%',
   },
-  galleryEyebrow: { en: 'The gallery', pt: 'PT_TODO: The gallery' },
-  galleryTitle: { en: 'Browse all of our work', pt: 'PT_TODO: Browse all of our work' },
-  reviewsEyebrow: { en: 'Reviews', pt: 'PT_TODO: Reviews' },
-  reviewsTitle: { en: 'Clients across France', pt: 'PT_TODO: Clients across France' },
-  ctaTitle: { en: 'Ready to create your own gallery?', pt: 'PT_TODO: Ready to create your own gallery?' },
+  galleryEyebrow: { en: 'The gallery', pt: 'A galeria' },
+  galleryTitle: { en: 'Browse all of our work', pt: 'Veja todo o nosso trabalho' },
+  reviewsEyebrow: { en: 'Reviews', pt: 'Avaliações' },
+  reviewsTitle: { en: 'Clients across Portugal', pt: 'Clientes em todo o Portugal' },
+  ctaTitle: { en: 'Ready to create your own gallery?', pt: 'Pronto para criar a sua própria galeria?' },
   ctaText: {
     en: 'Tell us your idea and we’ll match you with the right photographer in your city — flat price, no surprises.',
-    pt: 'PT_TODO: Tell us your idea and we’ll match you with the right photogr',
+    pt: 'Diga-nos o que tem em mente e encontramos o fotógrafo certo na sua cidade — preço fixo, sem surpresas.',
   },
-  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
-  statRating: { en: 'Average rating', pt: 'PT_TODO: Average rating' },
-  statCities: { en: 'Cities covered', pt: 'PT_TODO: Cities covered' },
-  statServices: { en: 'Session types', pt: 'PT_TODO: Session types' },
-  statDelivery: { en: 'Avg delivery', pt: 'PT_TODO: Avg delivery' },
+  breadcrumbHome: { en: 'Home', pt: 'Início' },
+  statRating: { en: 'Average rating', pt: 'Avaliação média' },
+  statCities: { en: 'Cities covered', pt: 'Cidades cobertas' },
+  statServices: { en: 'Session types', pt: 'Tipos de sessão' },
+  statDelivery: { en: 'Avg delivery', pt: 'Entrega média' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {
@@ -110,7 +110,7 @@ export default async function PortfolioPage({
   const wa = whatsappLink(
     {
       en: `Hi ${SITE_NAME}! I saw your portfolio and would like to book a photo session.`,
-      pt: 'PT_TODO',
+      pt: `Olá ${SITE_NAME}! Vi o vosso portefólio e gostaria de reservar uma sessão fotográfica.`,
     }[locale],
   );
 

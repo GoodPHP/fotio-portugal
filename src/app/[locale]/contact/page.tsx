@@ -19,16 +19,16 @@ import LeadForm, {
 } from '@/components/LeadForm';
 
 const COPY = {
-  title: { en: 'Contact', pt: 'PT_TODO: Contact' },
-  eyebrow: { en: 'Let’s talk', pt: 'PT_TODO: Let’s talk' },
+  title: { en: 'Contact', pt: 'Contacto' },
+  eyebrow: { en: 'Let’s talk', pt: 'Vamos falar' },
   intro: {
     en: 'Have a special request or a question? Write to us — we reply within a few hours. For the fastest answers, WhatsApp is the ideal channel.',
-    pt: 'PT_TODO: Have a special request or a question? Write to us — we reply',
+    pt: 'Tem um pedido especial ou uma dúvida? Escreva-nos — respondemos dentro de poucas horas. Para a resposta mais rápida, o WhatsApp é o canal ideal.',
   },
-  whatsappTitle: { en: 'Instant reply', pt: 'PT_TODO: Instant reply' },
-  whatsappCta: { en: 'Message us on WhatsApp', pt: 'PT_TODO: Message us on WhatsApp' },
-  whatsappMsg: { en: `Hi ${SITE_NAME}! I would like information about a photo service.`, pt: 'PT_TODO' },
-  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
+  whatsappTitle: { en: 'Instant reply', pt: 'Resposta imediata' },
+  whatsappCta: { en: 'Message us on WhatsApp', pt: 'Escreva-nos no WhatsApp' },
+  whatsappMsg: { en: `Hi ${SITE_NAME}! I would like information about a photo service.`, pt: `Olá ${SITE_NAME}! Gostaria de informações sobre um serviço de fotografia.` },
+  breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

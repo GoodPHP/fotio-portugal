@@ -17,33 +17,33 @@ import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content
 const OG_SERVICE_SLUG = 'family';
 
 const COPY = {
-  title: { en: 'Transparent pricing', pt: 'PT_TODO: Transparent pricing' },
-  eyebrow: { en: 'No surprises', pt: 'PT_TODO: No surprises' },
+  title: { en: 'Transparent pricing', pt: 'Preços transparentes' },
+  eyebrow: { en: 'No surprises', pt: 'Sem surpresas' },
   intro: {
     en: 'Indicative "from" prices, tailored to each service. The final cost depends on the type of shoot and is confirmed by our team. No hidden costs.',
-    pt: 'PT_TODO: Indicative "from" prices, tailored to each service. The fina',
+    pt: 'Preços indicativos "desde", ajustados a cada serviço. O valor final depende do tipo de sessão e é confirmado por nós. Sem custos escondidos.',
   },
-  includedTitle: { en: 'Always included', pt: 'PT_TODO: Always included' },
+  includedTitle: { en: 'Always included', pt: 'Sempre incluído' },
   included: {
     en: ['Verified local photographer', 'Professional light & colour editing', 'Private online gallery', 'Delivery in 48-72 hours', '100% money-back guarantee'],
     pt: [
-    'PT_TODO: Verified local photographer',
-    'PT_TODO: Professional light & colour editing',
-    'PT_TODO: Private online gallery',
-    'PT_TODO: Delivery in 48-72 hours',
-    'PT_TODO: 100% money-back guarantee',
-  ],
+      'Fotógrafo local verificado',
+      'Edição profissional de luz e cor',
+      'Galeria privada online',
+      'Entrega em 48-72 horas',
+      'Garantia de reembolso a 100%',
+    ],
   },
-  addonsTitle: { en: 'Optional add-ons', pt: 'PT_TODO: Optional add-ons' },
-  expressLabel: { en: 'Express 24h delivery', pt: 'PT_TODO: Express 24h delivery' },
-  secondLabel: { en: 'Second photographer', pt: 'PT_TODO: Second photographer' },
-  durationLabel: { en: 'Extended session (1.5x / 2x)', pt: 'PT_TODO: Extended session (1.5x / 2x)' },
-  tableService: { en: 'Service', pt: 'PT_TODO: Service' },
-  tableDuration: { en: 'Duration', pt: 'PT_TODO: Duration' },
-  tablePrice: { en: 'From', pt: 'PT_TODO: From' },
-  cta: { en: 'Book now', pt: 'PT_TODO: Book now' },
-  ctaSub: { en: 'Custom quote, confirmed within hours.', pt: 'PT_TODO: Custom quote, confirmed within hours.' },
-  breadcrumbHome: { en: 'Home', pt: 'PT_TODO: Home' },
+  addonsTitle: { en: 'Optional add-ons', pt: 'Extras opcionais' },
+  expressLabel: { en: 'Express 24h delivery', pt: 'Entrega expresso em 24 h' },
+  secondLabel: { en: 'Second photographer', pt: 'Segundo fotógrafo' },
+  durationLabel: { en: 'Extended session (1.5x / 2x)', pt: 'Sessão alargada (1,5x / 2x)' },
+  tableService: { en: 'Service', pt: 'Serviço' },
+  tableDuration: { en: 'Duration', pt: 'Duração' },
+  tablePrice: { en: 'From', pt: 'Desde' },
+  cta: { en: 'Book now', pt: 'Reservar' },
+  ctaSub: { en: 'Custom quote, confirmed within hours.', pt: 'Orçamento à medida, confirmado em poucas horas.' },
+  breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {

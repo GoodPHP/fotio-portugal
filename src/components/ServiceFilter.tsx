@@ -28,12 +28,12 @@ interface ServiceFilterProps {
 }
 
 const UI = {
-  searchLabel: { en: 'Search a service', pt: 'PT_TODO: Search a service' },
-  searchPlaceholder: { en: 'E.g. wedding, portrait…', pt: 'PT_TODO: E.g. wedding, portrait…' },
-  all: { en: 'All', pt: 'PT_TODO: All' },
-  from: { en: 'from', pt: 'PT_TODO: from' },
-  empty: { en: 'No services match your search.', pt: 'PT_TODO: No services match your search.' },
-  results: { en: 'services', pt: 'PT_TODO: services' },
+  searchLabel: { en: 'Search a service', pt: 'Procurar um serviço' },
+  searchPlaceholder: { en: 'E.g. wedding, portrait…', pt: 'Ex.: casamento, retrato…' },
+  all: { en: 'All', pt: 'Todos' },
+  from: { en: 'from', pt: 'desde' },
+  empty: { en: 'No services match your search.', pt: 'Nenhum serviço corresponde à pesquisa.' },
+  results: { en: 'services', pt: 'serviços' },
 } as const;
 
 function label(key: keyof typeof UI, locale: Locale): string {
