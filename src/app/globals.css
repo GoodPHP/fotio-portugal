@@ -176,6 +176,87 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+ * Entrance animations.
+ *
+ * Driven by each element's own progress through the scrollport, so there is no
+ * JavaScript: no observer, no hydration, no client bundle. See
+ * src/components/Motion.tsx for why this replaced framer-motion.
+ *
+ * Two guards, and the order matters. `prefers-reduced-motion` is outermost
+ * because a reader who asked for no motion should get none regardless of what
+ * the browser supports. `@supports` is inside it, so a browser without
+ * view-progress timelines (Firefox, at the time of writing) matches no rule at
+ * all and renders the content plainly visible. That is the only acceptable way
+ * for this to degrade: the failure mode to avoid is content that starts at
+ * opacity 0 and waits for an animation that will never run.
+ * ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    /*
+     * The cascade inside a <Stagger>.
+     *
+     * Offsetting each child's range rather than its delay, because with a
+     * scroll-driven timeline `animation-delay` measures nothing — progress is
+     * position, not time. Eight steps covers every grid on the site; a ninth
+     * child and beyond simply share the last offset, which is invisible by
+     * then because they are a row further down anyway.
+     */
+    .reveal-stagger > *:nth-child(2) { animation-range: entry 4% cover 34%; }
+    .reveal-stagger > *:nth-child(3) { animation-range: entry 8% cover 38%; }
+    .reveal-stagger > *:nth-child(4) { animation-range: entry 12% cover 42%; }
+    .reveal-stagger > *:nth-child(5) { animation-range: entry 16% cover 46%; }
+    .reveal-stagger > *:nth-child(6) { animation-range: entry 20% cover 50%; }
+    .reveal-stagger > *:nth-child(7) { animation-range: entry 24% cover 54%; }
+    .reveal-stagger > *:nth-child(n + 8) { animation-range: entry 28% cover 58%; }
+  }
+}
+
+/*
+ * Lightbox open transition.
+ *
+ * Outside the @supports guard above: this is a plain time-based animation on
+ * an element that mounts when it opens, so it needs no timeline support. It
+ * stays inside the reduced-motion guard, which is why it lives here rather
+ * than beside the component.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox-overlay {
+    animation: lightbox-fade 250ms ease-out both;
+  }
+  .lightbox-figure {
+    animation: lightbox-zoom 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-zoom {
+  from { opacity: 0; scale: 0.98; }
+  to { opacity: 1; scale: 1; }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 var(--reveal-y, 24px);
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * City themes.
  *
  * Every brand utility resolves through var(--color-brand-*), so redefining

@@ -22,8 +22,6 @@
   "dependencies": {
     "@next/third-parties": "^16.2.9",
     "@opennextjs/cloudflare": "^1.20.6",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
     "next": "^15.5.4",
     "next-intl": "^4.3.4",
     "react": "^19.0.1",
