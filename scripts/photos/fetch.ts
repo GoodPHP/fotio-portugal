@@ -43,7 +43,7 @@ const FORMATS = [
 const OG = { width: 1200, height: 630, quality: 82 };
 
 const utm = (url: string): string =>
-  `${url}${url.includes('?') ? '&' : '?'}utm_source=fotio&utm_medium=referral`;
+  `${url}${url.includes('?') ? '&' : '?'}utm_source=luzia&utm_medium=referral`;
 
 /**
  * `fetch` with a short backoff.

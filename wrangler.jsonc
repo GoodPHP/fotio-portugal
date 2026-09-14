@@ -12,7 +12,7 @@
 	// (`wrangler secret list` to see which):
 	//   npx wrangler secret put TELEGRAM_BOT_TOKEN
 	//   npx wrangler secret put TELEGRAM_CHAT_ID
-	"name": "fotio-portugal",
+	"name": "luzia",
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2026-08-01",
 	// nodejs_compat: the Next.js server and the lead route need Node builtins.
@@ -30,8 +30,8 @@
 	// deploy overwrites the remote configuration with this file, so a route that
 	// lives only in the dashboard is one bad deploy away from being dropped.
 	"routes": [
-		{ "pattern": "fotio.pt", "zone_name": "fotio.pt", "custom_domain": true },
-		{ "pattern": "www.fotio.pt", "zone_name": "fotio.pt", "custom_domain": true }
+		{ "pattern": "luzia.pt", "zone_name": "luzia.pt", "custom_domain": true },
+		{ "pattern": "www.luzia.pt", "zone_name": "luzia.pt", "custom_domain": true }
 	],
 	// No self-reference binding and no revalidation queue: every page is
 	// prerendered and nothing revalidates, so the Durable Object that used to

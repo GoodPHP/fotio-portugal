@@ -44,7 +44,7 @@ const BANNED: { pattern: RegExp; why: string }[] = [
   },
   { pattern: /\bylala\b/i, why: 'old brand name — import SITE_NAME from src/lib/site.ts' },
   { pattern: /\bylala\.art\b/i, why: 'old domain — set NEXT_PUBLIC_SITE_URL instead' },
-  { pattern: /\bfotio-france\b/, why: 'the France worker — this deployment is fotio-portugal' },
+  { pattern: /\bfotio-\w+\b/, why: 'a worker name from the France deployment' },
   { pattern: /\bCiao\b/, why: 'Italian greeting left in a WhatsApp message template' },
   { pattern: /\bpavaphotos\b/i, why: 'a domain from an even earlier incarnation' },
 ];

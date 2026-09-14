@@ -19,13 +19,18 @@ import { DEFAULT_LOCALE, type Locale } from './locales';
 // ---------------------------------------------------------------------- brand
 
 /**
- * TODO_BRAND — placeholder until the Portugal brand is chosen.
+ * The brand.
  *
- * Change this one line and the whole site follows: <title> template, wordmark,
- * OG siteName, JSON-LD Organization, the WhatsApp greeting, the Telegram alert
- * subject and the legal documents.
+ * "Luzia" carries "luz" — light — inside a Portuguese given name, which is the
+ * one thing every page on this site is actually about: the hour decides the
+ * photograph, and a local photographer is someone who knows which hour.
+ *
+ * This one line is the whole of it. Change it and the <title> template, the
+ * wordmark, the OG siteName, the JSON-LD Organization, both WhatsApp greetings,
+ * the Telegram alert subject and the legal documents follow.
+ * `scripts/check-brand.ts` fails the build on the name appearing anywhere else.
  */
-export const SITE_NAME = 'Fotio';
+export const SITE_NAME = 'Luzia';
 
 /** Sits under the brand in the default <title> and in OG descriptions. */
 export const SITE_TAGLINE: Record<Locale, string> = {
@@ -34,7 +39,7 @@ export const SITE_TAGLINE: Record<Locale, string> = {
 };
 
 /** Absolute site origin without trailing slash. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.fotio.pt').replace(/\/+$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.luzia.pt').replace(/\/+$/, '');
 
 /**
  * Prefix for the `<meta>` tags the language switcher reads.
