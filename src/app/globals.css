@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Ylala — editorial design system.
+ *
+ * The site sells photography, so photography leads and everything else gets
+ * out of its way: a warm paper ground, one serif doing the talking, hairline
+ * rules instead of cards, and almost no radius. Depth comes from scale,
+ * overlap and whitespace rather than from shadows.
+ *
+ * The `brand-*` token names are kept as the public interface so the hundreds of
+ * existing utilities keep resolving; what they point at is what changed.
+ * Contrast for every pairing is asserted in src/lib/theme.test.ts.
+ * ------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+
+  /* Ground and ink. Warm rather than neutral — paper, not screen. */
+  --color-brand-sand: #F7F4EE;
+  --color-brand-cream: #EDE8DD;
+  --color-brand-dark: #17150F;
+  /* Secondary text. 6.75:1 on paper, so it stays readable rather than faint. */
+  --color-brand-muted: #5A554A;
+
+  /*
+   * Sienna. Carries text and surfaces alike: 6.26:1 on paper, 6.87:1 under
+   * white. The quiet variant is decorative only and never has text on it.
+   */
+  --color-brand-orange-deep: #9C3B1B;
+  --color-brand-orange: #C4633C;
+
+  /*
+   * Rules do the work borders and shadows used to. They are dividers, not UI
+   * boundaries, so they are tuned to be seen and not noticed.
+   */
+  --color-brand-rule: #D8D5CF;
+  --color-brand-rule-strong: #B8B6B0;
+
+  /*
+   * An editorial scale jumps rather than steps: the display size is five times
+   * the body, so hierarchy is legible before a word is read.
+   */
+  --text-display: clamp(3rem, 1rem + 7.5vw, 7rem);
+  --text-title: clamp(2.125rem, 1.2rem + 3.2vw, 3.75rem);
+  --text-heading: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --text-sub: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+
+  /* Rhythm is deliberately uneven; sections breathe more than bands. */
+  --space-section: clamp(4.5rem, 2rem + 7vw, 9rem);
+  --space-band: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+
+  /* Paper has edges, not corners. */
+  --radius-card: 3px;
+  --radius-card-sm: 2px;
+  --radius-chip: 2px;
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --card-border: 1px solid var(--color-brand-rule);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-sand);
+  color: var(--color-brand-dark);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  /* Fraunces is a variable face; this is the optical setting that keeps it
+     from looking like a wedding invitation at display sizes. */
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  letter-spacing: -0.02em;
+}
+
+/* --- editorial primitives ------------------------------------------------ */
+
+/* Small letterspaced label above a heading. The one piece of ornament. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-brand-orange-deep);
+}
+
+/* A hairline that spans the measure. Replaces the top edge of a card. */
+.rule {
+  border-top: 1px solid var(--color-brand-rule);
+}
+
+/*
+ * Surfaces. The names survive from the previous design so existing markup keeps
+ * working, but they are ruled panels now rather than floating rounded cards.
+ */
+.bento-card {
+  background-color: transparent;
+  border-radius: var(--radius-card);
+  border: var(--card-border);
+  padding: 1.75rem;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.bento-card:hover {
+  border-color: var(--color-brand-dark);
+  background-color: color-mix(in srgb, #ffffff 55%, transparent);
+}
+
+.bento-card-dark {
+  background-color: var(--color-brand-dark);
+  color: #ffffff;
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
+}
+
+.bento-card-orange {
+  background-color: var(--color-brand-orange-deep);
+  color: #ffffff;
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
+}
+
+.bento-card-cream {
+  background-color: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
+}
+
+/*
+ * Dark surfaces invert the tokens that only work on paper.
+ *
+ * The muted grey and the sienna accent are tuned for a light ground: on ink
+ * they fall to 3.7:1 and 2.7:1. Rather than hand-picking light colours at every
+ * call site, a dark surface redefines the same tokens, so `text-brand-muted`
+ * keeps meaning "secondary text" wherever it is used.
+ */
+[data-surface='dark'],
+.bento-card-dark {
+  --color-brand-muted: #A9A49B;
+  --color-brand-orange-deep: #D98A63;
+  --color-brand-orange: #E0A183;
+  --color-brand-rule: rgb(255 255 255 / 0.14);
+  --color-brand-rule-strong: rgb(255 255 255 / 0.30);
+}
+
+/*
+ * A filled accent button is its own surface: white on the paper-tuned sienna is
+ * 6.87:1 whatever sits behind it. Without this it would inherit the inverted
+ * accent above and end up as white text on a light salmon block.
+ */
+[data-surface='dark'] .bg-brand-orange-deep,
+.bento-card-dark .bg-brand-orange-deep {
+  background-color: #9C3B1B;
+}
+
+/* Body copy inside a measure that is comfortable to read, not full width. */
+.measure {
+  max-width: 68ch;
+}
+.measure-tight {
+  max-width: 54ch;
+}
+
+/* Scrollbar customizations */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * City themes.
+ *
+ * Every brand utility resolves through var(--color-brand-*), so redefining
+ * those inside a scope re-themes everything underneath without a single class
+ * changing. A themed page wraps its own content; the header and footer stay in
+ * the house palette so the site still reads as one site.
+ *
+ * Contrast for every palette is asserted in src/lib/theme.test.ts, which parses
+ * this file. A theme that fails AA fails the build.
+ * ------------------------------------------------------------------------- */
+
+[data-city-theme] {
+  background-color: var(--color-brand-sand);
+  color: var(--color-brand-dark);
+}
+
+/* Paris — Haussmann limestone, zinc and brass, re-cut for the editorial system. */
+[data-city-theme='paris'] {
+  --color-brand-sand: #EFEEEA;
+  --color-brand-cream: #DEDFDD;
+  --color-brand-dark: #14181D;
+  --color-brand-muted: #55595F;
+  --color-brand-orange-deep: #6E5214;
+  --color-brand-orange: #A98A3E;
+  --color-brand-rule: #D2D3D0;
+  --color-brand-rule-strong: #B2B4B2;
+}

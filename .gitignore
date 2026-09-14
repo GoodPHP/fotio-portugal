@@ -1,0 +1,38 @@
+node_modules/
+.next/
+.wrangler/
+logs/
+coverage/
+.env
+.env.*
+!.env.example
+# Public build-time values, deliberately tracked — see the file's header.
+!.env.production
+.dev.vars
+!.dev.vars.example
+.DS_Store
+.photo-review/
+
+# Source material mined from the Astro implementation (git HEAD).
+# Authoring reference only — never shipped.
+reference/
+
+# OpenNext / Cloudflare adapter build output
+.open-next/
+cloudflare-env.d.ts
+
+# Next.js / TypeScript build artifacts
+*.tsbuildinfo
+__pycache__/
+
+# Generated at build time by scripts/generate-sitemap.ts
+public/sitemap.xml
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Unsplash response cache — keeps a re-run from spending API requests.
+.cache/

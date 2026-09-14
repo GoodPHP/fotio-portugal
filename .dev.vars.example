@@ -1,0 +1,6 @@
+# Local-only values for `next dev` and `opennextjs-cloudflare preview`.
+# Copy to .dev.vars (gitignored) and fill in. Production values are set with
+# `wrangler secret put` against the deployed worker, not here.
+NEXTJS_ENV=development
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=

@@ -1,0 +1,45 @@
+{
+  "name": "ylala",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "opennextjs-cloudflare build",
+    "build:next": "NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
+    "start": "next start",
+    "preview": "npm run build && opennextjs-cloudflare preview",
+    "deploy": "npm run build && opennextjs-cloudflare deploy --cacheChunkSize 5",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/lib/*.test.ts",
+    "test:e2e": "playwright test",
+    "check:seo": "NODE_ENV=production tsx scripts/check-seo.ts",
+    "build:e2e": "ROLLOUT_ENABLED=false next build",
+    "start:e2e": "ROLLOUT_ENABLED=false next start",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+  },
+  "dependencies": {
+    "@next/third-parties": "^16.2.9",
+    "@opennextjs/cloudflare": "^1.20.6",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "next": "^15.5.4",
+    "next-intl": "^4.3.4",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^15.5.4",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "wrangler": "^4.130.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "cities": "Cities",
+    "pricing": "Pricing",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "book": "Book now"
+  },
+  "common": {
+    "from": "from",
+    "bookNow": "Book now",
+    "discover": "Discover more",
+    "viewAll": "View all",
+    "search": "Search",
+    "loading": "Loading…"
+  },
+  "home": {
+    "heroBadge": "100% Vetted Local Pros",
+    "heroTitle": "Your photographer in France",
+    "heroSubtitle": "Vetted professional photographers in 22 French cities and destinations. Fixed prices agreed before you book. Private gallery in 48–72 hours."
+  }
+}

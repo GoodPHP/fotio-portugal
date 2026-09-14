@@ -1,0 +1,69 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// Deliberately the same worker name the Astro implementation used, so this
+	// deploy replaces that worker in place and keeps the routes and the custom
+	// domain, rather than standing up a second worker beside it and leaving
+	// ylala.art pointed at the old one.
+	//
+	// Secrets do not carry over with the script and are not in this file. They
+	// live on the worker itself (`wrangler secret list` to see which):
+	//   npx wrangler secret put TELEGRAM_BOT_TOKEN
+	//   npx wrangler secret put TELEGRAM_CHAT_ID
+	"name": "fotio-france",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-08-01",
+	// nodejs_compat: the Next.js server and the lead route need Node builtins.
+	// global_fetch_strictly_public: makes fetch() inside the worker go out to the
+	// public internet, which is what Next's own data fetching assumes.
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	// Both custom domains, declared here rather than only in the dashboard. A
+	// deploy overwrites the remote configuration with this file, so a route that
+	// lives only in the dashboard is one bad deploy away from being dropped.
+	"routes": [
+		{ "pattern": "ylala.art", "zone_name": "ylala.art", "custom_domain": true },
+		{ "pattern": "www.ylala.art", "zone_name": "ylala.art", "custom_domain": true }
+	],
+	// The worker calls itself for ISR revalidation.
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "fotio-france"
+		}
+	],
+	// Revalidation queue. SQLite-backed, so it needs the new_sqlite_classes
+	// migration below.
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "NEXT_CACHE_DO_QUEUE",
+				"class_name": "DOQueueHandler"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"DOQueueHandler"
+			]
+		}
+	],
+	// next/image runs through Cloudflare's image service.
+	"images": {
+		"binding": "IMAGES"
+	},
+	"observability": {
+		"enabled": true
+	}
+
+	// No "vars" block. NEXT_PUBLIC_* values are inlined by Next at build time
+	// and live in .env; the ROLLOUT_* knobs are read at runtime and can be added
+	// here when a value other than the default is wanted.
+}

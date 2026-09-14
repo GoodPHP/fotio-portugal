@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "cities": "Villes",
+    "pricing": "Tarifs",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "À propos",
+    "contact": "Contact",
+    "book": "Réserver"
+  },
+  "common": {
+    "from": "à partir de",
+    "bookNow": "Réserver",
+    "discover": "En savoir plus",
+    "viewAll": "Voir tout",
+    "search": "Rechercher",
+    "loading": "Chargement…"
+  },
+  "home": {
+    "heroBadge": "100% pros locaux vérifiés",
+    "heroTitle": "Votre photographe en France",
+    "heroSubtitle": "Photographes professionnels vérifiés dans 22 villes et destinations françaises. Prix fixes annoncés avant réservation. Galerie privée sous 48 à 72 heures."
+  }
+}
