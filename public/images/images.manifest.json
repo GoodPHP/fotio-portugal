@@ -1,4 +1,1137 @@
 {
   "version": 2,
-  "slots": {}
+  "slots": {
+    "cities/lisboa": {
+      "photoId": "IJq0V8tcbqc",
+      "photographer": "João Reguengos",
+      "username": "yey_eye",
+      "htmlLink": "https://unsplash.com/photos/brown-and-white-concrete-houses-near-body-of-water-during-daytime-IJq0V8tcbqc",
+      "downloadLocation": "https://api.unsplash.com/photos/IJq0V8tcbqc/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww",
+      "rawUrl": "https://images.unsplash.com/photo-1616862890964-fd20e9dd106d?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#d9d9d9",
+      "blurHash": "LqK,?VsAWUWVysniWBj[TKNGWBWW",
+      "description": "brown and white concrete houses near body of water during daytime",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.904,
+      "chosenAt": "2026-09-14T14:41:35.391Z"
+    },
+    "gallery/lisboa/1": {
+      "photoId": "we78a8X6bH0",
+      "photographer": "Max Berger",
+      "username": "maxberger",
+      "htmlLink": "https://unsplash.com/photos/brown-houses-under-blue-sky-we78a8X6bH0",
+      "downloadLocation": "https://api.unsplash.com/photos/we78a8X6bH0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMXx8RXNjb2xhcyUyMEdlcmFpcyUyQyUyMEFsZmFtYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDh8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1566751772333-6ada6f0ba9a2?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMXx8RXNjb2xhcyUyMEdlcmFpcyUyQyUyMEFsZmFtYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDh8MA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#c0a6a6",
+      "blurHash": "LmGu?]RiWUof%%bHf6WVJCbHoLkC",
+      "description": "brown houses under blue sky",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.707,
+      "chosenAt": "2026-09-14T14:41:35.394Z"
+    },
+    "gallery/lisboa/2": {
+      "photoId": "ESbluKJt3Wk",
+      "photographer": "Farnaz Kohankhaki",
+      "username": "farnaz________",
+      "htmlLink": "https://unsplash.com/photos/cityscape-with-colorful-buildings-overlooking-a-bay-ESbluKJt3Wk",
+      "downloadLocation": "https://api.unsplash.com/photos/ESbluKJt3Wk/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw4fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww",
+      "rawUrl": "https://images.unsplash.com/photo-1762144062694-3500b2bc7958?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw4fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww&ixlib=rb-4.1.0",
+      "width": 6114,
+      "height": 4585,
+      "color": "#d9d9d9",
+      "blurHash": "LuJkDlozWBj[_Nj@j[j[%MV@WCjZ",
+      "description": "Cityscape with colorful buildings overlooking a bay",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.562,
+      "chosenAt": "2026-09-14T14:41:35.397Z"
+    },
+    "gallery/lisboa/3": {
+      "photoId": "XaPFgY52QDY",
+      "photographer": "Pelayo Arbués",
+      "username": "pelayoarbues",
+      "htmlLink": "https://unsplash.com/photos/white-and-brown-concrete-buildings-near-sea-during-daytime-XaPFgY52QDY",
+      "downloadLocation": "https://api.unsplash.com/photos/XaPFgY52QDY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww",
+      "rawUrl": "https://images.unsplash.com/photo-1602409049323-53d9cdc7146c?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww&ixlib=rb-4.1.0",
+      "width": 3575,
+      "height": 2397,
+      "color": "#d9d9d9",
+      "blurHash": "LoK_5s%1t7oL~qjFaeoLbxWBazWB",
+      "description": "white and brown concrete buildings near sea during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.559,
+      "chosenAt": "2026-09-14T14:41:35.399Z"
+    },
+    "gallery/lisboa/4": {
+      "photoId": "rsB7CTYCO0Q",
+      "photographer": "Zhi Xuan Hew",
+      "username": "zhixuanhew",
+      "htmlLink": "https://unsplash.com/photos/a-sunset-view-of-a-city-with-a-church-and-a-body-of-water-in-the-rsB7CTYCO0Q",
+      "downloadLocation": "https://api.unsplash.com/photos/rsB7CTYCO0Q/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww",
+      "rawUrl": "https://images.unsplash.com/photo-1675194722358-4d36d837dfc7?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxFc2NvbGFzJTIwR2VyYWlzJTJDJTIwQWxmYW1hJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0OHww&ixlib=rb-4.1.0",
+      "width": 5869,
+      "height": 3913,
+      "color": "#d9c0c0",
+      "blurHash": "L=IEU,WBoMWC~Aj?jcWC-js.WEoL",
+      "description": "a sunset view of a city with a church and a body of water in the",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.459,
+      "chosenAt": "2026-09-14T14:41:35.401Z"
+    },
+    "cities/porto": {
+      "photoId": "Prb-sjOUBFs",
+      "photographer": "Nick Karvounis",
+      "username": "nickkarvounis",
+      "htmlLink": "https://unsplash.com/photos/boats-on-douro-river-in-porto-Prb-sjOUBFs",
+      "downloadLocation": "https://api.unsplash.com/photos/Prb-sjOUBFs/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA&ixlib=rb-4.1.0",
+      "width": 5760,
+      "height": 3840,
+      "color": "#0ca6f3",
+      "blurHash": "LhDdS5F#s+S5pfXTs8W=AekXs8Wr",
+      "description": "Traditional wooden boats on the Douro River in Porto, Portugal, with colorful buildings",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.15,
+      "chosenAt": "2026-09-14T14:41:35.405Z"
+    },
+    "gallery/porto/1": {
+      "photoId": "RwyaP4v2vI8",
+      "photographer": "Evan Verni",
+      "username": "evanv",
+      "htmlLink": "https://unsplash.com/photos/city-buildings-near-body-of-water-under-blue-and-white-sunny-cloudy-sky-during-daytime-RwyaP4v2vI8",
+      "downloadLocation": "https://api.unsplash.com/photos/RwyaP4v2vI8/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1585101857550-a5a2b871f72c?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#595959",
+      "blurHash": "LtFZNrW?NHRk%%ofWBWCRks-azWC",
+      "description": "city buildings near body of water under blue and white sunny cloudy sky during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.809,
+      "chosenAt": "2026-09-14T14:41:35.408Z"
+    },
+    "gallery/porto/2": {
+      "photoId": "_l-NoSV5oNI",
+      "photographer": "Steve Douglas",
+      "username": "sldoug",
+      "htmlLink": "https://unsplash.com/photos/aerial-view-of-houses-near-sea-during-daytime-_l-NoSV5oNI",
+      "downloadLocation": "https://api.unsplash.com/photos/_l-NoSV5oNI/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1590963852640-2714d687c102?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxDYWlzJTIwZGUlMjBHYWlhJTIwUG9ydG8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzM4fDA&ixlib=rb-4.1.0",
+      "width": 6016,
+      "height": 4016,
+      "color": "#0c4059",
+      "blurHash": "LGCGZ4tQ9u%1B@oMxHI;9HM|s8sm",
+      "description": "aerial view of houses near sea during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.669,
+      "chosenAt": "2026-09-14T14:41:35.413Z"
+    },
+    "gallery/porto/3": {
+      "photoId": "H8bFRH7b5pU",
+      "photographer": "Ana María García Orellana",
+      "username": "goanamaria",
+      "htmlLink": "https://unsplash.com/photos/a-cobblestone-street-at-night-with-storefronts-lit-up-H8bFRH7b5pU",
+      "downloadLocation": "https://api.unsplash.com/photos/H8bFRH7b5pU/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxSaWJlaXJhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MHww",
+      "rawUrl": "https://images.unsplash.com/photo-1645467125490-053c2d1569f0?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxSaWJlaXJhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MHww&ixlib=rb-4.1.0",
+      "width": 3280,
+      "height": 2464,
+      "color": "#262626",
+      "blurHash": "LC8W?RNeIU9Gt8Rlt7ju0Ls.%M-:",
+      "description": "a cobblestone street at night with storefronts lit up",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.627,
+      "chosenAt": "2026-09-14T14:41:35.418Z"
+    },
+    "gallery/porto/4": {
+      "photoId": "1at9oH2BOxM",
+      "photographer": "Julio SJ",
+      "username": "tates_",
+      "htmlLink": "https://unsplash.com/photos/city-buildings-near-body-of-water-during-daytime-1at9oH2BOxM",
+      "downloadLocation": "https://api.unsplash.com/photos/1at9oH2BOxM/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNHx8UmliZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTB8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1585075887276-4c6cfe753e60?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNHx8UmliZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTB8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#73a6d9",
+      "blurHash": "LtF?#Co#ofbIThoJayj[M|WAj]f6",
+      "description": "city buildings near body of water during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.565,
+      "chosenAt": "2026-09-14T14:41:35.422Z"
+    },
+    "cities/cascais": {
+      "photoId": "tii4RXhkQR0",
+      "photographer": "Liam",
+      "username": "iamliam",
+      "htmlLink": "https://unsplash.com/photos/boulders-on-body-of-water-tii4RXhkQR0",
+      "downloadLocation": "https://api.unsplash.com/photos/tii4RXhkQR0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1558905585-a2188a27407a?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww&ixlib=rb-4.1.0",
+      "width": 7755,
+      "height": 4638,
+      "color": "#f3f3f3",
+      "blurHash": "LPGI}*I@R5xvD4?HtmIURhw]r=j?",
+      "description": "boulders on body of water",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.622,
+      "chosenAt": "2026-09-14T14:41:35.423Z"
+    },
+    "gallery/cascais/1": {
+      "photoId": "Zu-DWyhmMAQ",
+      "photographer": "Marijan Sivric",
+      "username": "msivrictech",
+      "htmlLink": "https://unsplash.com/photos/a-seagull-flying-over-a-body-of-water-Zu-DWyhmMAQ",
+      "downloadLocation": "https://api.unsplash.com/photos/Zu-DWyhmMAQ/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw3fHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1697358034959-a6b2efd23ac0?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw3fHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#c0d9f3",
+      "blurHash": "LdHCp7o#kDj[.At7ayoe?bM|kCWV",
+      "description": "a seagull flying over a body of water",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.425,
+      "chosenAt": "2026-09-14T14:41:35.423Z"
+    },
+    "gallery/cascais/2": {
+      "photoId": "lBSh1PVh5FY",
+      "photographer": "Letícia Fracalossi",
+      "username": "leticiafracalossi",
+      "htmlLink": "https://unsplash.com/photos/a-large-body-of-water-sitting-next-to-a-rocky-shore-lBSh1PVh5FY",
+      "downloadLocation": "https://api.unsplash.com/photos/lBSh1PVh5FY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1649767580492-9dc98f6ddb7e?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww&ixlib=rb-4.1.0",
+      "width": 4590,
+      "height": 3060,
+      "color": "#c0c0c0",
+      "blurHash": "LjLqFMbcV@j[_NadWVj[M{aeofa|",
+      "description": "a large body of water sitting next to a rocky shore",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.001,
+      "chosenAt": "2026-09-14T14:41:35.424Z"
+    },
+    "gallery/cascais/3": {
+      "photoId": "Otc6LKr6bNU",
+      "photographer": "Sandra Grünewald",
+      "username": "elmuff",
+      "htmlLink": "https://unsplash.com/photos/gray-rocky-mountain-beside-blue-sea-under-blue-sky-during-daytime-Otc6LKr6bNU",
+      "downloadLocation": "https://api.unsplash.com/photos/Otc6LKr6bNU/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1583083670433-4e8930f6c7e6?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#8c8c8c",
+      "blurHash": "LXBgrfN$ROWCg9WbjXogEWW@sja$",
+      "description": "gray rocky mountain beside blue sea under blue sky during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 1.848,
+      "chosenAt": "2026-09-14T14:41:35.424Z"
+    },
+    "gallery/cascais/4": {
+      "photoId": "50cec4x2ZZY",
+      "photographer": "Sandra Grünewald",
+      "username": "elmuff",
+      "htmlLink": "https://unsplash.com/photos/white-and-gray-bird-on-gray-rock-near-body-of-water-during-daytime-50cec4x2ZZY",
+      "downloadLocation": "https://api.unsplash.com/photos/50cec4x2ZZY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1583083670244-c478469b029b?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxCb2NhJTIwZG8lMjBJbmZlcm5vJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1MXww&ixlib=rb-4.1.0",
+      "width": 4787,
+      "height": 3446,
+      "color": "#0c4073",
+      "blurHash": "LKD0cZ-hDiR,0;ocxBWCDiNM%Ms+",
+      "description": "white and gray bird on gray rock near body of water during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 1.705,
+      "chosenAt": "2026-09-14T14:41:35.425Z"
+    },
+    "cities/braga": {
+      "photoId": "J9NbjtXObWI",
+      "photographer": "Filipe Nobre",
+      "username": "filipenobre",
+      "htmlLink": "https://unsplash.com/photos/a-scenic-view-of-a-park-with-a-lot-of-flowers-J9NbjtXObWI",
+      "downloadLocation": "https://api.unsplash.com/photos/J9NbjtXObWI/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQwfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1725126150604-58fd344dca44?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQwfDA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#a6c0d9",
+      "blurHash": "LbF=?hITxtMxyZIUs.RP%hNGRPof",
+      "description": "A scenic view of a park with a lot of flowers",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.509,
+      "chosenAt": "2026-09-14T14:41:35.427Z"
+    },
+    "gallery/braga/1": {
+      "photoId": "WpfFRY8sLpk",
+      "photographer": "Sergey Konstantinov",
+      "username": "twirl",
+      "htmlLink": "https://unsplash.com/photos/a-city-next-to-a-body-of-water-WpfFRY8sLpk",
+      "downloadLocation": "https://api.unsplash.com/photos/WpfFRY8sLpk/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQwfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1656534461212-84a89d23193a?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQwfDA&ixlib=rb-4.1.0",
+      "width": 4608,
+      "height": 3456,
+      "color": "#404040",
+      "blurHash": "L8Csgd$dxS%M-nD,E4jE4,f,%1bI",
+      "description": "a city next to a body of water",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.514,
+      "chosenAt": "2026-09-14T14:41:35.429Z"
+    },
+    "gallery/braga/2": {
+      "photoId": "YhxF9dkf7-Y",
+      "photographer": "Timur Seyfelmlyukov",
+      "username": "timurse",
+      "htmlLink": "https://unsplash.com/photos/lisbon-cityscape-with-castle-and-rooftops-YhxF9dkf7-Y",
+      "downloadLocation": "https://api.unsplash.com/photos/YhxF9dkf7-Y/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8Mnx8MTc4OTM5NjM0MHww",
+      "rawUrl": "https://images.unsplash.com/photo-1789309164724-822e0ca8e046?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxFc2NhZCVDMyVCM3JpbyUyMGRvJTIwQm9tJTIwSmVzdXMlMjBkbyUyME1vbnRlJTIwQnJhZ2ElMjBQb3J0dWdhbHxlbnwxfDB8Mnx8MTc4OTM5NjM0MHww&ixlib=rb-4.1.0",
+      "width": 6240,
+      "height": 4160,
+      "color": "#73a6a6",
+      "blurHash": "LFIXpYM|MzR,3?xuS$W;1jSht7r=",
+      "description": "A high-angle view of terracotta rooftops and a castle in Lisbon, Portugal",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.337,
+      "chosenAt": "2026-09-14T14:41:35.431Z"
+    },
+    "gallery/braga/3": {
+      "photoId": "VasgabfZGy8",
+      "photographer": "José Duarte",
+      "username": "zegtr",
+      "htmlLink": "https://unsplash.com/photos/medieval-knight-statue-and-stone-castle-VasgabfZGy8",
+      "downloadLocation": "https://api.unsplash.com/photos/VasgabfZGy8/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyM3x8RXNjYWQlQzMlQjNyaW8lMjBkbyUyMEJvbSUyMEplc3VzJTIwZG8lMjBNb250ZSUyMEJyYWdhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDB8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1786882390633-b5fd5bf31bb3?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyM3x8RXNjYWQlQzMlQjNyaW8lMjBkbyUyMEJvbSUyMEplc3VzJTIwZG8lMjBNb250ZSUyMEJyYWdhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDB8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#c0a68c",
+      "blurHash": "LSHek4_29F%MKnI@sjxu%OxuxZNG",
+      "description": "A bronze statue of a medieval knight on a stone pedestal before a castle",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.335,
+      "chosenAt": "2026-09-14T14:41:35.434Z"
+    },
+    "gallery/braga/4": {
+      "photoId": "NMU8wexGMHk",
+      "photographer": "Vitalii Kyktov",
+      "username": "i_am_vitality",
+      "htmlLink": "https://unsplash.com/photos/grand-staircase-leading-to-a-historic-church-on-a-hill-NMU8wexGMHk",
+      "downloadLocation": "https://api.unsplash.com/photos/NMU8wexGMHk/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyNHx8RXNjYWQlQzMlQjNyaW8lMjBkbyUyMEJvbSUyMEplc3VzJTIwZG8lMjBNb250ZSUyMEJyYWdhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0MHww",
+      "rawUrl": "https://images.unsplash.com/photo-1765100779725-8c06178fec30?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyNHx8RXNjYWQlQzMlQjNyaW8lMjBkbyUyMEJvbSUyMEplc3VzJTIwZG8lMjBNb250ZSUyMEJyYWdhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0MHww&ixlib=rb-4.1.0",
+      "width": 4241,
+      "height": 2829,
+      "color": "#c0c0c0",
+      "blurHash": "LCFr-F_49DIn_2Ws4mIU^,g3xXaf",
+      "description": "Grand staircase leading to a historic church on a hill",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.245,
+      "chosenAt": "2026-09-14T14:41:35.436Z"
+    },
+    "cities/coimbra": {
+      "photoId": "y3tvS7uQN7I",
+      "photographer": "José Francisco García Cuenca",
+      "username": "josecuenca",
+      "htmlLink": "https://unsplash.com/photos/a-large-building-with-a-clock-tower-in-front-of-it-y3tvS7uQN7I",
+      "downloadLocation": "https://api.unsplash.com/photos/y3tvS7uQN7I/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1635893312205-6abda7db17a0?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA&ixlib=rb-4.1.0",
+      "width": 4569,
+      "height": 2685,
+      "color": "#0c40a6",
+      "blurHash": "LlFir{W?WBWB0PbIoKj]tSocaeWX",
+      "description": "a large building with a clock tower in front of it",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.031,
+      "chosenAt": "2026-09-14T14:41:35.439Z"
+    },
+    "gallery/coimbra/1": {
+      "photoId": "EAphdmvq6L0",
+      "photographer": "Etienne Girardet",
+      "username": "etiennegirardet",
+      "htmlLink": "https://unsplash.com/photos/brown-and-white-concrete-buildings-under-white-clouds-during-daytime-EAphdmvq6L0",
+      "downloadLocation": "https://api.unsplash.com/photos/EAphdmvq6L0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1631053744868-8afbc4df3d4e?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#a6c0d9",
+      "blurHash": "LcI5*]s:tRxu%%WAoet7MwozRjbI",
+      "description": "brown and white concrete buildings under white clouds during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 3.456,
+      "chosenAt": "2026-09-14T14:41:35.443Z"
+    },
+    "gallery/coimbra/2": {
+      "photoId": "J0oWoao2U-g",
+      "photographer": "Krzysztof",
+      "username": "krzysztof_h",
+      "htmlLink": "https://unsplash.com/photos/a-grand-staircase-leads-to-a-beautiful-church-J0oWoao2U-g",
+      "downloadLocation": "https://api.unsplash.com/photos/J0oWoao2U-g/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxFc2NhZGFzJTIwTW9udW1lbnRhaXMlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzUyfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1753471009210-078495653341?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxFc2NhZGFzJTIwTW9udW1lbnRhaXMlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzUyfDA&ixlib=rb-4.1.0",
+      "width": 6016,
+      "height": 4016,
+      "color": "#f3f3f3",
+      "blurHash": "LcG[{5M{IARj0MoesQj@4:t6xXt7",
+      "description": "A grand staircase leads to a beautiful church",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.446,
+      "chosenAt": "2026-09-14T14:41:35.446Z"
+    },
+    "gallery/coimbra/3": {
+      "photoId": "nAia0oa4-S0",
+      "photographer": "Filipe Nobre",
+      "username": "filipenobre",
+      "htmlLink": "https://unsplash.com/photos/a-river-running-through-a-lush-green-forest-nAia0oa4-S0",
+      "downloadLocation": "https://api.unsplash.com/photos/nAia0oa4-S0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNnx8UGElQzMlQTdvJTIwZGFzJTIwRXNjb2xhcyUyMENvaW1icmElMjBQb3J0dWdhbHxlbnwxfDB8Mnx8MTc4OTM5NjM0MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1721409800175-9b4ab6147d40?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNnx8UGElQzMlQTdvJTIwZGFzJTIwRXNjb2xhcyUyMENvaW1icmElMjBQb3J0dWdhbHxlbnwxfDB8Mnx8MTc4OTM5NjM0MXww&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#c0c0c0",
+      "blurHash": "LlGIfhWVWBaz_4bHj@j[%NaxfRj[",
+      "description": "A river running through a lush green forest",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.257,
+      "chosenAt": "2026-09-14T14:41:35.451Z"
+    },
+    "gallery/coimbra/4": {
+      "photoId": "AAVygafoJ7g",
+      "photographer": "Mágui de Almeida Carreira",
+      "username": "magui_ac",
+      "htmlLink": "https://unsplash.com/photos/brown-brick-building-under-cloudy-sky-during-daytime-AAVygafoJ7g",
+      "downloadLocation": "https://api.unsplash.com/photos/AAVygafoJ7g/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1585687141895-2fa98d0c8003?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQYSVDMyVBN28lMjBkYXMlMjBFc2NvbGFzJTIwQ29pbWJyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDB8MA&ixlib=rb-4.1.0",
+      "width": 3264,
+      "height": 2230,
+      "color": "#735940",
+      "blurHash": "LaGIGqVsx]kD?wRPxvog%hWA%MkC",
+      "description": "brown brick building under cloudy sky during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.02,
+      "chosenAt": "2026-09-14T14:41:35.454Z"
+    },
+    "cities/evora": {
+      "photoId": "phPqiTqeu6Y",
+      "photographer": "Filipe Nobre",
+      "username": "filipenobre",
+      "htmlLink": "https://unsplash.com/photos/a-large-building-with-columns-and-a-clock-tower-phPqiTqeu6Y",
+      "downloadLocation": "https://api.unsplash.com/photos/phPqiTqeu6Y/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0MXww",
+      "rawUrl": "https://images.unsplash.com/photo-1693750034188-0ce3b87b17fb?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0MXww&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#a6a6a6",
+      "blurHash": "LPIhQz9FxuW=%%%0WXj[o#-pNHs+",
+      "description": "a large building with columns and a clock tower",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.372,
+      "chosenAt": "2026-09-14T14:41:35.456Z"
+    },
+    "gallery/evora/1": {
+      "photoId": "JKj6d9H3I-I",
+      "photographer": "Filipe Nobre",
+      "username": "filipenobre",
+      "htmlLink": "https://unsplash.com/photos/ancient-ruins-with-tall-columns-silhouetted-against-bright-sky-JKj6d9H3I-I",
+      "downloadLocation": "https://api.unsplash.com/photos/JKj6d9H3I-I/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyMXx8VGVtcGxvJTIwUm9tYW5vJTIwJUMzJTg5dm9yYSUyMFBvcnR1Z2FsfGVufDF8MHwyfHwxNzg5Mzk2MzQyfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1782067915638-10b5d5acb276?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyMXx8VGVtcGxvJTIwUm9tYW5vJTIwJUMzJTg5dm9yYSUyMFBvcnR1Z2FsfGVufDF8MHwyfHwxNzg5Mzk2MzQyfDA&ixlib=rb-4.1.0",
+      "width": 8144,
+      "height": 6128,
+      "color": "#f3f3f3",
+      "blurHash": "LmOp*|t7~q?b~qRjIUIUxut7IURj",
+      "description": "Ancient ruins with tall columns silhouetted against bright sky",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.438,
+      "chosenAt": "2026-09-14T14:41:35.458Z"
+    },
+    "gallery/evora/2": {
+      "photoId": "8NZR0vB874o",
+      "photographer": "Timur Seyfelmlyukov",
+      "username": "timurse",
+      "htmlLink": "https://unsplash.com/photos/santa-justa-lift-in-lisbon-8NZR0vB874o",
+      "downloadLocation": "https://api.unsplash.com/photos/8NZR0vB874o/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDJ8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1789309164700-d50e398c9354?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDJ8MA&ixlib=rb-4.1.0",
+      "width": 6240,
+      "height": 4160,
+      "color": "#262626",
+      "blurHash": "LgIN{a~UE2M|TKOFbHt6OsNejFsm",
+      "description": "The Santa Justa Lift overlooking the terracotta rooftops of Lisbon in Portugal",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.337,
+      "chosenAt": "2026-09-14T14:41:35.460Z"
+    },
+    "gallery/evora/3": {
+      "photoId": "oLFBv2VKDMY",
+      "photographer": "Mikael Padeiro",
+      "username": "regard_urbain",
+      "htmlLink": "https://unsplash.com/photos/church-and-terracotta-roofs-in-obidos-oLFBv2VKDMY",
+      "downloadLocation": "https://api.unsplash.com/photos/oLFBv2VKDMY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDJ8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1786758862999-46304f80f397?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxUZW1wbG8lMjBSb21hbm8lMjAlQzMlODl2b3JhJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDJ8MA&ixlib=rb-4.1.0",
+      "width": 5785,
+      "height": 3856,
+      "color": "#262626",
+      "blurHash": "L4DSq3DiXSt4LI02Mwt7F;^*_3tP",
+      "description": "A white church with a bell tower among terracotta roofs in Obidos, Portugal",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.334,
+      "chosenAt": "2026-09-14T14:41:35.462Z"
+    },
+    "gallery/evora/4": {
+      "photoId": "Z5GZro2cg3s",
+      "photographer": "Hugo Alexandre Cruz",
+      "username": "hugoalexandrecruz",
+      "htmlLink": "https://unsplash.com/photos/ancient-roman-temple-ruins-with-stone-columns-and-blue-sky-Z5GZro2cg3s",
+      "downloadLocation": "https://api.unsplash.com/photos/Z5GZro2cg3s/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxOXx8VGVtcGxvJTIwUm9tYW5vJTIwJUMzJTg5dm9yYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDF8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1775585872802-52b58140ba8f?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxOXx8VGVtcGxvJTIwUm9tYW5vJTIwJUMzJTg5dm9yYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDF8MA&ixlib=rb-4.1.0",
+      "width": 3952,
+      "height": 2635,
+      "color": "#73a6d9",
+      "blurHash": "LaIO|lx]aIR-BHR*fkj[slWBW?oe",
+      "description": "Ancient roman temple ruins with stone columns and blue sky",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.292,
+      "chosenAt": "2026-09-14T14:41:35.466Z"
+    },
+    "cities/sintra": {
+      "photoId": "WTEohjp6WV4",
+      "photographer": "Nour Betar",
+      "username": "nourdt",
+      "htmlLink": "https://unsplash.com/photos/elegant-white-palace-with-a-central-archway-and-green-garden-WTEohjp6WV4",
+      "downloadLocation": "https://api.unsplash.com/photos/WTEohjp6WV4/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxRdWludGElMjBkYSUyMFJlZ2FsZWlyYSUyQyUyMHBvJUMzJUE3byUyMGluaWNpJUMzJUExdGljbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTR8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1786041736523-a923f9c2a257?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxRdWludGElMjBkYSUyMFJlZ2FsZWlyYSUyQyUyMHBvJUMzJUE3byUyMGluaWNpJUMzJUExdGljbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTR8MA&ixlib=rb-4.1.0",
+      "width": 11648,
+      "height": 4304,
+      "color": "#c0c0d9",
+      "blurHash": "LcF?CRt79Fax?wogM_j?NGj[s:of",
+      "description": "Elegant white palace with a central archway and green garden",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.126,
+      "chosenAt": "2026-09-14T14:41:35.466Z"
+    },
+    "cities/algarve": {
+      "photoId": "29EPu0bhJ9E",
+      "photographer": "Jacek Ulinski",
+      "username": "juli63",
+      "htmlLink": "https://unsplash.com/photos/a-boat-on-the-water-29EPu0bhJ9E",
+      "downloadLocation": "https://api.unsplash.com/photos/29EPu0bhJ9E/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMXx8UG9udGElMjBkYSUyMFBpZWRhZGUlMkMlMjBMYWdvcyUyMEFsZ2FydmUlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQzfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1662408077783-a6e8a0135cf7?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMXx8UG9udGElMjBkYSUyMFBpZWRhZGUlMkMlMjBMYWdvcyUyMEFsZ2FydmUlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQzfDA&ixlib=rb-4.1.0",
+      "width": 5905,
+      "height": 3775,
+      "color": "#d9d9d9",
+      "blurHash": "LXG+RAMdITof_4NGRjj[R-bHt7js",
+      "description": "a boat on the water",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.353,
+      "chosenAt": "2026-09-14T14:41:35.470Z"
+    },
+    "gallery/algarve/1": {
+      "photoId": "AXFp8jbAXlQ",
+      "photographer": "Tim ten Cate",
+      "username": "timtencate",
+      "htmlLink": "https://unsplash.com/photos/brown-rock-formation-on-sea-shore-during-sunset-AXFp8jbAXlQ",
+      "downloadLocation": "https://api.unsplash.com/photos/AXFp8jbAXlQ/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQcmFpYSUyMGRhJTIwTWFyaW5oYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTV8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1591264786838-6acdff391890?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQcmFpYSUyMGRhJTIwTWFyaW5oYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTV8MA&ixlib=rb-4.1.0",
+      "width": 6139,
+      "height": 4093,
+      "color": "#f3f3f3",
+      "blurHash": "LnM?xQ%MW?xa_NWCj]ay-pRkkCV@",
+      "description": "brown rock formation on sea shore during sunset",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 3.602,
+      "chosenAt": "2026-09-14T14:41:35.472Z"
+    },
+    "gallery/algarve/2": {
+      "photoId": "A2iS8eIRMYc",
+      "photographer": "Kiwihug",
+      "username": "kiwihug",
+      "htmlLink": "https://unsplash.com/photos/concrete-rock-formation-near-body-of-water-A2iS8eIRMYc",
+      "downloadLocation": "https://api.unsplash.com/photos/A2iS8eIRMYc/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQcmFpYSUyMGRhJTIwTWFyaW5oYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTV8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1513341186776-ce8fcdefb51b?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQcmFpYSUyMGRhJTIwTWFyaW5oYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTV8MA&ixlib=rb-4.1.0",
+      "width": 3000,
+      "height": 2002,
+      "color": "#262626",
+      "blurHash": "LRBM#+f600t7ozayM{ayIVayxuoe",
+      "description": "concrete rock formation near body of water",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 3.083,
+      "chosenAt": "2026-09-14T14:41:35.475Z"
+    },
+    "gallery/algarve/3": {
+      "photoId": "WJQ39Q1rpgA",
+      "photographer": "Sokmean Nou",
+      "username": "missxnou",
+      "htmlLink": "https://unsplash.com/photos/a-scenic-view-of-a-body-of-water-near-a-rocky-cliff-WJQ39Q1rpgA",
+      "downloadLocation": "https://api.unsplash.com/photos/WJQ39Q1rpgA/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQb250YSUyMGRhJTIwUGllZGFkZSUyQyUyMExhZ29zJTIwQWxnYXJ2ZSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDN8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1703194887679-406a9b5e7cf6?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQb250YSUyMGRhJTIwUGllZGFkZSUyQyUyMExhZ29zJTIwQWxnYXJ2ZSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDN8MA&ixlib=rb-4.1.0",
+      "width": 3926,
+      "height": 2944,
+      "color": "#73a6d9",
+      "blurHash": "LzEWatoKs,aelCM}bHaftSWXWXW=",
+      "description": "a scenic view of a body of water near a rocky cliff",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.569,
+      "chosenAt": "2026-09-14T14:41:35.477Z"
+    },
+    "gallery/algarve/4": {
+      "photoId": "y5wYQKbso3g",
+      "photographer": "Rikin Katyal",
+      "username": "sirvar",
+      "htmlLink": "https://unsplash.com/photos/a-rocky-cliff-overlooking-a-body-of-water-y5wYQKbso3g",
+      "downloadLocation": "https://api.unsplash.com/photos/y5wYQKbso3g/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxM3x8UG9udGElMjBkYSUyMFBpZWRhZGUlMkMlMjBMYWdvcyUyMEFsZ2FydmUlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQzfDA",
+      "rawUrl": "https://images.unsplash.com/photo-1661184734801-41013e2467bd?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxM3x8UG9udGElMjBkYSUyMFBpZWRhZGUlMkMlMjBMYWdvcyUyMEFsZ2FydmUlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQzfDA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#73a6d9",
+      "blurHash": "LwEWwctRj]fQ%%n#WBayVrjYWCj[",
+      "description": "a rocky cliff overlooking a body of water",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.39,
+      "chosenAt": "2026-09-14T14:41:35.480Z"
+    },
+    "cities/madeira": {
+      "photoId": "4DXo5wrZaus",
+      "photographer": "Tim Roosjen",
+      "username": "timroosjen",
+      "htmlLink": "https://unsplash.com/photos/man-standing-on-brown-rock-formation-near-blue-sea-during-daytime-4DXo5wrZaus",
+      "downloadLocation": "https://api.unsplash.com/photos/4DXo5wrZaus/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQaWNvJTIwZG8lMjBBcmllaXJvJTIwTWFkZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDR8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1585173847038-1cfe1954c10a?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQaWNvJTIwZG8lMjBBcmllaXJvJTIwTWFkZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDR8MA&ixlib=rb-4.1.0",
+      "width": 5239,
+      "height": 3455,
+      "color": "#8cc0d9",
+      "blurHash": "LxCa=2NeaeWXyZe.WVoKIrnin$jZ",
+      "description": "man standing on brown rock formation near blue sea during daytime",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.575,
+      "chosenAt": "2026-09-14T14:41:35.484Z"
+    },
+    "gallery/madeira/1": {
+      "photoId": "ExRfDYo2oFw",
+      "photographer": "Hikerwise.com",
+      "username": "hikerwise",
+      "htmlLink": "https://unsplash.com/photos/a-trail-with-a-sign-on-the-side-of-it-ExRfDYo2oFw",
+      "downloadLocation": "https://api.unsplash.com/photos/ExRfDYo2oFw/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxQaWNvJTIwZG8lMjBBcmllaXJvJTIwTWFkZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDR8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1721241843687-fed85df281d1?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxQaWNvJTIwZG8lMjBBcmllaXJvJTIwTWFkZWlyYSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDR8MA&ixlib=rb-4.1.0",
+      "width": 4000,
+      "height": 2667,
+      "color": "#f3f3f3",
+      "blurHash": "L_Ir7|RiM{bI~qM|Rja#%NWBoeWB",
+      "description": "A trail with a sign on the side of it",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.875,
+      "chosenAt": "2026-09-14T14:41:35.488Z"
+    },
+    "gallery/madeira/2": {
+      "photoId": "53tgS5Cq4z8",
+      "photographer": "Slava R",
+      "username": "slava28",
+      "htmlLink": "https://unsplash.com/photos/a-herd-of-cattle-standing-on-top-of-a-lush-green-field-53tgS5Cq4z8",
+      "downloadLocation": "https://api.unsplash.com/photos/53tgS5Cq4z8/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxGYW5hbCUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTZ8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1717919530686-167041dbde16?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxGYW5hbCUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTZ8MA&ixlib=rb-4.1.0",
+      "width": 4032,
+      "height": 3024,
+      "color": "#d9d9d9",
+      "blurHash": "LWH__JxuIVRQo$%Moej@00j[ofof",
+      "description": "a herd of cattle standing on top of a lush green field",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.841,
+      "chosenAt": "2026-09-14T14:41:35.491Z"
+    },
+    "gallery/madeira/3": {
+      "photoId": "Wk_HpvcIjpk",
+      "photographer": "Colin Watts",
+      "username": "colinwatts",
+      "htmlLink": "https://unsplash.com/photos/a-star-filled-sky-with-a-couple-of-trees-in-the-foreground-Wk_HpvcIjpk",
+      "downloadLocation": "https://api.unsplash.com/photos/Wk_HpvcIjpk/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMHx8RmFuYWwlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzU2fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1733170683329-b9b26aaf1162?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxMHx8RmFuYWwlMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzU2fDA&ixlib=rb-4.1.0",
+      "width": 5999,
+      "height": 4000,
+      "color": "#595973",
+      "blurHash": "LD8}MwVWxH%iyGITNFkXRPt8Rhj?",
+      "description": "A star filled sky with a couple of trees in the foreground",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.814,
+      "chosenAt": "2026-09-14T14:41:35.494Z"
+    },
+    "gallery/madeira/4": {
+      "photoId": "c4DoA-ZlJrI",
+      "photographer": "Hikerwise.com",
+      "username": "hikerwise",
+      "htmlLink": "https://unsplash.com/photos/a-group-of-trees-that-are-standing-in-the-grass-c4DoA-ZlJrI",
+      "downloadLocation": "https://api.unsplash.com/photos/c4DoA-ZlJrI/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxGYW5hbCUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTZ8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1721241843643-fb112e77c744?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxGYW5hbCUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTZ8MA&ixlib=rb-4.1.0",
+      "width": 4000,
+      "height": 2667,
+      "color": "#c0d9f3",
+      "blurHash": "LwDwH*ITkCV@?wRjaxRjt7t8WAV@",
+      "description": "A group of trees that are standing in the grass",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.805,
+      "chosenAt": "2026-09-14T14:41:35.498Z"
+    },
+    "cities/acores": {
+      "photoId": "G5VK1osWhns",
+      "photographer": "Nuno Antunes",
+      "username": "onun",
+      "htmlLink": "https://unsplash.com/photos/lake-near-forest-during-daytime-G5VK1osWhns",
+      "downloadLocation": "https://api.unsplash.com/photos/G5VK1osWhns/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1531069702079-c5226cdb8745?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA&ixlib=rb-4.1.0",
+      "width": 2765,
+      "height": 1843,
+      "color": "#a6c0c0",
+      "blurHash": "LvHCfvRPV@bI_4WBfkWBRObIWCax",
+      "description": "lake near forest during daytime",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.918,
+      "chosenAt": "2026-09-14T14:41:35.501Z"
+    },
+    "gallery/acores/1": {
+      "photoId": "iCtSUFpuH-g",
+      "photographer": "Martin Munk",
+      "username": "scandinavian_monk",
+      "htmlLink": "https://unsplash.com/photos/lake-in-the-middle-of-mountains-during-daytime-iCtSUFpuH-g",
+      "downloadLocation": "https://api.unsplash.com/photos/iCtSUFpuH-g/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1581925865466-ffed044c0c64?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA&ixlib=rb-4.1.0",
+      "width": 2800,
+      "height": 2100,
+      "color": "#f3f3f3",
+      "blurHash": "L$FZWzxui]bb.AxZayoMx]jXt7kB",
+      "description": "lake in the middle of mountains during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.803,
+      "chosenAt": "2026-09-14T14:41:35.503Z"
+    },
+    "gallery/acores/2": {
+      "photoId": "Vj0Nj86xtg4",
+      "photographer": "Jesus David Gomez",
+      "username": "soyjedavid",
+      "htmlLink": "https://unsplash.com/photos/white-wooden-row-boat-on-clear-water-near-bridge-under-blue-sky-and-white-clouds-during-day-time-Vj0Nj86xtg4",
+      "downloadLocation": "https://api.unsplash.com/photos/Vj0Nj86xtg4/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxNaXJhZG91cm8lMjBkYSUyMEJvY2ElMjBkbyUyMEluZmVybm8lMkMlMjBTZXRlJTIwQ2lkYWRlcyUyMEElQzMlQTdvcmVzJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0NXww",
+      "rawUrl": "https://images.unsplash.com/photo-1575460384680-d3040b05870f?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxNaXJhZG91cm8lMjBkYSUyMEJvY2ElMjBkbyUyMEluZmVybm8lMkMlMjBTZXRlJTIwQ2lkYWRlcyUyMEElQzMlQTdvcmVzJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM0NXww&ixlib=rb-4.1.0",
+      "width": 4608,
+      "height": 3456,
+      "color": "#262626",
+      "blurHash": "LrE:MVROs+WB?wWBoIWCS*ogj]WB",
+      "description": "white wooden row boat on clear water near bridge under blue sky and white clouds during day time",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.796,
+      "chosenAt": "2026-09-14T14:41:35.506Z"
+    },
+    "gallery/acores/3": {
+      "photoId": "ZhjyN_9yfTY",
+      "photographer": "Mr Xerty",
+      "username": "xerty",
+      "htmlLink": "https://unsplash.com/photos/a-body-of-water-surrounded-by-hills-ZhjyN_9yfTY",
+      "downloadLocation": "https://api.unsplash.com/photos/ZhjyN_9yfTY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw3fHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1664968454130-f69c48c289e0?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw3fHxMYWdvYSUyMGRvJTIwRm9nbyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNTd8MA&ixlib=rb-4.1.0",
+      "width": 5184,
+      "height": 3456,
+      "color": "#404026",
+      "blurHash": "LnFic2t7IUtR_4t7Rjof-;ofoyWB",
+      "description": "a body of water surrounded by hills",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.495,
+      "chosenAt": "2026-09-14T14:41:35.508Z"
+    },
+    "gallery/acores/4": {
+      "photoId": "wD6DEZv43cU",
+      "photographer": "Ries Bosch",
+      "username": "ries_bosch",
+      "htmlLink": "https://unsplash.com/photos/a-town-square-with-a-fountain-and-historic-buildings-wD6DEZv43cU",
+      "downloadLocation": "https://api.unsplash.com/photos/wD6DEZv43cU/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyM3x8TWlyYWRvdXJvJTIwZGElMjBCb2NhJTIwZG8lMjBJbmZlcm5vJTJDJTIwU2V0ZSUyMENpZGFkZXMlMjBBJUMzJUE3b3JlcyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDV8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1772974556837-7031e7f09774?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyM3x8TWlyYWRvdXJvJTIwZGElMjBCb2NhJTIwZG8lMjBJbmZlcm5vJTJDJTIwU2V0ZSUyMENpZGFkZXMlMjBBJUMzJUE3b3JlcyUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDV8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#8c8c8c",
+      "blurHash": "LXG[=|bFROM{.An%ROWA-;ogaxWB",
+      "description": "A town square with a fountain and historic buildings",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.26,
+      "chosenAt": "2026-09-14T14:41:35.511Z"
+    },
+    "cities/douro": {
+      "photoId": "53kK4Wmr4Cs",
+      "photographer": "Rach Sam",
+      "username": "rachsamphotos",
+      "htmlLink": "https://unsplash.com/photos/a-large-body-of-water-surrounded-by-a-lush-green-hillside-53kK4Wmr4Cs",
+      "downloadLocation": "https://api.unsplash.com/photos/53kK4Wmr4Cs/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxNaXJhZG91cm8lMjBkZSUyMFMlQzMlQTNvJTIwTGVvbmFyZG8lMjBkZSUyMEdhbGFmdXJhJTIwRG91cm8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQ2fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1638664370752-8188076afbab?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxNaXJhZG91cm8lMjBkZSUyMFMlQzMlQTNvJTIwTGVvbmFyZG8lMjBkZSUyMEdhbGFmdXJhJTIwRG91cm8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQ2fDA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#737359",
+      "blurHash": "LaFY[OInM_s;_4IUWAfl-=M{Rkj@",
+      "description": "a large body of water surrounded by a lush green hillside",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 3.594,
+      "chosenAt": "2026-09-14T14:41:35.516Z"
+    },
+    "gallery/douro/1": {
+      "photoId": "N2kCEDjAAHY",
+      "photographer": "Alejandro Piñero Amerio",
+      "username": "vjgalaxy",
+      "htmlLink": "https://unsplash.com/photos/red-boat-on-body-of-water-near-city-buildings-during-daytime-N2kCEDjAAHY",
+      "downloadLocation": "https://api.unsplash.com/photos/N2kCEDjAAHY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQaW5oJUMzJUEzbyUyMGUlMjBhJTIwbGluaGElMjBkbyUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1OHww",
+      "rawUrl": "https://images.unsplash.com/photo-1582647161018-bbf9819c30b2?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQaW5oJUMzJUEzbyUyMGUlMjBhJTIwbGluaGElMjBkbyUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfHx8MTc4OTM5NjM1OHww&ixlib=rb-4.1.0",
+      "width": 5184,
+      "height": 3456,
+      "color": "#262626",
+      "blurHash": "LdFrSG?as*R%_4xujqWBEmR-s:s:",
+      "description": "red boat on body of water near city buildings during daytime",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.892,
+      "chosenAt": "2026-09-14T14:41:35.520Z"
+    },
+    "gallery/douro/2": {
+      "photoId": "JKp_gV4xFpY",
+      "photographer": "Rui Alves",
+      "username": "asfotosde1enorme",
+      "htmlLink": "https://unsplash.com/photos/a-bridge-over-a-river-JKp_gV4xFpY",
+      "downloadLocation": "https://api.unsplash.com/photos/JKp_gV4xFpY/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxNaXJhZG91cm8lMjBkZSUyMFMlQzMlQTNvJTIwTGVvbmFyZG8lMjBkZSUyMEdhbGFmdXJhJTIwRG91cm8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQ2fDA",
+      "rawUrl": "https://images.unsplash.com/photo-1658232630608-8a9ec5dd3263?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw2fHxNaXJhZG91cm8lMjBkZSUyMFMlQzMlQTNvJTIwTGVvbmFyZG8lMjBkZSUyMEdhbGFmdXJhJTIwRG91cm8lMjBQb3J0dWdhbHxlbnwxfDB8fHwxNzg5Mzk2MzQ2fDA&ixlib=rb-4.1.0",
+      "width": 5184,
+      "height": 3456,
+      "color": "#c0d9f3",
+      "blurHash": "L=G]dutTRiof.AWCaxoftTRjj[j[",
+      "description": "a bridge over a river",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.475,
+      "chosenAt": "2026-09-14T14:41:35.523Z"
+    },
+    "gallery/douro/3": {
+      "photoId": "pFAq---8X6k",
+      "photographer": "mana5280",
+      "username": "mana5280",
+      "htmlLink": "https://unsplash.com/photos/douro-riverfront-in-porto-pFAq---8X6k",
+      "downloadLocation": "https://api.unsplash.com/photos/pFAq---8X6k/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNXx8TWlyYWRvdXJvJTIwZGUlMjBTJUMzJUEzbyUyMExlb25hcmRvJTIwZGUlMjBHYWxhZnVyYSUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1787274345451-4df0336ed249?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNXx8TWlyYWRvdXJvJTIwZGUlMjBTJUMzJUEzbyUyMExlb25hcmRvJTIwZGUlMjBHYWxhZnVyYSUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 8135,
+      "height": 5430,
+      "color": "#405973",
+      "blurHash": "L8CGS?1+59.9IWwaxBIoAcMc$xxB",
+      "description": "The Douro riverfront in Porto with traditional boats and crowded pedestrian walkways",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.336,
+      "chosenAt": "2026-09-14T14:41:35.528Z"
+    },
+    "gallery/douro/4": {
+      "photoId": "ntHJq7XmiN0",
+      "photographer": "mana5280",
+      "username": "mana5280",
+      "htmlLink": "https://unsplash.com/photos/traditional-boats-on-douro-river-porto-ntHJq7XmiN0",
+      "downloadLocation": "https://api.unsplash.com/photos/ntHJq7XmiN0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNHx8TWlyYWRvdXJvJTIwZGUlMjBTJUMzJUEzbyUyMExlb25hcmRvJTIwZGUlMjBHYWxhZnVyYSUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1787274345398-225967588790?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxNHx8TWlyYWRvdXJvJTIwZGUlMjBTJUMzJUEzbyUyMExlb25hcmRvJTIwZGUlMjBHYWxhZnVyYSUyMERvdXJvJTIwUG9ydHVnYWx8ZW58MXwwfDJ8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 7640,
+      "height": 4885,
+      "color": "#404040",
+      "blurHash": "LDAdfupyW?o#.9%MRis+F~yEt6WX",
+      "description": "Traditional wooden boats on the Douro River in Porto with a riverside market",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.292,
+      "chosenAt": "2026-09-14T14:41:35.532Z"
+    },
+    "cities/comporta": {
+      "photoId": "SvO5xLnYKSw",
+      "photographer": "Bodega",
+      "username": "bodegasupply",
+      "htmlLink": "https://unsplash.com/photos/a-body-of-water-surrounded-by-a-forest-SvO5xLnYKSw",
+      "downloadLocation": "https://api.unsplash.com/photos/SvO5xLnYKSw/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1704658011867-1fef84ee619e?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwyfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#8cc0d9",
+      "blurHash": "LpDT@tOZROt88^s8o#RjZ|bHR*s.",
+      "description": "a body of water surrounded by a forest",
+      "crop": 1.7777777777777777,
+      "widths": [
+        480,
+        960,
+        1600
+      ],
+      "score": 2.885,
+      "chosenAt": "2026-09-14T14:41:35.533Z"
+    },
+    "gallery/comporta/1": {
+      "photoId": "KCUA1gLC3f8",
+      "photographer": "Bodega",
+      "username": "bodegasupply",
+      "htmlLink": "https://unsplash.com/photos/a-view-of-a-mountain-with-a-body-of-water-in-the-foreground-KCUA1gLC3f8",
+      "downloadLocation": "https://api.unsplash.com/photos/KCUA1gLC3f8/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1704658011928-3d6d256cc901?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw0fHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#264040",
+      "blurHash": "LuG9T~%Maeog~Wxuj]oL_4t7WAof",
+      "description": "a view of a mountain with a body of water in the foreground",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 2.623,
+      "chosenAt": "2026-09-14T14:41:35.534Z"
+    },
+    "gallery/comporta/2": {
+      "photoId": "o-SIKwKcLu0",
+      "photographer": "Bodega",
+      "username": "bodegasupply",
+      "htmlLink": "https://unsplash.com/photos/a-view-of-a-beach-with-a-boat-in-the-water-o-SIKwKcLu0",
+      "downloadLocation": "https://api.unsplash.com/photos/o-SIKwKcLu0/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1704658015193-22b7a420e97a?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwxfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#73a6c0",
+      "blurHash": "LWE:-[KQIUNbPEIU-Us:My-UNxNG",
+      "description": "a view of a beach with a boat in the water",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 0.941,
+      "chosenAt": "2026-09-14T14:41:35.534Z"
+    },
+    "gallery/comporta/3": {
+      "photoId": "9rdZqJBnepU",
+      "photographer": "Bodega",
+      "username": "bodegasupply",
+      "htmlLink": "https://unsplash.com/photos/a-barn-in-a-field-with-trees-in-the-background-9rdZqJBnepU",
+      "downloadLocation": "https://api.unsplash.com/photos/9rdZqJBnepU/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1704658014165-80b23ea363ab?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHwzfHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 5904,
+      "height": 3936,
+      "color": "#c0d9f3",
+      "blurHash": "L~J[uHxDazj@%%a|azoLWAs:f7fk",
+      "description": "a barn in a field with trees in the background",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 0.349,
+      "chosenAt": "2026-09-14T14:41:35.535Z"
+    },
+    "gallery/comporta/4": {
+      "photoId": "MaZBU81o7-U",
+      "photographer": "Bodega",
+      "username": "bodegasupply",
+      "htmlLink": "https://unsplash.com/photos/a-grassy-hill-with-trees-on-top-of-it-MaZBU81o7-U",
+      "downloadLocation": "https://api.unsplash.com/photos/MaZBU81o7-U/download?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA",
+      "rawUrl": "https://images.unsplash.com/photo-1704658010269-a196c01592c8?ixid=M3w5NzAwODZ8MHwxfHNlYXJjaHw1fHxQcmFpYSUyMGRhJTIwQ29tcG9ydGElMjBDb21wb3J0YSUyMFBvcnR1Z2FsfGVufDF8MHx8fDE3ODkzOTYzNDd8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "color": "#d9d9f3",
+      "blurHash": "L~JkZpRjWBf6^-a{WVj[ogt7fQfk",
+      "description": "a grassy hill with trees on top of it",
+      "crop": 1.3333333333333333,
+      "widths": [
+        480,
+        960
+      ],
+      "score": 0.149,
+      "chosenAt": "2026-09-14T14:41:35.535Z"
+    }
+  }
 }

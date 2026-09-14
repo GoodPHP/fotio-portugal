@@ -27,4 +27,1513 @@ export interface ImageSlot {
  * silently answers "nothing" on a Worker, which is how galleries came back
  * empty on exactly the pages Next chose not to prerender.
  */
-export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = {};
+export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = {
+  "cities/lisboa": {
+    "width": 1600,
+    "height": 900,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/cities/lisboa-480.4c503325.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/lisboa-960.1c7b233e.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/lisboa-1600.1e195152.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/lisboa-480.8cb90851.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/lisboa-960.f325bce9.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/lisboa-1600.bdb505e4.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/lisboa-og.jpg"
+  },
+  "gallery/lisboa/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0a6a6",
+    "avif": [
+      {
+        "path": "/images/gallery/lisboa/1-480.be2d9c51.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/1-960.dc855732.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/lisboa/1-480.607d9aa5.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/1-960.a1d39b6d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/lisboa/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/gallery/lisboa/2-480.b9e6d8b0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/2-960.a53412a2.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/lisboa/2-480.fb0eae63.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/2-960.761c43f3.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/lisboa/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/gallery/lisboa/3-480.54ee942d.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/3-960.d2201194.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/lisboa/3-480.c6b7e186.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/3-960.d93835b7.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/lisboa/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#d9c0c0",
+    "avif": [
+      {
+        "path": "/images/gallery/lisboa/4-480.06f8fe7f.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/4-960.ac1a9640.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/lisboa/4-480.21bfad16.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/lisboa/4-960.7ce10ff2.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/porto": {
+    "width": 1600,
+    "height": 900,
+    "color": "#0ca6f3",
+    "avif": [
+      {
+        "path": "/images/cities/porto-480.77c8e918.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/porto-960.db7f2dfb.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/porto-1600.55a02b4a.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/porto-480.79bf0dd3.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/porto-960.224d7226.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/porto-1600.f315ee0a.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/porto-og.jpg"
+  },
+  "gallery/porto/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#595959",
+    "avif": [
+      {
+        "path": "/images/gallery/porto/1-480.df30daec.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/1-960.0e5f20cb.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/porto/1-480.ad9cb73e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/1-960.efb68cfa.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/porto/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#0c4059",
+    "avif": [
+      {
+        "path": "/images/gallery/porto/2-480.5159ebbd.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/2-960.11baa861.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/porto/2-480.b992ea5a.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/2-960.99f00b7a.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/porto/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/porto/3-480.78e73d90.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/3-960.012d9078.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/porto/3-480.798cc35d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/3-960.6d8a75b6.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/porto/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6d9",
+    "avif": [
+      {
+        "path": "/images/gallery/porto/4-480.060d4ecd.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/4-960.48ec33d0.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/porto/4-480.4a76e168.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/porto/4-960.90af168c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/cascais": {
+    "width": 1600,
+    "height": 900,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/cities/cascais-480.cfbbe470.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/cascais-960.bc7a41a3.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/cascais-1600.91701dfa.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/cascais-480.3a79c99d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/cascais-960.40561cc2.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/cascais-1600.ff0c4763.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/cascais-og.jpg"
+  },
+  "gallery/cascais/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0d9f3",
+    "avif": [
+      {
+        "path": "/images/gallery/cascais/1-480.45818574.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/1-960.8b3077fa.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/cascais/1-480.21c25d30.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/1-960.6b01fe35.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/cascais/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/gallery/cascais/2-480.2f58a288.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/2-960.819f178f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/cascais/2-480.6238cccd.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/2-960.0bf8ac49.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/cascais/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#8c8c8c",
+    "avif": [
+      {
+        "path": "/images/gallery/cascais/3-480.18b12230.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/3-960.f1ad0fe0.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/cascais/3-480.56f33c8b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/3-960.27d310b7.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/cascais/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#0c4073",
+    "avif": [
+      {
+        "path": "/images/gallery/cascais/4-480.349296c2.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/4-960.7dab5630.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/cascais/4-480.4fe7ff26.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/cascais/4-960.5e1c5098.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/braga": {
+    "width": 1600,
+    "height": 900,
+    "color": "#a6c0d9",
+    "avif": [
+      {
+        "path": "/images/cities/braga-480.71472841.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/braga-960.5e3ebbb3.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/braga-1600.6e04ccb5.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/braga-480.39f0fb0a.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/braga-960.3023a288.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/braga-1600.e74460da.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/braga-og.jpg"
+  },
+  "gallery/braga/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#404040",
+    "avif": [
+      {
+        "path": "/images/gallery/braga/1-480.26929e24.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/1-960.7adfb3a7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/braga/1-480.4d6eff29.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/1-960.7fad18a2.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/braga/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6a6",
+    "avif": [
+      {
+        "path": "/images/gallery/braga/2-480.27b09cee.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/2-960.150bdb28.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/braga/2-480.285180c2.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/2-960.0add1ed5.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/braga/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0a68c",
+    "avif": [
+      {
+        "path": "/images/gallery/braga/3-480.12bd1a7e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/3-960.b31e0f33.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/braga/3-480.32708a03.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/3-960.9d3ee3dc.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/braga/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/gallery/braga/4-480.982efe5a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/4-960.ed14b3da.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/braga/4-480.7c0ddff8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/braga/4-960.21f2cd92.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/coimbra": {
+    "width": 1600,
+    "height": 900,
+    "color": "#0c40a6",
+    "avif": [
+      {
+        "path": "/images/cities/coimbra-480.4591ba66.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/coimbra-960.dbb77c5c.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/coimbra-1600.8a2f2bda.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/coimbra-480.e917cc1f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/coimbra-960.4a494604.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/coimbra-1600.0257332a.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/coimbra-og.jpg"
+  },
+  "gallery/coimbra/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#a6c0d9",
+    "avif": [
+      {
+        "path": "/images/gallery/coimbra/1-480.2aa48124.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/1-960.df908dc2.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/coimbra/1-480.36aa8b00.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/1-960.196b6e1b.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/coimbra/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/gallery/coimbra/2-480.b05d89f8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/2-960.16373477.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/coimbra/2-480.2b34d6af.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/2-960.2320e5e4.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/coimbra/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/gallery/coimbra/3-480.52ddeeed.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/3-960.16576dae.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/coimbra/3-480.4f68b616.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/3-960.1f1df9ca.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/coimbra/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#735940",
+    "avif": [
+      {
+        "path": "/images/gallery/coimbra/4-480.2a0ac1c7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/4-960.a0d26183.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/coimbra/4-480.50a04dfb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/coimbra/4-960.56e50cef.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/evora": {
+    "width": 1600,
+    "height": 900,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/cities/evora-480.84c86ad8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/evora-960.53afbf29.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/evora-1600.e130ff17.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/evora-480.a037d8e8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/evora-960.3e83a153.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/evora-1600.3098e357.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/evora-og.jpg"
+  },
+  "gallery/evora/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/gallery/evora/1-480.5e20c444.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/1-960.598ed90b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/evora/1-480.13447b66.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/1-960.b317b123.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/evora/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/evora/2-480.bbac7024.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/2-960.b87752b7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/evora/2-480.44286f2b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/2-960.9325a397.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/evora/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/evora/3-480.448ffaa1.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/3-960.970596d0.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/evora/3-480.f04e7ad5.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/3-960.09699c6f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/evora/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6d9",
+    "avif": [
+      {
+        "path": "/images/gallery/evora/4-480.ef4fef25.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/4-960.e3cb026b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/evora/4-480.0a7da585.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/evora/4-960.b4f64b25.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/sintra": {
+    "width": 1600,
+    "height": 900,
+    "color": "#c0c0d9",
+    "avif": [
+      {
+        "path": "/images/cities/sintra-480.afd3795b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/sintra-960.3c4de7d2.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/sintra-1600.36723ed0.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/sintra-480.4ff3c5fc.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/sintra-960.76e65300.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/sintra-1600.be14deab.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/sintra-og.jpg"
+  },
+  "cities/algarve": {
+    "width": 1600,
+    "height": 900,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/cities/algarve-480.18c6838b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/algarve-960.c2524448.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/algarve-1600.ae9e1021.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/algarve-480.c5ee08ff.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/algarve-960.8f8acbfc.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/algarve-1600.bf072f64.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/algarve-og.jpg"
+  },
+  "gallery/algarve/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/gallery/algarve/1-480.33e570bf.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/1-960.96eead93.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/algarve/1-480.64baf4d7.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/1-960.aaf896b8.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/algarve/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/algarve/2-480.36440759.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/2-960.5c8ea02f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/algarve/2-480.191154ed.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/2-960.2b528172.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/algarve/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6d9",
+    "avif": [
+      {
+        "path": "/images/gallery/algarve/3-480.22bd4eea.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/3-960.64285761.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/algarve/3-480.8936b452.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/3-960.3ba2482d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/algarve/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6d9",
+    "avif": [
+      {
+        "path": "/images/gallery/algarve/4-480.9bd247c7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/4-960.292cb7fc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/algarve/4-480.3e482208.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/algarve/4-960.b400b045.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/madeira": {
+    "width": 1600,
+    "height": 900,
+    "color": "#8cc0d9",
+    "avif": [
+      {
+        "path": "/images/cities/madeira-480.50158235.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/madeira-960.e0b321e1.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/madeira-1600.1460bfdf.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/madeira-480.1a18c57f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/madeira-960.91c7ab3f.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/madeira-1600.400c911a.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/madeira-og.jpg"
+  },
+  "gallery/madeira/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/gallery/madeira/1-480.a18c1866.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/1-960.05817dd8.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/madeira/1-480.e807337b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/1-960.8336645d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/madeira/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/gallery/madeira/2-480.afca8868.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/2-960.a1feab28.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/madeira/2-480.99a379d7.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/2-960.976ae42c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/madeira/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#595973",
+    "avif": [
+      {
+        "path": "/images/gallery/madeira/3-480.f84e094b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/3-960.39b45260.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/madeira/3-480.e4183172.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/3-960.ed305394.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/madeira/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0d9f3",
+    "avif": [
+      {
+        "path": "/images/gallery/madeira/4-480.111017da.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/4-960.91850bc5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/madeira/4-480.a254265c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/madeira/4-960.dd9cbe06.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/acores": {
+    "width": 1600,
+    "height": 900,
+    "color": "#a6c0c0",
+    "avif": [
+      {
+        "path": "/images/cities/acores-480.0b2fe88c.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/acores-960.54c7821e.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/acores-1600.6c331798.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/acores-480.f6e5ba82.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/acores-960.9333db5b.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/acores-1600.f61a6b22.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/acores-og.jpg"
+  },
+  "gallery/acores/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/gallery/acores/1-480.d7537389.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/1-960.076b7ba4.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/acores/1-480.94b4832d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/1-960.2d6a2c19.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/acores/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/acores/2-480.afa6b028.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/2-960.5c35dfd1.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/acores/2-480.826e17ce.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/2-960.ac5bfa12.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/acores/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#404026",
+    "avif": [
+      {
+        "path": "/images/gallery/acores/3-480.b73f3f39.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/3-960.aa5c5c1c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/acores/3-480.98aa5968.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/3-960.b01f3934.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/acores/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#8c8c8c",
+    "avif": [
+      {
+        "path": "/images/gallery/acores/4-480.7f882da6.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/4-960.2670b1cc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/acores/4-480.a4d55a08.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/acores/4-960.8d123278.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/douro": {
+    "width": 1600,
+    "height": 900,
+    "color": "#737359",
+    "avif": [
+      {
+        "path": "/images/cities/douro-480.5a8f22e4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/douro-960.6c65ebd8.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/douro-1600.39e9e523.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/douro-480.d7d5f76d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/douro-960.f13d646a.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/douro-1600.a123471e.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/douro-og.jpg"
+  },
+  "gallery/douro/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/gallery/douro/1-480.e1347bd7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/1-960.8ebe886f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/douro/1-480.441be00b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/1-960.df472658.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/douro/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0d9f3",
+    "avif": [
+      {
+        "path": "/images/gallery/douro/2-480.fd1c84a5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/2-960.59e9390c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/douro/2-480.85b1967c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/2-960.60ac24e5.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/douro/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#405973",
+    "avif": [
+      {
+        "path": "/images/gallery/douro/3-480.e22aff67.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/3-960.b5200785.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/douro/3-480.b1e87e38.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/3-960.3c2852c5.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/douro/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#404040",
+    "avif": [
+      {
+        "path": "/images/gallery/douro/4-480.c1b8fc92.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/4-960.e92c17af.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/douro/4-480.0446a602.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/douro/4-960.c5c1e020.webp",
+        "width": 960
+      }
+    ]
+  },
+  "cities/comporta": {
+    "width": 1600,
+    "height": 900,
+    "color": "#8cc0d9",
+    "avif": [
+      {
+        "path": "/images/cities/comporta-480.12b35657.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/comporta-960.aacb73c2.avif",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/comporta-1600.f9da55ff.avif",
+        "width": 1600
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/cities/comporta-480.e1b56982.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/cities/comporta-960.5c3fce91.webp",
+        "width": 960
+      },
+      {
+        "path": "/images/cities/comporta-1600.066a199c.webp",
+        "width": 1600
+      }
+    ],
+    "og": "/images/cities/comporta-og.jpg"
+  },
+  "gallery/comporta/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#264040",
+    "avif": [
+      {
+        "path": "/images/gallery/comporta/1-480.603b3615.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/1-960.ab93be0b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/comporta/1-480.74cdd860.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/1-960.91e69fc1.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/comporta/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#73a6c0",
+    "avif": [
+      {
+        "path": "/images/gallery/comporta/2-480.5781ef03.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/2-960.5662adc9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/comporta/2-480.b56a9f14.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/2-960.49602b48.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/comporta/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#c0d9f3",
+    "avif": [
+      {
+        "path": "/images/gallery/comporta/3-480.c309ed74.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/3-960.036344b9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/comporta/3-480.6385b4cd.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/3-960.be5345c8.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/comporta/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#d9d9f3",
+    "avif": [
+      {
+        "path": "/images/gallery/comporta/4-480.366636ee.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/4-960.dbc00f4c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/comporta/4-480.93b7a925.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/comporta/4-960.542d80ab.webp",
+        "width": 960
+      }
+    ]
+  }
+};

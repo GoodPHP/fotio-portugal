@@ -53,10 +53,16 @@ function loadManifest(): Manifest {
   return JSON.parse(readFileSync(MANIFEST, 'utf8')) as Manifest;
 }
 
+interface Candidate {
+  photo: UnsplashPhoto;
+  rank: number;
+  ordering: (typeof ORDERINGS)[number];
+}
+
 /** Candidates for a slot, across both orderings of each of its queries. */
-function candidates(slot: Slot): { photo: UnsplashPhoto; rank: number }[] {
+function candidates(slot: Slot): Candidate[] {
   const orientation = slot.crop < 1 ? 'portrait' : 'landscape';
-  const out: { photo: UnsplashPhoto; rank: number }[] = [];
+  const out: Candidate[] = [];
   const seen = new Set<string>();
   for (const query of slot.queries) {
     for (const orderBy of ORDERINGS) {
@@ -65,11 +71,37 @@ function candidates(slot: Slot): { photo: UnsplashPhoto; rank: number }[] {
       cached.results.forEach((photo, index) => {
         if (seen.has(photo.id)) return;
         seen.add(photo.id);
-        out.push({ photo, rank: index + 1 });
+        out.push({ photo, rank: index + 1, ordering: orderBy });
       });
     }
   }
   return out;
+}
+
+/** Lower-case and strip diacritics, so "Évora" matches "evora". */
+function fold(text: string): string {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+/**
+ * Evidence that a photograph is actually of the place the slot is about.
+ *
+ * Unsplash matches a long query loosely, so "Escadório do Bom Jesus do Monte
+ * Braga Portugal" happily returns a photograph of Lisbon and "Paço das Escolas
+ * Coimbra Portugal" returns a beach. Without this check the first run put
+ * Lisbon on the Braga page and an Algarve beach on Coimbra's — which is worse
+ * than a generic photograph, because it is a wrong one.
+ *
+ * The search endpoint returns no tags or location, so the only evidence
+ * available is the description. That is weak evidence, which is why this is a
+ * strong preference rather than a filter: a good photograph with a silent
+ * description should still be able to win.
+ */
+function placeMatch(photo: UnsplashPhoto, slot: Slot): number {
+  if (slot.matchTokens.length === 0) return 0;
+  const text = fold(`${photo.alt_description ?? ''} ${photo.description ?? ''}`);
+  if (!text.trim()) return 0;
+  return slot.matchTokens.some((token) => text.includes(fold(token))) ? 1 : 0;
 }
 
 /** How close the source is to what the slot needs, 0 to 1. */
@@ -89,19 +121,53 @@ function recency(photo: UnsplashPhoto): number {
 }
 
 /**
- * The anti-ubiquity term is the whole point.
+ * Popularity, as a band rather than a penalty.
  *
- * A tram photograph with twelve thousand likes is the one on every competitor's
- * homepage. Subtracting log10(likes) lets a well-composed photograph with a
- * hundred and eighty beat it, which is the difference between a site that looks
- * researched and one that looks scraped.
+ * The first version of this simply subtracted log10(likes), and measuring the
+ * result showed it had overshot badly: the median chosen photograph had zero
+ * likes against twenty-three for a naive results[0] pipeline. That is not
+ * avoiding the photograph everyone has, it is picking the worst frame in the
+ * result set — on Unsplash a photograph nobody has ever liked is usually one
+ * nobody should.
+ *
+ * So the term rewards being known a little and penalises being famous. Below
+ * about twenty likes the reward ramps up; above about a hundred the penalty
+ * starts and grows with the logarithm. The sweet spot is a competent
+ * photograph that has not been downloaded ten thousand times — which is the
+ * actual goal, and is not the same thing as obscurity.
  */
-function score(photo: UnsplashPhoto, rank: number, slot: Slot, authorUses: number): number {
+const KNOWN_ENOUGH = 25;
+const TOO_FAMOUS = 2.0; // log10 — about a hundred likes.
+
+function popularity(photo: UnsplashPhoto): number {
+  const likes = Math.max(0, photo.likes);
+  const reward = 0.45 * (Math.min(likes, KNOWN_ENOUGH) / KNOWN_ENOUGH);
+  const penalty = 0.8 * Math.max(0, Math.log10(1 + likes) - TOO_FAMOUS);
+  return reward - penalty;
+}
+
+/**
+ * Rank only counts when the ordering was by relevance.
+ *
+ * The first version treated position 1 of an `order_by=latest` search as if it
+ * meant something, and it means only "uploaded most recently" — no relevance
+ * signal whatsoever. That is how a beach ended up on the Coimbra page: it was
+ * rank 1 of the recency pool and scored as if it were rank 1 of the relevance
+ * pool. The recency pool is a diversity source, so it gets a flat, modest
+ * value and has to win on the other terms.
+ */
+function rankValue(candidate: Candidate): number {
+  return candidate.ordering === 'relevant' ? 1.4 / Math.sqrt(candidate.rank) : 0.35;
+}
+
+function score(candidate: Candidate, slot: Slot, authorUses: number): number {
+  const { photo } = candidate;
   return (
-    1.0 * (1 / rank) +
-    0.6 * aspectFit(photo, slot) +
-    0.4 * recency(photo) -
-    0.8 * Math.log10(1 + photo.likes) -
+    rankValue(candidate) +
+    0.9 * aspectFit(photo, slot) +
+    0.9 * placeMatch(photo, slot) +
+    0.3 * recency(photo) +
+    popularity(photo) -
     1.5 * (authorUses >= MAX_PER_PHOTOGRAPHER_PER_GROUP ? 1 : 0)
   );
 }
@@ -143,12 +209,13 @@ function main(): void {
     }
 
     let best: { photo: UnsplashPhoto; value: number } | null = null;
-    for (const { photo, rank } of candidates(slot)) {
+    for (const candidate of candidates(slot)) {
+      const { photo } = candidate;
       if (assigned.has(photo.id)) continue;
       if (aspectFit(photo, slot) === 0) continue;
       const counts = authorsByGroup.get(slot.group);
       const authorUses = counts?.get(photo.user.username) ?? 0;
-      const value = score(photo, rank, slot, authorUses);
+      const value = score(candidate, slot, authorUses);
       if (!best || value > best.value) best = { photo, value };
     }
 

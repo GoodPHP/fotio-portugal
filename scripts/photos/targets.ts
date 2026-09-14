@@ -26,6 +26,12 @@ export interface Slot {
   queries: string[];
   /** Group within which one photographer may appear at most twice. */
   group: string;
+  /**
+   * Words that, appearing in a photograph's description, are evidence it is of
+   * the right place. Empty for a service slot, where there is no place to be
+   * wrong about.
+   */
+  matchTokens: string[];
 }
 
 const LANDSCAPE = 16 / 9;
@@ -83,6 +89,13 @@ export function allSlots(): Slot[] {
   for (const city of CITIES) {
     const spots = city.spots.map((s) => s.name);
     const queries = cityQueries(city.slug, city.name, spots);
+    // The place name, the region, and every distinctive word from a spot name.
+    const matchTokens = [
+      city.name,
+      city.nameLocalized?.en ?? city.name,
+      city.region.en,
+      ...spots.flatMap((name) => name.split(/[\s,]+/).filter((w) => w.length > 4)),
+    ];
 
     slots.push({
       key: `cities/${city.slug}`,
@@ -92,6 +105,7 @@ export function allSlots(): Slot[] {
       widths: [480, 960, 1600],
       queries,
       group: `city:${city.slug}`,
+      matchTokens,
     });
 
     for (let i = 1; i <= 4; i += 1) {
@@ -103,6 +117,7 @@ export function allSlots(): Slot[] {
         widths: [480, 960],
         queries,
         group: `city:${city.slug}`,
+        matchTokens,
       });
     }
   }
@@ -118,6 +133,7 @@ export function allSlots(): Slot[] {
       widths: [480, 960],
       queries,
       group: `service:${service.slug}`,
+      matchTokens: [],
     });
 
     for (let i = 1; i <= 5; i += 1) {
@@ -133,6 +149,7 @@ export function allSlots(): Slot[] {
         widths: [480, 960],
         queries,
         group: `service:${service.slug}`,
+        matchTokens: [],
       });
     }
   }
@@ -140,15 +157,36 @@ export function allSlots(): Slot[] {
   return slots;
 }
 
-/** Distinct search requests, so quota is spent once per query and not per slot. */
+/**
+ * Distinct search requests, so quota is spent once per query and not per slot.
+ *
+ * Ordered by how visible the slot is, because a demo key allows fifty requests
+ * an hour and the full set is nearly two hundred — so a first run is always a
+ * partial run. City heroes first, then the rest of each city, then services:
+ * that way an interrupted run leaves a site with photographs on the pages
+ * people actually land on rather than a scattering across the portfolio.
+ */
+const PRIORITY: Record<SlotKind, number> = {
+  'city-hero': 0,
+  'city-gallery': 1,
+  'service-card': 2,
+  portfolio: 3,
+};
+
 export function distinctQueries(): { query: string; orientation: 'landscape' | 'portrait' }[] {
-  const seen = new Map<string, 'landscape' | 'portrait'>();
+  const seen = new Map<string, { orientation: 'landscape' | 'portrait'; priority: number }>();
   for (const slot of allSlots()) {
-    for (const query of slot.queries) {
-      const orientation = slot.crop < 1 ? 'portrait' : 'landscape';
+    const orientation = slot.crop < 1 ? ('portrait' as const) : ('landscape' as const);
+    slot.queries.forEach((query, index) => {
       const key = `${query}::${orientation}`;
-      if (!seen.has(key)) seen.set(key, orientation);
-    }
+      // A query's rank within its slot matters too: the first is the specific
+      // one, and the fourth is the bare place name that returns the top 100.
+      const priority = PRIORITY[slot.kind] * 10 + index;
+      const existing = seen.get(key);
+      if (!existing || priority < existing.priority) seen.set(key, { orientation, priority });
+    });
   }
-  return [...seen].map(([key, orientation]) => ({ query: key.split('::')[0], orientation }));
+  return [...seen]
+    .sort((a, b) => a[1].priority - b[1].priority)
+    .map(([key, { orientation }]) => ({ query: key.split('::')[0], orientation }));
 }

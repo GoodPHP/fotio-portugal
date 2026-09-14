@@ -45,6 +45,35 @@ const OG = { width: 1200, height: 630, quality: 82 };
 const utm = (url: string): string =>
   `${url}${url.includes('?') ? '&' : '?'}utm_source=fotio&utm_medium=referral`;
 
+/**
+ * `fetch` with a short backoff.
+ *
+ * Downloading nearly two hundred photographs over a domestic connection means
+ * a transient failure is close to certain, and the first version of this script
+ * died on one — losing the work of every image before it. Three attempts and a
+ * widening pause turns that into a pause.
+ */
+async function fetchWithRetry(url: string, init?: RequestInit, attempts = 3): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await fetch(url, init);
+      if (response.ok) return response;
+      // 4xx other than 429 will not become ok by waiting.
+      if (response.status < 500 && response.status !== 429) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      lastError = new Error(`${response.status} ${response.statusText}`);
+    } catch (error) {
+      lastError = error;
+    }
+    if (attempt < attempts) {
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+}
+
 async function downloadSource(slot: SlotAssignment): Promise<Buffer> {
   mkdirSync(SOURCES, { recursive: true });
   const cached = join(SOURCES, `${slot.photoId}.jpg`);
@@ -59,8 +88,7 @@ async function downloadSource(slot: SlotAssignment): Promise<Buffer> {
   }
 
   const url = `${slot.rawUrl}&w=${SOURCE_WIDTH}&q=85&fm=jpg&fit=max`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`${response.status} downloading ${slot.photoId}`);
+  const response = await fetchWithRetry(url);
   const buffer = Buffer.from(await response.arrayBuffer());
   writeFileSync(cached, buffer);
   return buffer;
@@ -188,10 +216,18 @@ async function main(): Promise<void> {
 
   const credits: Record<string, unknown> = {};
   const rendered: Record<string, Rendered[]> = {};
+  const failed: { key: string; reason: string }[] = [];
   let done = 0;
 
   for (const [key, slot] of entries) {
-    rendered[key] = await renderSlot(key, slot);
+    try {
+      rendered[key] = await renderSlot(key, slot);
+    } catch (error) {
+      // One unreachable photograph is not a reason to discard the other 191.
+      // The slot simply stays out of the manifest and renders as a placeholder.
+      failed.push({ key, reason: error instanceof Error ? error.message : String(error) });
+      continue;
+    }
     credits[key] = {
       id: slot.photoId,
       description: slot.description,
@@ -222,9 +258,13 @@ async function main(): Promise<void> {
   writeImageManifest(manifest, rendered);
 
   console.log(
-    `[photos:fetch] ${entries.length} slots rendered, credits.json and` +
-      ' src/lib/data/image-manifest.ts written.',
+    `[photos:fetch] ${Object.keys(rendered).length}/${entries.length} slots rendered,` +
+      ' credits.json and src/lib/data/image-manifest.ts written.',
   );
+  if (failed.length > 0) {
+    console.log(`\n${failed.length} could not be downloaded — re-run to retry just these:`);
+    for (const { key, reason } of failed) console.log(`  ${key}: ${reason}`);
+  }
 }
 
 main().catch((error) => {
