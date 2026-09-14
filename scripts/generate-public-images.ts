@@ -14,7 +14,7 @@
  * The output is committed so a fresh clone typechecks; the build regenerates it,
  * and a diff means the images on disk changed without this being rerun.
  */
-import { readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const ROOT = process.cwd();
@@ -26,8 +26,16 @@ const IMAGE_PATTERN = /\.(jpe?g|png|webp|avif|svg)$/i;
 /** Matches `portfolioImages`: the gallery shows at most five per service. */
 const MAX_PORTFOLIO_IMAGES = 5;
 
-/** Every image file under `dir`, recursively, as paths relative to `public/`. */
+/**
+ * Every image file under `dir`, recursively, as paths relative to `public/`.
+ *
+ * A missing directory is an empty result rather than a crash: the image set is
+ * fetched by `scripts/photos/*` and is legitimately absent on a fresh clone,
+ * and the build has to reach `check-seo` — which reports the gap in terms of
+ * the pages affected — rather than die here on an ENOENT.
+ */
 function walk(dir: string): string[] {
+  if (!existsSync(dir)) return [];
   const found: string[] = [];
   for (const entry of readdirSync(dir)) {
     const abs = join(dir, entry);
@@ -49,6 +57,7 @@ function byNumber(a: string, b: string): number {
 
 function portfolioBySlug(): Record<string, string[]> {
   const bySlug: Record<string, string[]> = {};
+  if (!existsSync(PORTFOLIO_ROOT)) return bySlug;
   for (const slug of readdirSync(PORTFOLIO_ROOT).sort()) {
     const dir = join(PORTFOLIO_ROOT, slug);
     if (!statSync(dir).isDirectory()) continue;
