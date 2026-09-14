@@ -11,9 +11,9 @@ import { absoluteUrl } from '@/lib/urls';
 import { LOCALES, DEFAULT_LOCALE, tx, type Locale } from '@/lib/locales';
 import { pathnames, type AppPathname } from '@/i18n/pathnames';
 
-// Refresh hourly so the index tracks the drip-publish schedule rather than
-// freezing the city and service lists at build time.
-export const revalidate = 3600;
+// Generated at build time, like the sitemap it sits beside. The two describe
+// the same catalogue and must not be able to drift apart by an hour.
+export const dynamic = 'force-static';
 
 /**
  * /llms.txt — a plain-text index for AI answer engines.

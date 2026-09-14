@@ -15,14 +15,19 @@ import { CURATED_LEAVES } from './curated';
  *   ROLLOUT_ENABLED      'true' forces gating on, 'false' forces it off.
  *                        Unset → on in production, off elsewhere (dev/preview
  *                        always show every page).
- *   ROLLOUT_START        ISO date the drip begins (default 2026-09-08, UTC).
- *                        Set this to the actual deploy date: the default is the
- *                        date the French content landed, so leaving it unset on
- *                        a later deploy releases everything at once.
+ *   ROLLOUT_START        ISO date the drip begins (default 2026-09-14, UTC).
+ *                        Set this to the actual launch date. The default is
+ *                        the date the Portuguese catalogue landed, so leaving
+ *                        it unset on a later deploy releases a larger share on
+ *                        day one than intended.
  *   ROLLOUT_WINDOW_DAYS  Days over which all pages release (default 45).
+ *
+ * Since every route became `force-static`, the drip releases its next batch on
+ * the next build rather than on the next revalidation — so a daily scheduled
+ * rebuild is what keeps it moving.
  */
 
-const DEFAULT_START = '2026-09-08';
+const DEFAULT_START = '2026-09-14';
 const DEFAULT_WINDOW_DAYS = 45;
 const DAY_MS = 24 * 60 * 60 * 1000;
 

@@ -16,7 +16,17 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  /*
+   * Not actually monospace any more, and the name is kept because ~30 call
+   * sites use the utility it generates.
+   *
+   * Every use of it on this site is a small letterspaced uppercase label or a
+   * counter — decoration, never code. That was costing a third font family,
+   * roughly 30 KB, for a look Inter produces at 11px with the same tracking.
+   * Where digits have to line up, `font-variant-numeric: tabular-nums` does the
+   * one job the monospace face was genuinely needed for.
+   */
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /* Ground and ink. Warm rather than neutral — paper, not screen. */
   --color-brand-sand: #F7F4EE;
@@ -85,7 +95,17 @@ body {
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
   color: var(--color-brand-orange-deep);
+}
+
+/*
+ * Anything using the label face gets lining, fixed-width figures. Without it a
+ * counter like "3 / 12" shifts by a pixel or two as it counts, which is the
+ * one thing the monospace family was doing that Inter does not do by default.
+ */
+.font-mono {
+  font-variant-numeric: tabular-nums;
 }
 
 /* A hairline that spans the measure. Replaces the top edge of a card. */

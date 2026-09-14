@@ -38,9 +38,10 @@ function formatDate(date: string, locale: Locale): string {
   }
 }
 
-// Re-render via ISR so a post prerendered as 404 (before its drip slot) flips
-// live within ~1h of its scheduled publish time.
-export const revalidate = 3600;
+// Fully prerendered — see the note on the leaf route. Releasing the next batch
+// of drip-published pages is a rebuild, not a revalidation.
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 // Prerender only currently-published posts; the rest render on demand once
 // their slot passes (dynamicParams defaults to true).

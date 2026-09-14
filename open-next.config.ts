@@ -1,6 +1,5 @@
 import { defineCloudflareConfig } from '@opennextjs/cloudflare';
 import staticAssetsIncrementalCache from '@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache';
-import doQueue from '@opennextjs/cloudflare/overrides/queue/do-queue';
 
 /**
  * OpenNext adapter configuration for Cloudflare Workers.
@@ -11,11 +10,10 @@ import doQueue from '@opennextjs/cloudflare/overrides/queue/do-queue';
  *   - Nothing here is fetched from anywhere. Every page is built from data in
  *     this repository, so a revalidated page renders exactly what the deployed
  *     build already contains. There is nothing for a writable cache to catch.
- *   - The 45-day drip does not need it. `publishedCuratedLeafParams` prerenders
- *     only released leaves; the rest are absent from `generateStaticParams`, so
- *     with `dynamicParams: true` they render on demand and `isLeafPublished`
- *     decides at request time. A leaf goes live when its slot passes, cache or
- *     no cache.
+ *   - Nothing revalidates at all any more. Every route is `force-static` with
+ *     `dynamicParams: false`, so the full published matrix is prerendered and
+ *     anything outside it is a 404 rather than an on-demand render. The drip
+ *     releases its next batch on the next build.
  *
  * KV was the previous choice and it did not survive contact with reality: every
  * `opennextjs-cloudflare deploy` writes the whole cache to it — 165 entries, and
@@ -26,5 +24,4 @@ import doQueue from '@opennextjs/cloudflare/overrides/queue/do-queue';
  */
 export default defineCloudflareConfig({
   incrementalCache: staticAssetsIncrementalCache,
-  queue: doQueue,
 });

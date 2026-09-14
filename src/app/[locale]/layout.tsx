@@ -3,11 +3,10 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
-import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { Inter, Fraunces } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales';
-import { GA_MEASUREMENT_ID, HTML_LANG, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
+import { CF_ANALYTICS_TOKEN, HTML_LANG, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
 import { graph, organizationNode, websiteNode } from '@/lib/jsonld';
 import JsonLd from '@/components/JsonLd';
 import NavBar from '@/components/NavBar';
@@ -15,7 +14,6 @@ import Footer from '@/components/Footer';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', display: 'swap' });
 /* The display face for the whole site. */
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -49,7 +47,7 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const fontVars = `${inter.variable} ${jetbrains.variable} ${fraunces.variable}`;
+  const fontVars = `${inter.variable} ${fraunces.variable}`;
 
   return (
     <html lang={HTML_LANG[locale as Locale]} className={fontVars}>
@@ -78,7 +76,18 @@ export default async function LocaleLayout({
           <div className="flex-1">{children}</div>
           <Footer />
         </NextIntlClientProvider>
-        {GA_MEASUREMENT_ID ? <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
+        {/*
+          Cloudflare Web Analytics: one deferred request, no cookies, no
+          consent banner. Rendered as a plain script tag rather than through a
+          component so nothing about it is deferred to a third-party wrapper.
+        */}
+        {CF_ANALYTICS_TOKEN ? (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+          />
+        ) : null}
       </body>
     </html>
   );

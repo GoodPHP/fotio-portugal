@@ -1,11 +1,22 @@
-# Cache headers for Workers Static Assets. Next fingerprints everything under
-# /_next/static, so those files can be cached forever; the photography under
-# /images is stable but replaceable, so it gets a day with revalidation.
+# Cache headers for Workers Static Assets.
+
+# Next fingerprints everything under /_next/static, so it can be cached forever.
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Photography is stable but replaceable, and the filenames are not yet content
+# hashed. A day with a week of stale-while-revalidate means a reader almost
+# never waits for one, and a replaced image is live within a day.
 /images/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Build artifacts describing the catalogue. They change when the site is
+# rebuilt, which the drip schedule makes a daily event.
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/og-default.png
+  Cache-Control: public, max-age=31536000, immutable

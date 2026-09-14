@@ -33,31 +33,9 @@
 		{ "pattern": "fotio.pt", "zone_name": "fotio.pt", "custom_domain": true },
 		{ "pattern": "www.fotio.pt", "zone_name": "fotio.pt", "custom_domain": true }
 	],
-	// The worker calls itself for ISR revalidation.
-	"services": [
-		{
-			"binding": "WORKER_SELF_REFERENCE",
-			"service": "fotio-portugal"
-		}
-	],
-	// Revalidation queue. SQLite-backed, so it needs the new_sqlite_classes
-	// migration below.
-	"durable_objects": {
-		"bindings": [
-			{
-				"name": "NEXT_CACHE_DO_QUEUE",
-				"class_name": "DOQueueHandler"
-			}
-		]
-	},
-	"migrations": [
-		{
-			"tag": "v1",
-			"new_sqlite_classes": [
-				"DOQueueHandler"
-			]
-		}
-	],
+	// No self-reference binding and no revalidation queue: every page is
+	// prerendered and nothing revalidates, so the Durable Object that used to
+	// carry the queue existed only to be warned about on every build.
 	// next/image runs through Cloudflare's image service.
 	"images": {
 		"binding": "IMAGES"

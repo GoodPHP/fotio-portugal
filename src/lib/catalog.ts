@@ -231,6 +231,32 @@ export function publishedCuratedLeafParams(locale: Locale, now?: Date): LeafPara
   return params;
 }
 
+/**
+ * Every published leaf for one locale, curated or not, as route params.
+ *
+ * This is the prerender list, and it is deliberately wider than the curated
+ * set. `isLeafPublished` returns true for any combination not in the drip
+ * schedule, and only curated leaves are scheduled — so `publishedServicesForCity`
+ * already links to uncurated leaves from every city page. Prerendering only the
+ * curated ones and then refusing to render anything else would 404 the site's
+ * own internal links.
+ *
+ * Curation still does its actual job: it decides `noindex` and membership of
+ * the sitemap. It is not a prerender list and conflating the two is what made
+ * ISR look necessary.
+ */
+export function publishedLeafParams(locale: Locale, now?: Date): LeafParam[] {
+  const params: LeafParam[] = [];
+  for (const service of SERVICES) {
+    if (!serviceExistsIn(service, locale)) continue;
+    for (const city of CITIES) {
+      if (!isLeafPublished(service.slug, city.slug, now)) continue;
+      params.push({ service: serviceSlug(service, locale), city: city.slug });
+    }
+  }
+  return params;
+}
+
 /** Curated, published leaves for one locale, as stable ids. */
 export function publishedCuratedLeaves(
   locale: Locale,
