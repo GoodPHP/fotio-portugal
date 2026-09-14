@@ -25,6 +25,7 @@ export default async function Footer() {
     terms: { en: 'Terms of sale', pt: 'Termos e condições' }[locale],
     imageRights: { en: 'Image rights', pt: 'Direito à imagem' }[locale],
     photoCredits: { en: 'Photo credits', pt: 'Créditos fotográficos' }[locale],
+    complaints: { en: 'Complaints book', pt: 'Livro de reclamações' }[locale],
     whatsapp: { en: 'Message us on WhatsApp', pt: 'Escreva-nos no WhatsApp' }[locale],
     rights: { en: 'All rights reserved.', pt: 'Todos os direitos reservados.' }[locale],
   };
@@ -153,6 +154,18 @@ export default async function Footer() {
               <li>
                 <Link href="/legal/photo-credits" className="text-brand-muted transition-colors hover:text-brand-orange-deep">
                   {labels.photoCredits}
+                </Link>
+              </li>
+              {/*
+                Not optional. A provider of services to consumers in Portugal
+                must make the electronic complaints book available, and the
+                link belongs on every page rather than inside a document
+                nobody opens. An e2e test asserts it is here, because this is
+                exactly the kind of thing a footer refactor drops silently.
+              */}
+              <li>
+                <Link href="/legal/complaints" className="text-brand-muted transition-colors hover:text-brand-orange-deep">
+                  {labels.complaints}
                 </Link>
               </li>
             </ul>
