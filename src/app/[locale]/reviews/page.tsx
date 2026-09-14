@@ -5,7 +5,7 @@ import { REVIEWS, getAggregateRating } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode, aggregateRatingWithReviewsNodes } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
-import { serviceImage, absoluteOgImage } from '@/lib/images';
+import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { OG_IMAGE_ALT, SEO_PROSE, metaTitle, metaDescription, seoFacts } from './content';
@@ -60,7 +60,7 @@ export async function generateMetadata({
     route: '/reviews',
     title: metaTitle(locale, ratingValue, reviewCount),
     description: metaDescription(locale, ratingValue, reviewCount),
-    ogImage: serviceImage(OG_SERVICE_SLUG),
+    ogImage: ogImagePath(serviceSlot(OG_SERVICE_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -83,7 +83,7 @@ export default async function ReviewsPage({
       description: metaDescription(locale, ratingValue, reviewCount),
       locale,
       type: 'CollectionPage',
-      image: absoluteOgImage(serviceImage(OG_SERVICE_SLUG)),
+      image: absoluteOgImage(ogImagePath(serviceSlot(OG_SERVICE_SLUG))),
     }),
     ...aggregateRatingWithReviewsNodes(
       ratingValue,

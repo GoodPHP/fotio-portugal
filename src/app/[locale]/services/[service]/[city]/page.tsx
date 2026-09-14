@@ -17,7 +17,7 @@ import { type Locale, isLocale, tx } from '@/lib/locales';
 import { SITE_NAME, formatPrice, formatDuration, whatsappLink } from '@/lib/site';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
-import { serviceImage, cityImage, absoluteOgImage } from '@/lib/images';
+import { serviceSlot, citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { generateProgrammaticContent, getSeoMetadata } from '@/lib/content';
 import {  graph,
   professionalServiceNode,
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: LeafPageProps): Promise<Metad
     noindex: !isCuratedLeaf(service.slug, city.slug, locale),
     title,
     description,
-    ogImage: serviceImage(service.slug),
+    ogImage: ogImagePath(serviceSlot(service.slug)),
     ogImageAlt: `${tx(service.name, locale)} · ${city.name}`,
   });
 }
@@ -176,7 +176,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       name: metaTitle,
       description: metaDescription,
       locale,
-      image: absoluteOgImage(serviceImage(service.slug)),
+      image: absoluteOgImage(ogImagePath(serviceSlot(service.slug))),
     }),
     professionalServiceNode({
       citySlug: city.slug,
@@ -186,7 +186,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       url,
       // Same coverage claim as the city page makes, so the two agree.
       coveredAreas: city.coveredAreas,
-      image: absoluteOgImage(cityImage(city.slug)),
+      image: absoluteOgImage(ogImagePath(citySlot(city.slug))),
     }),
     serviceOfferNode({
       serviceSlug: service.slug,

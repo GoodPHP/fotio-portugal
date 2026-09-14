@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import {
@@ -14,7 +14,7 @@ import { isCityPublished } from '@/lib/publishSchedule';
 import type { City } from '@/lib/types';
 import { type Locale, tx } from '@/lib/locales';
 import { SITE_NAME, formatPrice } from '@/lib/site';
-import { cityImage, absoluteOgImage } from '@/lib/images';
+import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import {
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     alternates: cityAlternateParams(city),
     title: cityMetaTitle(city, locale),
     description: cityMetaDescription(city, locale),
-    ogImage: cityImage(city.slug),
+    ogImage: ogImagePath(citySlot(city.slug)),
     ogImageAlt: cityOgImageAlt(city, locale),
   });
 }
@@ -179,7 +179,7 @@ export default async function CityPage({ params }: CityPageProps) {
       description: cityMetaDescription(city, locale),
       locale,
       type: 'CollectionPage',
-      image: absoluteOgImage(cityImage(city.slug)),
+      image: absoluteOgImage(ogImagePath(citySlot(city.slug))),
       mainEntityId: servicesListId,
     }),
     professionalServiceNode({
@@ -191,7 +191,7 @@ export default async function CityPage({ params }: CityPageProps) {
       // The communes are covered but have no pages, so this is the only place
       // the coverage is stated in a machine-readable form.
       coveredAreas: city.coveredAreas,
-      image: absoluteOgImage(cityImage(city.slug)),
+      image: absoluteOgImage(ogImagePath(citySlot(city.slug))),
       photos: (city.gallery ?? []).map((shot) => absoluteOgImage(shot.src)),
     }),
     // Built from `orderedServices`, the same array the section renders, so the
@@ -235,14 +235,13 @@ export default async function CityPage({ params }: CityPageProps) {
 
           <FadeIn instant className="mt-6">
             <div className="relative isolate flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-card p-8 text-white sm:min-h-[26rem] sm:p-12">
-              <Image
-                src={cityImage(city.slug)}
+              <Picture
+                slot={citySlot(city.slug)}
                 alt={heading}
-                fill
-                priority
-                fetchPriority="high"
                 sizes="(max-width: 1280px) 100vw, 1216px"
                 className="absolute inset-0 -z-10 object-cover"
+                fill
+                priority
               />
               <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/45 to-black/20" />
               <p className="font-mono text-xs uppercase tracking-widest text-brand-cream">{region}</p>
@@ -285,12 +284,12 @@ export default async function CityPage({ params }: CityPageProps) {
                 <StaggerItem key={shot.src} className={`col-span-1 ${span}`}>
                   <figure>
                     <div className={`relative overflow-hidden ${wide ? 'aspect-[3/2]' : 'aspect-[4/5]'}`}>
-                      <Image
-                        src={shot.src}
+                      <Picture
+                        slot={shot.src}
                         alt={tx(shot.alt, locale)}
-                        fill
                         sizes="(max-width: 1024px) 50vw, 40vw"
                         className="object-cover"
+                        fill
                       />
                     </div>
                     {shot.caption && (

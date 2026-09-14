@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { type Locale, tx } from '@/lib/locales';
@@ -122,13 +122,12 @@ export default async function BlogIndexPage({
               className="relative block aspect-[16/10] overflow-hidden sm:aspect-auto sm:w-2/5 sm:shrink-0"
               aria-label={tx(post.title, locale)}
             >
-              <Image
-                src={post.cover}
+              <Picture
+                slot={post.cover}
                 alt={tx(post.coverAlt, locale)}
-                fill
-                loading={i === 0 ? 'eager' : 'lazy'}
                 sizes="(max-width: 640px) 100vw, 40vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
               />
             </Link>
             <div className="p-7 sm:flex-1 sm:p-8">

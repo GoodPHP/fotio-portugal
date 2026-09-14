@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/lib/locales';
 import { formatPrice } from '@/lib/site';
-import { serviceImage } from '@/lib/images';
+import { serviceSlot } from '@/lib/images';
 import { serviceHrefBySlug } from '@/lib/routes';
 
 export interface ServiceFilterItem {
@@ -118,12 +118,12 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="relative aspect-[4/3] overflow-hidden rounded-card-sm">
-                  <Image
-                    src={serviceImage(s.slug)}
+                  <Picture
+                    slot={serviceSlot(s.slug)}
                     alt=""
-                    fill
                     sizes="96px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
                   />
                 </span>
                 <span className="min-w-0">

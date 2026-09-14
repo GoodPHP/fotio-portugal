@@ -36,10 +36,6 @@
 	// No self-reference binding and no revalidation queue: every page is
 	// prerendered and nothing revalidates, so the Durable Object that used to
 	// carry the queue existed only to be warned about on every build.
-	// next/image runs through Cloudflare's image service.
-	"images": {
-		"binding": "IMAGES"
-	},
 	"observability": {
 		"enabled": true
 	}

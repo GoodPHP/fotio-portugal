@@ -1,10 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/lib/locales';
-import { cityImage } from '@/lib/images';
+import { citySlot } from '@/lib/images';
 import { cityHrefBySlug } from '@/lib/routes';
 
 export interface CityFilterItem {
@@ -84,12 +84,12 @@ export default function CityFilter({ cities, locale }: CityFilterProps) {
                 href={cityHrefBySlug(c.slug)}
                 className="group relative isolate flex h-full min-h-56 flex-col justify-end overflow-hidden rounded-card border border-brand-rule p-6 text-white transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/60"
               >
-                <Image
-                  src={cityImage(c.slug)}
+                <Picture
+                  slot={citySlot(c.slug)}
                   alt={c.name}
-                  fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="absolute inset-0 -z-10 object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
                 />
                 <span
                   aria-hidden="true"

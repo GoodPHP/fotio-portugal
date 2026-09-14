@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { type Locale, tx } from '@/lib/locales';
@@ -21,7 +21,7 @@ import {
 } from '@/lib/jsonld';
 import { ORG_ID } from '@/lib/jsonld-ids';
 import { absoluteUrl } from '@/lib/urls';
-import { cityImage, serviceImage, absoluteOgImage } from '@/lib/images';
+import { citySlot, serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
@@ -55,7 +55,7 @@ export async function generateMetadata({
     route: '/about',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: cityImage(HERO_CITY),
+    ogImage: ogImagePath(citySlot(HERO_CITY)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -108,7 +108,7 @@ export default async function AboutPage({
         description: tx(META_DESCRIPTION, locale),
         locale,
         type: 'AboutPage',
-        image: absoluteOgImage(cityImage(HERO_CITY)),
+        image: absoluteOgImage(ogImagePath(citySlot(HERO_CITY))),
         mainEntityId: ORG_ID,
       }),
       about: { '@id': ORG_ID },
@@ -149,13 +149,13 @@ export default async function AboutPage({
 
         <FadeIn delay={0.1} className="mt-10">
           <div className="relative aspect-[2/1] w-full overflow-hidden rounded-card border border-brand-rule sm:aspect-[21/9]">
-            <Image
-              src={cityImage(HERO_CITY)}
+            <Picture
+              slot={citySlot(HERO_CITY)}
               alt="Paris"
-              fill
-              priority
               sizes="(max-width: 1280px) 100vw, 1216px"
               className="object-cover"
+              fill
+              priority
             />
             <span
               aria-hidden="true"
@@ -197,15 +197,15 @@ export default async function AboutPage({
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-brand-rule">
-              <Image
-                src={serviceImage(STORY_SERVICE)}
+              <Picture
+                slot={serviceSlot(STORY_SERVICE)}
                 alt={tx(
-                  { en: 'A couple during a photo session in France' },
-                  locale,
+                { en: 'A couple during a photo session in France' },
+                locale,
                 )}
-                fill
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover"
+                fill
               />
             </div>
           </FadeIn>
@@ -325,12 +325,12 @@ export default async function AboutPage({
                   href={cityHref(city)}
                   className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-5 text-white transition-all hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                 >
-                  <Image
-                    src={cityImage(city.slug)}
+                  <Picture
+                    slot={citySlot(city.slug)}
                     alt={city.name}
-                    fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="absolute inset-0 -z-10 object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
                   />
                   <span
                     aria-hidden="true"
@@ -374,12 +374,12 @@ export default async function AboutPage({
                 href="/services"
                 className="group relative isolate flex aspect-square flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-4 text-white transition-all hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
-                <Image
-                  src={serviceImage(services[0].slug)}
+                <Picture
+                  slot={serviceSlot(services[0].slug)}
                   alt={getCategoryLabel(category, locale)}
-                  fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                   className="absolute inset-0 -z-10 object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
                 />
                 <span
                   aria-hidden="true"

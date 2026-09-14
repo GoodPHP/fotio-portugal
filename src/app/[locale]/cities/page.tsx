@@ -5,7 +5,7 @@ import { publishedCities } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode, itemListNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
-import { cityImage, absoluteOgImage } from '@/lib/images';
+import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
@@ -41,7 +41,7 @@ export async function generateMetadata({
     route: '/cities',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: cityImage(OG_CITY_SLUG),
+    ogImage: ogImagePath(citySlot(OG_CITY_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -74,14 +74,14 @@ export default async function CitiesHubPage({
       description: tx(META_DESCRIPTION, locale),
       locale,
       type: 'CollectionPage',
-      image: absoluteOgImage(cityImage(OG_CITY_SLUG)),
+      image: absoluteOgImage(ogImagePath(citySlot(OG_CITY_SLUG))),
       mainEntityId: directoryId,
     }),
     itemListNode(
       cities.map((city) => ({
         name: city.name,
         url: absoluteUrl(locale, '/cities/[city]', { city: city.slug }),
-        image: absoluteOgImage(cityImage(city.slug)),
+        image: absoluteOgImage(ogImagePath(citySlot(city.slug))),
         description: city.blurb,
       })),
       { id: directoryId, name: tx(META_TITLE, locale) },

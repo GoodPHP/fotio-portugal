@@ -1,32 +1,33 @@
 /**
- * Per-service portfolio image paths.
+ * Per-service portfolio image slots.
  *
- * Portfolio galleries live under `public/images/portfolio/<service-slug>/<n>.jpg`
- * and are fetched (up to 5 per service) via `scripts/fetch-photos.py`; see
- * `public/images/credits.json` for attribution.
+ * A slot is `portfolio/<service-slug>/<n>`, and `<Picture>` turns it into the
+ * AVIF and WebP files rendered by `npm run photos:fetch`. Five per service.
  *
- * The paths come from `public-images.ts`, generated at build time, rather than
- * from a directory listing. Reading the filesystem here worked only while a page
- * was prerendered: on Cloudflare Workers there is no filesystem, so any page
- * rendered on demand got an empty list and dropped its gallery without an error
- * to show for it. A service with no photographs still yields an empty list and
- * the gallery block is skipped — never a broken image.
+ * The list comes from the generated image manifest rather than from a directory
+ * listing. Reading the filesystem here worked only while a page was
+ * prerendered: on Cloudflare Workers there is no filesystem, so any page
+ * rendered on demand got an empty list and dropped its gallery with no error to
+ * show for it. A service with no photographs yields an empty list and the
+ * gallery block is skipped — never a broken image.
  */
-import { PORTFOLIO_IMAGES } from './data/public-images';
+import { IMAGE_SLOTS } from './data/image-manifest';
 import { SERVICES } from './data';
 import type { ServiceCategory } from './types';
 
 const MAX_IMAGES = 5;
 
-/**
- * Public paths to a service's portfolio images, sorted by filename, capped at 5.
- * Returns an empty array if the service has no portfolio folder yet.
- */
+/** A service's portfolio slots, in order, capped at five. */
 export function portfolioImages(serviceSlug: string): string[] {
-  return [...(PORTFOLIO_IMAGES[serviceSlug] ?? [])];
+  const slots: string[] = [];
+  for (let i = 1; i <= MAX_IMAGES; i += 1) {
+    const slot = `portfolio/${serviceSlug}/${i}`;
+    if (slot in IMAGE_SLOTS) slots.push(slot);
+  }
+  return slots;
 }
 
-/** A single portfolio photo tagged with the service and category it belongs to. */
+/** A single portfolio photograph, tagged with the service it belongs to. */
 export interface PortfolioPhoto {
   src: string;
   category: ServiceCategory;
@@ -34,9 +35,9 @@ export interface PortfolioPhoto {
 }
 
 /**
- * Every available portfolio photo across all services, interleaved round-robin
- * by photo index so the unfiltered view mixes themes (one shot per service,
- * then the next from each) instead of grouping five-of-a-kind together.
+ * Every available portfolio photograph, interleaved round-robin by index so the
+ * unfiltered view mixes themes — one from each service, then the next — rather
+ * than grouping five-of-a-kind together.
  */
 export function allPortfolioImages(): PortfolioPhoto[] {
   const perService = SERVICES.map((service) => ({

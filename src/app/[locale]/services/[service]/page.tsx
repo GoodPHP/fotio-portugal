@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import {
@@ -14,7 +14,7 @@ import {
 import { isServicePublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
 import { SITE_NAME, formatPrice, formatDuration } from '@/lib/site';
-import { serviceImage, absoluteOgImage } from '@/lib/images';
+import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import {
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     alternates: serviceAlternateParams(service),
     title: serviceMetaTitle(service, name, locale),
     description: serviceMetaDescription(service, name, locale),
-    ogImage: serviceImage(service.slug),
+    ogImage: ogImagePath(serviceSlot(service.slug)),
     ogImageAlt: {
       en: `A ${name.toLowerCase()} photographed by the ${SITE_NAME} network in Portugal`,
       pt: `Uma sessão de ${name.toLowerCase()} fotografada pela rede ${SITE_NAME} em Portugal`,
@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       name: serviceMetaTitle(service, name, locale),
       description: serviceMetaDescription(service, name, locale),
       locale,
-      image: absoluteOgImage(serviceImage(service.slug)),
+      image: absoluteOgImage(ogImagePath(serviceSlot(service.slug))),
       mainEntityId: citiesListId,
     }),
     serviceOfferNode({
@@ -203,14 +203,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             <FadeIn instant className="mt-6">
               <div className="relative isolate mb-7 flex aspect-[16/9] flex-col justify-end overflow-hidden rounded-card p-6 text-white sm:p-8">
-                <Image
-                  src={serviceImage(service.slug)}
+                <Picture
+                  slot={serviceSlot(service.slug)}
                   alt={name}
-                  fill
-                  priority
-                  fetchPriority="high"
                   sizes="(max-width: 1024px) 100vw, 700px"
                   className="absolute inset-0 -z-10 object-cover"
+                  fill
+                  priority
                 />
                 <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                 <span className="font-mono text-xs uppercase tracking-widest text-brand-cream">{categoryLabel}</span>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import {
@@ -12,7 +12,7 @@ import {
 } from '@/lib/catalog';
 import { type Locale, tx } from '@/lib/locales';
 import { SITE_NAME, formatPrice } from '@/lib/site';
-import { cityImage, serviceImage } from '@/lib/images';
+import { citySlot, serviceSlot, ogImagePath } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { cityHref, serviceHref } from '@/lib/routes';
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
     route: '/',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: cityImage(HERO_CITY_SLUG),
+    ogImage: ogImagePath(citySlot(HERO_CITY_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -154,14 +154,14 @@ export default async function HomePage({ params }: HomePageProps) {
       name: tx(META_TITLE, locale),
       description: tx(META_DESCRIPTION, locale),
       locale,
-      image: absoluteOgImage(cityImage(heroCity.slug)),
+      image: absoluteOgImage(ogImagePath(citySlot(heroCity.slug))),
       mainEntityId: citiesListId,
     }),
     itemListNode(
       topCities.map((city) => ({
         name: city.name,
         url: absoluteUrl(locale, '/cities/[city]', { city: city.slug }),
-        image: absoluteOgImage(cityImage(city.slug)),
+        image: absoluteOgImage(ogImagePath(citySlot(city.slug))),
         description: tx(city.narrative, locale),
       })),
       { id: citiesListId, name: copy.citiesTitle },
@@ -223,14 +223,13 @@ export default async function HomePage({ params }: HomePageProps) {
           {/* The photograph bleeds off the right edge rather than sitting in a box. */}
           <FadeIn instant y={20} className="lg:col-span-5 xl:col-span-6 lg:-mr-6 xl:-mr-[max(0px,calc((100vw-92rem)/2))]">
             <figure className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/10] lg:aspect-[3/4] lg:max-h-[70vh]">
-              <Image
-                src={cityImage(heroCity.slug)}
+              <Picture
+                slot={citySlot(heroCity.slug)}
                 alt={copy.heroImageAlt}
-                fill
-                priority
-                fetchPriority="high"
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover"
+                fill
+                priority
               />
             </figure>
             <figcaption className="mt-3 flex items-baseline justify-between gap-4 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">
@@ -322,12 +321,12 @@ export default async function HomePage({ params }: HomePageProps) {
                   className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
                 >
                   <figure className={`relative overflow-hidden ${feature ? 'aspect-[3/2]' : 'aspect-[4/3]'}`}>
-                    <Image
-                      src={serviceImage(service.slug)}
+                    <Picture
+                      slot={serviceSlot(service.slug)}
                       alt={tx(service.name, locale)}
-                      fill
                       sizes={feature ? '(max-width: 1024px) 100vw, 45vw' : '(max-width: 1024px) 50vw, 30vw'}
                       className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                      fill
                     />
                   </figure>
                   <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-brand-rule pt-3">
@@ -393,12 +392,12 @@ export default async function HomePage({ params }: HomePageProps) {
                     className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
                   >
                     <figure className={`relative overflow-hidden ${tall ? 'aspect-[4/5]' : 'aspect-[3/4]'}`}>
-                      <Image
-                        src={cityImage(city.slug)}
+                      <Picture
+                        slot={citySlot(city.slug)}
                         alt={city.name}
-                        fill
                         sizes="(max-width: 1024px) 50vw, 30vw"
                         className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                        fill
                       />
                     </figure>
                     <div className="mt-3 flex items-baseline justify-between gap-3 border-t border-brand-rule pt-2.5">

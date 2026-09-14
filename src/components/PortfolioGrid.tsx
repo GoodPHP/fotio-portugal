@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import Lightbox from '@/components/Lightbox';
 import type { Locale } from '@/lib/locales';
@@ -64,14 +64,12 @@ export default function PortfolioGrid({
       <Stagger className="mt-10 grid auto-rows-[9rem] grid-cols-2 gap-4 sm:auto-rows-[12rem] sm:grid-cols-4">
         <StaggerItem className="col-span-2 row-span-2">
           <button type="button" onClick={() => setOpenIndex(0)} className={TILE_CLASS}>
-            <Image
-              src={featured}
+            <Picture
+              slot={featured}
               alt={`${alt} — 1`}
-              fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
               className={IMG_CLASS}
-              // On a page with no hero image this tile is the largest thing on
-              // it, so lazy-loading it is lazy-loading the LCP.
+              fill
               priority={priorityFeatured}
             />
           </button>
@@ -80,12 +78,12 @@ export default function PortfolioGrid({
         {thumbs.map((src, i) => (
           <StaggerItem key={src} className="col-span-1 row-span-1">
             <button type="button" onClick={() => setOpenIndex(i + 1)} className={TILE_CLASS}>
-              <Image
-                src={src}
+              <Picture
+                slot={src}
                 alt={`${alt} — ${i + 2}`}
-                fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 210px"
                 className={IMG_CLASS}
+                fill
               />
             </button>
           </StaggerItem>

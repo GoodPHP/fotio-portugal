@@ -7,9 +7,10 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  images: {
-    formats: ['image/avif', 'image/webp'],
-  },
+  // No `images` config: nothing on this site goes through next/image any more.
+  // Every photograph is rendered to AVIF and WebP at build time by
+  // `npm run photos:fetch` and served as a content-hashed static asset — see
+  // src/components/Picture.tsx for why.
   eslint: {
     // Type-safety is enforced via `tsc` (npm run typecheck); skip lint during builds.
     ignoreDuringBuilds: true,

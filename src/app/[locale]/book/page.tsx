@@ -5,7 +5,7 @@ import { SERVICES, CITIES } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode, reserveActionNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
-import { serviceImage, absoluteOgImage } from '@/lib/images';
+import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
@@ -42,7 +42,7 @@ export async function generateMetadata({
     route: '/book',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: serviceImage(OG_SERVICE_SLUG),
+    ogImage: ogImagePath(serviceSlot(OG_SERVICE_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -72,7 +72,7 @@ export default async function BookingPage({
         name: tx(META_TITLE, locale),
         description: tx(META_DESCRIPTION, locale),
         locale,
-        image: absoluteOgImage(serviceImage(OG_SERVICE_SLUG)),
+        image: absoluteOgImage(ogImagePath(serviceSlot(OG_SERVICE_SLUG))),
       }),
       potentialAction: reserveActionNode({
         url: bookUrl,

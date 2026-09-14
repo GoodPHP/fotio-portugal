@@ -6,7 +6,7 @@ import { publishedServicesByCategory, getCategoryLabel } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode, offerCatalogNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
-import { serviceImage, absoluteOgImage } from '@/lib/images';
+import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { formatPrice, formatDuration } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
@@ -66,7 +66,7 @@ export async function generateMetadata({
     route: '/pricing',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: serviceImage(OG_SERVICE_SLUG),
+    ogImage: ogImagePath(serviceSlot(OG_SERVICE_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -94,7 +94,7 @@ export default async function PricingPage({
       description: tx(META_DESCRIPTION, locale),
       locale,
       type: 'CollectionPage',
-      image: absoluteOgImage(serviceImage(OG_SERVICE_SLUG)),
+      image: absoluteOgImage(ogImagePath(serviceSlot(OG_SERVICE_SLUG))),
       mainEntityId: catalogueId,
     }),
     offerCatalogNode({

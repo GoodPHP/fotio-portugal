@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import type { Locale } from '@/lib/locales';
 
 /**
@@ -151,14 +151,13 @@ export default function Lightbox({ images, index, onClose, onIndexChange, alt, l
         className="lightbox-figure relative h-[80vh] w-[90vw]"
         onClick={(e) => e.stopPropagation()}
       >
-        <Image
-          src={images[index]}
+        <Picture
+          slot={images[index]}
           alt={`${alt} — ${index + 1}`}
-          fill
           sizes="100vw"
-          quality={90}
-          priority
           className="object-contain"
+          fill
+          priority
         />
       </div>
 

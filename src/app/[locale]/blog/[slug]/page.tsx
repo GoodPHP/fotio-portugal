@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
@@ -145,13 +145,13 @@ export default async function BlogPostPage({
         </header>
 
         <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-card bg-neutral-100">
-          <Image
-            src={post.cover}
+          <Picture
+            slot={post.cover}
             alt={tx(post.coverAlt, locale)}
-            fill
-            priority
             sizes="(max-width: 768px) 100vw, 768px"
             className="object-cover"
+            fill
+            priority
           />
         </div>
 

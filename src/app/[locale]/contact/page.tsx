@@ -5,7 +5,7 @@ import { SERVICES, CITIES } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
-import { cityImage, absoluteOgImage } from '@/lib/images';
+import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { SITE_NAME, whatsappLink } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
@@ -48,7 +48,7 @@ export async function generateMetadata({
     route: '/contact',
     title: tx(META_TITLE, locale),
     description: tx(META_DESCRIPTION, locale),
-    ogImage: cityImage(OG_CITY_SLUG),
+    ogImage: ogImagePath(citySlot(OG_CITY_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
   });
 }
@@ -72,7 +72,7 @@ export default async function ContactPage({
       description: tx(META_DESCRIPTION, locale),
       locale,
       type: 'ContactPage',
-      image: absoluteOgImage(cityImage(OG_CITY_SLUG)),
+      image: absoluteOgImage(ogImagePath(citySlot(OG_CITY_SLUG))),
     }),
     breadcrumbNode([
       { name: c('breadcrumbHome', locale), url: absoluteUrl(locale, '/') },

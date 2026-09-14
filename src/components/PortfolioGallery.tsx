@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
+import Picture from '@/components/Picture';
 import { FadeIn } from '@/components/Motion';
 import Lightbox from '@/components/Lightbox';
 import type { Locale } from '@/lib/locales';
@@ -109,13 +109,12 @@ export default function PortfolioGallery({
             className={`${TILE_CLASS} mb-4 break-inside-avoid`}
           >
             <span className={`relative block ${ASPECTS[i % ASPECTS.length]}`}>
-              <Image
-                src={photo.src}
+              <Picture
+                slot={photo.src}
                 alt={photo.alt}
-                fill
-                loading={i < 8 ? 'eager' : 'lazy'}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
               />
               <span
                 aria-hidden="true"

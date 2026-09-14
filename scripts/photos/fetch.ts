@@ -133,6 +133,47 @@ async function renderSlot(key: string, slot: SlotAssignment): Promise<Rendered[]
   return out;
 }
 
+/**
+ * Writes the module the pages read.
+ *
+ * Generated here rather than discovered by walking `public/`, because this is
+ * the only place that knows the intrinsic size of each crop, and because
+ * `readdirSync` works during a prerender and silently answers "nothing" on a
+ * Worker — which is how galleries used to come back empty on exactly the pages
+ * Next chose not to prerender.
+ */
+function writeImageManifest(manifest: Manifest, rendered: Record<string, Rendered[]>): void {
+  const slots: Record<string, unknown> = {};
+
+  for (const [key, files] of Object.entries(rendered)) {
+    const slot = manifest.slots[key];
+    const avif = files.filter((f) => f.format === 'image/avif').sort((a, b) => a.width - b.width);
+    const webp = files.filter((f) => f.format === 'image/webp').sort((a, b) => a.width - b.width);
+    const widest = Math.max(...files.map((f) => f.width));
+    const ogPath = `/images/${key}-og.jpg`;
+
+    slots[key] = {
+      width: widest,
+      height: Math.round(widest / slot.crop),
+      color: slot.color,
+      avif: avif.map(({ path, width }) => ({ path, width })),
+      webp: webp.map(({ path, width }) => ({ path, width })),
+      ...(key.startsWith('cities/') || key.startsWith('services/') ? { og: ogPath } : {}),
+    };
+  }
+
+  const file = join(ROOT, 'src', 'lib', 'data', 'image-manifest.ts');
+  const header = readFileSync(file, 'utf8').split('export const IMAGE_SLOTS')[0];
+  writeFileSync(
+    file,
+    `${header}export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = ${JSON.stringify(
+      slots,
+      null,
+      2,
+    )};\n`,
+  );
+}
+
 async function main(): Promise<void> {
   if (!existsSync(MANIFEST)) {
     console.error('No manifest. Run `npm run photos:search` then `npm run photos:select` first.');
@@ -178,8 +219,12 @@ async function main(): Promise<void> {
     )}\n`,
   );
 
-  console.log(`[photos:fetch] ${entries.length} slots rendered, credits.json written.`);
-  console.log('Now run `npx tsx scripts/generate-public-images.ts` to regenerate the manifest module.');
+  writeImageManifest(manifest, rendered);
+
+  console.log(
+    `[photos:fetch] ${entries.length} slots rendered, credits.json and` +
+      ' src/lib/data/image-manifest.ts written.',
+  );
 }
 
 main().catch((error) => {
