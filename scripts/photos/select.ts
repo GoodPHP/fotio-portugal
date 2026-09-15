@@ -19,6 +19,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { readCached, type UnsplashPhoto } from './cache';
 import { allSlots, type Slot } from './targets';
+import { loadSpreads, MONOCHROME_BELOW } from './monochrome';
 
 const MANIFEST = join(process.cwd(), 'public', 'images', 'images.manifest.json');
 const ORDERINGS = ['relevant', 'latest'] as const;
@@ -59,15 +60,34 @@ interface Candidate {
   ordering: (typeof ORDERINGS)[number];
 }
 
-/** Candidates for a slot, across both orderings of each of its queries. */
-function candidates(slot: Slot): Candidate[] {
+/**
+ * Candidates for a slot, across both orderings of each of its queries.
+ *
+ * `seenState` records why a slot might come up empty, because the three causes
+ * need three different answers and the report used to give one:
+ *
+ *   - a query has not been fetched yet      → run the search again
+ *   - every query was fetched and matched   → the query is too narrow; broaden
+ *     nothing at all                          it, searching again cannot help
+ *   - results exist but none is usable      → they are taken by other slots or
+ *                                             the wrong shape; widen the pool
+ *
+ * The middle case is the one that mattered: two five-word service queries
+ * matched zero photographs, and the report sent you back to a search command
+ * that would have produced the same nothing forever.
+ */
+function candidates(slot: Slot, seenState?: { uncached: boolean; results: number }): Candidate[] {
   const orientation = slot.crop < 1 ? 'portrait' : 'landscape';
   const out: Candidate[] = [];
   const seen = new Set<string>();
   for (const query of slot.queries) {
     for (const orderBy of ORDERINGS) {
       const cached = readCached(query, orientation, orderBy);
-      if (!cached) continue;
+      if (!cached) {
+        if (seenState) seenState.uncached = true;
+        continue;
+      }
+      if (seenState) seenState.results += cached.results.length;
       cached.results.forEach((photo, index) => {
         if (seen.has(photo.id)) return;
         seen.add(photo.id);
@@ -160,15 +180,38 @@ function rankValue(candidate: Candidate): number {
   return candidate.ordering === 'relevant' ? 1.4 / Math.sqrt(candidate.rank) : 0.35;
 }
 
-function score(candidate: Candidate, slot: Slot, authorUses: number): number {
+/*
+ * Greyscale, as a heavy penalty rather than a filter.
+ *
+ * The site gives photographs the only colour on the page, so a monochrome one
+ * reads as a broken image rather than as a choice. A penalty rather than a
+ * `continue` because the failure mode matters: if every candidate for a slot
+ * happens to be greyscale, the best greyscale photograph is still a better
+ * outcome than an empty frame. Two points is larger than any other term can
+ * recover, so it only ever wins when there is nothing else.
+ *
+ * `spreads` is empty until `fetch.ts` has run, and then the penalty simply does
+ * not apply — which is the behaviour this had before the measurement existed.
+ */
+const MONOCHROME_PENALTY = 2.0;
+
+function score(
+  candidate: Candidate,
+  slot: Slot,
+  authorUses: number,
+  spreads: Record<string, number>,
+): number {
   const { photo } = candidate;
+  const spread = spreads[photo.id];
+  const monochrome = spread !== undefined && spread < MONOCHROME_BELOW;
   return (
     rankValue(candidate) +
     0.9 * aspectFit(photo, slot) +
     0.9 * placeMatch(photo, slot) +
     0.3 * recency(photo) +
     popularity(photo) -
-    1.5 * (authorUses >= MAX_PER_PHOTOGRAPHER_PER_GROUP ? 1 : 0)
+    1.5 * (authorUses >= MAX_PER_PHOTOGRAPHER_PER_GROUP ? 1 : 0) -
+    MONOCHROME_PENALTY * (monochrome ? 1 : 0)
   );
 }
 
@@ -181,6 +224,7 @@ function main(): void {
 
   const manifest = loadManifest();
   const slots = allSlots();
+  const spreads = loadSpreads();
 
   // A photograph may be used exactly once on the site. Seeded from whatever is
   // already assigned, so an incremental run cannot reuse a committed choice.
@@ -200,7 +244,12 @@ function main(): void {
 
   let chosen = 0;
   let kept = 0;
+  /** Slots waiting on a query the search has not fetched yet. */
   const empty: string[] = [];
+  /** Slots whose queries were all fetched and all came back with nothing. */
+  const barren: string[] = [];
+  /** Slots whose queries returned photographs, none of them usable here. */
+  const exhausted: string[] = [];
 
   for (const slot of slots) {
     if (manifest.slots[slot.key] && !refresh.has(slot.key)) {
@@ -209,18 +258,21 @@ function main(): void {
     }
 
     let best: { photo: UnsplashPhoto; value: number } | null = null;
-    for (const candidate of candidates(slot)) {
+    const seenState = { uncached: false, results: 0 };
+    for (const candidate of candidates(slot, seenState)) {
       const { photo } = candidate;
       if (assigned.has(photo.id)) continue;
       if (aspectFit(photo, slot) === 0) continue;
       const counts = authorsByGroup.get(slot.group);
       const authorUses = counts?.get(photo.user.username) ?? 0;
-      const value = score(candidate, slot, authorUses);
+      const value = score(candidate, slot, authorUses, spreads);
       if (!best || value > best.value) best = { photo, value };
     }
 
     if (!best) {
-      empty.push(slot.key);
+      if (seenState.uncached) empty.push(slot.key);
+      else if (seenState.results === 0) barren.push(slot.key);
+      else exhausted.push(slot.key);
       continue;
     }
 
@@ -251,7 +303,8 @@ function main(): void {
 
   const ids = new Set(Object.values(manifest.slots).map((s) => s.photoId));
   console.log(
-    `[photos:select] ${chosen} chosen, ${kept} kept, ${empty.length} with no candidate.` +
+    `[photos:select] ${chosen} chosen, ${kept} kept, ${empty.length} awaiting search,` +
+      ` ${barren.length} with an empty query, ${exhausted.length} with nothing left.` +
       ` ${Object.keys(manifest.slots).length} slots filled by ${ids.size} distinct photographs.`,
   );
   if (ids.size !== Object.keys(manifest.slots).length) {
@@ -259,10 +312,38 @@ function main(): void {
     process.exit(1);
   }
   if (empty.length > 0) {
-    console.log('\nNo candidate cached for:');
+    console.log('\nNot searched yet:');
     for (const key of empty.slice(0, 20)) console.log(`  ${key}`);
     if (empty.length > 20) console.log(`  … and ${empty.length - 20} more`);
     console.log('\nRun `npm run photos:search` until it reports complete, then re-run this.');
+  }
+
+  /*
+   * A barren slot is a different problem with different advice. Every query it
+   * has was fetched and every one of them matched nothing, so re-running the
+   * search will produce exactly the same nothing — the query itself is too
+   * narrow and needs a broader fallback in `targets.ts`.
+   */
+  if (barren.length > 0) {
+    console.log('\nSearched, but the query matched no photograph at all:');
+    for (const key of barren.slice(0, 20)) {
+      const slot = slots.find((s) => s.key === key);
+      console.log(`  ${key}  ← ${slot?.queries.map((q) => `"${q}"`).join(', ')}`);
+    }
+    if (barren.length > 20) console.log(`  … and ${barren.length - 20} more`);
+    console.log('\nBroaden the query in scripts/photos/targets.ts — searching again will not help.');
+  }
+
+  /*
+   * The pool was not empty; this slot just could not have any of it. Every
+   * candidate was either already assigned to another slot — a photograph is
+   * used once site-wide — or the wrong shape for this crop. A second, differently
+   * worded query is what widens the pool; searching the same one again will not.
+   */
+  if (exhausted.length > 0) {
+    console.log('\nCandidates existed but none was usable (already assigned, or wrong shape):');
+    for (const key of exhausted.slice(0, 20)) console.log(`  ${key}`);
+    if (exhausted.length > 20) console.log(`  … and ${exhausted.length - 20} more`);
   }
 }
 

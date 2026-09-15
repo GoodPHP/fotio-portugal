@@ -57,22 +57,65 @@ function cityQueries(citySlug: string, cityName: string, spots: string[]): strin
   ].filter(Boolean);
 }
 
-/** What a service portfolio should show: people, in the register it sells. */
+/**
+ * What a service portfolio should show: people, in the register it sells.
+ *
+ * Most entries are a single query, and that is a deliberate economy — one
+ * descriptive phrase per service, rather than the four a city needs to avoid
+ * the postcard shot. But a single query with no fallback is fatal when it
+ * returns nothing, and two of these did: `wedding portugal bride groom quinta`
+ * and `university graduation students black cape coimbra` are five-word
+ * conjunctions that Unsplash matched against precisely zero photographs, so the
+ * wedding card — the most valuable page on the site — silently had no image.
+ *
+ * So a service that asks for something narrow follows it with something broad.
+ * The narrow query still wins when it returns anything, because `select.ts`
+ * scores rank within the relevance ordering and the first query is the one
+ * asked first; the broad one only decides the slot when the specific one came
+ * back empty.
+ *
+ * Four services needed one. Two returned literally nothing; `elopement` and
+ * `destination-wedding` returned a single photograph each, which filled the
+ * card and left all six of their portfolio frames empty — a photograph is used
+ * once site-wide, so a pool of one is a pool for one slot.
+ *
+ * Three of them share `wedding ceremony bride groom outdoors` as that fallback,
+ * and sharing is the point rather than laziness: `distinctQueries` dedupes on
+ * the string, so the second and third service reuse a cached response and cost
+ * no quota at all. They cannot collide over it either — the assignment map
+ * makes every photograph unique across the site, and the per-group cap still
+ * stops one photographer filling one service's gallery.
+ */
 const SERVICE_QUERIES: Record<string, string[]> = {
   portrait: ['studio portrait professional headshot neutral background'],
   'lifestyle-portrait': ['lifestyle portrait outdoors natural light candid'],
-  couple: ['couple photoshoot walking old town street candid'],
+  /*
+   * Subject first, setting second — and the setting words kept few.
+   *
+   * This asked for `couple photoshoot walking old town street candid`, and
+   * Unsplash weighted the four setting words over the two subject ones: every
+   * usable result was street photography of an empty alley, and the card for a
+   * service that sells couple sessions showed a market street with no couple in
+   * it. A long query does not narrow a search here, it just moves what it is
+   * about. The same trap caught `batizado` (a wedding, on a christening card),
+   * `honeymoon` (a silhouette) and `lisbon-photoshoot` (an empty building):
+   * each named a place and a time of day, and got back the place.
+   */
+  couple: ['couple portrait holding hands outdoors', 'couple photoshoot candid city'],
   proposal: ['marriage proposal engagement ring moment surprise'],
   family: ['family portrait outdoors children parents natural light'],
   maternity: ['maternity pregnancy portrait outdoors golden hour'],
   newborn: ['newborn baby at home natural light photography'],
-  batizado: ['christening baptism church ceremony family portugal'],
-  wedding: ['wedding portugal bride groom quinta'],
-  elopement: ['elopement intimate wedding couple cliff coast'],
-  'destination-wedding': ['destination wedding portugal couple ceremony outdoors'],
+  batizado: ['baptism baby christening font', 'christening ceremony family church'],
+  wedding: ['wedding portugal bride groom quinta', 'wedding ceremony bride groom outdoors'],
+  elopement: ['elopement intimate wedding couple cliff coast', 'wedding ceremony bride groom outdoors'],
+  'destination-wedding': [
+    'destination wedding portugal couple ceremony outdoors',
+    'wedding ceremony bride groom outdoors',
+  ],
   vacation: ['travel couple holiday photoshoot portugal'],
-  honeymoon: ['honeymoon couple coast portugal sunset'],
-  'lisbon-photoshoot': ['couple photoshoot lisbon miradouro morning'],
+  honeymoon: ['newlywed couple honeymoon beach', 'couple embracing sunset coast'],
+  'lisbon-photoshoot': ['couple portrait lisbon', 'portrait session lisbon viewpoint'],
   headshots: ['corporate headshot business portrait office'],
   'personal-brand': ['personal branding photoshoot entrepreneur working'],
   'digital-nomad-headshots': ['remote worker portrait coworking lisbon'],
@@ -80,7 +123,10 @@ const SERVICE_QUERIES: Record<string, string[]> = {
   'real-estate': ['real estate interior photography bright living room'],
   food: ['restaurant food photography plated dish portugal'],
   'book-de-modelo': ['model portfolio test shoot studio fashion'],
-  finalistas: ['university graduation students black cape coimbra'],
+  finalistas: [
+    'university graduation students black cape coimbra',
+    'university graduation ceremony students gown',
+  ],
 };
 
 export function allSlots(): Slot[] {

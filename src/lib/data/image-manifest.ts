@@ -735,24 +735,24 @@ export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = {
   "gallery/evora/1": {
     "width": 960,
     "height": 720,
-    "color": "#f3f3f3",
+    "color": "#c0c0d9",
     "avif": [
       {
-        "path": "/images/gallery/evora/1-480.5e20c444.avif",
+        "path": "/images/gallery/evora/1-480.680a64ee.avif",
         "width": 480
       },
       {
-        "path": "/images/gallery/evora/1-960.598ed90b.avif",
+        "path": "/images/gallery/evora/1-960.8fb58f25.avif",
         "width": 960
       }
     ],
     "webp": [
       {
-        "path": "/images/gallery/evora/1-480.13447b66.webp",
+        "path": "/images/gallery/evora/1-480.01e1c260.webp",
         "width": 480
       },
       {
-        "path": "/images/gallery/evora/1-960.b317b123.webp",
+        "path": "/images/gallery/evora/1-960.e729631b.webp",
         "width": 960
       }
     ]
@@ -1532,6 +1532,3428 @@ export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = {
       },
       {
         "path": "/images/gallery/comporta/4-960.542d80ab.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/sintra/1": {
+    "width": 960,
+    "height": 720,
+    "color": "#0c8cd9",
+    "avif": [
+      {
+        "path": "/images/gallery/sintra/1-480.539d6d6a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/1-960.811ef16f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/sintra/1-480.27058f19.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/1-960.62cbb603.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/sintra/2": {
+    "width": 960,
+    "height": 720,
+    "color": "#0c4073",
+    "avif": [
+      {
+        "path": "/images/gallery/sintra/2-480.e0e061c5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/2-960.f47dddc2.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/sintra/2-480.29217c8a.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/2-960.6103df01.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/sintra/3": {
+    "width": 960,
+    "height": 720,
+    "color": "#a6c0f3",
+    "avif": [
+      {
+        "path": "/images/gallery/sintra/3-480.10d82af1.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/3-960.7fd2e4e5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/sintra/3-480.c66023b8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/3-960.171f9aae.webp",
+        "width": 960
+      }
+    ]
+  },
+  "gallery/sintra/4": {
+    "width": 960,
+    "height": 720,
+    "color": "#408cd9",
+    "avif": [
+      {
+        "path": "/images/gallery/sintra/4-480.86ee2fd0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/4-960.e7c6b28f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/gallery/sintra/4-480.dc70bb1e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/gallery/sintra/4-960.f9a4095c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/portrait": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/services/portrait-480.ad14ee08.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/portrait-960.a2b4d21d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/portrait-480.57739b9d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/portrait-960.300d4682.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/portrait-og.jpg"
+  },
+  "portfolio/portrait/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#405959",
+    "avif": [
+      {
+        "path": "/images/portfolio/portrait/1-480.61cdd5ca.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/1-960.9d46e30f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/portrait/1-480.7154d7da.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/1-960.a204b268.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/portrait/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/portrait/2-480.e9b3ebee.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/2-960.fe9d7e79.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/portrait/2-480.96eef47d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/2-960.6cbc545e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/portrait/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/portrait/3-480.19bd5617.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/3-960.e7494e36.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/portrait/3-480.8ae5cc19.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/3-960.37ea7d48.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/portrait/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/portrait/4-480.c0802f3b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/4-960.dfff488b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/portrait/4-480.dec0e816.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/4-960.84b9ef95.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/portrait/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/portrait/5-480.c1692d78.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/5-960.0f5861ab.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/portrait/5-480.ccfff8c8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/portrait/5-960.d78082ff.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/lifestyle-portrait": {
+    "width": 960,
+    "height": 640,
+    "color": "#404040",
+    "avif": [
+      {
+        "path": "/images/services/lifestyle-portrait-480.392600c4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/lifestyle-portrait-960.a06bac8d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/lifestyle-portrait-480.f10ff131.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/lifestyle-portrait-960.fc8fbebe.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/lifestyle-portrait-og.jpg"
+  },
+  "portfolio/lifestyle-portrait/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#597340",
+    "avif": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/1-480.10329f5c.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/1-960.03fab1fc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/1-480.d17c7d3a.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/1-960.09466cfe.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lifestyle-portrait/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#404026",
+    "avif": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/2-480.2077ef69.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/2-960.ca3d2e4c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/2-480.2b830e15.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/2-960.1818a825.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lifestyle-portrait/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/3-480.16abcccb.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/3-960.6d9267ce.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/3-480.a4bde370.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/3-960.58dde76b.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/couple": {
+    "width": 960,
+    "height": 640,
+    "color": "#a6c0d9",
+    "avif": [
+      {
+        "path": "/images/services/couple-480.8cfdc8df.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/couple-960.4ee91981.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/couple-480.e9e0ef96.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/couple-960.575f2a21.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/couple-og.jpg"
+  },
+  "portfolio/couple/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/couple/1-480.f2f9c14e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/1-960.7920feee.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/couple/1-480.af07a2cd.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/1-960.0181e49d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/couple/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/couple/2-480.de402204.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/2-960.d3236e91.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/couple/2-480.bb134f7c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/2-960.4b7a0d40.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/couple/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/couple/3-480.d4f91b83.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/3-960.f87ac0ce.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/couple/3-480.918d1eca.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/3-960.a397895e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/proposal": {
+    "width": 960,
+    "height": 640,
+    "color": "#8c7359",
+    "avif": [
+      {
+        "path": "/images/services/proposal-480.12377bdd.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/proposal-960.d04f4cad.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/proposal-480.1688b2f8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/proposal-960.9f524c6f.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/proposal-og.jpg"
+  },
+  "portfolio/proposal/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#402626",
+    "avif": [
+      {
+        "path": "/images/portfolio/proposal/1-480.f3ba7fb7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/1-960.f1e972e1.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/proposal/1-480.82cd8627.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/1-960.c41a5039.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/proposal/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/proposal/2-480.03c40e08.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/2-960.49731d7b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/proposal/2-480.e3d10fac.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/2-960.57af7565.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/proposal/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#595973",
+    "avif": [
+      {
+        "path": "/images/portfolio/proposal/3-480.c2810166.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/3-960.1c4b3d6f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/proposal/3-480.28888f16.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/3-960.af3a1017.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/family": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/services/family-480.94c5ebb0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/family-960.d3276a9e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/family-480.42c71d96.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/family-960.0d0322d2.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/family-og.jpg"
+  },
+  "portfolio/family/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#0c260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/family/1-480.7baf5cf2.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/1-960.48cccd26.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/family/1-480.fb169a32.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/1-960.ca78b9f6.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/family/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#264026",
+    "avif": [
+      {
+        "path": "/images/portfolio/family/2-480.586cbd0e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/2-960.ff19edb8.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/family/2-480.2d17227b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/2-960.4f04fe90.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/family/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/family/3-480.02a8ecf4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/3-960.09dac4d2.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/family/3-480.0579ef00.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/3-960.b6561119.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/maternity": {
+    "width": 960,
+    "height": 640,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/services/maternity-480.f094c091.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/maternity-960.81d4277c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/maternity-480.13214815.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/maternity-960.1bb6d5b6.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/maternity-og.jpg"
+  },
+  "portfolio/maternity/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/maternity/1-480.f91aefc9.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/1-960.74829fee.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/maternity/1-480.b81b93a2.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/1-960.2228b30f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/maternity/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#0c2626",
+    "avif": [
+      {
+        "path": "/images/portfolio/maternity/2-480.969df156.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/2-960.82269070.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/maternity/2-480.433f0572.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/2-960.08fb91af.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/maternity/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/maternity/3-480.4c8eb4ed.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/3-960.a5c61b80.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/maternity/3-480.cc3f3029.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/3-960.4a1c1d3f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/newborn": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/services/newborn-480.eee9939a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/newborn-960.cb54ecbc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/newborn-480.fccd029b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/newborn-960.369b0693.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/newborn-og.jpg"
+  },
+  "portfolio/newborn/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/newborn/1-480.b8ca8122.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/1-960.9b408879.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/newborn/1-480.c55975cd.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/1-960.67d50544.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/newborn/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/newborn/2-480.17241099.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/2-960.1c968568.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/newborn/2-480.504fd0ba.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/2-960.bef92a92.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/newborn/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#737373",
+    "avif": [
+      {
+        "path": "/images/portfolio/newborn/3-480.bbb07934.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/3-960.f76e1c5d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/newborn/3-480.4ae6d420.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/3-960.c04df681.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/batizado": {
+    "width": 960,
+    "height": 640,
+    "color": "#59260c",
+    "avif": [
+      {
+        "path": "/images/services/batizado-480.eeca0ea4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/batizado-960.d8165917.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/batizado-480.fe96e3a2.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/batizado-960.f412cf4a.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/batizado-og.jpg"
+  },
+  "portfolio/batizado/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/batizado/1-480.00ddc770.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/1-960.ac7a72a5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/batizado/1-480.2a16c760.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/1-960.f6b36fa7.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/batizado/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/batizado/2-480.a3c66cee.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/2-960.7190676c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/batizado/2-480.da06aad8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/2-960.4d171997.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/batizado/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#a68c73",
+    "avif": [
+      {
+        "path": "/images/portfolio/batizado/3-480.15061131.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/3-960.43307c32.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/batizado/3-480.eb8576f8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/3-960.1615e724.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/elopement": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0a6",
+    "avif": [
+      {
+        "path": "/images/services/elopement-480.ec1dfbfa.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/elopement-960.750c7c98.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/elopement-480.800a4ae4.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/elopement-960.8500bda2.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/elopement-og.jpg"
+  },
+  "services/destination-wedding": {
+    "width": 960,
+    "height": 640,
+    "color": "#8ca6d9",
+    "avif": [
+      {
+        "path": "/images/services/destination-wedding-480.17b7a4c8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/destination-wedding-960.6c6ecb40.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/destination-wedding-480.e4358fc1.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/destination-wedding-960.93b79340.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/destination-wedding-og.jpg"
+  },
+  "services/vacation": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0d9d9",
+    "avif": [
+      {
+        "path": "/images/services/vacation-480.6b475b83.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/vacation-960.de8fbbfa.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/vacation-480.1fb1d0e8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/vacation-960.37f49f23.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/vacation-og.jpg"
+  },
+  "portfolio/vacation/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/vacation/1-480.31ebc67c.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/1-960.d8220429.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/vacation/1-480.09ddfc4f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/1-960.017d0ac3.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/vacation/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/vacation/2-480.39a0338d.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/2-960.6487d7f7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/vacation/2-480.d4d74e8c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/2-960.d7b54520.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/vacation/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3d9c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/vacation/3-480.628c99dc.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/3-960.63b9769e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/vacation/3-480.88b8236e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/3-960.cd1fabde.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/honeymoon": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/services/honeymoon-480.59e8f395.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/honeymoon-960.5e33cdac.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/honeymoon-480.75a5b44e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/honeymoon-960.efd178ea.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/honeymoon-og.jpg"
+  },
+  "portfolio/honeymoon/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/honeymoon/1-480.4bbb3ce3.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/1-960.eb188dd0.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/honeymoon/1-480.b331ea80.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/1-960.4a560b7a.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/honeymoon/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#738ca6",
+    "avif": [
+      {
+        "path": "/images/portfolio/honeymoon/2-480.8f299d19.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/2-960.3f4906d0.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/honeymoon/2-480.b99bf42b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/2-960.08ed4d8a.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/honeymoon/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/honeymoon/3-480.8c2f08b5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/3-960.24fce055.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/honeymoon/3-480.0a1ef7a2.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/3-960.223956f2.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/lisbon-photoshoot": {
+    "width": 960,
+    "height": 640,
+    "color": "#8c8c8c",
+    "avif": [
+      {
+        "path": "/images/services/lisbon-photoshoot-480.3f7c4a9e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/lisbon-photoshoot-960.e97e43cc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/lisbon-photoshoot-480.7540b20d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/lisbon-photoshoot-960.3022b4ab.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/lisbon-photoshoot-og.jpg"
+  },
+  "portfolio/lisbon-photoshoot/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#408ca6",
+    "avif": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/1-480.ccd9e109.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/1-960.df7a2169.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/1-480.60a7b724.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/1-960.6b55d594.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lisbon-photoshoot/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/2-480.2476b105.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/2-960.fc893520.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/2-480.991aa7e7.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/2-960.f2dfe75c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lisbon-photoshoot/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/3-480.de0c752e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/3-960.57a733f1.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/3-480.6a384e88.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/3-960.9c70e15f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/headshots": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/services/headshots-480.d9e108b0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/headshots-960.665a8384.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/headshots-480.7e1c9b99.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/headshots-960.6d1895cb.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/headshots-og.jpg"
+  },
+  "portfolio/headshots/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/headshots/1-480.9c50b2b7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/1-960.f1dd6ab4.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/headshots/1-480.001eddda.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/1-960.40c36733.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/headshots/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#404040",
+    "avif": [
+      {
+        "path": "/images/portfolio/headshots/2-480.9dc70142.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/2-960.1fbf4c97.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/headshots/2-480.e69923c6.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/2-960.5c215633.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/headshots/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/headshots/3-480.4a634f5a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/3-960.ed25f6f7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/headshots/3-480.a4384073.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/3-960.cdfab3b0.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/personal-brand": {
+    "width": 960,
+    "height": 640,
+    "color": "#0c2640",
+    "avif": [
+      {
+        "path": "/images/services/personal-brand-480.af8082ab.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/personal-brand-960.5e66b32e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/personal-brand-480.10faa073.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/personal-brand-960.5587678b.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/personal-brand-og.jpg"
+  },
+  "portfolio/personal-brand/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/personal-brand/1-480.3f8240c7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/1-960.260ef37f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/personal-brand/1-480.521df0cb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/1-960.44348959.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/personal-brand/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/personal-brand/2-480.c8ffb28d.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/2-960.7e2a7db8.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/personal-brand/2-480.19f9d582.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/2-960.4cf70391.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/personal-brand/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/personal-brand/3-480.f5d0815e.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/3-960.b2f45234.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/personal-brand/3-480.502f9a6b.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/3-960.3374238b.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/digital-nomad-headshots": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/services/digital-nomad-headshots-480.ebaf5f75.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/digital-nomad-headshots-960.0e1601cb.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/digital-nomad-headshots-480.e47aa0b3.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/digital-nomad-headshots-960.58e6576b.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/digital-nomad-headshots-og.jpg"
+  },
+  "portfolio/digital-nomad-headshots/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#735959",
+    "avif": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/1-480.70df2309.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/1-960.92c097f9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/1-480.170a83ba.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/1-960.57986a4c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/digital-nomad-headshots/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/2-480.cbc510aa.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/2-960.5b5b070b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/2-480.caf1d40e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/2-960.f2a54117.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/digital-nomad-headshots/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/3-480.50343cf7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/3-960.363acb2e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/3-480.74b1c955.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/3-960.c48f3121.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/eventos-de-empresa": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/services/eventos-de-empresa-480.fe0259e8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/eventos-de-empresa-960.30002c71.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/eventos-de-empresa-480.8077d9e4.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/eventos-de-empresa-960.7fd5702d.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/eventos-de-empresa-og.jpg"
+  },
+  "portfolio/eventos-de-empresa/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#4059f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/1-480.5518d242.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/1-960.8ffa024b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/1-480.b474bae1.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/1-960.3113939e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/eventos-de-empresa/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/2-480.7e7f31af.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/2-960.ccc38bd8.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/2-480.1b2e0936.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/2-960.10711460.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/eventos-de-empresa/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/3-480.3b537056.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/3-960.4a2dd879.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/3-480.d0370082.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/3-960.0c6b3f58.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/real-estate": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/services/real-estate-480.98618455.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/real-estate-960.21c8efc3.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/real-estate-480.2e7fd15e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/real-estate-960.fe02a954.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/real-estate-og.jpg"
+  },
+  "portfolio/real-estate/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/real-estate/1-480.333fe3d9.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/1-960.c98325a9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/real-estate/1-480.e80a87e1.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/1-960.906a653c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/real-estate/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/real-estate/2-480.9a76e1f6.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/2-960.fc18a912.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/real-estate/2-480.776bf4eb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/2-960.df11da38.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/real-estate/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/real-estate/3-480.75ef0be7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/3-960.489c4870.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/real-estate/3-480.d5a87384.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/3-960.6d661100.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/food": {
+    "width": 960,
+    "height": 640,
+    "color": "#a6a6c0",
+    "avif": [
+      {
+        "path": "/images/services/food-480.54bd4737.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/food-960.9f090e8d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/food-480.65f6bb07.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/food-960.9ba1755f.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/food-og.jpg"
+  },
+  "portfolio/food/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/food/1-480.aa4188b5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/1-960.044e39a2.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/food/1-480.b4d38a35.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/1-960.272e2c0f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/food/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/food/2-480.a267a3d8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/2-960.3c3b20dc.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/food/2-480.80776deb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/2-960.d1a9d407.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/food/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/food/3-480.885932b5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/3-960.16901705.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/food/3-480.0e03a6df.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/3-960.82ce6051.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/book-de-modelo": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/services/book-de-modelo-480.ca0286f0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/book-de-modelo-960.04e5a0b5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/book-de-modelo-480.7abc2d89.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/book-de-modelo-960.4b8976e3.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/book-de-modelo-og.jpg"
+  },
+  "portfolio/book-de-modelo/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#595959",
+    "avif": [
+      {
+        "path": "/images/portfolio/book-de-modelo/1-480.794bcfad.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/1-960.dda0d77e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/book-de-modelo/1-480.fde507a5.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/1-960.abf235d9.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/book-de-modelo/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/book-de-modelo/2-480.84b37050.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/2-960.33928b22.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/book-de-modelo/2-480.bdb2ee35.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/2-960.a1d402b6.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/book-de-modelo/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#260c0c",
+    "avif": [
+      {
+        "path": "/images/portfolio/book-de-modelo/3-480.24279c41.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/3-960.11be825a.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/book-de-modelo/3-480.1616e6cd.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/3-960.9c24c17c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lifestyle-portrait/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/4-480.7d310b26.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/4-960.442a25ee.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/4-480.423abf1d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/4-960.158a8aa1.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lifestyle-portrait/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/5-480.ef1d5fa0.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/5-960.e7076948.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lifestyle-portrait/5-480.8d90d1d4.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lifestyle-portrait/5-960.a53a5fc3.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/couple/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/couple/4-480.f0d63e1d.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/4-960.c4b4568b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/couple/4-480.92c98ceb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/4-960.ef696542.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/couple/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/couple/5-480.d2cc19b2.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/5-960.45926288.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/couple/5-480.3e6b9cad.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/couple/5-960.675f1b23.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/proposal/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#737373",
+    "avif": [
+      {
+        "path": "/images/portfolio/proposal/4-480.784dbfa7.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/4-960.c9d60cdf.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/proposal/4-480.623faae8.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/4-960.1502f6c7.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/proposal/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/proposal/5-480.71736880.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/5-960.d3a6bbd6.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/proposal/5-480.f2140a25.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/proposal/5-960.47eb6cb3.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/family/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/family/4-480.a7a1d507.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/4-960.e44a5a51.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/family/4-480.b680bebe.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/4-960.13428535.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/family/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#407326",
+    "avif": [
+      {
+        "path": "/images/portfolio/family/5-480.63cd10a5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/5-960.0dc5ed7e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/family/5-480.d2fb497f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/family/5-960.03b97e86.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/maternity/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/maternity/4-480.a0007d6a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/4-960.cbd8372f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/maternity/4-480.28549e42.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/4-960.279dfc7a.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/maternity/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/maternity/5-480.b56ddd4a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/5-960.cd0a8244.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/maternity/5-480.3e641dda.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/maternity/5-960.f6c9d748.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/newborn/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/newborn/4-480.20226a96.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/4-960.7bb47302.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/newborn/4-480.36ffc786.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/4-960.7cb7cdaf.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/newborn/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#8c5940",
+    "avif": [
+      {
+        "path": "/images/portfolio/newborn/5-480.7ed9e6dd.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/5-960.8cbeac8e.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/newborn/5-480.a1f0e88c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/newborn/5-960.31b6b1b3.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/batizado/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0c0f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/batizado/4-480.a77a15de.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/4-960.978f3adf.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/batizado/4-480.6adbc62f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/4-960.a50ec125.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/batizado/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/batizado/5-480.5388c797.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/5-960.e611ee85.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/batizado/5-480.efb42b3e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/batizado/5-960.c779e73f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/wedding": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/services/wedding-480.f6dfddeb.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/wedding-960.e930bee8.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/wedding-480.065d850f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/wedding-960.f1257997.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/wedding-og.jpg"
+  },
+  "portfolio/wedding/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#404040",
+    "avif": [
+      {
+        "path": "/images/portfolio/wedding/1-480.e84db48b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/1-960.5c2bf63d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/wedding/1-480.d5b1024a.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/1-960.c388d459.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/wedding/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#404026",
+    "avif": [
+      {
+        "path": "/images/portfolio/wedding/2-480.2de18b92.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/2-960.af43b795.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/wedding/2-480.63230d59.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/2-960.a871b194.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/wedding/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/wedding/3-480.89d2fb62.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/3-960.0c01c2a5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/wedding/3-480.4e13d5e4.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/3-960.02036282.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/wedding/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/wedding/4-480.422943ab.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/4-960.88671683.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/wedding/4-480.04d9b5e0.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/4-960.8b694179.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/wedding/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/wedding/5-480.0e773492.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/5-960.736298ac.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/wedding/5-480.e08575be.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/wedding/5-960.be78c232.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/destination-wedding/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/destination-wedding/4-480.880a6a7b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/4-960.9976f8d5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/destination-wedding/4-480.5dabf1d2.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/4-960.1efa93d1.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/destination-wedding/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0a68c",
+    "avif": [
+      {
+        "path": "/images/portfolio/destination-wedding/5-480.61d73f98.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/5-960.229c036b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/destination-wedding/5-480.93515822.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/5-960.9c56669e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/vacation/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/vacation/4-480.16816187.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/4-960.d52e920d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/vacation/4-480.7f40cfe7.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/4-960.eb305816.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/vacation/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/vacation/5-480.ba06dcc5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/5-960.516305de.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/vacation/5-480.dbbd27f4.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/vacation/5-960.8cbd4a8c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/honeymoon/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#d9d9c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/honeymoon/4-480.bc9c48e5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/4-960.ab131af5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/honeymoon/4-480.489a053e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/4-960.90b8ab4a.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/honeymoon/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/honeymoon/5-480.512977aa.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/5-960.8f0d3b4b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/honeymoon/5-480.21b7a393.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/honeymoon/5-960.06b56639.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lisbon-photoshoot/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/4-480.1b053fb5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/4-960.779a0ab7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/4-480.be8a8f0d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/4-960.3c5511a4.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/lisbon-photoshoot/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a68c8c",
+    "avif": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/5-480.edf6e915.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/5-960.05314dee.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/5-480.89babcfc.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/lisbon-photoshoot/5-960.34d08a1d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/headshots/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#737373",
+    "avif": [
+      {
+        "path": "/images/portfolio/headshots/4-480.0509a87b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/4-960.6e4e7fb3.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/headshots/4-480.34ae4ef3.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/4-960.a4830600.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/headshots/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/headshots/5-480.cabc7174.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/5-960.33a4291b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/headshots/5-480.2316964d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/headshots/5-960.8daf7f78.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/personal-brand/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a68c8c",
+    "avif": [
+      {
+        "path": "/images/portfolio/personal-brand/4-480.da2c2e85.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/4-960.8b265e9f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/personal-brand/4-480.74bd79a0.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/4-960.5ebda495.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/personal-brand/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#26260c",
+    "avif": [
+      {
+        "path": "/images/portfolio/personal-brand/5-480.81b8aa35.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/5-960.8d45d86f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/personal-brand/5-480.7d0c4303.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/personal-brand/5-960.4ecaea61.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/digital-nomad-headshots/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/4-480.a01bed96.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/4-960.f06d50d7.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/4-480.4088122d.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/4-960.7af5658b.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/digital-nomad-headshots/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/5-480.7b0b9f8b.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/5-960.768efe37.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/5-480.a8e367fc.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/digital-nomad-headshots/5-960.45eb8388.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/eventos-de-empresa/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/4-480.51f6a400.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/4-960.85ea2f1f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/4-480.006c5e66.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/4-960.3c226a4e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/eventos-de-empresa/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/5-480.c257182d.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/5-960.d59a848a.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/eventos-de-empresa/5-480.187976a6.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/eventos-de-empresa/5-960.768aef4c.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/real-estate/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6a6a6",
+    "avif": [
+      {
+        "path": "/images/portfolio/real-estate/4-480.de72843a.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/4-960.e3bf3cd9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/real-estate/4-480.1b878b5e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/4-960.2d15f9c5.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/real-estate/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0a68c",
+    "avif": [
+      {
+        "path": "/images/portfolio/real-estate/5-480.918db27c.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/5-960.cb98952b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/real-estate/5-480.abafe433.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/real-estate/5-960.7c740ec8.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/food/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a68c73",
+    "avif": [
+      {
+        "path": "/images/portfolio/food/4-480.c0292457.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/4-960.56fbc645.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/food/4-480.de1c2c26.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/4-960.6e27dc4b.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/food/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/food/5-480.2dac5e49.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/5-960.6738533b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/food/5-480.3a718a6e.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/food/5-960.34ad8481.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/book-de-modelo/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#a6c0d9",
+    "avif": [
+      {
+        "path": "/images/portfolio/book-de-modelo/4-480.962a16e4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/4-960.745892d9.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/book-de-modelo/4-480.6db4391c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/4-960.de81575f.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/book-de-modelo/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/book-de-modelo/5-480.ffa54a63.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/5-960.4cc2aba5.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/book-de-modelo/5-480.1b135f71.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/book-de-modelo/5-960.b113f5e2.webp",
+        "width": 960
+      }
+    ]
+  },
+  "services/finalistas": {
+    "width": 960,
+    "height": 640,
+    "color": "#d9d9d9",
+    "avif": [
+      {
+        "path": "/images/services/finalistas-480.11a3eae4.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/services/finalistas-960.19fe772c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/services/finalistas-480.376bd076.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/services/finalistas-960.321092cc.webp",
+        "width": 960
+      }
+    ],
+    "og": "/images/services/finalistas-og.jpg"
+  },
+  "portfolio/finalistas/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/finalistas/1-480.f23cd4d2.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/1-960.db48128f.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/finalistas/1-480.0302e40f.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/1-960.8680c6be.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/finalistas/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/finalistas/2-480.c5406db3.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/2-960.83218933.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/finalistas/2-480.67bc0719.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/2-960.1f67e642.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/finalistas/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#730c26",
+    "avif": [
+      {
+        "path": "/images/portfolio/finalistas/3-480.531ae51c.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/3-960.1101c65b.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/finalistas/3-480.6c554980.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/3-960.dfd0ff8e.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/finalistas/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#595959",
+    "avif": [
+      {
+        "path": "/images/portfolio/finalistas/4-480.1f2af673.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/4-960.ae01845d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/finalistas/4-480.bb670934.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/4-960.ae6711fd.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/finalistas/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/finalistas/5-480.3e207826.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/5-960.388c4b31.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/finalistas/5-480.585c570c.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/finalistas/5-960.122f00da.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/elopement/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#404026",
+    "avif": [
+      {
+        "path": "/images/portfolio/elopement/1-480.1c3ef5d2.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/1-960.982ac714.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/elopement/1-480.2b228663.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/1-960.4e03f195.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/elopement/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/elopement/2-480.d0b0e5b3.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/2-960.a63c8b1d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/elopement/2-480.9e9ad153.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/2-960.bf6681ab.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/elopement/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#c0c0c0",
+    "avif": [
+      {
+        "path": "/images/portfolio/elopement/3-480.d544d613.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/3-960.f089c45d.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/elopement/3-480.01cad840.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/3-960.4c99a51d.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/elopement/4": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/elopement/4-480.fad07448.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/4-960.324422b6.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/elopement/4-480.536f3757.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/4-960.d55cec76.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/elopement/5": {
+    "width": 960,
+    "height": 1440,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/elopement/5-480.e1ae52b8.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/5-960.228b4c84.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/elopement/5-480.53e6a031.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/elopement/5-960.8351a275.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/destination-wedding/1": {
+    "width": 960,
+    "height": 640,
+    "color": "#735959",
+    "avif": [
+      {
+        "path": "/images/portfolio/destination-wedding/1-480.fcd3d379.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/1-960.a9d7954c.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/destination-wedding/1-480.9d550730.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/1-960.aaaeaa78.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/destination-wedding/2": {
+    "width": 960,
+    "height": 640,
+    "color": "#f3f3f3",
+    "avif": [
+      {
+        "path": "/images/portfolio/destination-wedding/2-480.6ba670a5.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/2-960.5f0349df.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/destination-wedding/2-480.220b4ddb.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/2-960.fa05dde0.webp",
+        "width": 960
+      }
+    ]
+  },
+  "portfolio/destination-wedding/3": {
+    "width": 960,
+    "height": 640,
+    "color": "#262626",
+    "avif": [
+      {
+        "path": "/images/portfolio/destination-wedding/3-480.6c691f69.avif",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/3-960.3e01e6ce.avif",
+        "width": 960
+      }
+    ],
+    "webp": [
+      {
+        "path": "/images/portfolio/destination-wedding/3-480.02f8c7a9.webp",
+        "width": 480
+      },
+      {
+        "path": "/images/portfolio/destination-wedding/3-960.d17a0ac9.webp",
         "width": 960
       }
     ]

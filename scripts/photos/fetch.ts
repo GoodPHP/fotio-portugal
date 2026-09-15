@@ -23,6 +23,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import type { Manifest, SlotAssignment } from './select';
+import { SITE_NAME } from '../../src/lib/site';
+import { colourSpread, loadSpreads, saveSpreads } from './monochrome';
 
 const KEY = process.env.UNSPLASH_KEY;
 const ROOT = process.cwd();
@@ -42,8 +44,18 @@ const FORMATS = [
 /** Social scrapers do not negotiate a <picture>, so OG cards stay JPEG. */
 const OG = { width: 1200, height: 630, quality: 82 };
 
+/*
+ * Unsplash requires the referral parameters on every attribution link, and the
+ * source is the application name — so it is the brand, and it is derived from
+ * `SITE_NAME` rather than typed. It was typed, in lower case, which is how it
+ * survived `check-brand`: that gate's pattern was case-sensitive, so a rename
+ * would have left every photographer credit on the site pointing at the old
+ * brand's referral. The gate is case-insensitive now too.
+ */
+const UTM_SOURCE = SITE_NAME.toLowerCase();
+
 const utm = (url: string): string =>
-  `${url}${url.includes('?') ? '&' : '?'}utm_source=luzia&utm_medium=referral`;
+  `${url}${url.includes('?') ? '&' : '?'}utm_source=${UTM_SOURCE}&utm_medium=referral`;
 
 /**
  * `fetch` with a short backoff.
@@ -79,19 +91,42 @@ async function downloadSource(slot: SlotAssignment): Promise<Buffer> {
   const cached = join(SOURCES, `${slot.photoId}.jpg`);
   if (existsSync(cached)) return readFileSync(cached);
 
-  // The Unsplash API terms require this endpoint to be hit whenever a
-  // photograph is actually used. It is not a download: it registers the use.
-  if (KEY) {
-    await fetch(slot.downloadLocation, {
-      headers: { Authorization: `Client-ID ${KEY}`, 'Accept-Version': 'v1' },
-    }).catch(() => undefined);
-  }
-
   const url = `${slot.rawUrl}&w=${SOURCE_WIDTH}&q=85&fm=jpg&fit=max`;
   const response = await fetchWithRetry(url);
   const buffer = Buffer.from(await response.arrayBuffer());
   writeFileSync(cached, buffer);
   return buffer;
+}
+
+/* ---------------------------------------------------------------------------
+ * Registering a download with Unsplash.
+ *
+ * The API terms require `links.download_location` to be hit whenever a
+ * photograph is actually used, and a production key is not granted without it.
+ *
+ * This used to live inside `downloadSource`, fired only when the source was not
+ * already cached, and swallowed every error with `.catch(() => undefined)`.
+ * Both halves of that were wrong in the same direction. The trigger shares the
+ * hourly allowance with the search — 50 requests on a demo key against nearly
+ * two hundred photographs — so most of them failed; and because the source was
+ * cached by then, no later run would ever retry. A compliance obligation was
+ * being missed silently and permanently.
+ *
+ * So the registrations are a ledger instead. What has been registered is
+ * recorded, the run reports what is still outstanding, and re-running picks up
+ * the rest once the allowance resets — which is the same shape as the search
+ * command, for the same reason.
+ * ------------------------------------------------------------------------- */
+
+const TRIGGERS = join(ROOT, '.cache', 'unsplash-downloads.json');
+
+function loadTriggers(): Record<string, string> {
+  if (!existsSync(TRIGGERS)) return {};
+  try {
+    return JSON.parse(readFileSync(TRIGGERS, 'utf8')) as Record<string, string>;
+  } catch {
+    return {};
+  }
 }
 
 function encodeCacheKey(sourceHash: string, width: number, ext: string, quality: number): string {
@@ -216,7 +251,16 @@ async function main(): Promise<void> {
 
   const credits: Record<string, unknown> = {};
   const rendered: Record<string, Rendered[]> = {};
+  // Measured once per photograph and kept, so `select.ts` can avoid greyscale
+  // without ever opening an image itself. See scripts/photos/monochrome.ts.
+  const spreads = loadSpreads();
   const failed: { key: string; reason: string }[] = [];
+  const triggers = loadTriggers();
+  let registered = 0;
+  let pending = 0;
+  // Once the allowance is gone every further call is a wasted round trip, so
+  // the first refusal stops the rest of them for this run.
+  let allowanceSpent = false;
   let done = 0;
 
   for (const [key, slot] of entries) {
@@ -228,6 +272,36 @@ async function main(): Promise<void> {
       failed.push({ key, reason: error instanceof Error ? error.message : String(error) });
       continue;
     }
+
+    // The photograph is now genuinely in use, which is the moment the terms
+    // describe. A photograph in two slots is still one registration.
+    if (KEY && !triggers[slot.photoId]) {
+      if (allowanceSpent) {
+        pending += 1;
+      } else {
+        try {
+          const response = await fetch(slot.downloadLocation, {
+            headers: { Authorization: `Client-ID ${KEY}`, 'Accept-Version': 'v1' },
+          });
+          if (response.ok) {
+            triggers[slot.photoId] = new Date().toISOString();
+            registered += 1;
+          } else {
+            if (response.status === 403) allowanceSpent = true;
+            pending += 1;
+          }
+        } catch {
+          pending += 1;
+        }
+      }
+    }
+    if (spreads[slot.photoId] === undefined) {
+      const source = join(SOURCES, `${slot.photoId}.jpg`);
+      if (existsSync(source)) {
+        spreads[slot.photoId] = Math.round((await colourSpread(source)) * 10) / 10;
+      }
+    }
+
     credits[key] = {
       id: slot.photoId,
       description: slot.description,
@@ -255,7 +329,27 @@ async function main(): Promise<void> {
     )}\n`,
   );
 
+  saveSpreads(spreads);
+
+  mkdirSync(dirname(TRIGGERS), { recursive: true });
+  writeFileSync(TRIGGERS, `${JSON.stringify(triggers, null, 2)}\n`);
+
   writeImageManifest(manifest, rendered);
+
+  if (!KEY) {
+    console.warn(
+      '[photos:fetch] no UNSPLASH_KEY, so no download was registered with Unsplash.' +
+        ' Re-run with the key set before shipping these photographs.',
+    );
+  } else if (pending > 0) {
+    console.warn(
+      `[photos:fetch] ${registered} download(s) registered with Unsplash, ${pending} still` +
+        ' outstanding — the hourly allowance ran out. Re-run this command in an hour;' +
+        ' it resumes from the ledger and re-renders nothing.',
+    );
+  } else if (registered > 0) {
+    console.log(`[photos:fetch] ${registered} download(s) registered with Unsplash.`);
+  }
 
   console.log(
     `[photos:fetch] ${Object.keys(rendered).length}/${entries.length} slots rendered,` +
