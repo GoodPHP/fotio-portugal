@@ -180,10 +180,17 @@ export interface BlogPost {
   /** ISO date of the last substantive revision; emitted as `dateModified`. */
   updated?: string;
   readTime: string;
-  author: string;
+  /**
+   * A named writer, only when there is a real one. Absent means the article
+   * is published by the organisation, and is attributed to it.
+   */
+  author?: string;
   summary: Localized;
   content: Localized;
-  /** Root-relative cover image path, e.g. '/images/cities/paris.jpg'. */
+  /**
+   * Image slot for the cover, e.g. 'cities/douro'. A `cities/*` or
+   * `services/*` slot also has a 1200×630 share card, so use one of those.
+   */
   cover: string;
   /** Localized alt text for the cover image. */
   coverAlt: Localized;

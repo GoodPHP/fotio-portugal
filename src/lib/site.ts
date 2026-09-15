@@ -39,7 +39,7 @@ export const SITE_TAGLINE: Record<Locale, string> = {
 };
 
 /** Absolute site origin without trailing slash. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.luzia.pt').replace(/\/+$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.luzia.pics').replace(/\/+$/, '');
 
 /**
  * Prefix for the `<meta>` tags the language switcher reads.
@@ -108,6 +108,13 @@ export const SOCIAL_LINKS: string[] = [
   process.env.NEXT_PUBLIC_FACEBOOK_URL,
 ].filter((u): u is string => Boolean(u));
 
+/**
+ * X/Twitter handle including the "@", configured via env. Emitted as
+ * `twitter:site` only when set — a card naming an account that does not exist
+ * is worse than a card naming none.
+ */
+export const TWITTER_HANDLE = (process.env.NEXT_PUBLIC_TWITTER_HANDLE ?? '').trim();
+
 /** Build a WhatsApp click-to-chat deep link with a prefilled message. */
 export function whatsappLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -148,6 +155,22 @@ const DURATION_FORMAT: Record<Locale, (hours: number, rest: number) => string> =
 export function formatPrice(amount: number, locale: Locale = DEFAULT_LOCALE): string {
   const grouped = new Intl.NumberFormat(NUMBER_LOCALE[locale]).format(amount);
   return PRICE_FORMAT[locale](grouped);
+}
+
+/**
+ * A calendar date as the reader writes one: "15 September 2026",
+ * "15 de setembro de 2026". Read at noon UTC, so an ISO date never renders as
+ * the day before in a timezone west of Greenwich.
+ */
+export function formatDate(isoDate: string, locale: Locale = DEFAULT_LOCALE): string {
+  const date = new Date(`${isoDate.slice(0, 10)}T12:00:00Z`);
+  if (Number.isNaN(date.getTime())) return isoDate;
+  return new Intl.DateTimeFormat(HTML_LANG[locale], {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
 }
 
 /**

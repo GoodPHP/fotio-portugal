@@ -5,20 +5,22 @@ import { tx, type Locale, type Localized } from '@/lib/locales';
  * long-form passage that closes the page below the article list.
  *
  * The article count is interpolated from the catalogue rather than typed out,
- * so publishing a post cannot leave the copy claiming an old figure.
+ * so publishing a post cannot leave the copy claiming an old figure. The
+ * passage describes what the guides are *for* rather than listing articles, so
+ * it stays true as the list grows.
  *
  * Both languages are authored rather than translated.
  */
 
 /** ≤60 chars once the layout appends the brand suffix. */
 export const META_TITLE: Localized = {
-  en: 'Portugal Photography Guides — Spots, Permits, Seasons',
+  en: 'Portugal Photography Guides — Seasons, Spots, Style',
   pt: 'Guias de fotografia em Portugal',
 };
 
 const DESCRIPTION_TEMPLATE: Localized = {
-  en: '{count} guides from photographers who work these places weekly: Lisbon spots, Sintra permits, Douro harvest dates, Algarve tides, what to wear on calçada.',
-  pt: '{count} guias de quem fotografa estes sítios todas as semanas: locais em Lisboa, autorizações em Sintra, datas da vindima, marés no Algarve, o que calçar.',
+  en: '{count} guides from photographers who work Portugal every week: the month each place is at its best, what to wear on calçada, the hour a viewpoint is empty.',
+  pt: '{count} guias de quem fotografa Portugal todas as semanas: o melhor mês para cada sítio, o que vestir na calçada, a hora em que o miradouro está vazio.',
 };
 
 export function metaDescription(locale: Locale, postCount: number): string {
@@ -26,8 +28,8 @@ export function metaDescription(locale: Locale, postCount: number): string {
 }
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'Lisbon photographed at the hour these guides recommend',
-  pt: 'Lisboa fotografada à hora que estes guias recomendam',
+  en: 'Portugal photographed at the hour these guides recommend',
+  pt: 'Portugal fotografado à hora que estes guias recomendam',
 };
 
 export const SEO_PROSE = {
@@ -38,15 +40,15 @@ export const SEO_PROSE = {
   } as Localized,
   paragraphs: {
     en: [
-      'These are working notes rather than travel writing. Each one exists because the same question kept arriving in enquiries, and the answer was long enough to be worth writing down once: which direction a viewpoint faces, what a permit actually costs, which hour a place is still empty.',
-      'Several of them save real money. Photography rules in Portugal are set per site rather than nationally, and Sintra alone has two separate regimes because Quinta da Regaleira is not run by Parques de Sintra. Knowing that before you plan a morning around a palace is worth more than any amount of advice about composition.',
-      'Others are about timing, which is the thing people most often get wrong and the thing that costs nothing to get right. The Douro harvest is a week nobody can name in March. Madeira’s Fanal only works in fog. The Algarve’s best month is February and its worst is the one everybody books. Lisbon’s miradouros are finished by nine in July.',
+      'These are working notes rather than travel writing. Each one exists because the same question kept arriving in enquiries, and the answer was long enough to be worth writing down once: which direction a viewpoint faces, which month a place is at its best, which hour it is still empty.',
+      'They start with the two questions that arrive most often — when to come, and what to wear. Both sound like matters of taste and both are mostly logistics. A July session in Lisbon is finished by nine in the morning, and a heel on polished calçada is a twisted ankle waiting for the first staircase.',
+      'None of it is general advice about composition. Photography rules in Portugal are set site by site rather than nationally, the Douro harvest is a week nobody can name in March, and Madeira’s Fanal only works in fog. That is the kind of detail that decides whether a morning is worth planning around, and it is what these guides are for.',
       'If your question is not answered here, ask it directly — the answer usually turns into the next article.',
     ],
     pt: [
-      'Isto são notas de trabalho e não literatura de viagens. Cada uma existe porque a mesma pergunta continuava a chegar nos pedidos de orçamento, e a resposta era longa o suficiente para valer a pena escrevê-la uma vez: para onde está virado um miradouro, quanto custa de facto uma autorização, a que hora um sítio ainda está vazio.',
-      'Várias poupam dinheiro a sério. As regras de fotografia em Portugal são definidas local a local e não a nível nacional, e só Sintra tem dois regimes distintos porque a Quinta da Regaleira não é gerida pela Parques de Sintra. Saber isso antes de planear uma manhã à volta de um palácio vale mais do que qualquer conselho sobre composição.',
-      'Outras são sobre horários, que é aquilo em que as pessoas mais se enganam e aquilo que não custa nada acertar. A vindima no Douro é uma semana que ninguém consegue nomear em Março. O Fanal, na Madeira, só resulta com nevoeiro. O melhor mês do Algarve é Fevereiro e o pior é aquele que toda a gente marca. Os miradouros de Lisboa acabam às nove, em Julho.',
+      'Isto são notas de trabalho e não literatura de viagens. Cada uma existe porque a mesma pergunta continuava a chegar nos pedidos de orçamento, e a resposta era longa o suficiente para valer a pena escrevê-la uma vez: para onde está virado um miradouro, em que mês um sítio está no seu melhor, a que hora ainda está vazio.',
+      'Começam pelas duas perguntas que mais chegam — quando vir, e o que vestir. Ambas parecem questões de gosto e ambas são sobretudo logística. Uma sessão em Lisboa em Julho acaba às nove da manhã, e um salto na calçada polida é um tornozelo torcido à espera da primeira escadaria.',
+      'Nada disto é conselho genérico sobre composição. As regras de fotografia em Portugal são definidas local a local e não a nível nacional, a vindima no Douro é uma semana que ninguém consegue nomear em Março, e o Fanal, na Madeira, só resulta com nevoeiro. É esse o tipo de pormenor que decide se vale a pena planear uma manhã, e é para isso que estes guias servem.',
       'Se a sua pergunta não estiver aqui respondida, faça-a directamente — a resposta costuma dar o artigo seguinte.',
     ],
   } as Localized<string[]>,

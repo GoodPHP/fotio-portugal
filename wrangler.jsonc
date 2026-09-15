@@ -30,8 +30,8 @@
 	// deploy overwrites the remote configuration with this file, so a route that
 	// lives only in the dashboard is one bad deploy away from being dropped.
 	"routes": [
-		{ "pattern": "luzia.pt", "zone_name": "luzia.pt", "custom_domain": true },
-		{ "pattern": "www.luzia.pt", "zone_name": "luzia.pt", "custom_domain": true }
+		{ "pattern": "luzia.pics", "zone_name": "luzia.pics", "custom_domain": true },
+		{ "pattern": "www.luzia.pics", "zone_name": "luzia.pics", "custom_domain": true }
 	],
 	// No self-reference binding and no revalidation queue: every page is
 	// prerendered and nothing revalidates, so the Durable Object that used to

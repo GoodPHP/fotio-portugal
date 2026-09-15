@@ -5,6 +5,7 @@ import { publishedCities, publishedServices } from '@/lib/catalog';
 import { type Locale, tx } from '@/lib/locales';
 import { SITE_NAME, SOCIAL_LINKS, whatsappLink } from '@/lib/site';
 import { cityHref, serviceHref } from '@/lib/routes';
+import { LEGAL_PAGES_VISIBLE } from '@/lib/legal';
 import TileMark from './TileMark';
 
 /**
@@ -43,7 +44,7 @@ export default async function Footer() {
   };
 
   // Footer links appear site-wide, so only surface published pages.
-  const featuredServices = publishedServices().slice(0, 6);
+  const featuredServices = publishedServices(locale).slice(0, 6);
   const featuredCities = publishedCities().slice(0, 6);
   const year = new Date().getFullYear();
 
@@ -116,10 +117,17 @@ export default async function Footer() {
             </a>
           </div>
 
-          {/* Four columns on a grout grid: the wall, in miniature. */}
+          {/* Columns on a grout grid: the wall, in miniature. Three while the
+              legal pages are hidden, four once they are published. */}
           <nav
             aria-label="Footer"
-            className="grout grid-cols-2 md:grid-cols-4 lg:col-span-8"
+            className={`grout grid-cols-2 lg:col-span-8 ${
+              LEGAL_PAGES_VISIBLE
+                ? 'md:grid-cols-4'
+                : // An odd third column would leave an empty grout cell on the
+                  // two-up phone grid, so it takes the whole row there.
+                  'md:grid-cols-3 [&>:last-child]:col-span-2 md:[&>:last-child]:col-span-1'
+            }`}
           >
             {column(
               labels.services,
@@ -136,7 +144,7 @@ export default async function Footer() {
               { href: '/pricing', label: t('pricing') },
               { href: '/reviews', label: labels.reviews },
             ])}
-            {column(labels.legal, [
+            {LEGAL_PAGES_VISIBLE && column(labels.legal, [
               { href: '/legal/notice', label: labels.legalNotice },
               { href: '/legal/privacy', label: labels.privacy },
               { href: '/legal/terms', label: labels.terms },

@@ -18,6 +18,7 @@ import {
   publishedCities,
   publishedServices,
   publishedCuratedLeaves,
+  publishedBlogPosts,
   getServiceById,
   serviceSlug,
   serviceExistsIn,
@@ -32,6 +33,9 @@ import { SERVICE_SEO } from '../src/lib/data/service-seo';
 import { LEAF_SEO } from '../src/lib/data/leaf-seo';
 import { CURATED_LEAVES } from '../src/lib/curated';
 import { SITE_NAME } from '../src/lib/site';
+import { SERVICE_LANDING } from '../src/lib/data/service-landing';
+import { IMAGE_SLOTS } from '../src/lib/data/image-manifest';
+import { articleProblems, landingProblems } from '../src/lib/landing-check';
 
 const failures: string[] = [];
 const fail = (msg: string) => failures.push(msg);
@@ -217,6 +221,29 @@ for (const [key, seo] of Object.entries(LEAF_SEO)) {
     if (description.length > DESCRIPTION_MAX) {
       fail(`leaf ${key} (${locale}): description is ${description.length} chars, over ${DESCRIPTION_MAX}`);
     }
+  }
+}
+
+// 11. Every published service carries its conversion sections, complete in each
+// language it is sold in. A page without them still renders — the sections are
+// conditional — but it is a price card, not a page anyone books from.
+for (const service of publishedServices()) {
+  for (const locale of LOCALES) {
+    if (!serviceExistsIn(service, locale)) continue;
+    for (const problem of landingProblems(service, SERVICE_LANDING[service.slug], locale)) fail(problem);
+  }
+}
+
+// 12. Every published article fits the SERP limits and has a real share card.
+for (const post of publishedBlogPosts()) {
+  for (const locale of LOCALES) {
+    const problems = articleProblems(post, locale, {
+      brandSuffix: ` · ${SITE_NAME}`,
+      titleMax: TITLE_MAX,
+      descriptionMax: DESCRIPTION_MAX,
+      hasShareCard: (slot) => Boolean(IMAGE_SLOTS[slot]?.og),
+    });
+    for (const problem of problems) fail(problem);
   }
 }
 

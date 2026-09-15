@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { type Locale, tx } from '@/lib/locales';
-import { getCategoryLabel, publishedServices, publishedServicesByCategory } from '@/lib/catalog';
+import { getCategoryLabel, publishedServices, publishedServicesByCategory, serviceSlug } from '@/lib/catalog';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode, itemListNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
@@ -58,15 +58,17 @@ export default async function ServicesHubPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Only list published services so the catalogue never links to a 404.
-  const grouped = publishedServicesByCategory();
+  // Only list services published in this language, under this language's slug,
+  // so the catalogue never links to a 404.
+  const grouped = publishedServicesByCategory(locale);
   const categories: ServiceFilterCategory[] = Array.from(grouped.keys()).map((cat) => ({
     value: cat,
     label: getCategoryLabel(cat, locale),
   }));
 
-  const services: ServiceFilterItem[] = publishedServices().map((s) => ({
-    slug: s.slug,
+  const services: ServiceFilterItem[] = publishedServices(locale).map((s) => ({
+    id: s.slug,
+    slug: serviceSlug(s, locale),
     name: tx(s.name, locale),
     category: s.category,
     price: s.initialPrice,
@@ -90,7 +92,7 @@ export default async function ServicesHubPage({
       mainEntityId: catalogueId,
     }),
     itemListNode(
-      publishedServices().map((service) => ({
+      publishedServices(locale).map((service) => ({
         name: tx(service.name, locale),
         url: absoluteUrl(locale, '/services/[service]', serviceHref(service, locale).params),
         image: absoluteOgImage(ogImagePath(serviceSlot(service.slug))),

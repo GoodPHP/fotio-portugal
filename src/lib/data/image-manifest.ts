@@ -1891,24 +1891,24 @@ export const IMAGE_SLOTS: Readonly<Record<string, ImageSlot>> = {
   "services/couple": {
     "width": 960,
     "height": 640,
-    "color": "#a6c0d9",
+    "color": null,
     "avif": [
       {
-        "path": "/images/services/couple-480.8cfdc8df.avif",
+        "path": "/images/services/couple-480.db22a110.avif",
         "width": 480
       },
       {
-        "path": "/images/services/couple-960.4ee91981.avif",
+        "path": "/images/services/couple-960.2b69526f.avif",
         "width": 960
       }
     ],
     "webp": [
       {
-        "path": "/images/services/couple-480.e9e0ef96.webp",
+        "path": "/images/services/couple-480.3882b2ae.webp",
         "width": 480
       },
       {
-        "path": "/images/services/couple-960.575f2a21.webp",
+        "path": "/images/services/couple-960.e2c7bf16.webp",
         "width": 960
       }
     ],

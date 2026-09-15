@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { tx, type Locale } from '@/lib/locales';
 import { buildMetadata } from '@/lib/seo';
-import { LEGAL_DOCS } from '@/lib/legal';
+import { LEGAL_DOCS, LEGAL_PAGES_VISIBLE } from '@/lib/legal';
 import LegalDocument from '@/components/LegalDocument';
 
 const DOC = LEGAL_DOCS['complaints'];
@@ -14,6 +15,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
+  if (!LEGAL_PAGES_VISIBLE) return {};
   return buildMetadata({
     locale,
     route: ROUTE,
@@ -25,6 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
+  if (!LEGAL_PAGES_VISIBLE) notFound();
   setRequestLocale(locale);
   return <LegalDocument doc={DOC} locale={locale} />;
 }

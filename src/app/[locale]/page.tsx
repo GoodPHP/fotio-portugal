@@ -64,7 +64,7 @@ export default async function HomePage({ params }: HomePageProps) {
   // Featured grid + cities grid link out, so they must only show published pages.
   // One published service per category → up to six distinct category images.
   const seenCategories = new Set<string>();
-  const featuredServices = publishedServices().filter((s) => {
+  const featuredServices = publishedServices(locale).filter((s) => {
     if (seenCategories.has(s.category)) return false;
     seenCategories.add(s.category);
     return true;

@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { Link } from '@/i18n/navigation';
 
 interface PortfolioStickyCtaProps {
@@ -7,6 +8,8 @@ interface PortfolioStickyCtaProps {
   whatsappHref: string;
   /** Accessible label for the WhatsApp button. */
   whatsappLabel: string;
+  /** Where "Book now" goes; a service page passes the form with itself preselected. */
+  bookHref?: ComponentProps<typeof Link>['href'];
 }
 
 /**
@@ -26,6 +29,7 @@ export default function PortfolioStickyCta({
   bookLabel,
   whatsappHref,
   whatsappLabel,
+  bookHref = '/book',
 }: PortfolioStickyCtaProps) {
   return (
     /*
@@ -55,7 +59,7 @@ export default function PortfolioStickyCta({
         </svg>
       </a>
       <Link
-        href="/book"
+        href={bookHref}
         className="font-display flex items-center bg-brand-dark px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white"
       >
         {bookLabel}

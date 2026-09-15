@@ -1,5 +1,13 @@
 import type { Locale } from './locales';
-import { SITE_NAME, SITE_URL, SOCIAL_LINKS } from './site';
+import {
+  CURRENCY,
+  HTML_LANG,
+  SITE_COUNTRY,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+  SOCIAL_LINKS,
+} from './site';
 import { ORG_ID, WEBSITE_ID, businessId, serviceNodeId, offerId } from './jsonld-ids';
 
 type Node = Record<string, unknown>;
@@ -12,13 +20,18 @@ export function graph(nodes: Node[]): Node {
   };
 }
 
-export function organizationNode(): Node {
+export function organizationNode(locale: Locale): Node {
   return {
     '@type': 'Organization',
     '@id': ORG_ID,
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    description: SITE_TAGLINE[locale],
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+    // The whole network operates in one country; saying so is what lets an
+    // answer engine match "photographer in Portugal" to the organisation
+    // rather than only to the city nodes.
+    areaServed: { '@type': 'Country', name: 'Portugal' },
     // Omit `sameAs` entirely when no social URLs are configured, rather than
     // emitting an empty array (which validators flag).
     ...(SOCIAL_LINKS.length > 0 ? { sameAs: SOCIAL_LINKS } : {}),
@@ -31,7 +44,9 @@ export function websiteNode(locale: Locale): Node {
     '@id': WEBSITE_ID,
     url: SITE_URL,
     name: SITE_NAME,
-    inLanguage: locale,
+    // One WebSite node serves both languages under the same @id, so it lists
+    // both rather than whichever page happened to emit it.
+    inLanguage: Object.values(HTML_LANG),
     publisher: { '@id': ORG_ID },
   };
 }
@@ -122,7 +137,7 @@ export function professionalServiceNode({
     ...(photos.length > 0
       ? { photo: photos.map((contentUrl) => ({ '@type': 'ImageObject', contentUrl })) }
       : {}),
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     priceRange,
     parentOrganization: { '@id': ORG_ID },
     areaServed: served,
@@ -130,7 +145,7 @@ export function professionalServiceNode({
       '@type': 'PostalAddress',
       addressLocality: cityName,
       addressRegion: region,
-      addressCountry: 'FR',
+      addressCountry: SITE_COUNTRY,
     },
   };
 }
@@ -144,6 +159,8 @@ export interface ServiceOfferInput {
   url: string;
   citySlug?: string;
   areaServedName?: string;
+  /** Absolute URL of the service photograph. */
+  image?: string;
 }
 
 export function serviceOfferNode({
@@ -155,6 +172,7 @@ export function serviceOfferNode({
   url,
   citySlug,
   areaServedName,
+  image,
 }: ServiceOfferInput): Node {
   return {
     '@type': 'Service',
@@ -163,14 +181,23 @@ export function serviceOfferNode({
     description,
     serviceType: serviceName,
     url,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     provider: { '@id': ORG_ID },
-    ...(areaServedName ? { areaServed: { '@type': 'City', name: areaServedName } } : {}),
+    ...(image ? { image } : {}),
+    areaServed: areaServedName
+      ? { '@type': 'City', name: areaServedName }
+      : { '@type': 'Country', name: 'Portugal' },
     offers: {
       '@type': 'Offer',
       '@id': offerId(serviceSlug, citySlug),
-      price,
-      priceCurrency: 'EUR',
+      // A "from" price, stated as one — see `offerCatalogNode`. A bare
+      // `price` claims the session costs exactly this.
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        minPrice: price,
+        priceCurrency: CURRENCY,
+        valueAddedTaxIncluded: true,
+      },
       availability: 'https://schema.org/InStock',
       url,
     },
@@ -219,7 +246,8 @@ export interface ArticleInput {
   description: string;
   url: string;
   datePublished: string;
-  author: string;
+  /** A named writer. Absent means the article is the organisation's own. */
+  author?: string;
   locale: Locale;
   /** Absolute URL of the article cover image. */
   image?: string;
@@ -253,14 +281,23 @@ export function articleNode({
     // Google reads `dateModified` for freshness; fall back to the publish date
     // so the field is never absent or newer than the article itself.
     dateModified: dateModified ?? datePublished,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     ...(image ? { image } : {}),
     ...(section ? { articleSection: section } : {}),
     ...(wordCount && wordCount > 0 ? { wordCount } : {}),
-    author: { '@type': 'Person', name: author },
+    author: authorNode(author),
     publisher: { '@id': ORG_ID },
     isPartOf: { '@id': WEBSITE_ID },
   };
+}
+
+/**
+ * The writer, as structured data. An unsigned article is attributed to the
+ * organisation by reference rather than to a Person with the brand's name,
+ * which would assert a human who does not exist.
+ */
+function authorNode(author: string | undefined): Node {
+  return author ? { '@type': 'Person', name: author } : { '@id': ORG_ID };
 }
 
 /** Schema.org page subtypes we distinguish. Everything else is a plain WebPage. */
@@ -298,7 +335,7 @@ export function webPageNode({
     url,
     name,
     description,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     isPartOf: { '@id': WEBSITE_ID },
     ...(image ? { primaryImageOfPage: { '@type': 'ImageObject', contentUrl: image } } : {}),
     ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
@@ -370,7 +407,7 @@ export function imageGalleryNode({
     url,
     name,
     description,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     isPartOf: { '@id': WEBSITE_ID },
     associatedMedia: images.map((image) => ({
       '@type': 'ImageObject',
@@ -416,7 +453,7 @@ export function offerCatalogNode({
     '@id': id,
     name,
     url,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     numberOfItems: offers.length,
     provider: { '@id': ORG_ID },
     itemListElement: offers.map((offer, i) => ({
@@ -429,7 +466,7 @@ export function offerCatalogNode({
       priceSpecification: {
         '@type': 'PriceSpecification',
         minPrice: offer.price,
-        priceCurrency: 'EUR',
+        priceCurrency: CURRENCY,
         valueAddedTaxIncluded: true,
       },
     })),
@@ -440,7 +477,7 @@ export interface BlogPostSummary {
   headline: string;
   url: string;
   datePublished: string;
-  author: string;
+  author?: string;
   description?: string;
   /** Absolute URL of the cover image. */
   image?: string;
@@ -471,7 +508,7 @@ export function blogNode({
     url,
     name,
     description,
-    inLanguage: locale,
+    inLanguage: HTML_LANG[locale],
     publisher: { '@id': ORG_ID },
     isPartOf: { '@id': WEBSITE_ID },
     blogPost: posts.map((post) => ({
@@ -480,9 +517,9 @@ export function blogNode({
       url: post.url,
       mainEntityOfPage: { '@type': 'WebPage', '@id': post.url },
       datePublished: post.datePublished,
-      author: { '@type': 'Person', name: post.author },
+      author: authorNode(post.author),
       publisher: { '@id': ORG_ID },
-      inLanguage: locale,
+      inLanguage: HTML_LANG[locale],
       ...(post.description ? { description: post.description } : {}),
       ...(post.image ? { image: post.image } : {}),
       ...(post.section ? { articleSection: post.section } : {}),

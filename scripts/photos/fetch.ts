@@ -205,8 +205,12 @@ async function renderSlot(key: string, slot: SlotAssignment): Promise<Rendered[]
  * Worker — which is how galleries used to come back empty on exactly the pages
  * Next chose not to prerender.
  */
-function writeImageManifest(manifest: Manifest, rendered: Record<string, Rendered[]>): void {
-  const slots: Record<string, unknown> = {};
+function writeImageManifest(
+  manifest: Manifest,
+  rendered: Record<string, Rendered[]>,
+  base: Readonly<Record<string, unknown>> = {},
+): void {
+  const slots: Record<string, unknown> = { ...base };
 
   for (const [key, files] of Object.entries(rendered)) {
     const slot = manifest.slots[key];
@@ -243,13 +247,36 @@ async function main(): Promise<void> {
     process.exit(2);
   }
   const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8')) as Manifest;
-  const entries = Object.entries(manifest.slots);
+
+  /*
+   * `--only <slot key>…` re-renders just those slots and keeps every other
+   * slot's derivatives, credit and manifest entry as committed.
+   *
+   * Replacing one photograph should not require the source cache for the
+   * other hundred and ninety-one, which lives in `.cache/` and does not
+   * survive a fresh clone — without this, swapping a single card meant
+   * re-downloading and re-encoding the whole site.
+   */
+  const onlyIndex = process.argv.indexOf('--only');
+  const only = onlyIndex === -1 ? null : new Set(process.argv.slice(onlyIndex + 1));
+  const unknown = only ? [...only].filter((key) => !manifest.slots[key]) : [];
+  if (unknown.length > 0) {
+    console.error(`[photos:fetch] not in the manifest: ${unknown.join(', ')}`);
+    process.exit(2);
+  }
+  const entries = Object.entries(manifest.slots).filter(([key]) => !only || only.has(key));
   if (entries.length === 0) {
     console.error('The manifest is empty. Run `npm run photos:select` first.');
     process.exit(2);
   }
 
-  const credits: Record<string, unknown> = {};
+  const previousCredits =
+    only && existsSync(CREDITS)
+      ? (JSON.parse(readFileSync(CREDITS, 'utf8')) as { photos: Record<string, unknown> }).photos
+      : {};
+  const previousSlots = only ? (await import('../../src/lib/data/image-manifest')).IMAGE_SLOTS : {};
+
+  const credits: Record<string, unknown> = { ...previousCredits };
   const rendered: Record<string, Rendered[]> = {};
   // Measured once per photograph and kept, so `select.ts` can avoid greyscale
   // without ever opening an image itself. See scripts/photos/monochrome.ts.
@@ -334,7 +361,7 @@ async function main(): Promise<void> {
   mkdirSync(dirname(TRIGGERS), { recursive: true });
   writeFileSync(TRIGGERS, `${JSON.stringify(triggers, null, 2)}\n`);
 
-  writeImageManifest(manifest, rendered);
+  writeImageManifest(manifest, rendered, previousSlots);
 
   if (!KEY) {
     console.warn(

@@ -9,6 +9,9 @@ import { serviceSlot } from '@/lib/images';
 import { serviceHrefBySlug } from '@/lib/routes';
 
 export interface ServiceFilterItem {
+  /** Stable catalogue id: keys the list and names the image slot. */
+  id: string;
+  /** URL slug in the locale being rendered. */
   slug: string;
   name: string;
   category: string;
@@ -109,7 +112,7 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
         */
         <ul className="mt-10 border-t border-brand-rule">
           {filtered.map((s, i) => (
-            <li key={s.slug}>
+            <li key={s.id}>
               <Link
                 href={serviceHrefBySlug(s.slug)}
                 className="group grid grid-cols-[2.5rem_4.5rem_1fr_auto] items-center gap-x-4 border-b border-brand-rule py-4 pr-3 transition-colors hover:bg-brand-tile focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep sm:grid-cols-[3rem_6rem_1fr_10rem_auto] sm:gap-x-6 sm:py-5"
@@ -119,7 +122,7 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
                 </span>
                 <span className="relative aspect-[4/3] overflow-hidden border border-brand-rule">
                   <Picture
-                    slot={serviceSlot(s.slug)}
+                    slot={serviceSlot(s.id)}
                     alt=""
                     sizes="96px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

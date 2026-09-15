@@ -8,6 +8,7 @@ import NavActive from './NavActive';
 import TileMark from './TileMark';
 
 const NAV_LINKS = [
+  { href: '/', key: 'home' },
   { href: '/services', key: 'services' },
   { href: '/cities', key: 'cities' },
   { href: '/pricing', key: 'pricing' },

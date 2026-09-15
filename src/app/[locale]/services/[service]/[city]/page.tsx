@@ -9,6 +9,7 @@ import {
   localizedCityName,
   getServiceBySlug,
   serviceSlug,
+  serviceExistsIn,
   publishedLeafParams,
   isCuratedLeaf,
 } from '@/lib/catalog';
@@ -152,11 +153,13 @@ export default async function LeafPage({ params }: LeafPageProps) {
     pt: `Olá ${SITE_NAME}! Gostaria de reservar: ${serviceName} ${ptAt(city)}. Pode dar-me mais informações?`,
   }[locale];
 
-  // Related: other tailored services in the same city (published leaves only).
+  // Related: other tailored services in the same city (published leaves only),
+  // offered in this language — a city's topServices mix English-only and
+  // Portuguese-only sessions, whose leaves 404 in the other locale.
   const relatedServices = city.topServices
     .filter((slug) => slug !== service.slug && isLeafPublished(slug, city.slug))
     .map((slug) => getServiceById(slug))
-    .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s) && serviceExistsIn(s!, locale))
     .slice(0, 6);
 
   // Nearby: same service in other cities that prioritise it, then any others —

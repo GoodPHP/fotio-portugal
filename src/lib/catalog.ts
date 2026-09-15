@@ -183,8 +183,16 @@ export function getAggregateRating(): { ratingValue: number; reviewCount: number
 // their own publish check + notFound() to gate direct requests.
 // ---------------------------------------------------------------------------
 
-export function publishedServices(now?: Date): Service[] {
-  return SERVICES.filter((s) => isServicePublished(s.slug, now));
+/**
+ * Pass `locale` wherever the result is rendered as links. A service offered in
+ * one language only has no page in the other, so an unfiltered list links a
+ * Portuguese reader to /fotografo/portrait and an English one to
+ * /services/batizado — both 404.
+ */
+export function publishedServices(locale?: Locale, now?: Date): Service[] {
+  return SERVICES.filter(
+    (s) => isServicePublished(s.slug, now) && (!locale || serviceExistsIn(s, locale)),
+  );
 }
 
 export function publishedCities(now?: Date): City[] {
@@ -196,9 +204,9 @@ export function publishedBlogPosts(now?: Date): BlogPost[] {
 }
 
 /** Published services grouped by category, preserving SERVICES order. */
-export function publishedServicesByCategory(now?: Date): Map<ServiceCategory, Service[]> {
+export function publishedServicesByCategory(locale?: Locale, now?: Date): Map<ServiceCategory, Service[]> {
   const map = new Map<ServiceCategory, Service[]>();
-  for (const service of publishedServices(now)) {
+  for (const service of publishedServices(locale, now)) {
     const list = map.get(service.category) ?? [];
     list.push(service);
     map.set(service.category, list);
@@ -281,6 +289,8 @@ export function publishedCitiesForService(serviceSlug: string, now?: Date): City
 }
 
 /** Services for which the `service × city` leaf is published (live links only). */
-export function publishedServicesForCity(citySlug: string, now?: Date): Service[] {
-  return SERVICES.filter((s) => isLeafPublished(s.slug, citySlug, now));
+export function publishedServicesForCity(citySlug: string, locale?: Locale, now?: Date): Service[] {
+  return SERVICES.filter(
+    (s) => isLeafPublished(s.slug, citySlug, now) && (!locale || serviceExistsIn(s, locale)),
+  );
 }

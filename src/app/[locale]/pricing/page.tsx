@@ -80,7 +80,7 @@ export default async function PricingPage({
   setRequestLocale(locale);
 
   // Only show published services so the pricing table never links to a 404.
-  const grouped = publishedServicesByCategory();
+  const grouped = publishedServicesByCategory(locale);
 
   // A price table described only by a BreadcrumbList publishes no prices. The
   // catalogue is built from `grouped`, the same map the table renders, so the

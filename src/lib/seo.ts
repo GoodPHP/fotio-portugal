@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import type { Locale } from './locales';
 import { PUBLIC_IMAGES } from './data/public-images';
-import { META_ALT_PREFIX, OG_LOCALE, SITE_NAME, SITE_URL } from './site';
+import { META_ALT_PREFIX, OG_LOCALE, SITE_NAME, SITE_URL, TWITTER_HANDLE } from './site';
+import { LOCALES } from './locales';
 import {
   absoluteUrl,
   languageAlternates,
@@ -62,6 +63,14 @@ export interface BuildMetadataInput {
   ogImageAlt?: string;
   /** Open Graph type. Articles must say so; everything else is a website. */
   ogType?: 'website' | 'article';
+  /** `article:*` Open Graph properties. Only read when `ogType` is 'article'. */
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    section?: string;
+    /** Named writers; omitted for articles the organisation publishes itself. */
+    authors?: string[];
+  };
   /**
    * Keep the page crawlable and link-equity-passing, but out of the index.
    * Used by the long-tail service x city pages that have no authored copy.
@@ -87,6 +96,7 @@ export function buildMetadata({
   ogImage,
   ogImageAlt,
   ogType = 'website',
+  article,
   noindex = false,
 }: BuildMetadataInput): Metadata {
   const selfParams = alternates[locale];
@@ -129,16 +139,31 @@ export function buildMetadata({
   // Always emit a reachable og:image: the page photo if the file exists, else default.
   const relImage = ogImage ? resolvePublicImage(ogImage) : DEFAULT_OG_IMAGE;
   const isDefaultImage = relImage === DEFAULT_OG_IMAGE;
+  // Share cards rendered by `scripts/photos/fetch.ts` are cut to exactly the
+  // branded default's size, so their dimensions are known too. Stating them
+  // lets Facebook and LinkedIn draw the large card on the first share instead
+  // of fetching the image to measure it and showing a thumbnail meanwhile.
+  const isShareCard = isDefaultImage || /-og\.jpg$/.test(relImage);
   const imageUrl = absoluteOgImage(relImage);
   const imageAlt = ogImageAlt ?? ogTitle;
   const ogImages = [
     {
       url: imageUrl,
       alt: imageAlt,
-      // Dimensions are only known for the branded default; omit for photos.
-      ...(isDefaultImage ? { width: DEFAULT_OG_IMAGE_WIDTH, height: DEFAULT_OG_IMAGE_HEIGHT } : {}),
+      ...(isShareCard
+        ? {
+            width: DEFAULT_OG_IMAGE_WIDTH,
+            height: DEFAULT_OG_IMAGE_HEIGHT,
+            type: isDefaultImage ? 'image/png' : 'image/jpeg',
+          }
+        : {}),
     },
   ];
+  // The other languages this page exists in, from the same alternates that
+  // drive hreflang — never a locale where the page would 404.
+  const alternateLocale = LOCALES.filter((l) => l !== locale && alternates[l] !== undefined).map(
+    (l) => OG_LOCALE[l],
+  );
 
   return {
     metadataBase,
@@ -159,19 +184,30 @@ export function buildMetadata({
         }
       : {}),
     openGraph: {
-      type: ogType,
       url: canonical,
       title: ogTitle,
       description: clampedDescription,
       siteName: SITE_NAME,
       locale: OG_LOCALE[locale],
+      ...(alternateLocale.length > 0 ? { alternateLocale } : {}),
       images: ogImages,
+      ...(ogType === 'article' && article
+        ? {
+            type: 'article' as const,
+            publishedTime: article.publishedTime,
+            modifiedTime: article.modifiedTime ?? article.publishedTime,
+            ...(article.section ? { section: article.section } : {}),
+            ...(article.authors?.length ? { authors: article.authors } : {}),
+          }
+        : { type: ogType }),
     },
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
       description: clampedDescription,
-      images: [imageUrl],
+      // With alt text: X reads `twitter:image:alt` and nothing else for it.
+      images: [{ url: imageUrl, alt: imageAlt }],
+      ...(TWITTER_HANDLE ? { site: TWITTER_HANDLE } : {}),
     },
   };
 }

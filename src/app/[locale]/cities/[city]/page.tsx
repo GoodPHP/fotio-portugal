@@ -119,7 +119,7 @@ export default async function CityPage({ params }: CityPageProps) {
   // Services whose `service × city` leaf is published (live links only), ordered
   // with this city's curated topServices first, then the rest of the catalog.
   const topSet = new Set(city.topServices);
-  const liveServices = publishedServicesForCity(city.slug);
+  const liveServices = publishedServicesForCity(city.slug, locale);
   const liveSet = new Set(liveServices.map((s) => s.slug));
   const orderedServices = [
     ...city.topServices

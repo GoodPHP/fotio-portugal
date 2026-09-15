@@ -9,6 +9,9 @@ import {
   serviceExistsIn,
   getServiceById,
   isCuratedLeaf,
+  publishedServices,
+  publishedServicesByCategory,
+  publishedServicesForCity,
 } from './catalog';
 import { CURATED_LEAVES } from './curated';
 import { LOCALES } from './locales';
@@ -76,6 +79,36 @@ describe('the real catalogue', () => {
 
   test('an unknown id resolves to nothing', () => {
     assert.equal(getServiceById('not-a-service'), undefined);
+  });
+});
+
+describe('locale-filtered listings', () => {
+  // Every list rendered as links must hold only services with a page in that
+  // language, or the link 404s: /services/batizado, /fotografo/portrait.
+  for (const locale of LOCALES) {
+    test(`published services in ${locale} all exist in ${locale}`, () => {
+      const listed = publishedServices(locale);
+      assert.ok(listed.length > 0);
+      for (const s of listed) assert.ok(serviceExistsIn(s, locale), `${s.slug} is not offered in ${locale}`);
+      for (const list of publishedServicesByCategory(locale).values()) {
+        for (const s of list) assert.ok(serviceExistsIn(s, locale), `${s.slug} is not offered in ${locale}`);
+      }
+    });
+
+    test(`services listed on a city page in ${locale} all exist in ${locale}`, () => {
+      for (const city of CITIES) {
+        for (const s of publishedServicesForCity(city.slug, locale)) {
+          assert.ok(serviceExistsIn(s, locale), `${s.slug} in ${city.slug} is not offered in ${locale}`);
+        }
+      }
+    });
+  }
+
+  test('single-language services are dropped from the other language', () => {
+    const ptOnly = SERVICES.filter((s) => !serviceExistsIn(s, 'en'));
+    assert.ok(ptOnly.length > 0, 'expected at least one Portuguese-only service');
+    const enIds = new Set(publishedServices('en').map((s) => s.slug));
+    for (const s of ptOnly) assert.equal(enIds.has(s.slug), false, `${s.slug} leaked into en`);
   });
 });
 

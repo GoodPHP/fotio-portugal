@@ -33,6 +33,17 @@ import type { Localized } from './locales';
  *
  * Bodies use the Markdown subset in `src/lib/article.ts`.
  */
+
+/**
+ * Hidden until the TODO_ company details are real: every legal page 404s and
+ * the footer drops its Legal column. Flip back to `true` to publish them.
+ *
+ * Hiding them does not make the site compliant. The complaints book and a
+ * privacy policy are required of a consumer-facing business in Portugal that
+ * takes bookings, so this must be `true` before launch.
+ */
+export const LEGAL_PAGES_VISIBLE = false;
+
 export interface LegalDoc {
   /** Route key suffix and physical folder name. */
   slug: LegalSlug;

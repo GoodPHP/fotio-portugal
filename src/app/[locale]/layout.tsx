@@ -68,7 +68,7 @@ export default async function LocaleLayout({
         {/* Site-wide Organization + WebSite graph: every page's JSON-LD references
             these by @id (provider/parentOrganization/publisher), so emitting them
             once globally keeps those references resolvable across the site. */}
-        <JsonLd data={graph([organizationNode(), websiteNode(locale as Locale)])} />
+        <JsonLd data={graph([organizationNode(locale as Locale), websiteNode(locale as Locale)])} />
         {/*
           The provider stays, but without `messages`.
 

@@ -10,32 +10,32 @@ import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, articleNode, faqNode } from '@/lib/jsonld';
 import { wordCount } from '@/lib/article';
 import { absoluteUrl } from '@/lib/urls';
-import { SITE_NAME, SITE_URL } from '@/lib/site';
+import { absoluteOgImage, ogImagePath } from '@/lib/images';
+import { SITE_NAME, formatDate } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
 import ArticleBody from '@/components/ArticleBody';
-import { blogAlternateParams } from '@/lib/routes';
+import { blogAlternateParams, blogHref } from '@/lib/routes';
 
 const COPY = {
   blog: { en: 'Blog', pt: 'Blog' },
-  back: { en: 'All articles', pt: 'Todos os artigos' },
-  ctaTitle: { en: 'Turn inspiration into real photos', pt: 'Transforme a inspiração em fotografias' },
-  cta: { en: 'Book a session', pt: 'Reservar uma sessão' },
+  back: { en: 'All guides', pt: 'Todos os guias' },
+  ctaTitle: { en: 'Turn the plan into photographs', pt: 'Transforme o plano em fotografias' },
+  ctaText: {
+    en: 'Tell us the place and the date. A written quote within about two hours during the working day, and nothing to pay to ask.',
+    pt: 'Diga-nos o sítio e a data. Orçamento por escrito em cerca de duas horas durante o dia útil, e não paga nada para perguntar.',
+  },
+  cta: { en: 'Check your date', pt: 'Ver disponibilidade' },
+  services: { en: 'See the services', pt: 'Ver os serviços' },
   home: { en: 'Home', pt: 'Início' },
   toc: { en: 'In this guide', pt: 'Neste guia' },
   faq: { en: 'Frequently asked questions', pt: 'Perguntas frequentes' },
-  updated: { en: 'Updated on', pt: 'Actualizado a' },
+  updated: { en: 'Updated', pt: 'Actualizado' },
+  more: { en: 'More guides', pt: 'Mais guias' },
+  byline: { en: `By the ${SITE_NAME} photographers`, pt: `Pelos fotógrafos ${SITE_NAME}` },
 } as const;
 
 function c(key: keyof typeof COPY, locale: Locale): string {
   return (COPY[key] as Record<Locale, string>)[locale] ?? COPY[key].en;
-}
-
-function formatDate(date: string, locale: Locale): string {
-  try {
-    return new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(date));
-  } catch {
-    return date;
-  }
 }
 
 // Fully prerendered — see the note on the leaf route. Releasing the next batch
@@ -65,8 +65,16 @@ export async function generateMetadata({
     alternates: blogAlternateParams(post),
     title: `${tx(post.title, locale)} · ${SITE_NAME}`,
     description: tx(post.summary, locale),
-    ogImage: post.cover,
+    // `cover` is a slot key, not a path: the share card is what a scraper can read.
+    ogImage: ogImagePath(post.cover),
+    ogImageAlt: tx(post.coverAlt, locale),
     ogType: 'article',
+    article: {
+      publishedTime: post.date,
+      modifiedTime: post.updated,
+      section: post.section ? tx(post.section, locale) : undefined,
+      authors: post.author ? [post.author] : undefined,
+    },
   });
 }
 
@@ -88,17 +96,22 @@ export default async function BlogPostPage({
     question: tx(f.question, locale),
     answer: tx(f.answer, locale),
   }));
+  const url = absoluteUrl(locale, '/blog/[slug]', { slug });
+  const related = [...publishedBlogPosts()]
+    .filter((other) => other.slug !== slug)
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2);
 
   const jsonLd = graph([
     articleNode({
       headline: tx(post.title, locale),
       description: tx(post.summary, locale),
-      url: absoluteUrl(locale, '/blog/[slug]', { slug }),
+      url,
       datePublished: post.date,
       dateModified: post.updated,
       author: post.author,
       locale,
-      image: `${SITE_URL}${post.cover}`,
+      image: absoluteOgImage(ogImagePath(post.cover)),
       section: post.section ? tx(post.section, locale) : undefined,
       wordCount: wordCount(body),
     }),
@@ -107,12 +120,12 @@ export default async function BlogPostPage({
     breadcrumbNode([
       { name: c('home', locale), url: absoluteUrl(locale, '/') },
       { name: c('blog', locale), url: absoluteUrl(locale, '/blog') },
-      { name: tx(post.title, locale), url: absoluteUrl(locale, '/blog/[slug]', { slug }) },
+      { name: tx(post.title, locale), url },
     ]),
   ]);
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-20 sm:py-24">
+    <main className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
       <JsonLd data={jsonLd} />
       <Link
         href="/blog"
@@ -121,30 +134,31 @@ export default async function BlogPostPage({
         <span aria-hidden="true">←</span> {c('back', locale)}
       </Link>
 
-      <article className="mt-6">
+      <article className="mt-8">
         <header>
-          <div className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-brand-muted">
+          {post.section && <p className="eyebrow">{tx(post.section, locale)}</p>}
+          <h1 className="font-display mt-4 text-4xl font-bold leading-[1.02] tracking-[-0.02em] text-brand-dark sm:text-[3.5rem]">
+            {tx(post.title, locale)}
+          </h1>
+          <p className="mt-6 text-xl leading-relaxed text-brand-muted">{tx(post.summary, locale)}</p>
+          <p className="font-mono mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-brand-rule pt-5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-brand-muted">
+            <span>{post.author ?? c('byline', locale)}</span>
+            <span aria-hidden="true">·</span>
             <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
             {post.updated && (
               <>
                 <span aria-hidden="true">·</span>
-                <time dateTime={post.updated}>
-                  {c('updated', locale)} {formatDate(post.updated, locale)}
-                </time>
+                <span>
+                  {c('updated', locale)} <time dateTime={post.updated}>{formatDate(post.updated, locale)}</time>
+                </span>
               </>
             )}
             <span aria-hidden="true">·</span>
             <span>{post.readTime}</span>
-            <span aria-hidden="true">·</span>
-            <span>{post.author}</span>
-          </div>
-          <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-brand-dark sm:text-5xl">
-            {tx(post.title, locale)}
-          </h1>
-          <p className="mt-5 text-xl leading-relaxed text-brand-muted">{tx(post.summary, locale)}</p>
+          </p>
         </header>
 
-        <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-card bg-brand-cream">
+        <div className="relative mt-10 aspect-[16/9] overflow-hidden bg-brand-cream">
           <Picture
             slot={post.cover}
             alt={tx(post.coverAlt, locale)}
@@ -155,7 +169,7 @@ export default async function BlogPostPage({
           />
         </div>
 
-        <div className="mt-10 border-t border-brand-rule pt-8">
+        <div className="mt-10">
           <ArticleBody content={body} tocLabel={c('toc', locale)} />
         </div>
 
@@ -166,7 +180,7 @@ export default async function BlogPostPage({
             </h2>
             <dl className="mt-8 space-y-6">
               {faqs.map((faq) => (
-                <div key={faq.question} className="rounded-card border border-brand-rule bg-brand-tile p-7">
+                <div key={faq.question} className="border border-brand-rule bg-brand-tile p-7">
                   <dt className="font-display text-lg font-bold text-brand-dark">{faq.question}</dt>
                   <dd className="mt-2.5 leading-relaxed text-brand-dark">{faq.answer}</dd>
                 </div>
@@ -176,15 +190,56 @@ export default async function BlogPostPage({
         )}
       </article>
 
-      <aside className="mt-16 flex flex-col items-start justify-between gap-5 rounded-card bg-brand-orange-deep p-8 text-white sm:flex-row sm:items-center">
-        <h2 className="font-display text-xl font-bold">{c('ctaTitle', locale)}</h2>
-        <Link
-          href="/book"
-          className="btn btn-outline shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-        >
-          {c('cta', locale)}
-        </Link>
+      <aside
+        data-surface="dark"
+        aria-labelledby="post-cta"
+        className="mt-16 bg-brand-dark p-8 text-white sm:p-10"
+      >
+        <h2 id="post-cta" className="font-display text-2xl font-bold">
+          {c('ctaTitle', locale)}
+        </h2>
+        <p className="mt-3 leading-relaxed text-white/75">{c('ctaText', locale)}</p>
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <Link href="/book" className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            {c('cta', locale)}
+          </Link>
+          <Link href="/services" className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            {c('services', locale)}
+          </Link>
+        </div>
       </aside>
+
+      {related.length > 0 && (
+        <nav aria-labelledby="post-more" className="mt-16 border-t border-brand-rule pt-10">
+          <h2 id="post-more" className="font-display text-2xl font-bold text-brand-dark">
+            {c('more', locale)}
+          </h2>
+          <ul className="mt-6 grid gap-6 sm:grid-cols-2">
+            {related.map((other) => (
+              <li key={other.slug}>
+                <Link
+                  href={blogHref(other.slug)}
+                  className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                >
+                  <span className="relative block aspect-[3/2] overflow-hidden bg-brand-cream">
+                    <Picture
+                      slot={other.cover}
+                      alt=""
+                      sizes="(max-width: 640px) 100vw, 360px"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      fill
+                    />
+                  </span>
+                  <span className="font-display mt-4 block text-lg font-bold leading-snug text-brand-dark transition-colors group-hover:text-brand-orange-deep">
+                    {tx(other.title, locale)}
+                  </span>
+                  <span className="mt-1 block text-sm text-brand-muted">{other.readTime}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { LEGAL_PAGES_VISIBLE } from '../src/lib/legal';
 
 /** Every <link rel="alternate"> on the page, as hreflang -> href. */
 async function alternates(page: Page): Promise<Record<string, string>> {
@@ -38,9 +39,8 @@ test.describe('locale routing', () => {
       '/pt/precos',
       '/pt/sobre',
       '/pt/reservar',
-      '/pt/politica-de-privacidade',
-      '/pt/livro-de-reclamacoes',
-    ] as const) {
+      ...(LEGAL_PAGES_VISIBLE ? ['/pt/politica-de-privacidade', '/pt/livro-de-reclamacoes'] : []),
+    ]) {
       const response = await page.goto(path);
       expect(response?.status(), `${path} should be 200`).toBe(200);
       await expect(page.locator('h1').first()).toBeVisible();
@@ -255,11 +255,21 @@ test.describe('what the server sends', () => {
    * must make the electronic complaints book available.
    */
   test('the complaints book is linked from every page', async ({ page }) => {
+    test.skip(!LEGAL_PAGES_VISIBLE, 'legal pages are hidden (LEGAL_PAGES_VISIBLE) — required before launch');
     for (const url of ['/', '/pt', '/cities/porto', '/pt/precos']) {
       await page.goto(url);
       const link = page.locator('footer a[href$="livro-de-reclamacoes"], footer a[href$="/legal/complaints"]');
       await expect(link, `${url} must link the complaints book`).toHaveCount(1);
     }
+  });
+
+  test('hidden legal pages 404 and are not linked', async ({ page }) => {
+    test.skip(LEGAL_PAGES_VISIBLE, 'legal pages are published');
+    for (const path of ['/legal/privacy', '/legal/complaints', '/pt/politica-de-privacidade', '/pt/livro-de-reclamacoes']) {
+      expect((await page.goto(path))?.status(), `${path} should be hidden`).toBe(404);
+    }
+    await page.goto('/');
+    await expect(page.locator('footer a[href*="/legal/"], footer a[href$="livro-de-reclamacoes"]')).toHaveCount(0);
   });
 
   /**

@@ -13,8 +13,8 @@ import {
 } from '@/lib/catalog';
 import { isServicePublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { SITE_NAME, formatPrice, formatDuration } from '@/lib/site';
-import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
+import { SITE_NAME, formatPrice, formatDuration, whatsappLink } from '@/lib/site';
+import { serviceSlot, absoluteOgImage, ogImagePath, hasImage } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import {
@@ -26,12 +26,22 @@ import {
   itemListNode,
 } from '@/lib/jsonld';
 import { SERVICE_SEO } from '@/lib/data/service-seo';
+import { SERVICE_LANDING } from '@/lib/data/service-landing';
 import type { Service } from '@/lib/types';
 import JsonLd from '@/components/JsonLd';
 import Faq from '@/components/Faq';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
+import PortfolioStickyCta from '@/components/PortfolioStickyCta';
+import {
+  ServiceAudience,
+  ServiceCtaBand,
+  ServicePrepare,
+  ServiceProcess,
+  TrustList,
+  WhatsAppIcon,
+} from '@/components/ServiceLanding';
 import { portfolioImages } from '@/lib/portfolio';
 import { leafHref, serviceAlternateParams } from '@/lib/routes';
 
@@ -116,12 +126,21 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const description = serviceDescription(name, locale, tx(service.description ?? { en: '' }, locale) || undefined);
   const deliverables = tx(service.deliverables, locale);
   const categoryLabel = getCategoryLabel(service.category, locale);
+  const landing = SERVICE_LANDING[service.slug];
+  const price = formatPrice(service.initialPrice, locale);
   // Per-service portfolio gallery (empty until stock photos are fetched).
   const portfolio = portfolioImages(service.slug);
   // Only link to leaf pages (service × city) that are already published, so the
   // grid never points at a 404.
   const cities = publishedCitiesForService(service.slug);
 
+  // The booking form preselects the service, so the reader arrives at a form
+  // that already knows what they came for.
+  const bookHref = { pathname: '/book', query: { service: service.slug } } as const;
+
+  // Every reassurance here is a claim the site already makes elsewhere — the
+  // contact page's reply time, the booking page's weather policy and quote —
+  // so the service page cannot promise more than the terms do.
   const labels = {
     breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
     breadcrumbServices: { en: 'Services', pt: 'Serviços' }[locale],
@@ -136,22 +155,60 @@ export default async function ServicePage({ params }: ServicePageProps) {
     duration: { en: 'Duration', pt: 'Duração' }[locale],
     photos: { en: 'Edited photos', pt: 'Fotografias editadas' }[locale],
     book: { en: 'Book now', pt: 'Reservar' }[locale],
+    checkDate: { en: 'Check your date', pt: 'Ver disponibilidade' }[locale],
+    whatsapp: { en: 'Ask on WhatsApp', pt: 'Perguntar no WhatsApp' }[locale],
+    noDeposit: { en: 'No deposit to ask for a quote.', pt: 'Pedir orçamento não obriga a sinal.' }[locale],
+    trustLabel: { en: 'Booking terms', pt: 'Condições de reserva' }[locale],
+    trust: {
+      en: ['Reply within about two hours', 'Price agreed before the session', 'Free reschedule for bad weather'],
+      pt: ['Resposta em cerca de duas horas', 'Preço acordado antes da sessão', 'Remarcação grátis por mau tempo'],
+    }[locale],
+    audienceEyebrow: { en: 'Who it is for', pt: 'Para quem é' }[locale],
+    audienceHeading: { en: 'Who books this, and why', pt: 'Quem marca, e porquê' }[locale],
+    processEyebrow: { en: 'How it works', pt: 'Como funciona' }[locale],
+    processHeading: { en: 'From the first message to your gallery', pt: 'Da primeira mensagem à sua galeria' }[locale],
+    processNote: {
+      en: 'Four details — place, date, session and how to reach you — are enough for a written quote. Nothing to pay to ask.',
+      pt: 'Quatro dados — sítio, data, sessão e contacto — chegam para um orçamento por escrito. Não paga nada para perguntar.',
+    }[locale],
+    prepareEyebrow: { en: 'Before the session', pt: 'Antes da sessão' }[locale],
+    prepareHeading: { en: 'How to prepare', pt: 'Como se preparar' }[locale],
+    prepareIntro: {
+      en: 'Short, practical, and the part most people skip. None of it costs anything, and all of it shows in the photographs.',
+      pt: 'Curto, prático, e a parte que quase toda a gente salta. Nada disto custa dinheiro, e tudo se nota nas fotografias.',
+    }[locale],
+    ctaHeading: { en: `${name}, from ${price}`, pt: `${name}, desde ${price}` }[locale],
+    ctaText: {
+      en: 'Tell us the place and the date. You get a written quote within about two hours during the working day, and the price you are quoted is the price you pay.',
+      pt: 'Diga-nos o sítio e a data. Recebe um orçamento por escrito em cerca de duas horas durante o dia útil, e o preço indicado é o preço que paga.',
+    }[locale],
   };
 
-  const faqEntries = (service.faqs ?? []).map((f) => ({
+  const waHref = whatsappLink(
+    {
+      en: `Hi ${SITE_NAME}! I’d like to book: ${name}. Could you share availability?`,
+      pt: `Olá ${SITE_NAME}! Gostaria de reservar: ${name}. Que disponibilidade têm?`,
+    }[locale],
+  );
+
+  // Catalogue questions first, then the buyer's questions from the landing
+  // copy — one list, rendered once and emitted once as FAQPage.
+  const faqEntries = [...(service.faqs ?? []), ...(landing?.faqs ?? [])].map((f) => ({
     question: tx(f.question, locale),
     answer: tx(f.answer, locale),
   }));
 
   const url = absoluteUrl(locale, '/services/[service]', { service: serviceSlug(service, locale) });
   const citiesListId = `${url}#cities`;
+  const slot = serviceSlot(service.slug);
+  const image = hasImage(slot) ? absoluteOgImage(ogImagePath(slot)) : undefined;
   const jsonLd = graph([
     webPageNode({
       url,
       name: serviceMetaTitle(service, name, locale),
       description: serviceMetaDescription(service, name, locale),
       locale,
-      image: absoluteOgImage(ogImagePath(serviceSlot(service.slug))),
+      image,
       mainEntityId: citiesListId,
     }),
     serviceOfferNode({
@@ -161,6 +218,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       price: service.initialPrice,
       locale,
       url,
+      image,
     }),
     // Built from `cities`, the array the grid renders, so the list cannot
     // advertise a leaf the page does not link to.
@@ -205,7 +263,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <FadeIn instant className="mt-6">
               <div className="relative isolate mb-7 flex aspect-[16/9] flex-col justify-end overflow-hidden rounded-card p-6 text-white sm:p-8">
                 <Picture
-                  slot={serviceSlot(service.slug)}
+                  slot={slot}
                   alt={name}
                   sizes="(max-width: 1024px) 100vw, 700px"
                   className="absolute inset-0 -z-10 object-cover"
@@ -218,7 +276,28 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <h1 id="service-heading" className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-brand-dark sm:text-6xl">
                 {name}
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-dark">{description}</p>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-dark">
+                {landing ? tx(landing.promise, locale) : description}
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href={bookHref}
+                  className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                >
+                  {labels.checkDate}
+                </Link>
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                >
+                  <WhatsAppIcon />
+                  {labels.whatsapp}
+                </a>
+              </div>
+              <TrustList items={labels.trust} label={labels.trustLabel} />
             </FadeIn>
 
             {/* What's included */}
@@ -241,7 +320,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <FadeIn instant delay={0.15} className="lg:col-span-5">
             <aside data-surface="dark" aria-label="Pricing" className="sticky top-24 rounded-card bg-brand-dark p-8 text-white">
               <p className="text-sm text-brand-muted">{labels.from}</p>
-              <p className="mt-1 font-display text-5xl font-bold">{formatPrice(service.initialPrice, locale)}</p>
+              <p className="mt-1 font-display text-5xl font-bold">{price}</p>
 
               <dl className="mt-8 space-y-4 border-t border-white/10 pt-6">
                 <div className="flex items-center justify-between">
@@ -255,15 +334,34 @@ export default async function ServicePage({ params }: ServicePageProps) {
               </dl>
 
               <Link
-                href="/book"
+                href={bookHref}
                 className="btn btn-primary mt-8 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {labels.book}
               </Link>
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline mt-3 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <WhatsAppIcon />
+                {labels.whatsapp}
+              </a>
+              <p className="mt-4 text-center text-xs text-brand-muted">{labels.noDeposit}</p>
             </aside>
           </FadeIn>
         </div>
       </section>
+
+      {landing && (
+        <ServiceAudience
+          headingId="service-audience-heading"
+          eyebrow={labels.audienceEyebrow}
+          heading={labels.audienceHeading}
+          points={tx(landing.audience, locale)}
+        />
+      )}
 
       {/* Service portfolio gallery */}
       <PortfolioGrid
@@ -274,6 +372,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
         alt={name}
         locale={locale}
       />
+
+      {landing && (
+        <ServiceProcess
+          headingId="service-process-heading"
+          eyebrow={labels.processEyebrow}
+          heading={labels.processHeading}
+          steps={tx(landing.process, locale)}
+          cta={{ href: bookHref, label: labels.checkDate, note: labels.processNote }}
+        />
+      )}
+
+      {landing && (
+        <ServicePrepare
+          headingId="service-prepare-heading"
+          eyebrow={labels.prepareEyebrow}
+          heading={labels.prepareHeading}
+          intro={labels.prepareIntro}
+          items={tx(landing.prepare, locale)}
+        />
+      )}
 
       {/* Cities grid */}
       <section aria-labelledby="service-cities-heading" className="bg-brand-sand py-16">
@@ -311,7 +429,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           heading={tx(seoProse.heading, locale)}
           paragraphs={tx(seoProse.paragraphs, locale)}
           facts={[
-            { label: labels.from, value: formatPrice(service.initialPrice, locale) },
+            { label: labels.from, value: price },
             { label: labels.duration, value: formatDuration(service.durationMinutes, locale) },
             { label: labels.photos, value: `${service.editedPhotos}` },
             {
@@ -323,6 +441,29 @@ export default async function ServicePage({ params }: ServicePageProps) {
       )}
 
       <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
+
+      <ServiceCtaBand
+        headingId="service-cta-heading"
+        heading={labels.ctaHeading}
+        text={labels.ctaText}
+        bookHref={bookHref}
+        bookLabel={labels.checkDate}
+        whatsappHref={waHref}
+        whatsappLabel={labels.whatsapp}
+      />
+
+      {/*
+        Below desktop only. On a wide screen the price card is already sticky
+        beside the content, and a second pinned bar would sit on top of it.
+      */}
+      <div className="lg:hidden">
+        <PortfolioStickyCta
+          bookHref={bookHref}
+          bookLabel={labels.book}
+          whatsappHref={waHref}
+          whatsappLabel={labels.whatsapp}
+        />
+      </div>
     </main>
   );
 }
