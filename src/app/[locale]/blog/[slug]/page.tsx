@@ -170,7 +170,7 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mt-10">
-          <ArticleBody content={body} tocLabel={c('toc', locale)} />
+          <ArticleBody content={body} tocLabel={c('toc', locale)} locale={locale} />
         </div>
 
         {faqs.length > 0 && (

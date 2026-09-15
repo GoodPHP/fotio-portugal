@@ -8,9 +8,10 @@ import {
   type TocEntry,
 } from '@/lib/article';
 import { contentHref } from '@/lib/routes';
+import type { Locale } from '@/lib/locales';
 
 /** Render inline `**bold**` and `[label](href)` markup as React nodes. */
-function Inline({ text }: { text: string }): ReactNode {
+function Inline({ text, locale }: { text: string; locale: Locale }): ReactNode {
   return parseInline(text).map((token, i) => {
     if (token.type === 'bold') {
       return (
@@ -32,7 +33,7 @@ function Inline({ text }: { text: string }): ReactNode {
         );
       }
       // Prose is authored with English paths; re-localize them for the reader.
-      const internal = contentHref(token.href);
+      const internal = contentHref(token.href, locale);
       return internal ? (
         <Link key={i} href={internal} className={className}>
           {token.text}
@@ -47,7 +48,7 @@ function Inline({ text }: { text: string }): ReactNode {
   });
 }
 
-function Block({ block }: { block: ArticleBlock }) {
+function Block({ block, locale }: { block: ArticleBlock; locale: Locale }) {
   switch (block.type) {
     case 'heading':
       return block.level === 2 ? (
@@ -67,7 +68,7 @@ function Block({ block }: { block: ArticleBlock }) {
       const className = 'mt-5 space-y-2.5 pl-5 leading-relaxed text-brand-dark';
       const items = block.items.map((item, i) => (
         <li key={i} className="pl-1.5 marker:font-semibold marker:text-brand-orange-deep">
-          <Inline text={item} />
+          <Inline text={item} locale={locale} />
         </li>
       ));
       return block.ordered ? (
@@ -90,7 +91,7 @@ function Block({ block }: { block: ArticleBlock }) {
                     scope="col"
                     className="font-mono px-4 py-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-brand-dark"
                   >
-                    <Inline text={cell} />
+                    <Inline text={cell} locale={locale} />
                   </th>
                 ))}
               </tr>
@@ -100,7 +101,7 @@ function Block({ block }: { block: ArticleBlock }) {
                 <tr key={r} className="border-t border-brand-rule align-top">
                   {row.map((cell, c) => (
                     <td key={c} className="px-4 py-3 text-brand-dark">
-                      <Inline text={cell} />
+                      <Inline text={cell} locale={locale} />
                     </td>
                   ))}
                 </tr>
@@ -113,14 +114,14 @@ function Block({ block }: { block: ArticleBlock }) {
     case 'callout':
       return (
         <aside className="mt-7 border border-brand-rule border-l-[3px] border-l-brand-orange-deep bg-brand-tile px-6 py-5 leading-relaxed text-brand-dark">
-          <Inline text={block.text} />
+          <Inline text={block.text} locale={locale} />
         </aside>
       );
 
     default:
       return (
         <p className="mt-5 leading-relaxed text-brand-dark">
-          <Inline text={block.text} />
+          <Inline text={block.text} locale={locale} />
         </p>
       );
   }
@@ -155,7 +156,16 @@ function TableOfContents({ entries, label }: { entries: TocEntry[]; label: strin
  * Render a blog post body from its authored Markdown subset, preceded by a
  * table of contents on long-form articles (see `src/lib/article.ts`).
  */
-export default function ArticleBody({ content, tocLabel }: { content: string; tocLabel: string }) {
+export default function ArticleBody({
+  content,
+  tocLabel,
+  locale,
+}: {
+  content: string;
+  tocLabel: string;
+  /** The reader's language: internal links in the prose are localized to it. */
+  locale: Locale;
+}) {
   const blocks = parseArticle(content);
   const toc = tableOfContents(blocks);
 
@@ -163,7 +173,7 @@ export default function ArticleBody({ content, tocLabel }: { content: string; to
     <>
       {toc.length > 0 && <TableOfContents entries={toc} label={tocLabel} />}
       {blocks.map((block, i) => (
-        <Block key={i} block={block} />
+        <Block key={i} block={block} locale={locale} />
       ))}
     </>
   );

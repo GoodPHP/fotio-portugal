@@ -20,7 +20,7 @@ export default function LegalDocument({ doc, locale }: { doc: LegalDoc; locale: 
         </p>
       </header>
       <div className="mt-2">
-        <ArticleBody content={tx(doc.body, locale)} tocLabel={locale === 'pt' ? 'Índice' : 'Contents'} />
+        <ArticleBody content={tx(doc.body, locale)} tocLabel={locale === 'pt' ? 'Índice' : 'Contents'} locale={locale} />
       </div>
     </main>
   );

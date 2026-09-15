@@ -9,7 +9,7 @@
  */
 import type { BlogPost, City, Service } from './types';
 import { LOCALES, type Locale } from './locales';
-import { serviceSlug, serviceLocales } from './catalog';
+import { getServiceById, serviceExistsIn, serviceSlug, serviceLocales } from './catalog';
 import type { AlternateParams } from './urls';
 
 /** Locales a service page exists in, with its slug in each. */
@@ -120,25 +120,31 @@ export type ContentHref =
  *
  * Content is authored with English paths, because that is what the writer sees
  * in the address bar. Handing that string straight to `<Link>` would send a
- * French reader to an English URL, so it is parsed back into a route key and
- * params and re-localized at render.
+ * Portuguese reader to an English URL, so it is parsed back into a route key
+ * and params and re-localized at render.
  *
- * Returns null for anything unrecognized, which the caller renders as a plain
- * anchor rather than guessing.
+ * Localizing the route key is not enough on its own: the service segment is a
+ * catalogue id, and a Portuguese article linking `/services/family` needs
+ * `/fotografo/fotografo-de-familia`, not `/fotografo/family`, which 404s.
+ *
+ * Returns null for anything unrecognized, and for a service with no page in
+ * `locale`, which the caller renders as a plain anchor rather than guessing.
  */
-export function contentHref(path: string): ContentHref | null {
+export function contentHref(path: string, locale: Locale): ContentHref | null {
   const clean = path.split('#')[0].split('?')[0].replace(/\/+$/, '') || '/';
   if (isStaticRoute(clean)) return clean;
 
   const parts = clean.split('/').filter(Boolean);
   if (parts.length === 2 && parts[0] === 'cities') return cityHrefBySlug(parts[1]);
   if (parts.length === 2 && parts[0] === 'blog') return blogHref(parts[1]);
-  if (parts.length === 2 && parts[0] === 'services') return serviceHrefBySlug(parts[1]);
-  if (parts.length === 3 && parts[0] === 'services') {
-    return {
-      pathname: '/services/[service]/[city]',
-      params: { service: parts[1], city: parts[2] },
-    } as const;
-  }
-  return null;
+  if (parts[0] !== 'services' || (parts.length !== 2 && parts.length !== 3)) return null;
+
+  const service = getServiceById(parts[1]);
+  if (!service || !serviceExistsIn(service, locale)) return null;
+  const slug = serviceSlug(service, locale);
+  if (parts.length === 2) return serviceHrefBySlug(slug);
+  return {
+    pathname: '/services/[service]/[city]',
+    params: { service: slug, city: parts[2] },
+  } as const;
 }
