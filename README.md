@@ -156,6 +156,9 @@ ROLLOUT_WINDOW_DAYS  days over which every leaf releases (default 45)
 - Fill every `TODO_` in `src/lib/legal.ts` — NIF/NIPC, registered office,
   commercial registry, IVA status, host, and the RAL body required by
   DL 144/2015. `npm run check:legal` lists them.
+- **Delete `ALLOW_LEGAL_TODO` from `netlify.toml`.** The Netlify preview builds
+  over those placeholders; nothing public may. Removing it is what proves the
+  line above was actually done, because the build fails again until it was.
 - Have a Portuguese lawyer read the terms of sale, particularly the
   DL 24/2014 art. 17(1)(l) carve-out the fixed-date booking model rests on.
 - Set `ROLLOUT_START` to the launch date.
@@ -168,6 +171,11 @@ ROLLOUT_WINDOW_DAYS  days over which every leaf releases (default 45)
 ```bash
 npm run deploy    # builds and pushes to Cloudflare Workers
 ```
+
+Cloudflare is the real target. A Netlify site builds the same commit as a
+preview — plain `next build` through `@netlify/plugin-nextjs`, configured in
+`netlify.toml` — and it is a preview in the literal sense: it builds over the
+unfinished legal documents, so it must not be the address anyone is given.
 
 Secrets are not in the repository. `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`
 are set with `wrangler secret put` and read at runtime. Security headers are

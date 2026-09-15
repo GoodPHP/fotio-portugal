@@ -1,0 +1,38 @@
+# Netlify build configuration.
+#
+# The site's real deploy target is Cloudflare Workers — `npm run deploy` runs
+# `opennextjs-cloudflare`, and wrangler.jsonc holds the routes. This file exists
+# for the Netlify preview that runs alongside it, which builds plain Next
+# (`npm run build:next`) and serves it through @netlify/plugin-nextjs.
+
+[build]
+  command = "npm run build:next"
+  publish = ".next"
+
+[build.environment]
+  # Pinned because the README requires it and Netlify's default has moved twice.
+  # tsx, next-intl and the build gates all assume it.
+  NODE_VERSION = "22"
+
+  # ---------------------------------------------------------------------------
+  # DELETE THIS BEFORE THE SITE IS PUBLIC.
+  #
+  # `check-legal` refuses to build while a TODO_ placeholder survives in a legal
+  # document, and sixteen do: NIF, legal name, registered office, commercial
+  # registry, share capital, IVA status, host, and the RAL arbitration body that
+  # DL 144/2015 obliges a consumer-facing provider in Portugal to name. A site
+  # that takes bookings without them is not merely unpolished, it is
+  # non-compliant — which is the whole reason the gate stops a build rather than
+  # printing a warning.
+  #
+  # The flag is set here rather than in the Netlify dashboard on purpose. In the
+  # dashboard it is invisible from the repository and nobody reviewing the code
+  # would ever learn that the legal pages are unfinished; here it is in the diff,
+  # it is in the "Before going live" list in README.md, and removing it is a
+  # commit rather than a setting nobody remembers to look at.
+  #
+  # `npm run deploy` — the Cloudflare path, the one that serves real traffic —
+  # deliberately does not set this. Production still fails until the details are
+  # real.
+  # ---------------------------------------------------------------------------
+  ALLOW_LEGAL_TODO = "1"
