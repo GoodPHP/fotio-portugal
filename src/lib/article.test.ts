@@ -45,22 +45,22 @@ test('parseArticle gives repeated headings unique anchors', () => {
 });
 
 test('parseArticle reads a table with its header row', () => {
-  const blocks = parseArticle('| Ville | Prix |\n| --- | --- |\n| Paris | €350 |\n| Annecy | €420 |');
+  const blocks = parseArticle('| Cidade | Preço |\n| --- | --- |\n| Lisboa | €350 |\n| Porto | €420 |');
   assert.deepEqual(blocks[0], {
     type: 'table',
-    head: ['Ville', 'Prix'],
-    rows: [['Paris', '€350'], ['Annecy', '€420']],
+    head: ['Cidade', 'Preço'],
+    rows: [['Lisboa', '€350'], ['Porto', '€420']],
   });
 });
 
 test('parseArticle falls back to a paragraph for a malformed table', () => {
-  const blocks = parseArticle('| Ville | Prix |\n| Paris | €350 |');
+  const blocks = parseArticle('| Cidade | Preço |\n| Lisboa | €350 |');
   assert.equal(blocks[0].type, 'paragraph');
 });
 
 test('parseArticle reads a callout', () => {
-  assert.deepEqual(parseArticle('> Nota bene.\n> Seconda riga.'), [
-    { type: 'callout', text: 'Nota bene. Seconda riga.' },
+  assert.deepEqual(parseArticle('> Nota bene.\n> Segunda linha.'), [
+    { type: 'callout', text: 'Nota bene. Segunda linha.' },
   ]);
 });
 

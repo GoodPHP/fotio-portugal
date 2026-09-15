@@ -34,13 +34,36 @@ const EXTENSIONS = new Set(['.ts', '.tsx', '.js', '.mjs', '.jsonc', '.json', '.c
  * canonical, a wrong sitemap entry or a wrong JSON-LD @id, none of which show
  * up as a broken page.
  */
-const BANNED: { pattern: RegExp; why: string }[] = [
+interface Rule {
+  pattern: RegExp;
+  why: string;
+  /**
+   * Files this one rule tolerates.
+   *
+   * Per-rule rather than per-file, because the two places that must spell the
+   * brand — the Cloudflare route and the npm package name — are also the two
+   * places a *stale* brand would be most expensive, and a blanket file
+   * allowance would stop the gate looking for the old names there at all.
+   */
+  allow?: string[];
+}
+
+const BANNED: Rule[] = [
   // The current brand, not only the previous one. Otherwise the rule decays
   // into "the brand we already renamed lives in one place", and the next
   // rename is the same hunt through eighteen files.
   {
-    pattern: new RegExp(`\\b${SITE_NAME}\\b`),
+    // Case-insensitive on purpose. The first version was not, and a lower-case
+    // `utm_source=<brand>` in the photo fetcher sat in the repository for the
+    // whole rebuild without the gate noticing — a rename would have kept every
+    // photographer credit pointing at the previous brand's referral.
+    pattern: new RegExp(`\\b${SITE_NAME}\\b`, 'i'),
     why: 'the brand name — import SITE_NAME from src/lib/site.ts',
+    // Neither can import a TypeScript constant: one is Cloudflare's route
+    // table and the other is the package manifest. The README lists both as
+    // things to change by hand at launch, and this is what keeps that list
+    // honest — every other spelling of the brand still fails.
+    allow: ['wrangler.jsonc', 'package.json'],
   },
   { pattern: /\bylala\b/i, why: 'old brand name — import SITE_NAME from src/lib/site.ts' },
   { pattern: /\bylala\.art\b/i, why: 'old domain — set NEXT_PUBLIC_SITE_URL instead' },
@@ -90,6 +113,7 @@ function main(): void {
 
   const failures: string[] = [];
   const usedAllowances = new Set<string>();
+  const usedRuleAllowances = new Set<string>();
 
   for (const abs of files) {
     const rel = relative(ROOT, abs);
@@ -100,11 +124,15 @@ function main(): void {
       continue;
     }
     const lines = content.split('\n');
-    for (const { pattern, why } of BANNED) {
+    for (const { pattern, why, allow } of BANNED) {
       lines.forEach((line, i) => {
         if (!pattern.test(line)) return;
         if (ALLOWED.has(rel)) {
           usedAllowances.add(rel);
+          return;
+        }
+        if (allow?.includes(rel)) {
+          usedRuleAllowances.add(`${why}::${rel}`);
           return;
         }
         failures.push(`${rel}:${i + 1}  ${line.trim().slice(0, 90)}\n    → ${why}`);
@@ -114,7 +142,15 @@ function main(): void {
 
   // An allowance nobody needs is a line of stale bookkeeping that makes the
   // list look like more work is left than there is.
-  const stale = [...ALLOWED].filter((f) => f !== 'src/lib/site.ts' && !usedAllowances.has(f));
+  const stale = [
+    ...[...ALLOWED].filter((f) => f !== 'src/lib/site.ts' && !usedAllowances.has(f)),
+    // A per-rule allowance rots the same way, so it is held to the same rule.
+    ...BANNED.flatMap(({ why, allow }) =>
+      (allow ?? [])
+        .filter((f) => !usedRuleAllowances.has(`${why}::${f}`))
+        .map((f) => `${f} (for: ${why})`),
+    ),
+  ];
 
   if (failures.length > 0) {
     console.error(`[check-brand] ${failures.length} occurrence(s) outside src/lib/site.ts:\n`);

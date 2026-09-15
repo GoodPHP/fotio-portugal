@@ -63,7 +63,7 @@ test('clampTitle preserves a brand already inside the title and trims the lead',
 
 test('clampTitle accounts for a brand suffix the layout will append', () => {
   // Non-absolute title; the layout appends " | <brand>" later.
-  const title = 'Professional Wedding Photography Session — Professional photographer in France';
+  const title = 'Professional Wedding Photography Session — Professional photographer in Portugal';
   const suffix = ` | ${SITE_NAME}`;
   const result = clampTitle(title, { brandSuffixLen: suffix.length, max: TITLE_MAX });
   assert.ok(result.length + suffix.length <= TITLE_MAX,
@@ -72,6 +72,6 @@ test('clampTitle accounts for a brand suffix the layout will append', () => {
 
 test('clampTitle leaves a short branded title untouched', () => {
   const brand = SITE_NAME;
-  const title = `Photographer in Paris | ${brand}`;
+  const title = `Photographer in Lisbon | ${brand}`;
   assert.equal(clampTitle(title, { brand, max: TITLE_MAX }), title);
 });

@@ -34,17 +34,17 @@ export function GET(): Response {
   push();
   push(
     `> ${SITE_NAME} connects travellers, couples, families and businesses with vetted local ` +
-      `photographers across ${cities.length} cities and destinations in France. Fixed prices from ` +
+      `photographers across ${cities.length} cities and destinations in Portugal. Fixed prices from ` +
       `€${minPrice}, agreed before booking. Private online gallery delivered in 48–72 hours.`,
   );
   push();
 
   push('## Languages');
   push(`- English is the default and is served without a prefix: ${SITE_URL}/services`);
-  push(`- French is served under /fr with translated segments: ${absoluteUrl('pt', '/services')}`);
+  push(`- Portuguese is served under /pt with translated segments: ${absoluteUrl('pt', '/services')}`);
   push(
     '- The two are not mirror images. Some services are offered in one language only, because ' +
-      'the audiences differ: English covers inbound destination work, French covers domestic ' +
+      'the audiences differ: English covers inbound destination work, Portuguese covers domestic ' +
       'life events. A page that exists in one language emits no alternate for the other.',
   );
   push();
@@ -111,9 +111,21 @@ export function GET(): Response {
   ] as const) {
     push(`- ${label}: ${pattern(route, 'en')} · ${pattern(route, 'pt')}`);
   }
+  /*
+   * Spelled from the route table rather than typed, because the typed version
+   * was still the previous site's: `/services/wedding/paris` against
+   * `/fr/photographe/mariage/paris`, on a Portuguese site with no Paris and no
+   * /fr. This file is served to AI crawlers, so it was the one place the old
+   * country was being published rather than merely remembered in a comment.
+   */
   push(
-    '- Service slugs are translated. /services/wedding/paris and ' +
-      '/fr/photographe/mariage/paris are the same page; city slugs are identical in both.',
+    `- Service slugs are translated. ${absoluteUrl('en', '/services/[service]/[city]', {
+      service: 'wedding',
+      city: 'lisboa',
+    })} and ${absoluteUrl('pt', '/services/[service]/[city]', {
+      service: 'wedding',
+      city: 'lisboa',
+    })} are the same page; city slugs are identical in both.`,
   );
   push(
     '- Combinations without written copy still render, but carry noindex and are absent from ' +

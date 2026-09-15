@@ -1,7 +1,7 @@
 /**
  * Fails the build while any PT_TODO marker survives.
  *
- * `scripts/codemod/strip-fr.ts` put one wherever a French string was removed
+ * The French→Portuguese codemod put one wherever a French string was removed
  * and a Portuguese one has to be written. The marker exists because the
  * alternative — renaming the key and keeping the French text — typechecks,
  * passes every other gate and ships. This is the detector for that.
@@ -24,9 +24,7 @@ function walk(dir: string, out: string[] = []): string[] {
   return out;
 }
 
-const files = walk(join(ROOT, 'src'))
-  .concat(walk(join(ROOT, 'messages')))
-  .filter((f) => !f.includes('codemod'));
+const files = walk(join(ROOT, 'src')).concat(walk(join(ROOT, 'messages')));
 
 const byFile = new Map<string, number>();
 let total = 0;
