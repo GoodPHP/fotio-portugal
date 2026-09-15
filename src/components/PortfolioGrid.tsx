@@ -27,7 +27,7 @@ interface PortfolioGridProps {
 }
 
 const TILE_CLASS =
-  'group relative block h-full w-full cursor-zoom-in overflow-hidden rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep';
+  'group relative block h-full w-full cursor-zoom-in overflow-hidden border border-brand-rule transition-colors hover:border-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep';
 const IMG_CLASS = 'object-cover transition-transform duration-500 group-hover:scale-105';
 
 /**
@@ -52,16 +52,22 @@ export default function PortfolioGrid({
   const thumbs = rest.slice(0, 4);
 
   return (
-    <section aria-labelledby="portfolio-heading" className="mx-auto max-w-7xl px-6 py-16">
-      <FadeIn>
-        <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">{eyebrow}</p>
-        <h2 id="portfolio-heading" className="mt-2 font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
+    <section aria-labelledby="portfolio-heading" className="mx-auto max-w-[92rem] px-6 py-[var(--space-section)]">
+      <FadeIn className="border-b border-brand-rule pb-7">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2
+          id="portfolio-heading"
+          className="font-display mt-4 font-bold leading-[1.0] text-brand-dark"
+          style={{ fontSize: 'var(--text-title)' }}
+        >
           {title}
         </h2>
-        <p className="mt-3 max-w-2xl text-base leading-relaxed text-brand-muted">{subtitle}</p>
+        <p className="measure mt-4 text-base leading-relaxed text-brand-muted">{subtitle}</p>
       </FadeIn>
 
-      <Stagger className="mt-10 grid auto-rows-[9rem] grid-cols-2 gap-4 sm:auto-rows-[12rem] sm:grid-cols-4">
+      {/* Four grout lines rather than four gaps: the block reads as one pane of
+          tiling instead of five photographs that happen to be near each other. */}
+      <Stagger className="mt-10 grid auto-rows-[9rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:grid-cols-4">
         <StaggerItem className="col-span-2 row-span-2">
           <button type="button" onClick={() => setOpenIndex(0)} className={TILE_CLASS}>
             <Picture

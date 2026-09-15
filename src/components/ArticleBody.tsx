@@ -14,14 +14,16 @@ function Inline({ text }: { text: string }): ReactNode {
   return parseInline(text).map((token, i) => {
     if (token.type === 'bold') {
       return (
-        <strong key={i} className="font-semibold text-neutral-900">
+        <strong key={i} className="font-semibold text-brand-dark">
           {token.text}
         </strong>
       );
     }
     if (token.type === 'link') {
+      // Cobalt, underlined on a hairline, thickening on hover. A prose link
+      // is the one place the accent is allowed to appear mid-sentence.
       const className =
-        'font-medium text-brand-orange-deep underline decoration-brand-orange/30 underline-offset-4 transition hover:decoration-brand-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40';
+        'font-medium text-brand-orange-deep underline decoration-brand-orange/40 underline-offset-4 transition hover:decoration-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep';
       if (token.external) {
         return (
           <a key={i} href={token.href} rel="noopener noreferrer" target="_blank" className={className}>
@@ -51,12 +53,12 @@ function Block({ block }: { block: ArticleBlock }) {
       return block.level === 2 ? (
         <h2
           id={block.id}
-          className="mt-14 scroll-mt-28 font-display text-3xl font-bold tracking-tight text-neutral-900"
+          className="font-display mt-14 scroll-mt-28 border-t border-brand-rule pt-6 text-[1.75rem] font-bold leading-tight text-brand-dark sm:text-3xl"
         >
           {block.text}
         </h2>
       ) : (
-        <h3 id={block.id} className="mt-10 scroll-mt-28 font-display text-xl font-bold text-neutral-900">
+        <h3 id={block.id} className="font-display mt-10 scroll-mt-28 text-xl font-bold text-brand-dark">
           {block.text}
         </h3>
       );
@@ -71,18 +73,23 @@ function Block({ block }: { block: ArticleBlock }) {
       return block.ordered ? (
         <ol className={`${className} list-decimal`}>{items}</ol>
       ) : (
-        <ul className={`${className} list-disc`}>{items}</ul>
+        // A square marker rather than a disc: the system has no circles in it.
+        <ul className={`${className} list-[square]`}>{items}</ul>
       );
     }
 
     case 'table':
       return (
-        <div className="mt-7 overflow-x-auto rounded-card-sm border border-brand-rule">
+        <div className="mt-7 overflow-x-auto border border-brand-rule bg-brand-tile">
           <table className="w-full min-w-[34rem] border-collapse text-left text-sm">
-            <thead className="bg-brand-sand/40">
+            <thead className="border-b border-brand-rule bg-brand-cream/60">
               <tr>
                 {block.head.map((cell, i) => (
-                  <th key={i} scope="col" className="px-4 py-3 font-semibold text-neutral-900">
+                  <th
+                    key={i}
+                    scope="col"
+                    className="font-mono px-4 py-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-brand-dark"
+                  >
                     <Inline text={cell} />
                   </th>
                 ))}
@@ -105,7 +112,7 @@ function Block({ block }: { block: ArticleBlock }) {
 
     case 'callout':
       return (
-        <aside className="mt-7 rounded-card-sm border-l-4 border-brand-orange-deep bg-brand-sand/30 px-6 py-5 leading-relaxed text-neutral-800">
+        <aside className="mt-7 border border-brand-rule border-l-[3px] border-l-brand-orange-deep bg-brand-tile px-6 py-5 leading-relaxed text-brand-dark">
           <Inline text={block.text} />
         </aside>
       );
@@ -121,17 +128,19 @@ function Block({ block }: { block: ArticleBlock }) {
 
 function TableOfContents({ entries, label }: { entries: TocEntry[]; label: string }) {
   return (
-    <nav aria-label={label} className="mt-10 rounded-card border border-brand-rule bg-neutral-50 p-7">
-      <h2 className="text-sm font-semibold uppercase tracking-widest text-brand-muted">{label}</h2>
-      <ol className="mt-4 space-y-2.5 text-[0.95rem]">
+    <nav aria-label={label} className="tile mt-10 p-7">
+      <h2 className="font-mono text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-brand-muted">
+        {label}
+      </h2>
+      <ol className="mt-5 space-y-3 text-[0.95rem]">
         {entries.map((entry, i) => (
-          <li key={entry.id} className="flex gap-3">
-            <span aria-hidden="true" className="font-semibold tabular-nums text-brand-orange-deep">
+          <li key={entry.id} className="flex gap-4">
+            <span aria-hidden="true" className="font-mono font-semibold tabular-nums text-brand-orange-deep">
               {String(i + 1).padStart(2, '0')}
             </span>
             <a
               href={`#${entry.id}`}
-              className="font-medium text-brand-dark underline decoration-transparent underline-offset-4 transition hover:text-brand-orange-deep hover:decoration-brand-orange/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40"
+              className="font-medium text-brand-dark underline decoration-transparent underline-offset-4 transition hover:text-brand-orange-deep hover:decoration-brand-orange/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
             >
               {entry.text}
             </a>

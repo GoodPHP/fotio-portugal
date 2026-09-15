@@ -209,30 +209,34 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
 
   if (done) {
     return (
-      <div className="rounded-card border border-brand-rule bg-white p-8 text-center">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-chip bg-brand-orange/10 text-brand-orange-deep">
+      <div className="tile p-8 text-center sm:p-10">
+        <div className="mx-auto flex size-14 items-center justify-center bg-brand-orange-deep text-white">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-7">
-            <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" />
           </svg>
         </div>
-        <h3 className="mt-5 font-display text-2xl font-bold">{t('successTitle', locale)}</h3>
-        <p className="mx-auto mt-3 max-w-md text-brand-muted">{t('successBody', locale)}</p>
-        <p className="mt-2 font-mono text-sm text-brand-muted">{t('reference', locale)}: {reference}</p>
-        <a
-          href={whatsappLink(buildWhatsAppMessage())}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-chip bg-[#25D366] px-6 py-3 font-semibold text-brand-dark transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/50"
-        >
-          {t('whatsapp', locale)}
-        </a>
+        <h3 className="font-display mt-6 text-2xl font-bold text-brand-dark">{t('successTitle', locale)}</h3>
+        <p className="mx-auto mt-3 max-w-md leading-relaxed text-brand-muted">{t('successBody', locale)}</p>
+        <p className="font-mono mt-4 inline-block border border-brand-rule px-3 py-1.5 text-xs uppercase tracking-[0.14em] text-brand-muted">
+          {t('reference', locale)}: {reference}
+        </p>
+        <div>
+          <a
+            href={whatsappLink(buildWhatsAppMessage())}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn mt-7 bg-[#25D366] text-brand-dark hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+          >
+            {t('whatsapp', locale)}
+          </a>
+        </div>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_22rem]">
-      <div className="rounded-card border border-brand-rule bg-white p-6 sm:p-8">
+      <div className="tile p-6 sm:p-8">
         {/* Honeypot */}
         <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
           <label htmlFor={`${baseId}-hp`}>Leave empty</label>
@@ -249,14 +253,14 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <Field id={`${baseId}-service`} label={t('service', locale)}>
-            <select id={`${baseId}-service`} value={serviceSlug} onChange={(e) => setServiceSlug(e.target.value)} className={inputClass(false)}>
+            <select id={`${baseId}-service`} value={serviceSlug} onChange={(e) => setServiceSlug(e.target.value)} className="field">
               {services.map((s) => (
                 <option key={s.slug} value={s.slug}>{s.name} — {t('from', locale)} {formatPrice(s.price, locale)}</option>
               ))}
             </select>
           </Field>
           <Field id={`${baseId}-city`} label={t('city', locale)}>
-            <select id={`${baseId}-city`} value={citySlug} onChange={(e) => setCitySlug(e.target.value)} className={inputClass(false)}>
+            <select id={`${baseId}-city`} value={citySlug} onChange={(e) => setCitySlug(e.target.value)} className="field">
               {cities.map((c) => (
                 <option key={c.slug} value={c.slug}>{c.name}</option>
               ))}
@@ -272,17 +276,19 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               aria-invalid={Boolean(errors.date)}
-              className={inputClass(Boolean(errors.date))}
+              className="field"
             />
           </Field>
           <Field id={`${baseId}-time`} label={t('time', locale)}>
-            <input id={`${baseId}-time`} type="time" value={time} onChange={(e) => setTime(e.target.value)} className={inputClass(false)} />
+            <input id={`${baseId}-time`} type="time" value={time} onChange={(e) => setTime(e.target.value)} className="field" />
           </Field>
         </div>
 
         <fieldset className="mt-6">
-          <legend className="mb-2 text-sm font-medium text-brand-dark">{t('duration', locale)}</legend>
-          <div role="radiogroup" className="flex gap-2">
+          <legend className="field-label">{t('duration', locale)}</legend>
+          {/* A segmented control: three chips sharing their edges, so the choice
+              reads as one control rather than as three buttons. */}
+          <div role="radiogroup" className="chip-group">
             {DURATION_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
@@ -290,11 +296,7 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
                 role="radio"
                 aria-checked={durationPref === opt.value}
                 onClick={() => setDurationPref(opt.value)}
-                className={`flex-1 rounded-card-sm px-4 py-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
-                  durationPref === opt.value
-                    ? 'bg-brand-dark text-white shadow'
-                    : 'bg-brand-sand/50 text-brand-dark ring-1 ring-brand-rule hover:ring-brand-orange/40'
-                }`}
+                className="chip font-medium focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 {durationLabel(opt.value, locale)}
               </button>
@@ -303,7 +305,7 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
         </fieldset>
 
         <fieldset className="mt-6">
-          <legend className="mb-2 text-sm font-medium text-brand-dark">{t('addons', locale)}</legend>
+          <legend className="field-label">{t('addons', locale)}</legend>
           <div className="space-y-2">
             <CheckboxRow id={`${baseId}-express`} checked={express} onChange={setExpress} label={t('express', locale)} />
             <CheckboxRow id={`${baseId}-second`} checked={secondPhotographer} onChange={setSecondPhotographer} label={t('second', locale)} />
@@ -312,47 +314,61 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
 
         <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
           <Field id={`${baseId}-name`} label={t('name', locale)} error={errors.name}>
-            <input id={`${baseId}-name`} type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} aria-invalid={Boolean(errors.name)} className={inputClass(Boolean(errors.name))} />
+            <input id={`${baseId}-name`} type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} aria-invalid={Boolean(errors.name)} className="field" />
           </Field>
           <Field id={`${baseId}-phone`} label={t('phone', locale)} error={errors.phone}>
-            <input id={`${baseId}-phone`} type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} aria-invalid={Boolean(errors.phone)} className={inputClass(Boolean(errors.phone))} />
+            <input id={`${baseId}-phone`} type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} aria-invalid={Boolean(errors.phone)} className="field" />
           </Field>
         </div>
 
         <div className="mt-5">
           <Field id={`${baseId}-email`} label={t('email', locale)} error={errors.email}>
-            <input id={`${baseId}-email`} type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={Boolean(errors.email)} className={inputClass(Boolean(errors.email))} />
+            <input id={`${baseId}-email`} type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={Boolean(errors.email)} className="field" />
           </Field>
         </div>
 
         <div className="mt-5">
           <Field id={`${baseId}-remarks`} label={t('remarks', locale)}>
-            <textarea id={`${baseId}-remarks`} rows={3} value={remarks} onChange={(e) => setRemarks(e.target.value)} className={`${inputClass(false)} resize-y`} />
+            <textarea id={`${baseId}-remarks`} rows={3} value={remarks} onChange={(e) => setRemarks(e.target.value)} className="field resize-y" />
           </Field>
         </div>
       </div>
 
       {/* Sticky trust panel */}
       <aside className="lg:sticky lg:top-6 lg:self-start">
-        <div data-surface="dark" className="rounded-card bg-brand-dark p-6 text-white">
-          <h2 className="font-display text-2xl font-bold text-white">{t('quoteTitle', locale)}</h2>
-          <p className="mt-3 text-sm leading-relaxed text-white/70">{t('quoteBody', locale)}</p>
-          <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-sm text-white/80">
+        <div data-surface="dark" className="relative overflow-hidden bg-brand-dark p-7 text-white">
+          <div
+            className="azulejo azulejo-fade pointer-events-none absolute right-0 top-0 h-32 w-32 opacity-70"
+            style={{
+              ['--azulejo-cell' as string]: '32px',
+              ['--azulejo-origin' as string]: '100% 0%',
+            }}
+            aria-hidden="true"
+          />
+          <h2 className="font-display relative text-2xl font-bold text-white">{t('quoteTitle', locale)}</h2>
+          <p className="relative mt-3 text-sm leading-relaxed text-brand-muted">{t('quoteBody', locale)}</p>
+          <ul className="relative mt-6 space-y-2.5 border-t border-brand-rule pt-5 text-sm text-white">
             {(['perk1', 'perk2', 'perk3'] as const).map((key) => (
-              <li key={key} className="flex items-center gap-2">
+              <li key={key} className="flex items-center gap-2.5">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-4 shrink-0 text-brand-orange-deep">
-                  <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" />
                 </svg>
                 {t(key, locale)}
               </li>
             ))}
           </ul>
           {reference && (
-            <p className="mt-4 font-mono text-xs text-brand-muted">{t('reference', locale)}: {reference}</p>
+            <p className="font-mono relative mt-5 text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">
+              {t('reference', locale)}: {reference}
+            </p>
           )}
 
           {formError && (
-            <p role="alert" aria-live="assertive" className="mt-4 rounded-chip bg-red-500/20 px-4 py-3 text-sm font-medium text-red-100">
+            <p
+              role="alert"
+              aria-live="assertive"
+              className="relative mt-4 border-l-[3px] border-white bg-white/10 px-4 py-3 text-sm font-medium text-white"
+            >
               {formError}
             </p>
           )}
@@ -360,7 +376,7 @@ function BookingWidgetInner({ services, cities, locale }: BookingWidgetProps) {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-5 inline-flex w-full items-center justify-center rounded-chip bg-brand-orange-deep px-8 py-4 text-base font-semibold text-white transition hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn btn-primary relative mt-6 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             {submitting ? t('sending', locale) : t('submit', locale)}
           </button>
@@ -378,14 +394,6 @@ export default function BookingWidget(props: BookingWidgetProps) {
   );
 }
 
-function inputClass(hasError: boolean): string {
-  return `w-full rounded-card-sm border bg-brand-sand/40 px-4 py-3 text-base text-neutral-900 outline-none transition focus:bg-white focus:ring-2 ${
-    hasError
-      ? 'border-red-400 focus:border-red-500 focus:ring-red-200'
-      : 'border-brand-rule focus:border-brand-orange-deep focus:ring-brand-orange/30'
-  }`;
-}
-
 function Field({
   id,
   label,
@@ -399,12 +407,12 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-brand-dark">
+      <label htmlFor={id} className="field-label">
         {label}
       </label>
       {children}
       <p aria-live="polite" className="min-h-5">
-        {error && <span className="text-sm text-red-600">{error}</span>}
+        {error && <span className="text-sm text-brand-error">{error}</span>}
       </p>
     </div>
   );
@@ -422,20 +430,19 @@ function CheckboxRow({
   label: string;
 }) {
   return (
-    <label
-      htmlFor={id}
-      className={`flex cursor-pointer items-center gap-3 rounded-card-sm border px-4 py-3 transition ${
-        checked ? 'border-brand-orange/50 bg-brand-orange/5' : 'border-brand-rule bg-brand-sand/40 hover:border-brand-orange/30'
-      }`}
-    >
+    /*
+      The row carries the selected state through `:has(:checked)` in CSS rather
+      than through the `checked` prop, so the border cannot lag the control.
+    */
+    <label htmlFor={id} className="check-row">
       <input
         id={id}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="size-5 rounded border-black/20 text-brand-orange-deep focus:ring-brand-orange/40"
+        className="checkbox"
       />
-      <span className="text-sm font-medium text-neutral-800">{label}</span>
+      <span className="text-sm font-medium text-brand-dark">{label}</span>
     </label>
   );
 }

@@ -13,9 +13,11 @@
  */
 export const CITY_THEMES = {
   lisboa: {
-    name: 'Azulejo',
+    name: 'Ocre',
     description:
-      'Lime-washed render, glazed tile blue and the ochre the afternoon sun puts on a south-west facade.',
+      'The house palette is already the city\'s own tile, so a cobalt Lisboa page would say nothing. ' +
+      'This is the other Lisbon: lime render gone warm, the ochre a south-west facade takes late in the ' +
+      'afternoon, and the burnt red of a pantile roof.',
   },
 } as const;
 

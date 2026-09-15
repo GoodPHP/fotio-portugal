@@ -138,13 +138,13 @@ export default async function BlogPostPage({
             <span aria-hidden="true">·</span>
             <span>{post.author}</span>
           </div>
-          <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
+          <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-brand-dark sm:text-5xl">
             {tx(post.title, locale)}
           </h1>
           <p className="mt-5 text-xl leading-relaxed text-brand-muted">{tx(post.summary, locale)}</p>
         </header>
 
-        <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-card bg-neutral-100">
+        <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-card bg-brand-cream">
           <Picture
             slot={post.cover}
             alt={tx(post.coverAlt, locale)}
@@ -161,13 +161,13 @@ export default async function BlogPostPage({
 
         {faqs.length > 0 && (
           <section aria-labelledby="faq" className="mt-16 border-t border-brand-rule pt-10">
-            <h2 id="faq" className="scroll-mt-28 font-display text-3xl font-bold tracking-tight text-neutral-900">
+            <h2 id="faq" className="scroll-mt-28 font-display text-3xl font-bold tracking-tight text-brand-dark">
               {c('faq', locale)}
             </h2>
             <dl className="mt-8 space-y-6">
               {faqs.map((faq) => (
-                <div key={faq.question} className="rounded-card border border-brand-rule bg-white p-7">
-                  <dt className="font-display text-lg font-bold text-neutral-900">{faq.question}</dt>
+                <div key={faq.question} className="rounded-card border border-brand-rule bg-brand-tile p-7">
+                  <dt className="font-display text-lg font-bold text-brand-dark">{faq.question}</dt>
                   <dd className="mt-2.5 leading-relaxed text-brand-dark">{faq.answer}</dd>
                 </div>
               ))}
@@ -180,7 +180,7 @@ export default async function BlogPostPage({
         <h2 className="font-display text-xl font-bold">{c('ctaTitle', locale)}</h2>
         <Link
           href="/book"
-          className="inline-flex shrink-0 items-center rounded-chip bg-white px-7 py-3.5 font-semibold text-brand-dark transition hover:bg-brand-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          className="btn btn-outline shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
         >
           {c('cta', locale)}
         </Link>

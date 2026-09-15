@@ -20,11 +20,19 @@ import { absoluteUrl } from '@/lib/urls';
 import { graph, faqNode, webPageNode, itemListNode, aggregateRatingWithReviewsNodes } from '@/lib/jsonld';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
+import Faq from '@/components/Faq';
 import { absoluteOgImage } from '@/lib/images';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
-/** Paris leads the network and carries the hero photograph and the OG card. */
-const HERO_CITY_SLUG = 'paris';
+/**
+ * Lisboa leads the network and carries the hero photograph and the OG card.
+ *
+ * This was `'paris'` until the redesign — a slug left behind by the site this
+ * one was rebuilt from. Nothing broke visibly, because the lookup falls back
+ * to the first published city, which is why it survived: the hero showed a
+ * photograph and the OG card showed an image, just never the intended ones.
+ */
+const HERO_CITY_SLUG = 'lisboa';
 
 interface HomePageProps {
   params: Promise<{ locale: Locale }>;
@@ -51,7 +59,6 @@ export default async function HomePage({ params }: HomePageProps) {
   const tc = await getTranslations('common');
 
   const rating = getAggregateRating();
-  // Paris leads: it is the largest market and the strongest photograph.
   const heroCity =
     publishedCities().find((c) => c.slug === HERO_CITY_SLUG) ?? publishedCities()[0] ?? CITIES[0];
   // Featured grid + cities grid link out, so they must only show published pages.
@@ -72,7 +79,9 @@ export default async function HomePage({ params }: HomePageProps) {
     citiesTitle: { en: 'The most loved cities', pt: 'As cidades mais procuradas' }[locale],
     howEyebrow: { en: 'How it works', pt: 'Como funciona' }[locale],
     howTitle: { en: 'From booking to gallery in 3 steps', pt: 'Da reserva à galeria em 3 passos' }[locale],
+    faqEyebrow: { en: 'Before you book', pt: 'Antes de reservar' }[locale],
     faqTitle: { en: 'Frequently asked questions', pt: 'Perguntas frequentes' }[locale],
+    ctaEyebrow: { en: 'Next step', pt: 'Próximo passo' }[locale],
     ctaTitle: { en: 'Ready to photograph your time in Portugal?', pt: 'Pronto para fotografar o seu tempo em Portugal?' }[locale],
     ctaSub: { en: 'Reply within 2 hours. No deposit required to enquire.', pt: 'Resposta em 2 horas. Não é preciso sinal para pedir orçamento.' }[locale],
     ratingLabel: { en: 'from real clients', pt: 'de clientes reais' }[locale],
@@ -83,7 +92,9 @@ export default async function HomePage({ params }: HomePageProps) {
     statServices: { en: 'Session types', pt: 'Tipos de sessão' }[locale],
     statDelivery: { en: 'Gallery delivery', pt: 'Entrega da galeria' }[locale],
     statRating: { en: 'Client rating', pt: 'Avaliação dos clientes' }[locale],
+    statReply: { en: 'Reply time', pt: 'Tempo de resposta' }[locale],
     explore: { en: 'Explore services', pt: 'Ver os serviços' }[locale],
+    from: { en: 'from', pt: 'desde' }[locale],
   };
 
   const trust = [
@@ -179,84 +190,121 @@ export default async function HomePage({ params }: HomePageProps) {
     ),
   ]);
 
+  const arrow = (
+    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="square" />
+    </svg>
+  );
+
   return (
     <main>
       <JsonLd data={jsonLd} />
+
       {/*
-        Hero. The site sells photography, so a photograph carries the page and
-        the type sits beside it rather than on top of it — no scrim, no
-        contrast compromise, and the headline stays crisp at any size.
+        Hero.
+
+        The site sells photography, so a photograph carries the page and the
+        type sits beside it rather than on top of it — no scrim, no contrast
+        compromise, and the headline stays crisp at any size. The lattice runs
+        underneath the type block and fades out before it reaches the words,
+        which is the one place on the site where the motif is decoration rather
+        than structure and the only place it is allowed to be.
       */}
-      <section aria-labelledby="hero-heading" className="relative">
-        <div className="mx-auto grid max-w-[92rem] items-end gap-y-10 px-6 pb-[var(--space-band)] pt-10 lg:grid-cols-12 lg:gap-x-12 lg:pt-12">
+      <section aria-labelledby="hero-heading" className="relative overflow-hidden">
+        <div
+          className="azulejo azulejo-fade pointer-events-none absolute -left-24 top-0 hidden h-[34rem] w-[44rem] opacity-70 lg:block"
+          style={{ ['--azulejo-cell' as string]: '46px' }}
+          aria-hidden="true"
+        />
+
+        <div className="relative mx-auto grid max-w-[92rem] items-end gap-y-12 px-6 pb-[var(--space-band)] pt-12 lg:grid-cols-12 lg:gap-x-12 lg:pt-16">
           <FadeIn instant y={20} className="lg:col-span-7 xl:col-span-6">
             <p className="eyebrow">{copy.heroEyebrow}</p>
             <h1
               id="hero-heading"
-              className="mt-5 font-display font-semibold leading-[0.94] text-brand-dark"
+              className="font-display-tight mt-6 font-bold text-brand-dark"
               style={{ fontSize: 'var(--text-display)' }}
             >
               {t('heroTitle')}
             </h1>
-            <p className="measure mt-7 text-lg leading-relaxed text-brand-muted sm:text-xl">
+            <p className="measure mt-8 text-lg leading-relaxed text-brand-muted sm:text-xl">
               {t('heroSubtitle')}
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link
                 href="/book"
-                className="group inline-flex items-center gap-3 border-b-2 border-brand-dark pb-1 font-display text-lg font-semibold text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
               >
                 {tc('bookNow')}
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                {arrow}
               </Link>
               <Link
                 href="/services"
-                className="border-b border-brand-rule-strong pb-1 text-lg text-brand-muted transition-colors hover:border-brand-dark hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                className="link-ruled text-base focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
               >
                 {copy.explore}
               </Link>
             </div>
           </FadeIn>
 
-          {/* The photograph bleeds off the right edge rather than sitting in a box. */}
+          {/*
+            The photograph bleeds off the right edge rather than sitting in a
+            box, and carries a caption bar rather than a caption: on a tiled
+            wall the label is part of the tile.
+          */}
           <FadeIn instant y={20} className="lg:col-span-5 xl:col-span-6 lg:-mr-6 xl:-mr-[max(0px,calc((100vw-92rem)/2))]">
-            <figure className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/10] lg:aspect-[3/4] lg:max-h-[70vh]">
-              <Picture
-                slot={citySlot(heroCity.slug)}
-                alt={copy.heroImageAlt}
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover"
-                fill
-                priority
-              />
+            <figure className="relative">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-brand-rule sm:aspect-[16/10] lg:aspect-[3/4] lg:max-h-[70vh]">
+                <Picture
+                  slot={citySlot(heroCity.slug)}
+                  alt={copy.heroImageAlt}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                  fill
+                  priority
+                />
+              </div>
+              <figcaption className="flex items-center justify-between gap-4 border-x border-b border-brand-rule bg-brand-tile px-4 py-3 font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted">
+                <span className="text-brand-dark">{heroCity.name}</span>
+                <span>{tx(heroCity.region, locale)}</span>
+              </figcaption>
             </figure>
-            <figcaption className="mt-3 flex items-baseline justify-between gap-4 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">
-              <span>{heroCity.name}</span>
-              <span>{tx(heroCity.region, locale)}</span>
-            </figcaption>
           </FadeIn>
         </div>
 
         {/*
-          The facts that used to sit in coloured boxes, as a ruled ledger. Same
-          information, a quarter of the visual weight, and it reads as fact
-          rather than as decoration.
+          The facts, as a course of tiles. Same information the coloured boxes
+          used to carry, a quarter of the visual weight, and it reads as fact
+          rather than as decoration because the grout does the separating.
         */}
-        <div className="mx-auto max-w-[92rem] px-6">
-          <dl className="grid grid-cols-2 border-t border-brand-rule sm:grid-cols-4">
+        <div className="mx-auto max-w-[92rem] px-6 pb-[var(--space-band)]">
+          <dl className="grout grout-tile grid-cols-2 sm:grid-cols-4">
             {[
               { v: `${CITIES.length}`, k: copy.statCities },
               { v: `${SERVICES.length}`, k: copy.statServices },
               { v: '48–72h', k: copy.statDelivery },
-              { v: rating.reviewCount > 0 ? `${rating.ratingValue.toFixed(1)}/5` : '—', k: copy.statRating },
+              /*
+                The fourth tile used to render an em dash whenever there were no
+                reviews, which is every build: REVIEWS is deliberately empty,
+                because an aggregate rating assembled from invented reviews is
+                structured data that lies. A dash in a four-tile course reads as
+                a broken cell rather than as an absence, so the tile carries the
+                promise the site actually makes until there are real ratings to
+                put there.
+              */
+              rating.reviewCount > 0
+                ? { v: `${rating.ratingValue.toFixed(1)}/5`, k: copy.statRating }
+                : { v: '2h', k: copy.statReply },
             ].map((s) => (
-              <div key={s.k} className="border-b border-brand-rule py-6 pr-6 sm:border-b-0">
+              <div key={s.k} className="px-5 py-7 sm:px-6">
                 <dt className="sr-only">{s.k}</dt>
                 <dd>
-                  <span className="block font-display text-3xl font-semibold leading-none text-brand-dark sm:text-4xl">{s.v}</span>
-                  <span className="mt-2 block font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">{s.k}</span>
+                  <span className="font-display block text-3xl font-bold leading-none tracking-[-0.04em] text-brand-dark sm:text-[2.75rem]">
+                    {s.v}
+                  </span>
+                  <span className="mt-3 block font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted">
+                    {s.k}
+                  </span>
                 </dd>
               </div>
             ))}
@@ -264,23 +312,29 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* Trust strip */}
-      <section aria-labelledby="trust-heading" className="border-y border-brand-rule bg-brand-sand">
+      {/* Trust strip, on ink: the one band that inverts, so the page has a
+          rhythm of light and dark before any photograph is seen. */}
+      <section data-surface="dark" aria-labelledby="trust-heading" className="bg-brand-dark">
         {/*
-          The cards are h3s, so the section needs its own h2 or the document
-          skips a level. It is not shown because the cards read as a row of
+          The cells are h3s, so the section needs its own h2 or the document
+          skips a level. It is not shown because the cells read as a row of
           facts rather than a titled block, but a screen reader needs it.
         */}
         <h2 id="trust-heading" className="sr-only">
           {copy.trustHeading}
         </h2>
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px overflow-hidden px-6 py-10 sm:gap-8 lg:grid-cols-4">
-          {trust.map((item) => (
-            <div key={item.title} className="px-1 py-3 sm:px-0">
-              <h3 className="font-display text-base font-semibold text-brand-dark">{item.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-brand-muted">{item.desc}</p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-[92rem] px-6 py-[var(--space-band)]">
+          <div className="grout grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {trust.map((item, i) => (
+              <div key={item.title} className="px-6 py-7">
+                <span className="font-mono text-[0.6875rem] font-semibold tracking-[0.16em] text-brand-orange-deep">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display mt-4 text-lg font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-muted">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -288,15 +342,15 @@ export default async function HomePage({ params }: HomePageProps) {
         Featured services. An uneven grid rather than six identical tiles: the
         first two run large and the rest tuck in beside them, so the eye is
         given an order to read in. The photographs fill their frames edge to
-        edge, with the type underneath where it belongs.
+        edge, with a caption bar underneath where it belongs.
       */}
       <section aria-labelledby="services-heading" className="mx-auto max-w-[92rem] px-6 py-[var(--space-section)]">
-        <FadeIn className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-rule pb-6">
+        <FadeIn className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-rule pb-7">
           <div>
             <p className="eyebrow">{copy.servicesEyebrow}</p>
             <h2
               id="services-heading"
-              className="mt-3 font-display font-semibold leading-[1.02] text-brand-dark"
+              className="font-display mt-4 font-bold leading-[1.0] text-brand-dark"
               style={{ fontSize: 'var(--text-title)' }}
             >
               {copy.servicesTitle}
@@ -304,13 +358,14 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
           <Link
             href="/services"
-            className="whitespace-nowrap border-b border-brand-rule-strong pb-1 text-sm text-brand-muted transition-colors hover:border-brand-dark hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+            className="link-ruled whitespace-nowrap text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
           >
-            {tc('viewAll')} →
+            {tc('viewAll')}
+            {arrow}
           </Link>
         </FadeIn>
 
-        <Stagger className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-6">
+        <Stagger className="mt-12 grid grid-cols-2 items-start gap-6 lg:grid-cols-6">
           {featuredServices.map((service, i) => {
             // The first two are given twice the room; the rest share the row.
             const feature = i < 2;
@@ -318,32 +373,36 @@ export default async function HomePage({ params }: HomePageProps) {
               <StaggerItem key={service.slug} className={feature ? 'col-span-2 lg:col-span-3' : 'col-span-1 lg:col-span-2'}>
                 <Link
                   href={serviceHref(service, locale)}
-                  className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                  className="tile tile-link group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
                 >
                   <figure className={`relative overflow-hidden ${feature ? 'aspect-[3/2]' : 'aspect-[4/3]'}`}>
                     <Picture
                       slot={serviceSlot(service.slug)}
                       alt={tx(service.name, locale)}
                       sizes={feature ? '(max-width: 1024px) 100vw, 45vw' : '(max-width: 1024px) 50vw, 30vw'}
-                      className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                      className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
                       fill
                     />
                   </figure>
-                  <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-brand-rule pt-3">
-                    <h3
-                      className={`font-display font-semibold text-brand-dark transition-colors group-hover:text-brand-orange-deep ${
-                        feature ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'
-                      }`}
-                    >
-                      {tx(service.name, locale)}
-                    </h3>
-                    <span className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">
-                      {formatPrice(service.initialPrice, locale)}
-                    </span>
+                  <div className="border-t border-brand-rule px-5 py-4">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3
+                        className={`font-display font-semibold text-brand-dark transition-colors group-hover:text-brand-orange-deep ${
+                          feature ? 'text-2xl sm:text-[1.75rem]' : 'text-lg'
+                        }`}
+                      >
+                        {tx(service.name, locale)}
+                      </h3>
+                      <span className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-brand-muted">
+                        {copy.from} {formatPrice(service.initialPrice, locale)}
+                      </span>
+                    </div>
+                    {feature && service.description && (
+                      <p className="measure-tight mt-2.5 text-sm leading-relaxed text-brand-muted">
+                        {tx(service.description, locale)}
+                      </p>
+                    )}
                   </div>
-                  {feature && service.description && (
-                    <p className="measure-tight mt-2 text-brand-muted">{tx(service.description, locale)}</p>
-                  )}
                 </Link>
               </StaggerItem>
             );
@@ -351,20 +410,23 @@ export default async function HomePage({ params }: HomePageProps) {
         </Stagger>
       </section>
 
+      {/* A frieze rather than a rule: the section break is part of the wall. */}
+      <div className="frieze azulejo" aria-hidden="true" />
+
       {/*
         Cities. The captions sit under the photographs rather than on top of
         them, so no scrim is needed and the images are seen whole. Widths run in
         a repeating uneven rhythm, which is what stops twelve frames reading as
         a contact sheet.
       */}
-      <section aria-labelledby="cities-heading" className="border-y border-brand-rule bg-brand-cream/50 py-[var(--space-section)]">
+      <section aria-labelledby="cities-heading" className="bg-brand-cream/60 py-[var(--space-section)]">
         <div className="mx-auto max-w-[92rem] px-6">
-          <FadeIn className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-rule pb-6">
+          <FadeIn className="flex flex-wrap items-end justify-between gap-6 border-b border-brand-rule pb-7">
             <div>
               <p className="eyebrow">{copy.citiesEyebrow}</p>
               <h2
                 id="cities-heading"
-                className="mt-3 font-display font-semibold leading-[1.02] text-brand-dark"
+                className="font-display mt-4 font-bold leading-[1.0] text-brand-dark"
                 style={{ fontSize: 'var(--text-title)' }}
               >
                 {copy.citiesTitle}
@@ -372,13 +434,14 @@ export default async function HomePage({ params }: HomePageProps) {
             </div>
             <Link
               href="/cities"
-              className="whitespace-nowrap border-b border-brand-rule-strong pb-1 text-sm text-brand-muted transition-colors hover:border-brand-dark hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+              className="link-ruled whitespace-nowrap text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
             >
-              {tc('viewAll')} →
+              {tc('viewAll')}
+              {arrow}
             </Link>
           </FadeIn>
 
-          <Stagger className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12">
+          <Stagger className="mt-12 grid grid-cols-2 items-start gap-6 lg:grid-cols-12">
             {topCities.map((city, i) => {
               // 5 / 4 / 3 repeating, so no two rows break the same way.
               // Written out rather than interpolated: Tailwind scans source
@@ -389,18 +452,18 @@ export default async function HomePage({ params }: HomePageProps) {
                 <StaggerItem key={city.slug} className={`col-span-1 ${span}`}>
                   <Link
                     href={cityHref(city)}
-                    className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                    className="tile tile-link group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
                   >
                     <figure className={`relative overflow-hidden ${tall ? 'aspect-[4/5]' : 'aspect-[3/4]'}`}>
                       <Picture
                         slot={citySlot(city.slug)}
                         alt={city.name}
                         sizes="(max-width: 1024px) 50vw, 30vw"
-                        className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+                        className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
                         fill
                       />
                     </figure>
-                    <div className="mt-3 flex items-baseline justify-between gap-3 border-t border-brand-rule pt-2.5">
+                    <div className="flex items-baseline justify-between gap-3 border-t border-brand-rule px-4 py-3.5">
                       <span className="font-display text-lg font-semibold text-brand-dark transition-colors group-hover:text-brand-orange-deep">
                         {city.name}
                       </span>
@@ -416,50 +479,51 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      {/* How it works */}
-      <section aria-labelledby="how-heading" className="mx-auto max-w-7xl px-6 py-20">
+      {/*
+        How it works. Three tiles on one grout grid, each opening on an oversized
+        numeral — the process is the only place on the site where a number is
+        allowed to be the largest thing in its cell.
+      */}
+      <section aria-labelledby="how-heading" className="mx-auto max-w-[92rem] px-6 py-[var(--space-section)]">
         <FadeIn>
-          <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">{copy.howEyebrow}</p>
-          <h2 id="how-heading" className="mt-2 max-w-2xl font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-5xl">
+          <p className="eyebrow">{copy.howEyebrow}</p>
+          <h2
+            id="how-heading"
+            className="font-display mt-4 max-w-3xl font-bold leading-[1.0] text-brand-dark"
+            style={{ fontSize: 'var(--text-title)' }}
+          >
             {copy.howTitle}
           </h2>
         </FadeIn>
-        <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="grout grout-tile mt-12 grid-cols-1 md:grid-cols-3">
           {steps.map((step) => (
-            <StaggerItem key={step.n}>
-              <div className="relative h-full rounded-card border border-brand-rule bg-white p-7">
-                <span className="font-mono text-sm font-semibold text-brand-orange-deep">{step.n}</span>
-                <h3 className="mt-4 font-display text-xl font-semibold text-brand-dark">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-muted">{step.desc}</p>
-              </div>
-            </StaggerItem>
+            <div key={step.n} className="relative overflow-hidden px-7 py-9">
+              {/* The lattice marks the corner of each step without competing
+                  with the numeral for the cell. */}
+              <div
+                className="azulejo azulejo-fade pointer-events-none absolute right-0 top-0 h-28 w-28 opacity-70"
+                style={{
+                  ['--azulejo-cell' as string]: '28px',
+                  ['--azulejo-origin' as string]: '100% 0%',
+                }}
+                aria-hidden="true"
+              />
+              <span className="font-display relative block text-5xl font-bold leading-none tracking-[-0.05em] text-brand-orange-deep">
+                {step.n}
+              </span>
+              <h3 className="font-display relative mt-6 text-xl font-semibold text-brand-dark">{step.title}</h3>
+              <p className="relative mt-2.5 text-sm leading-relaxed text-brand-muted">{step.desc}</p>
+            </div>
           ))}
-        </Stagger>
-      </section>
-
-      {/* FAQ */}
-      <section aria-labelledby="faq-heading" className="bg-brand-sand py-20">
-        <div className="mx-auto max-w-3xl px-6">
-          <FadeIn>
-            <h2 id="faq-heading" className="text-center font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-5xl">
-              {copy.faqTitle}
-            </h2>
-          </FadeIn>
-          <div className="mt-10 divide-y divide-black/5 rounded-card border border-brand-rule bg-white">
-            {faqs.map((faq) => (
-              <details key={faq.q} className="group px-6 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
-                  {faq.q}
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-sand text-brand-dark transition-transform group-open:rotate-45" aria-hidden="true">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-brand-muted">{faq.a}</p>
-              </details>
-            ))}
-          </div>
         </div>
       </section>
+
+      <Faq
+        headingId="faq-heading"
+        eyebrow={copy.faqEyebrow}
+        title={copy.faqTitle}
+        entries={faqs.map((f) => ({ question: f.q, answer: f.a }))}
+      />
 
       {/*
         Long-form close. The page above is grids and photographs; this is the
@@ -473,27 +537,44 @@ export default async function HomePage({ params }: HomePageProps) {
         facts={tx(SEO_PROSE.facts, locale)}
       />
 
-      {/* Conversion CTA */}
-      <section aria-labelledby="cta-heading" className="mx-auto max-w-7xl px-6 pb-8">
+      {/* Conversion CTA: the page ends on the full tile, ink and lattice. */}
+      <section aria-labelledby="cta-heading" className="mx-auto max-w-[92rem] px-6">
         <FadeIn>
-          <div data-surface="dark" className="relative overflow-hidden rounded-card bg-brand-dark px-8 py-16 text-center sm:px-16 sm:py-20">
-            <h2 id="cta-heading" className="relative mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {copy.ctaTitle}
-            </h2>
-            <p className="relative mx-auto mt-4 max-w-lg text-base text-neutral-300">{copy.ctaSub}</p>
-            <div className="relative mt-9 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/book"
-                className="inline-flex items-center gap-2 rounded-chip bg-brand-orange-deep px-8 py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          <div data-surface="dark" className="relative overflow-hidden bg-brand-dark px-8 py-[var(--space-band)] sm:px-16">
+            <div
+              className="azulejo azulejo-fade-r pointer-events-none absolute inset-y-0 right-0 w-full max-w-3xl opacity-80"
+              style={{
+                ['--azulejo-cell' as string]: '52px',
+                maskImage: 'linear-gradient(to left, #000 20%, transparent 85%)',
+                WebkitMaskImage: 'linear-gradient(to left, #000 20%, transparent 85%)',
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative max-w-2xl">
+              <p className="eyebrow">{copy.ctaEyebrow}</p>
+              <h2
+                id="cta-heading"
+                className="font-display mt-4 font-bold leading-[1.02] text-white"
+                style={{ fontSize: 'var(--text-title)' }}
               >
-                {tc('bookNow')}
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 rounded-chip border border-white/20 px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                {tc('discover')}
-              </Link>
+                {copy.ctaTitle}
+              </h2>
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-brand-muted">{copy.ctaSub}</p>
+              <div className="mt-9 flex flex-wrap gap-4">
+                <Link
+                  href="/book"
+                  className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  {tc('bookNow')}
+                  {arrow}
+                </Link>
+                <Link
+                  href="/services"
+                  className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  {tc('discover')}
+                </Link>
+              </div>
             </div>
           </div>
         </FadeIn>

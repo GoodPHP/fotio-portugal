@@ -12,7 +12,7 @@ import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
 /** The city that fronts the contact page on social previews. */
-const OG_CITY_SLUG = 'lyon';
+const OG_CITY_SLUG = 'lisboa';
 import LeadForm, {
   type LeadFormServiceOption,
   type LeadFormCityOption,
@@ -85,10 +85,10 @@ export default async function ContactPage({
       <JsonLd data={jsonLd} />
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.3fr]">
         <header className="lg:pt-2">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+          <p className="eyebrow">
             {c('eyebrow', locale)}
           </p>
-          <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
+          <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-5xl">
             {c('title', locale)}
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>
@@ -99,7 +99,7 @@ export default async function ContactPage({
               href={whatsappLink(c('whatsappMsg', locale))}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-chip bg-[#25D366] px-6 py-3 font-semibold text-brand-dark transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="btn mt-4 bg-[#25D366] text-brand-dark hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
             >
               {c('whatsappCta', locale)}
             </a>

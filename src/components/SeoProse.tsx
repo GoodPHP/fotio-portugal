@@ -50,29 +50,32 @@ export default function SeoProse({
   return (
     <section
       aria-labelledby={headingId}
-      className={nested ? 'py-20' : 'mx-auto max-w-7xl px-6 py-20'}
+      className={nested ? 'py-[var(--space-section)]' : 'mx-auto max-w-[92rem] px-6 py-[var(--space-section)]'}
     >
       <FadeIn>
-        <div className="rule pt-12" />
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-16">
+        <div className="grid gap-10 border-t border-brand-rule pt-12 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:gap-16">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
-              {eyebrow}
-            </p>
+            <p className="eyebrow">{eyebrow}</p>
             <h2
               id={headingId}
-              className="mt-3 font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl"
+              className="font-display mt-4 text-3xl font-bold leading-[1.05] text-brand-dark sm:text-[2.5rem]"
             >
               {heading}
             </h2>
+            {/*
+              The figures are a course of tiles rather than a loose two-column
+              list: they are the same facts the hero states, and stating them
+              twice in two different shapes is how a page stops looking like one
+              page.
+            */}
             {facts && facts.length > 0 && (
-              <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-brand-rule pt-6">
+              <dl className="grout grout-tile mt-9 grid-cols-2">
                 {facts.map((fact) => (
-                  <div key={fact.label}>
-                    <dt className="font-mono text-[0.7rem] uppercase tracking-widest text-brand-muted">
+                  <div key={fact.label} className="px-4 py-5">
+                    <dt className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-brand-muted">
                       {fact.label}
                     </dt>
-                    <dd className="mt-1 font-display text-2xl font-semibold text-brand-dark">
+                    <dd className="font-display mt-2 text-2xl font-bold tracking-[-0.03em] text-brand-dark">
                       {fact.value}
                     </dd>
                   </div>

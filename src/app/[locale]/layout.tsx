@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
-import { Inter, Fraunces } from 'next/font/google';
+import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales';
 import { CF_ANALYTICS_TOKEN, HTML_LANG, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
@@ -13,13 +13,23 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import '../globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-/* The display face for the whole site. */
-const fraunces = Fraunces({
+/* Body and UI. Neutral on purpose: the display face carries the identity. */
+const body = Inter({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
+
+/*
+ * The display face for the whole site.
+ *
+ * Bricolage is a grotesque with an optical-size axis and a width axis, and the
+ * design leans on both: `font-optical-sizing: auto` in globals.css lets one
+ * file set a 128px headline with closed apertures and an 15px card title with
+ * open ones, which is what keeps the six-fold jump in the type scale from
+ * reading as the same letterforms scaled up.
+ */
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-display-face',
   display: 'swap',
-  axes: ['SOFT', 'WONK', 'opsz'],
+  axes: ['opsz', 'wdth'],
 });
 
 export const metadata: Metadata = {
@@ -47,7 +57,7 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const fontVars = `${inter.variable} ${fraunces.variable}`;
+  const fontVars = `${body.variable} ${display.variable}`;
 
   return (
     <html lang={HTML_LANG[locale as Locale]} className={fontVars}>

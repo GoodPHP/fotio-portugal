@@ -54,9 +54,9 @@ export default function CityFilter({ cities, locale }: CityFilterProps) {
               aria-hidden="true"
               viewBox="0 0 24 24"
               fill="none"
-              className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-brand-muted"
+              className="field-search-icon size-4"
             >
-              <path d="m21 21-4.3-4.3M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="m21 21-4.3-4.3M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
             </svg>
             <input
               id="city-search"
@@ -64,7 +64,7 @@ export default function CityFilter({ cities, locale }: CityFilterProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={label('searchPlaceholder', locale)}
-              className="w-full border-0 border-b border-brand-rule-strong bg-transparent py-3 pl-8 pr-4 text-base text-brand-dark outline-none transition-colors placeholder:text-brand-muted focus:border-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+              className="field field-search"
             />
           </div>
         </div>
@@ -77,32 +77,49 @@ export default function CityFilter({ cities, locale }: CityFilterProps) {
       {filtered.length === 0 ? (
         <p className="mt-12 text-center text-lg text-brand-muted">{label('empty', locale)}</p>
       ) : (
-        <ul className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        /*
+          The card used to be a photograph with a black gradient poured over it
+          and white type on top. That is the one thing a site selling
+          photography should not do: the scrim is there to rescue contrast, and
+          it costs a third of the image to do it. The caption now sits under the
+          photograph on the tile face, so the picture is seen whole and the type
+          is ink on a light ground at full contrast.
+        */
+        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((c) => (
             <li key={c.slug}>
               <Link
                 href={cityHrefBySlug(c.slug)}
-                className="group relative isolate flex h-full min-h-56 flex-col justify-end overflow-hidden rounded-card border border-brand-rule p-6 text-white transition duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/60"
+                className="tile tile-link group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
               >
-                <Picture
-                  slot={citySlot(c.slug)}
-                  alt={c.name}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="absolute inset-0 -z-10 object-cover transition-transform duration-500 group-hover:scale-105"
-                  fill
-                />
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/35 to-black/10"
-                />
-                <span className="text-xs font-semibold uppercase tracking-widest text-white/80">
-                  {c.region}
+                <span className="relative block aspect-[4/3] overflow-hidden">
+                  <Picture
+                    slot={citySlot(c.slug)}
+                    alt={c.name}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    fill
+                  />
                 </span>
-                <h3 className="mt-1 font-display text-2xl font-semibold">{c.name}</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-white/80">{c.blurb}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold">
-                  {label('explore', locale)}
-                  <span aria-hidden="true" className="transition group-hover:translate-x-1">→</span>
+                <span className="flex flex-1 flex-col border-t border-brand-rule px-5 py-4">
+                  <span className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-brand-muted">
+                    {c.region}
+                  </span>
+                  <h3 className="font-display mt-1.5 text-2xl font-semibold text-brand-dark transition-colors group-hover:text-brand-orange-deep">
+                    {c.name}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-brand-muted">{c.blurb}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-orange-deep">
+                    {label('explore', locale)}
+                    <svg
+                      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="square" />
+                    </svg>
+                  </span>
                 </span>
               </Link>
             </li>

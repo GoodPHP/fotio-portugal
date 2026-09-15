@@ -28,6 +28,7 @@ import {
 import { SERVICE_SEO } from '@/lib/data/service-seo';
 import type { Service } from '@/lib/types';
 import JsonLd from '@/components/JsonLd';
+import Faq from '@/components/Faq';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
@@ -189,7 +190,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       {/* Hero + price card */}
       <section aria-labelledby="service-heading" className="relative overflow-hidden">
-        <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-12 pt-12 lg:grid-cols-12 lg:pt-16">
+        <div className="relative mx-auto grid max-w-[92rem] gap-12 px-6 pb-12 pt-12 lg:grid-cols-12 lg:pt-16">
           <div className="lg:col-span-7">
             <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
               <ol className="flex flex-wrap items-center gap-1.5">
@@ -225,8 +226,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark">{labels.includedTitle}</h2>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {deliverables.map((item) => (
-                  <li key={item} className="flex items-start gap-3 rounded-card-sm border border-brand-rule bg-white px-4 py-3">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange-deep" aria-hidden="true">
+                  <li key={item} className="flex items-start gap-3 rounded-card-sm border border-brand-rule bg-brand-tile px-4 py-3">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center bg-brand-orange-deep text-white" aria-hidden="true">
                       <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     </span>
                     <span className="text-sm leading-snug text-brand-dark">{item}</span>
@@ -255,7 +256,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
               <Link
                 href="/book"
-                className="mt-8 flex w-full items-center justify-center rounded-chip bg-brand-orange-deep px-6 py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="btn btn-primary mt-8 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {labels.book}
               </Link>
@@ -276,7 +277,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       {/* Cities grid */}
       <section aria-labelledby="service-cities-heading" className="bg-brand-sand py-16">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-[92rem] px-6">
           <FadeIn>
             <h2 id="service-cities-heading" className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
               {labels.citiesTitle}
@@ -289,7 +290,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <StaggerItem key={city.slug}>
                 <Link
                   href={leafHref(service, city, locale)}
-                  className="group flex items-center justify-between rounded-card-sm border border-brand-rule bg-white px-5 py-5 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                  className="group flex items-center justify-between rounded-card-sm border border-brand-rule bg-brand-tile px-5 py-5 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                 >
                   <span>
                     <span className="block font-display text-lg font-semibold text-brand-dark">{city.name}</span>
@@ -321,27 +322,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         />
       )}
 
-      {/* FAQ */}
-      {faqEntries.length > 0 && (
-        <section aria-labelledby="service-faq-heading" className="mx-auto max-w-3xl px-6 py-16">
-          <FadeIn>
-            <h2 id="service-faq-heading" className="text-center font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
-              {labels.faqTitle}
-            </h2>
-          </FadeIn>
-          <div className="mt-8 divide-y divide-black/5 rounded-card border border-brand-rule bg-white">
-            {faqEntries.map((faq) => (
-              <details key={faq.question} className="group px-6 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
-                  {faq.question}
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-sand transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-brand-muted">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      )}
+      <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
     </main>
   );
 }

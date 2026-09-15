@@ -106,8 +106,10 @@ export default function Lightbox({ images, index, onClose, onIndexChange, alt, l
 
   if (!mounted) return null;
 
+  // Square, like everything else. A round control is the one shape the system
+  // does not have, and the lightbox is the place it was hiding.
   const btnClass =
-    'absolute z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
+    'absolute z-10 flex h-12 w-12 items-center justify-center border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-brand-tile hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white';
 
   if (index === null) return null;
 
@@ -176,7 +178,7 @@ export default function Lightbox({ images, index, onClose, onIndexChange, alt, l
       )}
 
       {hasMultiple && (
-        <span className="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-sm text-white/80">
+        <span className="font-mono absolute bottom-5 left-1/2 -translate-x-1/2 border border-white/25 px-3 py-1.5 text-xs uppercase tracking-[0.14em] text-white">
           {index + 1} / {total}
         </span>
       )}

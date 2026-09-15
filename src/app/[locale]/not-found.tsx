@@ -42,25 +42,25 @@ export default async function NotFound() {
 
   return (
     <main className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-6 text-center">
-      <p className="font-mono text-sm uppercase tracking-widest text-brand-orange-deep">404</p>
+      <p className="eyebrow">404</p>
       <h1 className="mt-3 font-display text-4xl font-bold">{c.heading}</h1>
       <p className="mt-3 text-brand-muted">{c.body}</p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/"
-          className="rounded-chip bg-brand-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+          className="btn btn-ink btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
         >
           {c.home}
         </Link>
         <Link
           href="/cities"
-          className="rounded-chip border border-brand-rule px-6 py-3 text-sm font-semibold text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+          className="btn btn-outline btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
         >
           {c.cities}
         </Link>
         <Link
           href="/services"
-          className="rounded-chip border border-brand-rule px-6 py-3 text-sm font-semibold text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+          className="btn btn-outline btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
         >
           {c.services}
         </Link>

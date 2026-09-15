@@ -47,7 +47,7 @@ function t(key: keyof typeof UI, locale: Locale): string {
 const ASPECTS = ['aspect-[3/4]', 'aspect-[4/5]', 'aspect-square', 'aspect-[3/2]'] as const;
 
 const TILE_CLASS =
-  'group relative block w-full cursor-zoom-in overflow-hidden rounded-card-sm bg-neutral-100 duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep';
+  'group relative block w-full cursor-zoom-in overflow-hidden border border-brand-rule bg-brand-cream transition-colors hover:border-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep';
 
 export default function PortfolioGallery({
   photos,
@@ -79,7 +79,7 @@ export default function PortfolioGallery({
         <div
           role="group"
           aria-label={t('all', locale)}
-          className="flex flex-wrap justify-center gap-2.5"
+          className="flex flex-wrap justify-center gap-2"
         >
           <FilterChip active={active === 'all'} onClick={() => selectCategory('all')}>
             {t('all', locale)}
@@ -94,19 +94,19 @@ export default function PortfolioGallery({
             </FilterChip>
           ))}
         </div>
-        <p className="mt-5 text-center text-sm font-medium text-brand-muted" aria-live="polite">
+        <p className="font-mono mt-6 text-center text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted" aria-live="polite">
           {t('showing', locale)} {visible.length} {t('of', locale)} {filtered.length} {t('photos', locale)}
         </p>
       </FadeIn>
 
-      <div className="mt-10 gap-4 [column-fill:_balance] columns-2 sm:columns-3 lg:columns-4">
+      <div className="mt-10 gap-3 [column-fill:_balance] columns-2 sm:columns-3 lg:columns-4">
         {visible.map((photo, i) => (
           <button
             key={`${photo.src}-${i}`}
             type="button"
             onClick={() => setOpenIndex(i)}
             aria-label={`${t('zoom', locale)} — ${photo.alt}`}
-            className={`${TILE_CLASS} mb-4 break-inside-avoid`}
+            className={`${TILE_CLASS} mb-3 break-inside-avoid`}
           >
             <span className={`relative block ${ASPECTS[i % ASPECTS.length]}`}>
               <Picture
@@ -116,11 +116,13 @@ export default function PortfolioGallery({
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 fill
               />
+              {/* A caption bar that slides up from the bottom edge, rather than
+                  a gradient poured over the lower third of the photograph. */}
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/55 to-transparent p-3 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-brand-dark px-3 py-2.5 transition-transform duration-300 group-hover:translate-y-0"
               >
-                <span className="text-xs font-semibold uppercase tracking-wide text-white">
+                <span className="font-mono block truncate text-[0.625rem] uppercase tracking-[0.16em] text-white">
                   {photo.alt}
                 </span>
               </span>
@@ -134,7 +136,7 @@ export default function PortfolioGallery({
           <button
             type="button"
             onClick={() => setVisibleCount((c) => c + batch)}
-            className="rounded-chip bg-brand-dark px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+            className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
           >
             {t('loadMore', locale)} ({remaining})
           </button>
@@ -163,15 +165,15 @@ function FilterChip({
   children: React.ReactNode;
 }) {
   return (
+    /*
+      Selected is styled from `aria-pressed` in globals.css, not from the
+      `active` prop, so the look and the announcement cannot disagree.
+    */
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-chip px-4 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 ${
-        active
-          ? 'bg-brand-dark text-white shadow'
-          : 'bg-white text-brand-dark ring-1 ring-brand-rule hover:ring-brand-orange/40'
-      }`}
+      className="chip focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep"
     >
       {children}
     </button>

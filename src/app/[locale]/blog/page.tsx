@@ -102,10 +102,10 @@ export default async function BlogIndexPage({
     <main className="mx-auto max-w-5xl px-6 py-20 sm:py-24">
       <JsonLd data={jsonLd} />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+        <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
           {c('title', locale)}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>
@@ -115,7 +115,7 @@ export default async function BlogIndexPage({
         {posts.map((post, i) => (
           <article
             key={post.slug}
-            className="group overflow-hidden rounded-card border border-brand-rule bg-white transition hover:-translate-y-0.5 sm:flex"
+            className="group overflow-hidden rounded-card border border-brand-rule bg-brand-tile transition sm:flex"
           >
             <Link
               href={blogHref(post.slug)}
@@ -138,7 +138,7 @@ export default async function BlogIndexPage({
                 <span aria-hidden="true">·</span>
                 <span>{post.author}</span>
               </div>
-              <h2 className="mt-4 font-display text-2xl font-bold text-neutral-900 group-hover:text-brand-orange-deep sm:text-3xl">
+              <h2 className="mt-4 font-display text-2xl font-bold text-brand-dark group-hover:text-brand-orange-deep sm:text-3xl">
                 <Link href={blogHref(post.slug)} className="focus-visible:outline-none focus-visible:underline">
                   {tx(post.title, locale)}
                 </Link>
@@ -146,7 +146,7 @@ export default async function BlogIndexPage({
               <p className="mt-3 text-brand-muted">{tx(post.summary, locale)}</p>
               <Link
                 href={blogHref(post.slug)}
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-orange-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 {c('readMore', locale)}
                 <span aria-hidden="true" className="transition group-hover:translate-x-1">→</span>

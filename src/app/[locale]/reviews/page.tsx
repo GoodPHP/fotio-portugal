@@ -105,10 +105,10 @@ export default async function ReviewsPage({
     <main className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
       <JsonLd data={jsonLd} />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+        <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
           {c('title', locale)}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>
@@ -119,8 +119,8 @@ export default async function ReviewsPage({
           worse than both — the same number is emitted as an AggregateRating.
         */}
         {reviewCount > 0 ? (
-          <div className="mt-8 inline-flex items-center gap-4 rounded-card-sm border border-brand-rule bg-white px-6 py-4">
-            <span className="font-display text-4xl font-bold text-neutral-900">{ratingValue}</span>
+          <div className="mt-8 inline-flex items-center gap-4 rounded-card-sm border border-brand-rule bg-brand-tile px-6 py-4">
+            <span className="font-display text-4xl font-bold text-brand-dark">{ratingValue}</span>
             <span className="h-10 w-px bg-black/10" />
             <span>
               <Stars count={Math.round(ratingValue)} />
@@ -130,7 +130,7 @@ export default async function ReviewsPage({
             </span>
           </div>
         ) : (
-          <p className="mt-8 rounded-card-sm border border-brand-rule bg-white px-6 py-4 text-brand-muted">
+          <p className="mt-8 rounded-card-sm border border-brand-rule bg-brand-tile px-6 py-4 text-brand-muted">
             {c('empty', locale)}
           </p>
         )}
@@ -140,14 +140,14 @@ export default async function ReviewsPage({
         {REVIEWS.map((r) => (
           <article
             key={r.id}
-            className="mb-5 break-inside-avoid rounded-card border border-brand-rule bg-white p-6 transition"
+            className="mb-5 break-inside-avoid rounded-card border border-brand-rule bg-brand-tile p-6 transition"
           >
             <Stars count={r.stars} />
             <blockquote className="mt-4 text-brand-dark">
               <p>“{tx(r.text, locale)}”</p>
             </blockquote>
             <footer className="mt-5 border-t border-brand-rule pt-4">
-              <p className="font-semibold text-neutral-900">{r.name}</p>
+              <p className="font-semibold text-brand-dark">{r.name}</p>
               <p className="text-sm text-brand-muted">
                 {tx(r.serviceName, locale)} · {r.cityName}
               </p>

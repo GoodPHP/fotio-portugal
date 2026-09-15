@@ -11,7 +11,7 @@ import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
 /** The city that fronts the directory on social previews. */
-const OG_CITY_SLUG = 'paris';
+const OG_CITY_SLUG = 'lisboa';
 import CityFilter, { type CityFilterItem } from '@/components/CityFilter';
 
 const COPY = {
@@ -93,13 +93,13 @@ export default async function CitiesHubPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-20 sm:py-24">
+    <main className="mx-auto max-w-[92rem] px-6 py-20 sm:py-24">
       <JsonLd data={jsonLd} />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+        <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
           {c('title', locale)}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>

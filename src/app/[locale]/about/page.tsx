@@ -24,6 +24,7 @@ import { absoluteUrl } from '@/lib/urls';
 import { citySlot, serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
+import Faq from '@/components/Faq';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import {
   COPY,
@@ -38,7 +39,15 @@ import {
 } from './content';
 import { cityHref } from '@/lib/routes';
 
-const HERO_CITY = 'paris';
+/*
+ * Both of these name a real entry in the catalogue, and until now the first did
+ * not: it was `'paris'`, left behind by the site this one was rebuilt from.
+ * Nothing failed loudly — `citySlot` happily builds a key for a city that does
+ * not exist, so the hero rendered the missing-photograph tile and the OG card
+ * pointed at a file that was never generated. `scripts/check-slots.ts` now
+ * fails the build on a slug the catalogue does not have.
+ */
+const HERO_CITY = 'porto';
 const STORY_SERVICE = 'couple';
 
 export async function generateMetadata({
@@ -82,17 +91,35 @@ export default async function AboutPage({
   setRequestLocale(locale);
 
   const { ratingValue, reviewCount } = getAggregateRating();
+  // Resolved from the catalogue so the alt text names the place actually shown,
+  // rather than repeating a slug that had been wrong for the whole rebuild.
+  const heroCity = CITIES.find((c) => c.slug === HERO_CITY);
   const featuredCities = CITIES.slice(0, 8);
   const categories = [...servicesByCategory().entries()].filter(([, services]) => services.length > 0);
 
+  /*
+    Two things were wrong with this row.
+
+    The labels carried only an `en` field, and `tx` falls back to English, so a
+    Portuguese reader got "cities covered" on a page otherwise fully
+    translated. `check-pt-todo` cannot catch it because there is no marker to
+    find — a missing translation and a deliberate English string look the same.
+
+    The last tile rendered "0/5" under "0 reviews" whenever REVIEWS is empty,
+    which is every build: the reviews are deliberately absent because inventing
+    them would be a lie, and printing a zero score is not the honest
+    alternative — it reads as a rating rather than as an absence.
+  */
   const stats = [
-    { value: `${CITIES.length}`, label: { en: 'cities covered' } },
-    { value: `${SERVICES.length}+`, label: { en: 'service types' } },
-    { value: '48-72h', label: { en: 'gallery delivery' } },
-    {
-      value: `${ratingValue}/5`,
-      label: { en: `${reviewCount} reviews` },
-    },
+    { value: `${CITIES.length}`, label: { en: 'cities covered', pt: 'sítios cobertos' } },
+    { value: `${SERVICES.length}+`, label: { en: 'service types', pt: 'tipos de sessão' } },
+    { value: '48-72h', label: { en: 'gallery delivery', pt: 'entrega da galeria' } },
+    reviewCount > 0
+      ? {
+          value: `${ratingValue}/5`,
+          label: { en: `${reviewCount} reviews`, pt: `${reviewCount} avaliações` },
+        }
+      : { value: '2h', label: { en: 'reply time', pt: 'tempo de resposta' } },
   ];
 
   const aboutUrl = absoluteUrl(locale, '/about');
@@ -135,9 +162,9 @@ export default async function AboutPage({
       <JsonLd data={jsonLd} />
 
       {/* Header + hero image */}
-      <section className="mx-auto max-w-7xl px-6 pt-20 sm:pt-24">
+      <section className="mx-auto max-w-[92rem] px-6 pt-20 sm:pt-24">
         <FadeIn instant className="max-w-3xl">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-orange-deep">
+          <p className="eyebrow">
             {tx(COPY.eyebrow, locale)}
           </p>
           <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
@@ -151,7 +178,7 @@ export default async function AboutPage({
           <div className="relative aspect-[2/1] w-full overflow-hidden rounded-card border border-brand-rule sm:aspect-[21/9]">
             <Picture
               slot={citySlot(HERO_CITY)}
-              alt="Paris"
+              alt={heroCity ? `${heroCity.name}, ${tx(heroCity.region, locale)}` : HERO_CITY}
               sizes="(max-width: 1280px) 100vw, 1216px"
               className="object-cover"
               fill
@@ -166,13 +193,17 @@ export default async function AboutPage({
       </section>
 
       {/* Stats */}
-      <section aria-label="Key facts" className="mx-auto max-w-7xl px-6 py-14">
+      <section aria-label="Key facts" className="mx-auto max-w-[92rem] px-6 py-14">
         <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s) => (
             <StaggerItem key={s.value}>
-              <div className="rounded-card border border-brand-rule bg-white p-6 text-center">
-                <p className="font-display text-3xl font-bold text-brand-orange-deep">{s.value}</p>
-                <p className="mt-1 text-sm text-brand-muted">{tx(s.label, locale)}</p>
+              <div className="tile h-full px-5 py-7">
+                <p className="font-display text-3xl font-bold leading-none tracking-[-0.04em] text-brand-dark sm:text-4xl">
+                  {s.value}
+                </p>
+                <p className="font-mono mt-3 text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted">
+                  {tx(s.label, locale)}
+                </p>
               </div>
             </StaggerItem>
           ))}
@@ -181,9 +212,9 @@ export default async function AboutPage({
 
       {/* Story / mission */}
       <section aria-labelledby="story-heading" className="bg-brand-sand py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto grid max-w-[92rem] gap-10 px-6 lg:grid-cols-2 lg:items-center">
           <FadeIn>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+            <p className="eyebrow">
               {tx(COPY.storyEyebrow, locale)}
             </p>
             <h2
@@ -200,7 +231,10 @@ export default async function AboutPage({
               <Picture
                 slot={serviceSlot(STORY_SERVICE)}
                 alt={tx(
-                { en: 'A couple during a photo session in France' },
+                {
+                  en: 'A couple during a photo session in Portugal',
+                  pt: 'Um casal durante uma sessão fotográfica em Portugal',
+                },
                 locale,
                 )}
                 sizes="(max-width: 1024px) 100vw, 600px"
@@ -213,9 +247,9 @@ export default async function AboutPage({
       </section>
 
       {/* Values */}
-      <section aria-labelledby="values-heading" className="mx-auto max-w-7xl px-6 py-20">
+      <section aria-labelledby="values-heading" className="mx-auto max-w-[92rem] px-6 py-20">
         <FadeIn>
-          <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+          <p className="eyebrow">
             {tx(COPY.valuesEyebrow, locale)}
           </p>
           <h2
@@ -242,9 +276,9 @@ export default async function AboutPage({
 
       {/* How it works */}
       <section aria-labelledby="how-heading" className="bg-brand-sand py-20">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-[92rem] px-6">
           <FadeIn>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+            <p className="eyebrow">
               {tx(COPY.stepsEyebrow, locale)}
             </p>
             <h2
@@ -257,7 +291,7 @@ export default async function AboutPage({
           <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
             {STEPS.map((step) => (
               <StaggerItem key={step.n}>
-                <div className="relative h-full rounded-card border border-brand-rule bg-white p-7">
+                <div className="relative h-full rounded-card border border-brand-rule bg-brand-tile p-7">
                   <span className="font-mono text-sm font-semibold text-brand-orange-deep">{step.n}</span>
                   <h3 className="mt-4 font-display text-xl font-semibold text-brand-dark">{tx(step.title, locale)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-brand-muted">{tx(step.body, locale)}</p>
@@ -269,9 +303,9 @@ export default async function AboutPage({
       </section>
 
       {/* Why trust us / guarantees */}
-      <section aria-labelledby="trust-heading" className="mx-auto max-w-7xl px-6 py-20">
+      <section aria-labelledby="trust-heading" className="mx-auto max-w-[92rem] px-6 py-20">
         <FadeIn>
-          <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+          <p className="eyebrow">
             {tx(COPY.trustEyebrow, locale)}
           </p>
           <h2
@@ -297,10 +331,10 @@ export default async function AboutPage({
 
       {/* Where we shoot (coverage) */}
       <section aria-labelledby="coverage-heading" className="bg-brand-sand py-20">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-[92rem] px-6">
           <FadeIn className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+              <p className="eyebrow">
                 {tx(COPY.coverageEyebrow, locale)}
               </p>
               <h2
@@ -323,7 +357,7 @@ export default async function AboutPage({
               <StaggerItem key={city.slug}>
                 <Link
                   href={cityHref(city)}
-                  className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-5 text-white transition-all hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                  className="group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-5 text-white transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                 >
                   <Picture
                     slot={citySlot(city.slug)}
@@ -346,10 +380,10 @@ export default async function AboutPage({
       </section>
 
       {/* What we offer */}
-      <section aria-labelledby="offer-heading" className="mx-auto max-w-7xl px-6 py-20">
+      <section aria-labelledby="offer-heading" className="mx-auto max-w-[92rem] px-6 py-20">
         <FadeIn className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+            <p className="eyebrow">
               {tx(COPY.offerEyebrow, locale)}
             </p>
             <h2
@@ -372,7 +406,7 @@ export default async function AboutPage({
             <StaggerItem key={category}>
               <Link
                 href="/services"
-                className="group relative isolate flex aspect-square flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-4 text-white transition-all hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                className="group relative isolate flex aspect-square flex-col justify-end overflow-hidden rounded-card-sm border border-brand-rule p-4 text-white transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 <Picture
                   slot={serviceSlot(services[0].slug)}
@@ -400,9 +434,9 @@ export default async function AboutPage({
       {/* Testimonials */}
       {REVIEWS.length > 0 && (
         <section aria-labelledby="reviews-heading" className="bg-brand-sand py-20">
-          <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-[92rem] px-6">
             <FadeIn>
-              <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+              <p className="eyebrow">
                 {tx(COPY.reviewsEyebrow, locale)}
               </p>
               <h2
@@ -415,7 +449,7 @@ export default async function AboutPage({
             <Stagger className="mt-10 grid gap-6 md:grid-cols-3">
               {REVIEWS.map((review) => (
                 <StaggerItem key={review.id}>
-                  <figure className="flex h-full flex-col rounded-card border border-brand-rule bg-white p-7">
+                  <figure className="flex h-full flex-col rounded-card border border-brand-rule bg-brand-tile p-7">
                     <Stars count={review.stars} />
                     <span className="sr-only">{tx({ en: `${review.stars} out of 5 stars` }, locale)}</span>
                     <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-brand-dark">
@@ -436,32 +470,11 @@ export default async function AboutPage({
       )}
 
       {/* FAQ */}
-      <section aria-labelledby="faq-heading" className="mx-auto max-w-3xl px-6 py-20">
-        <FadeIn>
-          <h2
-            id="faq-heading"
-            className="text-center font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl"
-          >
-            {tx(COPY.faqTitle, locale)}
-          </h2>
-        </FadeIn>
-        <div className="mt-10 divide-y divide-black/5 rounded-card border border-brand-rule bg-white">
-          {ABOUT_FAQ.map((faq) => (
-            <details key={tx(faq.q, 'en')} className="group px-6 py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
-                {tx(faq.q, locale)}
-                <span
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-sand text-brand-dark transition-transform group-open:rotate-45"
-                  aria-hidden="true"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-brand-muted">{tx(faq.a, locale)}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq
+        headingId="faq-heading"
+        title={tx(COPY.faqTitle, locale)}
+        entries={ABOUT_FAQ.map((faq) => ({ question: tx(faq.q, locale), answer: tx(faq.a, locale) }))}
+      />
 
       <SeoProse
         headingId="about-seo-heading"
@@ -472,7 +485,7 @@ export default async function AboutPage({
       />
 
       {/* CTA */}
-      <section aria-labelledby="cta-heading" className="mx-auto max-w-7xl px-6 pb-16">
+      <section aria-labelledby="cta-heading" className="mx-auto max-w-[92rem] px-6 pb-16">
         <FadeIn>
           <div data-surface="dark" className="relative overflow-hidden rounded-card bg-brand-dark px-8 py-16 text-center sm:px-16 sm:py-20">
             <div
@@ -481,17 +494,17 @@ export default async function AboutPage({
             <h2 id="cta-heading" className="relative mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
               {tx(COPY.ctaTitle, locale)}
             </h2>
-            <p className="relative mx-auto mt-4 max-w-lg text-base text-neutral-300">{tx(COPY.ctaSub, locale)}</p>
+            <p className="relative mx-auto mt-4 max-w-lg text-base text-brand-muted">{tx(COPY.ctaSub, locale)}</p>
             <div className="relative mt-9 flex flex-wrap justify-center gap-3">
               <Link
                 href="/book"
-                className="inline-flex items-center gap-2 rounded-chip bg-brand-orange-deep px-8 py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {tx(COPY.cta, locale)}
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-chip border border-white/20 px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {tx(COPY.ctaContact, locale)}
               </Link>

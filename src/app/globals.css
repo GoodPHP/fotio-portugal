@@ -1,74 +1,128 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
- * Editorial design system.
+ * Azulejo Modernist.
  *
- * The site sells photography, so photography leads and everything else gets
- * out of its way: a warm paper ground, one serif doing the talking, hairline
- * rules instead of cards, and almost no radius. Depth comes from scale,
- * overlap and whitespace rather than from shadows.
+ * The site sells photography in Portugal, and the one visual language that is
+ * both unmistakably Portuguese and genuinely modernist is the tile: a glazed
+ * white square, a cobalt line, a lattice that repeats without ever being
+ * boring, and grout holding it all to a grid.
  *
- * The `brand-*` token names are kept as the public interface so the hundreds of
- * existing utilities keep resolving; what they point at is what changed.
- * Contrast for every pairing is asserted in src/lib/theme.test.ts.
+ * Four rules follow from that, and every decision below is one of them:
+ *
+ *   1. Squares. Nothing is rounded, anywhere. A tile has corners.
+ *   2. Grout, not shadows. Panels are separated by a 1px line that reads as
+ *      the gap between tiles; depth comes from the grid, never from a blur.
+ *   3. One cobalt. A single saturated blue carries every accent, link, mark
+ *      and filled action. Where more colour is needed, the photographs supply
+ *      it — they are the only thing on the page allowed to be polychrome.
+ *   4. The lattice is drawn, not loaded. The azulejo motif is four radial
+ *      gradients; it costs no request, scales to any size and re-colours
+ *      itself inside a theme because it is painted in `currentColor` terms.
+ *
+ * The `brand-*` token names are the public interface — several hundred
+ * utilities across the site resolve through them — so the names survive and
+ * the values underneath are what changed. Contrast for every pairing is
+ * asserted in src/lib/theme.test.ts, which parses this file. A colour that
+ * fails AA fails the build, so these values are not free to be prettier than
+ * they are legible.
  * ------------------------------------------------------------------------- */
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display-face), "Helvetica Neue", Arial, sans-serif;
   /*
-   * Not actually monospace any more, and the name is kept because ~30 call
-   * sites use the utility it generates.
+   * Not monospace, and the name is kept because ~35 call sites use the utility
+   * it generates.
    *
-   * Every use of it on this site is a small letterspaced uppercase label or a
-   * counter — decoration, never code. That was costing a third font family,
-   * roughly 30 KB, for a look Inter produces at 11px with the same tracking.
-   * Where digits have to line up, `font-variant-numeric: tabular-nums` does the
-   * one job the monospace face was genuinely needed for.
+   * Every use of it is a small letterspaced uppercase label or a counter —
+   * decoration, never code. That was costing a third font family for a look
+   * the body face produces at 11px with the same tracking. Where digits have
+   * to line up, `font-variant-numeric: tabular-nums` does the one job the
+   * monospace face was genuinely needed for.
    */
-  --font-mono: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
-
-  /* Ground and ink. Warm rather than neutral — paper, not screen. */
-  --color-brand-sand: #F7F4EE;
-  --color-brand-cream: #EDE8DD;
-  --color-brand-dark: #17150F;
-  /* Secondary text. 6.75:1 on paper, so it stays readable rather than faint. */
-  --color-brand-muted: #5A554A;
+  --font-mono: var(--font-body), ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   /*
-   * Sienna. Carries text and surfaces alike: 6.26:1 on paper, 6.87:1 under
-   * white. The quiet variant is decorative only and never has text on it.
+   * Ground and ink.
+   *
+   * Bone rather than white: a glazed tile is never paper-white, and a flat
+   * #fff ground would make the white tile faces below it disappear. The ink
+   * carries a blue cast so that black type and cobalt type read as relatives
+   * rather than as two unrelated decisions.
    */
-  --color-brand-orange-deep: #9C3B1B;
-  --color-brand-orange: #C4633C;
+  --color-brand-sand: #F3F3EE;
+  --color-brand-cream: #E3E9EA;
+  --color-brand-dark: #0E1417;
+  /* Secondary text. 6:1 on bone, so it stays readable rather than faint. */
+  --color-brand-muted: #535E61;
 
   /*
-   * Rules do the work borders and shadows used to. They are dividers, not UI
-   * boundaries, so they are tuned to be seen and not noticed.
+   * Cobalt. The one accent, and it does every job: link, mark, rule, filled
+   * button, lattice. 6.9:1 on bone and 7.7:1 under white, so it is a text
+   * colour and not only a decorative one — which is the whole reason a single
+   * accent can carry a site this size.
+   *
+   * The token is still called `orange` because renaming it would touch ~100
+   * call sites for no behavioural gain. It is cobalt.
    */
-  --color-brand-rule: #D8D5CF;
-  --color-brand-rule-strong: #B8B6B0;
+  --color-brand-orange-deep: #1B4FA8;
+  /* The quiet variant: lattices, hairline marks, hover washes. Never text. */
+  --color-brand-orange: #3E78BE;
 
   /*
-   * An editorial scale jumps rather than steps: the display size is five times
-   * the body, so hierarchy is legible before a word is read.
+   * Grout. Two weights: the line between two tiles, and the line that ends a
+   * run of them. They are structure, not decoration, so they are tuned to be
+   * read as a grid and not noticed as a border.
    */
-  --text-display: clamp(3rem, 1rem + 7.5vw, 7rem);
-  --text-title: clamp(2.125rem, 1.2rem + 3.2vw, 3.75rem);
-  --text-heading: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --color-brand-rule: #D5D7D1;
+  --color-brand-rule-strong: #A7ACA6;
+
+  /*
+   * The glazed face. Tiles sit on the bone ground and are lighter than it, so
+   * a grid of them reads as a wall rather than as a set of outlined boxes.
+   */
+  --color-brand-tile: #FBFBF8;
+
+  /*
+   * Validation. The forms were reaching for Tailwind's `red-600`/`red-50`,
+   * which is the one palette on the site that never re-themes — on a Lisboa
+   * page an error message came out a different red from the page it was on.
+   * 6.8:1 on bone and on a tile face, so it is a text colour too.
+   */
+  --color-brand-error: #A32118;
+
+  /*
+   * The scale jumps rather than steps: the display size is six times the body,
+   * so hierarchy is legible before a word is read. Bricolage is a grotesque
+   * with a width axis, which holds together at 8rem in a way a text face does
+   * not — the top of every page is set to be seen across a room.
+   */
+  /*
+   * The ceiling is set by the widest word the headline has to hold, not by
+   * taste: at 8rem "photographer" overran the seven-column measure and collided
+   * with the hero photograph on a 1440px screen. 6.75rem is the largest size
+   * that keeps it inside its column.
+   */
+  --text-display: clamp(3.25rem, 0.9rem + 7.2vw, 6.75rem);
+  --text-title: clamp(2.25rem, 1.15rem + 3.7vw, 4.25rem);
+  --text-heading: clamp(1.625rem, 1.1rem + 1.6vw, 2.5rem);
   --text-sub: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
 
   /* Rhythm is deliberately uneven; sections breathe more than bands. */
-  --space-section: clamp(4.5rem, 2rem + 7vw, 9rem);
+  --space-section: clamp(4.5rem, 2rem + 7vw, 9.5rem);
   --space-band: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
 
-  /* Paper has edges, not corners. */
-  --radius-card: 3px;
-  --radius-card-sm: 2px;
-  --radius-chip: 2px;
+  /* A tile has corners. This is the whole of the radius system. */
+  --radius-card: 0px;
+  --radius-card-sm: 0px;
+  --radius-chip: 0px;
   --shadow-card: none;
   --shadow-card-hover: none;
   --card-border: 1px solid var(--color-brand-rule);
+
+  /* The lattice cell. Overridden per element where a coarser weave reads better. */
+  --azulejo-cell: 30px;
 }
 
 body {
@@ -79,106 +133,684 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ---------------------------------------------------------------------------
+ * Type.
+ * ------------------------------------------------------------------------- */
+
 .font-display {
   font-family: var(--font-display);
-  /* Fraunces is a variable face; this is the optical setting that keeps it
-     from looking like a wedding invitation at display sizes. */
-  font-variation-settings: "SOFT" 0, "WONK" 1;
-  letter-spacing: -0.02em;
+  /*
+   * Bricolage carries an optical-size axis; letting the browser drive it means
+   * a 128px headline gets the tight, closed apertures it needs and a 16px card
+   * title gets the open ones, from one font file.
+   */
+  font-optical-sizing: auto;
+  letter-spacing: -0.035em;
 }
 
-/* --- editorial primitives ------------------------------------------------ */
-
-/* Small letterspaced label above a heading. The one piece of ornament. */
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-brand-orange-deep);
+/*
+ * Display type at hero scale wants to be tighter still. Kerning that looks
+ * correct at 24px looks loose at 128px, and this is the one place it shows.
+ */
+.font-display-tight {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
 }
 
 /*
  * Anything using the label face gets lining, fixed-width figures. Without it a
  * counter like "3 / 12" shifts by a pixel or two as it counts, which is the
- * one thing the monospace family was doing that Inter does not do by default.
+ * one thing the monospace family was doing that the body face does not do by
+ * default.
  */
 .font-mono {
   font-variant-numeric: tabular-nums;
 }
 
-/* A hairline that spans the measure. Replaces the top edge of a card. */
+/* ---------------------------------------------------------------------------
+ * The azulejo lattice.
+ *
+ * Four radial gradients, one per corner of a square cell, each striking an arc
+ * into it. That is the construction behind the interlocking-circle pattern
+ * every tiled facade in Lisbon is some variation of.
+ *
+ * The radius is deliberately larger than half the cell. At exactly half the
+ * arcs are tangent and the pattern reads as a grid of bubbles; past that they
+ * cross, and crossing is what makes it a tile — the interlocking curve is the
+ * whole motif, and 0.6 is where it looks struck with a compass rather than
+ * generated.
+ *
+ * It is painted from `--azulejo-ink`, which defaults to the accent, so a city
+ * theme re-colours the lattice by redefining one colour token and nothing
+ * else. On a dark surface the accent token is already inverted, so the same
+ * rule paints a light lattice on ink without a second declaration.
+ * ------------------------------------------------------------------------- */
+
+.azulejo {
+  --azulejo-ink: color-mix(in srgb, var(--color-brand-orange-deep) 38%, transparent);
+  --azulejo-stroke: 1px;
+  --azulejo-radius: calc(var(--azulejo-cell) * 0.6);
+  background-image:
+    radial-gradient(
+      circle at 0 0,
+      transparent calc(var(--azulejo-radius) - var(--azulejo-stroke)),
+      var(--azulejo-ink) calc(var(--azulejo-radius) - var(--azulejo-stroke)) var(--azulejo-radius),
+      transparent var(--azulejo-radius)
+    ),
+    radial-gradient(
+      circle at 100% 0,
+      transparent calc(var(--azulejo-radius) - var(--azulejo-stroke)),
+      var(--azulejo-ink) calc(var(--azulejo-radius) - var(--azulejo-stroke)) var(--azulejo-radius),
+      transparent var(--azulejo-radius)
+    ),
+    radial-gradient(
+      circle at 0 100%,
+      transparent calc(var(--azulejo-radius) - var(--azulejo-stroke)),
+      var(--azulejo-ink) calc(var(--azulejo-radius) - var(--azulejo-stroke)) var(--azulejo-radius),
+      transparent var(--azulejo-radius)
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      transparent calc(var(--azulejo-radius) - var(--azulejo-stroke)),
+      var(--azulejo-ink) calc(var(--azulejo-radius) - var(--azulejo-stroke)) var(--azulejo-radius),
+      transparent var(--azulejo-radius)
+    );
+  background-size: var(--azulejo-cell) var(--azulejo-cell);
+  background-position: center;
+}
+
+/*
+ * A frieze: the narrow band of tile that runs along the top of a dado. Used as
+ * a section separator, where a plain hairline would say nothing about where
+ * the site thinks it is.
+ */
+.frieze {
+  /*
+   * Exactly one course. The height and the cell are the same number on purpose:
+   * a band shorter than its cell clips the arcs into a squiggle that reads as a
+   * texture rather than as tile, which is what 1.75rem over a 30px cell did.
+   */
+  --azulejo-cell: 2.5rem;
+  height: 2.5rem;
+  border-block: 1px solid var(--color-brand-rule);
+}
+
+/*
+ * Fade a lattice out, so it reads as a band rather than as a texture. The
+ * two-axis variant fades from a corner outward, which is what a lattice hung
+ * off the corner of a hero or a cell needs — a single-axis mask leaves a hard
+ * edge running straight through the content.
+ */
+.azulejo-fade {
+  /* Which corner the lattice is anchored to. Overridden inline where it is not
+     the top-left one. */
+  --azulejo-origin: 0% 0%;
+  -webkit-mask-image: radial-gradient(125% 125% at var(--azulejo-origin), #000 0%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(125% 125% at var(--azulejo-origin), #000 0%, #000 30%, transparent 78%);
+}
+/* Fade a lattice out at one end, so it reads as a band rather than a texture. */
+.azulejo-fade-r {
+  -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+}
+.azulejo-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+}
+
+/* ---------------------------------------------------------------------------
+ * Editorial primitives.
+ * ------------------------------------------------------------------------- */
+
+/*
+ * The label above a heading, and the one recurring piece of ornament: a cobalt
+ * lozenge — a tile stood on its corner — then letterspaced caps. It appears
+ * above every section on the site, which is most of what makes a page with
+ * eleven different section layouts still read as one page.
+ */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-brand-orange-deep);
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  margin-right: 0.9em;
+  vertical-align: 0.06em;
+  background-color: currentColor;
+  rotate: 45deg;
+}
+
+/* A hairline that spans the measure. The grout line between two courses. */
 .rule {
   border-top: 1px solid var(--color-brand-rule);
 }
 
 /*
- * Surfaces. The names survive from the previous design so existing markup keeps
- * working, but they are ruled panels now rather than floating rounded cards.
+ * The tile: the one surface in the system.
+ *
+ * Lighter than the ground it sits on, squared off, held by a grout line. It
+ * hovers to cobalt rather than lifting, because a tile that lifted off the
+ * wall would be a broken tile.
+ */
+.tile {
+  background-color: var(--color-brand-tile);
+  border: 1px solid var(--color-brand-rule);
+  border-radius: 0;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+/*
+ * A tile that is also a link. The corner mark is the tile-maker's mark: a
+ * small cobalt triangle in the bottom-right that fills in on hover. It is the
+ * site's smallest recurring signature and it costs one pseudo-element.
+ */
+.tile-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.tile-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 0.875rem 0.875rem;
+  border-color: transparent transparent var(--color-brand-rule) transparent;
+  transition: border-bottom-color 0.18s ease;
+}
+
+.tile-link:hover,
+.tile-link:focus-visible {
+  border-color: var(--color-brand-orange-deep);
+}
+
+.tile-link:hover::after,
+.tile-link:focus-visible::after {
+  border-bottom-color: var(--color-brand-orange-deep);
+}
+
+/*
+ * Grout: a grid whose gaps are the grid.
+ *
+ * The container paints the grout colour and the children paint over it, so a
+ * 1px gap becomes a continuous line in both directions with no child carrying
+ * a border and no doubled edge where two children meet. This is what a row of
+ * statistics, a run of feature cells or a numbered process is built from
+ * everywhere on the site.
+ */
+.grout {
+  display: grid;
+  gap: 1px;
+  background-color: var(--color-brand-rule);
+  border: 1px solid var(--color-brand-rule);
+}
+
+.grout > * {
+  background-color: var(--color-brand-sand);
+}
+
+/* The same wall, glazed: cells read as tiles rather than as cut-outs. */
+.grout-tile > * {
+  background-color: var(--color-brand-tile);
+}
+
+/*
+ * Surfaces kept from the previous design so existing markup keeps working.
+ * They are tiles now; the names are the only thing that survived.
  */
 .bento-card {
-  background-color: transparent;
-  border-radius: var(--radius-card);
+  background-color: var(--color-brand-tile);
+  border-radius: 0;
   border: var(--card-border);
   padding: 1.75rem;
   transition: border-color 0.18s ease, background-color 0.18s ease;
 }
 
 .bento-card:hover {
-  border-color: var(--color-brand-dark);
-  background-color: color-mix(in srgb, #ffffff 55%, transparent);
+  border-color: var(--color-brand-orange-deep);
 }
 
 .bento-card-dark {
   background-color: var(--color-brand-dark);
   color: #ffffff;
-  border-radius: var(--radius-card);
+  border-radius: 0;
   padding: 1.75rem;
 }
 
 .bento-card-orange {
   background-color: var(--color-brand-orange-deep);
   color: #ffffff;
-  border-radius: var(--radius-card);
+  border-radius: 0;
   padding: 1.75rem;
 }
 
 .bento-card-cream {
   background-color: var(--color-brand-cream);
   color: var(--color-brand-dark);
-  border-radius: var(--radius-card);
+  border-radius: 0;
   padding: 1.75rem;
 }
 
-/*
- * Dark surfaces invert the tokens that only work on paper.
+/* ---------------------------------------------------------------------------
+ * Actions.
  *
- * The muted grey and the sienna accent are tuned for a light ground: on ink
- * they fall to 3.7:1 and 2.7:1. Rather than hand-picking light colours at every
- * call site, a dark surface redefines the same tokens, so `text-brand-muted`
- * keeps meaning "secondary text" wherever it is used.
+ * Three, and no more: a filled cobalt block, an outlined block, and a ruled
+ * link. Before this the site had eleven distinct button shapes spelled out in
+ * utility strings at the call sites, which is how a filled button ends up
+ * three different heights on three different pages.
+ * ------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.9375rem 1.75rem;
+  border-radius: 0;
+  border: 1px solid transparent;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-align: center;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn svg {
+  flex: none;
+  transition: translate 0.18s ease;
+}
+
+.btn:hover svg {
+  translate: 0.1875rem 0;
+}
+
+.btn-primary {
+  background-color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover svg {
+  translate: none;
+}
+
+/*
+ * The ink variant. Used where cobalt would be the third blue thing in a row —
+ * a secondary page's primary action, the 404, the portfolio hero — so the page
+ * still has one obvious action without every page shouting in the same colour.
  */
+.btn-ink {
+  background-color: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+  color: var(--color-brand-sand);
+}
+
+.btn-ink:hover {
+  background-color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-brand-dark);
+  color: var(--color-brand-dark);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-sand);
+}
+
+/* On ink, the outline is the light and the fill is the page. */
+[data-surface='dark'] .btn-outline {
+  border-color: rgb(255 255 255 / 0.35);
+  color: #ffffff;
+}
+
+[data-surface='dark'] .btn-outline:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-brand-dark);
+}
+
+.btn-sm {
+  padding: 0.6875rem 1.125rem;
+  font-size: 0.8125rem;
+}
+
+/*
+ * The third action: a link ruled underneath, for places where a block would
+ * be too loud — "view all" beside a section heading, the secondary half of a
+ * hero pair. The rule thickens and turns cobalt rather than moving.
+ */
+.link-ruled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.1875rem;
+  border-bottom: 1px solid var(--color-brand-rule-strong);
+  color: var(--color-brand-muted);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.link-ruled:hover {
+  border-color: var(--color-brand-orange-deep);
+  color: var(--color-brand-orange-deep);
+}
+
+.link-ruled svg {
+  flex: none;
+  transition: translate 0.18s ease;
+}
+
+.link-ruled:hover svg {
+  translate: 0.1875rem 0;
+}
+
+/*
+ * A chip: filter pills, tags, counters. Square, because everything is.
+ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-brand-rule);
+  border-radius: 0;
+  background-color: var(--color-brand-tile);
+  font-size: 0.8125rem;
+  line-height: 1;
+  color: var(--color-brand-muted);
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+.chip:hover {
+  border-color: var(--color-brand-orange-deep);
+  color: var(--color-brand-orange-deep);
+}
+
+.chip-active,
+.chip[aria-pressed='true'],
+.chip[aria-checked='true'] {
+  background-color: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+  color: var(--color-brand-sand);
+}
+
+.chip-active:hover,
+.chip[aria-pressed='true']:hover,
+.chip[aria-checked='true']:hover {
+  background-color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: #ffffff;
+}
+
+/* A segmented control: chips that share their edges instead of sitting apart. */
+.chip-group {
+  display: flex;
+}
+
+.chip-group > .chip {
+  flex: 1 1 0;
+  justify-content: center;
+  padding-block: 0.75rem;
+}
+
+.chip-group > .chip + .chip {
+  margin-left: -1px;
+}
+
+/*
+ * A selected chip has to paint over the hairline it shares with its neighbour,
+ * or the seam shows through the fill on one side only.
+ */
+.chip-group > .chip[aria-checked='true'],
+.chip-group > .chip[aria-pressed='true'] {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------------
+ * Form controls.
+ *
+ * Declared once, here, for the same reason the buttons are: three forms on the
+ * site had three different input heights and two different focus treatments.
+ * ------------------------------------------------------------------------- */
+
+.field {
+  display: block;
+  width: 100%;
+  padding: 0.8125rem 0.9375rem;
+  border: 1px solid var(--color-brand-rule-strong);
+  border-radius: 0;
+  background-color: var(--color-brand-tile);
+  color: var(--color-brand-dark);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field::placeholder {
+  color: color-mix(in srgb, var(--color-brand-muted) 70%, transparent);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--color-brand-orange-deep);
+  /* An inset rather than a ring: the field keeps its square footprint. */
+  box-shadow: inset 0 0 0 1px var(--color-brand-orange-deep);
+}
+
+.field[aria-invalid='true'] {
+  border-color: var(--color-brand-error);
+}
+
+.field[aria-invalid='true']:focus {
+  border-color: var(--color-brand-error);
+  box-shadow: inset 0 0 0 1px var(--color-brand-error);
+}
+
+.field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/*
+ * A select has to opt out of the platform control to keep its corners, and
+ * then draw its own caret. The caret is a chevron in the accent, encoded
+ * inline so it costs no request and inherits nothing it should not.
+ */
+select.field {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%231B4FA8' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9375rem center;
+  background-size: 0.75rem 0.5rem;
+}
+
+/*
+ * A checkbox, square and cobalt.
+ *
+ * The native control cannot be squared off or re-coloured consistently across
+ * engines, so it is replaced outright: `appearance: none` for the box, an
+ * inline tick for the mark. It stays a real <input type="checkbox">, so the
+ * keyboard, the label association and the form value all still come free.
+ */
+.checkbox {
+  appearance: none;
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1px solid var(--color-brand-rule-strong);
+  border-radius: 0;
+  background-color: var(--color-brand-tile);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.checkbox:checked {
+  background-color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2.5 7.5 5.5 10.5 11.5 4' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: 0.75rem;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--color-brand-orange-deep);
+  outline-offset: 2px;
+}
+
+/* The row a checkbox sits in, so the whole strip is the hit target. */
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8125rem 0.9375rem;
+  border: 1px solid var(--color-brand-rule);
+  background-color: var(--color-brand-tile);
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.check-row:hover,
+.check-row:has(:checked) {
+  border-color: var(--color-brand-orange-deep);
+}
+
+/*
+ * A field with a leading icon.
+ *
+ * The inset is declared here rather than as a `pl-10` utility at the call site:
+ * these component classes are unlayered CSS and Tailwind's utilities live in a
+ * layer, so an unlayered `padding` shorthand beats `pl-10` and the icon ends up
+ * sitting on top of the placeholder — which is exactly what it did. Owning both
+ * numbers in one rule also means the icon and the text cannot drift apart.
+ */
+.field-search {
+  padding-left: 2.75rem;
+}
+
+.field-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9375rem;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--color-brand-muted);
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.4375rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-brand-muted);
+}
+
+/* ---------------------------------------------------------------------------
+ * Dark surfaces.
+ *
+ * The muted grey and the cobalt accent are tuned for a light ground; on ink
+ * they fall well below AA. Rather than hand-picking light colours at every
+ * call site, a dark surface redefines the same tokens, so `text-brand-muted`
+ * keeps meaning "secondary text" wherever it is used, and the azulejo lattice
+ * re-colours itself for free because it is painted from the accent token.
+ * ------------------------------------------------------------------------- */
+
 [data-surface='dark'],
 .bento-card-dark {
-  --color-brand-muted: #A9A49B;
-  --color-brand-orange-deep: #D98A63;
-  --color-brand-orange: #E0A183;
+  --color-brand-muted: #9AA5A8;
+  --color-brand-orange-deep: #7FB2E8;
+  --color-brand-orange: #A8CBF0;
   --color-brand-rule: rgb(255 255 255 / 0.14);
   --color-brand-rule-strong: rgb(255 255 255 / 0.30);
+  --color-brand-tile: rgb(255 255 255 / 0.04);
 }
 
 /*
- * A filled accent button is its own surface: white on the paper-tuned sienna is
- * 6.87:1 whatever sits behind it. Without this it would inherit the inverted
- * accent above and end up as white text on a light salmon block.
+ * A filled cobalt action is its own surface: white on the paper-tuned cobalt
+ * is 7.7:1 whatever sits behind it. Without this it would inherit the inverted
+ * accent above and end up as white text on a pale sky-blue block.
  */
 [data-surface='dark'] .bg-brand-orange-deep,
+[data-surface='dark'] .btn-primary,
 .bento-card-dark .bg-brand-orange-deep {
-  background-color: #9C3B1B;
+  background-color: #1B4FA8;
+  border-color: #1B4FA8;
+  color: #ffffff;
 }
 
-/* Body copy inside a measure that is comfortable to read, not full width. */
+[data-surface='dark'] .btn-primary:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-brand-dark);
+}
+
+/* Grout on ink: the cells are the ground and the gaps are the light. */
+[data-surface='dark'] .grout,
+[data-surface='dark'] .grout-tile {
+  background-color: rgb(255 255 255 / 0.14);
+  border-color: rgb(255 255 255 / 0.14);
+}
+
+[data-surface='dark'] .grout > *,
+[data-surface='dark'] .grout-tile > * {
+  background-color: var(--color-brand-dark);
+}
+
+[data-surface='dark'] .chip {
+  background-color: rgb(255 255 255 / 0.05);
+}
+
+[data-surface='dark'] .chip-active {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-brand-dark);
+}
+
+[data-surface='dark'] .field {
+  background-color: rgb(255 255 255 / 0.05);
+  border-color: rgb(255 255 255 / 0.22);
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Measures.
+ * ------------------------------------------------------------------------- */
+
 .measure {
   max-width: 68ch;
 }
@@ -202,19 +834,44 @@ body {
  * renders on the server, which has no pathname; <NavActive> adds the class
  * after mount. Declaring it here keeps the two halves of that arrangement in
  * one place each rather than spread through a template literal.
+ *
+ * The cue is a cobalt lozenge under the link — the same lozenge the eyebrow
+ * uses — rather than a colour change, so an active link and a hovered link are
+ * never confusable.
  * ------------------------------------------------------------------------- */
+
+.nav-link {
+  position: relative;
+}
 
 .nav-link-active {
   color: var(--color-brand-dark);
-  border-color: var(--color-brand-dark);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* In the mobile panel the links are large and unbordered, so the cue differs. */
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.4375rem;
+  width: 0.3125rem;
+  height: 0.3125rem;
+  margin-left: -0.15625rem;
+  background-color: var(--color-brand-orange-deep);
+  rotate: 45deg;
+}
+
+/* In the mobile panel the links are large and stacked, so the cue differs. */
 .nav-menu .nav-link-active {
   color: var(--color-brand-orange-deep);
-  border-color: var(--color-brand-rule);
-  font-weight: 600;
+}
+
+.nav-menu .nav-link-active::after {
+  left: 0;
+  bottom: auto;
+  top: 50%;
+  margin-left: 0;
+  translate: -1.25rem -50%;
 }
 
 /* The <details> disclosure: suppress the native marker in every engine. */
@@ -235,6 +892,43 @@ body {
 }
 .nav-menu[open] .nav-menu-open {
   display: inline;
+}
+
+/* ---------------------------------------------------------------------------
+ * Disclosure rows (FAQ, and anything else built on <details>).
+ *
+ * The marker is a plus that rotates into a cross. Square, hairlined, cobalt on
+ * open — the same vocabulary as everything else.
+ * ------------------------------------------------------------------------- */
+
+.disclosure > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.disclosure > summary::marker {
+  content: '';
+}
+
+.disclosure-mark {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--color-brand-rule-strong);
+  color: var(--color-brand-dark);
+  transition: rotate 0.25s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.disclosure[open] .disclosure-mark {
+  rotate: 45deg;
+  background-color: var(--color-brand-orange-deep);
+  border-color: var(--color-brand-orange-deep);
+  color: #ffffff;
 }
 
 /* ---------------------------------------------------------------------------
@@ -323,8 +1017,9 @@ body {
  *
  * Every brand utility resolves through var(--color-brand-*), so redefining
  * those inside a scope re-themes everything underneath without a single class
- * changing. A themed page wraps its own content; the header and footer stay in
- * the house palette so the site still reads as one site.
+ * changing — the lattice and the tile faces included. A themed page wraps its
+ * own content; the header and footer stay in the house palette so the site
+ * still reads as one site.
  *
  * Contrast for every palette is asserted in src/lib/theme.test.ts, which parses
  * this file. A theme that fails AA fails the build.
@@ -336,20 +1031,22 @@ body {
 }
 
 /*
- * Lisboa — lime render, glazed tile and the ochre a south-west facade takes in
- * the afternoon, re-cut for the editorial system.
+ * Lisboa — Ocre.
  *
- * Contrast for every pairing is asserted in src/lib/theme.test.ts, which parses
- * this file. A palette that fails AA fails the build, so these values are not
- * free to be prettier than they are legible.
+ * The house palette is already the city's own tile, so a Lisboa page painted
+ * cobalt would say nothing. This is the other Lisbon: lime render gone warm,
+ * the ochre a south-west facade takes in the late afternoon, and the burnt red
+ * of a pantile roof. It reads as the same site in a different light, which is
+ * the entire point of the mechanism.
  */
 [data-city-theme='lisboa'] {
-  --color-brand-sand: #F4F2EC;
-  --color-brand-cream: #E4E6E4;
-  --color-brand-dark: #15191C;
-  --color-brand-muted: #545A5E;
-  --color-brand-orange-deep: #1C4C63;
-  --color-brand-orange: #3E7C96;
-  --color-brand-rule: #D4D6D3;
-  --color-brand-rule-strong: #B3B7B5;
+  --color-brand-sand: #F5F1E8;
+  --color-brand-cream: #EBE0CE;
+  --color-brand-dark: #191510;
+  --color-brand-muted: #5C5347;
+  --color-brand-orange-deep: #A33F26;
+  --color-brand-orange: #C4694A;
+  --color-brand-rule: #DCD4C4;
+  --color-brand-rule-strong: #B3A893;
+  --color-brand-tile: #FCFAF4;
 }

@@ -68,9 +68,9 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
               aria-hidden="true"
               viewBox="0 0 24 24"
               fill="none"
-              className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-brand-muted"
+              className="field-search-icon size-4"
             >
-              <path d="m21 21-4.3-4.3M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="m21 21-4.3-4.3M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
             </svg>
             <input
               id="service-search"
@@ -78,7 +78,7 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={label('searchPlaceholder', locale)}
-              className="w-full border-0 border-b border-brand-rule-strong bg-transparent py-3 pl-8 pr-4 text-base text-brand-dark outline-none transition-colors placeholder:text-brand-muted focus:border-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+              className="field field-search"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
         </p>
       </div>
 
-      <div role="group" aria-label={label('searchLabel', locale)} className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
+      <div role="group" aria-label={label('searchLabel', locale)} className="mt-8 flex flex-wrap gap-2">
         <FilterChip active={active === 'all'} onClick={() => setActive('all')}>
           {label('all', locale)}
         </FilterChip>
@@ -112,12 +112,12 @@ export default function ServiceFilter({ services, categories, locale }: ServiceF
             <li key={s.slug}>
               <Link
                 href={serviceHrefBySlug(s.slug)}
-                className="group grid grid-cols-[2.5rem_4.5rem_1fr_auto] items-center gap-x-4 border-b border-brand-rule py-4 transition-colors hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep sm:grid-cols-[3rem_6rem_1fr_10rem_auto] sm:gap-x-6 sm:py-5"
+                className="group grid grid-cols-[2.5rem_4.5rem_1fr_auto] items-center gap-x-4 border-b border-brand-rule py-4 pr-3 transition-colors hover:bg-brand-tile focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep sm:grid-cols-[3rem_6rem_1fr_10rem_auto] sm:gap-x-6 sm:py-5"
               >
                 <span aria-hidden="true" className="font-mono text-xs tabular-nums text-brand-muted">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="relative aspect-[4/3] overflow-hidden rounded-card-sm">
+                <span className="relative aspect-[4/3] overflow-hidden border border-brand-rule">
                   <Picture
                     slot={serviceSlot(s.slug)}
                     alt=""
@@ -160,15 +160,16 @@ function FilterChip({
   children: React.ReactNode;
 }) {
   return (
+    /*
+      The selected state is styled from `aria-pressed` in globals.css rather
+      than from the `active` prop, so a chip cannot look selected while
+      announcing itself as unpressed.
+    */
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`border-b-2 pb-1 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep ${
-        active
-          ? 'border-brand-dark font-medium text-brand-dark'
-          : 'border-transparent text-brand-muted hover:border-brand-rule-strong hover:text-brand-dark'
-      }`}
+      className="chip focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep"
     >
       {children}
     </button>

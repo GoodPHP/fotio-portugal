@@ -28,6 +28,7 @@ import {
 import { CITY_SEO } from '@/lib/data/city-seo';
 import { ptName, ptAt, ptOf, ptWith, upperFirst } from '@/lib/pt-grammar';
 import JsonLd from '@/components/JsonLd';
+import Faq from '@/components/Faq';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { cityAlternateParams, leafHref } from '@/lib/routes';
 import CityTheme from '@/components/CityTheme';
@@ -222,7 +223,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
       {/* Hero */}
       <section aria-labelledby="city-heading" className="relative">
-        <div className="mx-auto max-w-7xl px-6 pt-12 lg:pt-16">
+        <div className="mx-auto max-w-[92rem] px-6 pt-12 lg:pt-16">
           <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
             <ol className="flex flex-wrap items-center gap-1.5">
               <li><Link href="/" className="hover:text-brand-orange-deep">{labels.breadcrumbHome}</Link></li>
@@ -233,25 +234,41 @@ export default async function CityPage({ params }: CityPageProps) {
             </ol>
           </nav>
 
-          <FadeIn instant className="mt-6">
-            <div className="relative isolate flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-card p-8 text-white sm:min-h-[26rem] sm:p-12">
+          {/*
+            The title above the photograph rather than on top of it.
+
+            It used to sit inside the frame over a black gradient covering the
+            lower two-thirds of the image — a scrim that exists only to rescue
+            contrast, and that costs most of the photograph to do it. On a page
+            whose subject is what this city looks like, that is the wrong
+            trade. Ink on the page ground reads at full contrast and the
+            photograph is seen whole.
+          */}
+          <FadeIn instant className="mt-8">
+            <p className="eyebrow">{region}</p>
+            <h1
+              id="city-heading"
+              className="font-display-tight mt-4 max-w-4xl font-bold text-brand-dark"
+              style={{ fontSize: 'var(--text-title)' }}
+            >
+              {heading}
+            </h1>
+          </FadeIn>
+
+          <FadeIn instant delay={0.05} className="mt-8">
+            <div className="relative aspect-[16/9] w-full overflow-hidden border border-brand-rule sm:aspect-[21/9]">
               <Picture
                 slot={citySlot(city.slug)}
                 alt={heading}
-                sizes="(max-width: 1280px) 100vw, 1216px"
-                className="absolute inset-0 -z-10 object-cover"
+                sizes="(max-width: 1472px) 100vw, 1472px"
+                className="object-cover"
                 fill
                 priority
               />
-              <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/45 to-black/20" />
-              <p className="font-mono text-xs uppercase tracking-widest text-brand-cream">{region}</p>
-              <h1 id="city-heading" className="mt-3 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-                {heading}
-              </h1>
             </div>
           </FadeIn>
 
-          <FadeIn instant delay={0.05} className="mt-8 max-w-3xl">
+          <FadeIn instant delay={0.05} className="measure mt-8">
             <p className="text-lg leading-relaxed text-brand-dark">{tx(city.narrative, locale)}</p>
           </FadeIn>
 
@@ -306,8 +323,8 @@ export default async function CityPage({ params }: CityPageProps) {
       )}
 
       {/* Seasonality */}
-      <section aria-labelledby="season-heading" className="mx-auto max-w-7xl px-6 py-12">
-        <FadeIn className="rounded-card-sm border border-brand-rule bg-white p-8 sm:p-10">
+      <section aria-labelledby="season-heading" className="mx-auto max-w-[92rem] px-6 py-12">
+        <FadeIn className="rounded-card-sm border border-brand-rule bg-brand-tile p-8 sm:p-10">
           <h2 id="season-heading" className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
             {labels.seasonTitle}
           </h2>
@@ -317,7 +334,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
       {/* Photo spots */}
       <section aria-labelledby="spots-heading" className="bg-brand-sand py-16">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-[92rem] px-6">
           <FadeIn>
             <h2 id="spots-heading" className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
               {labels.spotsTitle}
@@ -328,7 +345,7 @@ export default async function CityPage({ params }: CityPageProps) {
           <Stagger className="mt-10 grid gap-5 md:grid-cols-2">
             {city.spots.map((spot) => (
               <StaggerItem key={spot.name}>
-                <article className="h-full rounded-card-sm border border-brand-rule bg-white p-7">
+                <article className="h-full rounded-card-sm border border-brand-rule bg-brand-tile p-7">
                   <h3 className="font-display text-xl font-semibold text-brand-dark">{spot.name}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-brand-muted">{tx(spot.description, locale)}</p>
                   <dl className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -349,7 +366,7 @@ export default async function CityPage({ params }: CityPageProps) {
       </section>
 
       {/* Services in this city */}
-      <section aria-labelledby="city-services-heading" className="mx-auto max-w-7xl px-6 py-16">
+      <section aria-labelledby="city-services-heading" className="mx-auto max-w-[92rem] px-6 py-16">
         <FadeIn>
           <h2 id="city-services-heading" className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
             {labels.servicesTitle}
@@ -368,7 +385,7 @@ export default async function CityPage({ params }: CityPageProps) {
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="font-display text-lg font-semibold text-brand-dark">{tx(service.name, locale)}</h3>
                       {isTop && (
-                        <span className="shrink-0 rounded-chip bg-brand-orange/10 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-brand-orange-deep">
+                        <span className="font-mono shrink-0 bg-brand-orange-deep px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-white">
                           {labels.popular}
                         </span>
                       )}
@@ -393,7 +410,7 @@ export default async function CityPage({ params }: CityPageProps) {
         reader deciding whether we reach them and a crawler ranking for them.
       */}
       {city.coveredAreas && city.coveredAreas.length > 0 && (
-        <section aria-labelledby="coverage-heading" className="mx-auto max-w-7xl px-6 pb-16">
+        <section aria-labelledby="coverage-heading" className="mx-auto max-w-[92rem] px-6 pb-16">
           <FadeIn>
             <div className="rule pt-10">
               <h2
@@ -409,7 +426,7 @@ export default async function CityPage({ params }: CityPageProps) {
                 {city.coveredAreas.map((area) => (
                   <li
                     key={area}
-                    className="rounded-chip border border-brand-rule bg-white px-4 py-2 text-sm text-brand-dark"
+                    className="rounded-chip border border-brand-rule bg-brand-tile px-4 py-2 text-sm text-brand-dark"
                   >
                     {area}
                   </li>
@@ -441,27 +458,7 @@ export default async function CityPage({ params }: CityPageProps) {
       </section>
       )}
 
-      {/* FAQ */}
-      {faqEntries.length > 0 && (
-        <section aria-labelledby="city-faq-heading" className="mx-auto max-w-3xl px-6 py-16">
-          <FadeIn>
-            <h2 id="city-faq-heading" className="text-center font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
-              {labels.faqTitle}
-            </h2>
-          </FadeIn>
-          <div className="mt-8 divide-y divide-black/5 rounded-card-sm border border-brand-rule bg-white">
-            {faqEntries.map((faq) => (
-              <details key={faq.question} className="group px-6 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
-                  {faq.question}
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-sand transition-transform group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-brand-muted">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      )}
+      <Faq headingId="city-faq-heading" title={labels.faqTitle} entries={faqEntries} />
       </main>
     </CityTheme>
   );
@@ -469,9 +466,11 @@ export default async function CityPage({ params }: CityPageProps) {
 
 function StatPill({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-chip border border-brand-rule bg-white px-5 py-3">
-      <span className="block font-display text-2xl font-bold text-brand-dark">{value}</span>
-      <span className="block text-xs text-brand-muted">{label}</span>
+    <div className="border border-brand-rule bg-brand-tile px-5 py-3.5">
+      <span className="font-display block text-2xl font-bold tracking-[-0.03em] text-brand-dark">{value}</span>
+      <span className="font-mono mt-1 block text-[0.625rem] uppercase tracking-[0.16em] text-brand-muted">
+        {label}
+      </span>
     </div>
   );
 }

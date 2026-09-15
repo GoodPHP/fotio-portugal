@@ -212,7 +212,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       <main>
       <JsonLd data={jsonLd} />
 
-      <div className="mx-auto max-w-7xl px-6 pt-12 lg:pt-16">
+      <div className="mx-auto max-w-[92rem] px-6 pt-12 lg:pt-16">
         <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li><Link href="/" className="hover:text-brand-orange-deep">{labels.breadcrumbHome}</Link></li>
@@ -226,11 +226,11 @@ export default async function LeafPage({ params }: LeafPageProps) {
         </nav>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-12 pt-6 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-[92rem] gap-12 px-6 pb-12 pt-6 lg:grid-cols-12">
         {/* Main content */}
         <article className="lg:col-span-7 xl:col-span-8">
           <FadeIn instant>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">{region}</p>
+            <p className="eyebrow">{region}</p>
             <h1 className="mt-3 font-display text-4xl font-bold leading-[1.08] tracking-tight text-brand-dark sm:text-5xl">
               {serviceName} <span className="text-brand-muted">·</span> {cityLabel}
             </h1>
@@ -239,7 +239,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
           {/* Answer-first highlighted block */}
           <FadeIn instant delay={0.08}>
             <div className="mt-8 rounded-card-sm border border-brand-orange/20 bg-brand-orange/5 p-6 sm:p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">{labels.answerEyebrow}</p>
+              <p className="eyebrow">{labels.answerEyebrow}</p>
               <p className="mt-3 text-lg leading-relaxed text-brand-dark">{content.answerBox}</p>
             </div>
           </FadeIn>
@@ -265,18 +265,30 @@ export default async function LeafPage({ params }: LeafPageProps) {
             <p className="mt-4 text-base leading-relaxed text-brand-dark">{content.detailsText}</p>
           </FadeIn>
 
-          {/* FAQ */}
+          {/*
+            The only FAQ on the site that is not the shared <Faq> section: this
+            one lives inside the article column of a two-column page, and the
+            shared component is a full-width band. It uses the same disclosure
+            primitives, so the marker and the open behaviour still come from
+            one place.
+          */}
           {content.customFAQs.length > 0 && (
             <FadeIn delay={0.05} className="mt-12">
-              <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">{labels.faqTitle}</h2>
-              <div className="mt-6 divide-y divide-black/5 rounded-card-sm border border-brand-rule bg-white">
+              <h2 className="font-display text-2xl font-bold text-brand-dark sm:text-3xl">{labels.faqTitle}</h2>
+              <div className="mt-6 border-t border-brand-rule">
                 {content.customFAQs.map((faq) => (
-                  <details key={faq.question} className="group px-6 py-5">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
-                      {faq.question}
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-sand transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                  <details key={faq.question} className="disclosure group border-b border-brand-rule">
+                    <summary className="flex items-center justify-between gap-5 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep">
+                      <span className="font-display text-lg font-semibold text-brand-dark transition-colors group-hover:text-brand-orange-deep">
+                        {faq.question}
+                      </span>
+                      <span className="disclosure-mark" aria-hidden="true">
+                        <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
+                        </svg>
+                      </span>
                     </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-brand-muted">{faq.answer}</p>
+                    <p className="pb-5 text-[0.9375rem] leading-relaxed text-brand-muted">{faq.answer}</p>
                   </details>
                 ))}
               </div>
@@ -303,7 +315,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
 
             <Link
               href="/book"
-              className="mt-8 flex w-full items-center justify-center rounded-chip bg-brand-orange-deep px-6 py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="btn btn-primary mt-8 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {labels.book}
             </Link>
@@ -311,7 +323,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
               href={whatsappLink(waMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 flex w-full items-center justify-center gap-2 rounded-chip border border-white/20 px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="btn btn-outline mt-3 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.16c-.24.68-1.42 1.32-1.96 1.36-.5.05-.5.42-3.15-.66-2.66-1.08-4.31-3.83-4.44-4.01-.13-.18-1.06-1.41-1.06-2.69 0-1.27.67-1.9.91-2.16.24-.26.52-.32.7-.32.17 0 .35 0 .5.01.16.01.38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.13.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.22.61-.13.24.09 1.55.73 1.81.86.27.13.45.2.51.31.06.11.06.64-.18 1.32z" />
@@ -336,7 +348,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       {/* Related services in this city */}
       {relatedServices.length > 0 && (
         <section aria-labelledby="related-services-heading" className="bg-brand-sand py-16">
-          <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-[92rem] px-6">
             <FadeIn>
               <h2 id="related-services-heading" className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
                 {labels.relatedServicesTitle}
@@ -363,7 +375,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
 
       {/* Same service in nearby cities */}
       {nearbyCities.length > 0 && (
-        <section aria-labelledby="nearby-heading" className="mx-auto max-w-7xl px-6 py-16">
+        <section aria-labelledby="nearby-heading" className="mx-auto max-w-[92rem] px-6 py-16">
           <FadeIn>
             <h2 id="nearby-heading" className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
               {labels.nearbyTitle}
@@ -374,7 +386,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
               <Link
                 key={nearby.slug}
                 href={leafHref(service, nearby, locale)}
-                className="group flex items-center justify-between rounded-chip border border-brand-rule bg-white px-4 py-4 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                className="group flex items-center justify-between rounded-chip border border-brand-rule bg-brand-tile px-4 py-4 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 <span className="font-display font-semibold text-brand-dark">{nearby.name}</span>
                 <span className="text-brand-muted transition-colors group-hover:text-brand-orange-deep" aria-hidden="true">→</span>

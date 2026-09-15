@@ -54,6 +54,7 @@ const COPY = {
   },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
   statRating: { en: 'Average rating', pt: 'Avaliação média' },
+  statReply: { en: 'Reply time', pt: 'Tempo de resposta' },
   statCities: { en: 'Cities covered', pt: 'Cidades cobertas' },
   statServices: { en: 'Session types', pt: 'Tipos de sessão' },
   statDelivery: { en: 'Avg delivery', pt: 'Entrega média' },
@@ -134,8 +135,19 @@ export default async function PortfolioPage({
     }
   }
 
+  /*
+    The first tile used to fall back to a hardcoded "5.0★".
+
+    REVIEWS is empty and is meant to be — the catalogue module says so, because
+    an aggregate rating assembled from invented reviews is a claim that is not
+    true. The fallback printed exactly that claim on every build anyway, in the
+    largest type on the page, which is the same falsehood by a shorter route.
+    Until there are real ratings the tile carries a promise the site can keep.
+  */
   const stats = [
-    { value: rating.ratingValue ? `${rating.ratingValue.toFixed(1)}★` : '5.0★', label: c('statRating', locale) },
+    rating.ratingValue
+      ? { value: `${rating.ratingValue.toFixed(1)}★`, label: c('statRating', locale) }
+      : { value: '2h', label: c('statReply', locale) },
     { value: `${CITIES.length}`, label: c('statCities', locale) },
     { value: `${SERVICES.length}`, label: c('statServices', locale) },
     { value: '48-72h', label: c('statDelivery', locale) },
@@ -171,14 +183,14 @@ export default async function PortfolioPage({
         <div
           aria-hidden="true"
         />
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center sm:py-28">
+        <div className="mx-auto max-w-[92rem] px-6 py-20 text-center sm:py-28">
           <FadeIn instant>
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+            <p className="eyebrow">
               {c('eyebrow', locale)}
             </p>
             <h1
               id="portfolio-hero"
-              className="mx-auto mt-4 max-w-4xl font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl"
+              className="mx-auto mt-4 max-w-4xl font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl"
             >
               {c('heroTitle', locale)}
             </h1>
@@ -188,7 +200,7 @@ export default async function PortfolioPage({
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/book"
-                className="rounded-chip bg-brand-dark px-8 py-3.5 font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                className="btn btn-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 {c('book', locale)}
               </Link>
@@ -196,7 +208,7 @@ export default async function PortfolioPage({
                 href={wa}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-chip border border-brand-rule bg-white px-8 py-3.5 font-semibold text-neutral-800 transition-colors hover:border-brand-orange/40 hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
                 {c('whatsapp', locale)}
               </a>
@@ -206,22 +218,29 @@ export default async function PortfolioPage({
         </div>
       </section>
 
-      {/* Trust stats */}
-      <section aria-label={c('eyebrow', locale)} className="border-y border-brand-rule bg-brand-sand">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
+      {/* Trust stats, as the same course of tiles the home page opens with. */}
+      <section aria-label={c('eyebrow', locale)} className="mx-auto max-w-[92rem] px-6 pb-[var(--space-band)]">
+        <dl className="grout grout-tile grid-cols-2 sm:grid-cols-4">
           {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="font-display text-3xl font-bold text-neutral-900 sm:text-4xl">{stat.value}</p>
-              <p className="mt-1 text-sm text-brand-muted">{stat.label}</p>
+            <div key={stat.label} className="px-5 py-7 sm:px-6">
+              <dt className="sr-only">{stat.label}</dt>
+              <dd>
+                <span className="font-display block text-3xl font-bold leading-none tracking-[-0.04em] text-brand-dark sm:text-[2.75rem]">
+                  {stat.value}
+                </span>
+                <span className="font-mono mt-3 block text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted">
+                  {stat.label}
+                </span>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       {/* Gallery */}
-      <section aria-labelledby="gallery-heading" className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+      <section aria-labelledby="gallery-heading" className="mx-auto max-w-[92rem] px-6 py-16 sm:py-20">
         <FadeIn className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+          <p className="eyebrow">
             {c('galleryEyebrow', locale)}
           </p>
           <h2
@@ -246,9 +265,9 @@ export default async function PortfolioPage({
 
       {/* Testimonials */}
       <section aria-labelledby="reviews-heading" className="bg-brand-sand py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-[92rem] px-6">
           <FadeIn>
-            <p className="font-mono text-xs uppercase tracking-widest text-brand-orange-deep">
+            <p className="eyebrow">
               {c('reviewsEyebrow', locale)}
             </p>
             <h2
@@ -261,7 +280,7 @@ export default async function PortfolioPage({
           <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {REVIEWS.map((review) => (
               <StaggerItem key={review.id}>
-                <figure className="flex h-full flex-col rounded-card border border-brand-rule bg-white p-6">
+                <figure className="flex h-full flex-col rounded-card border border-brand-rule bg-brand-tile p-6">
                   <div role="img" className="flex gap-0.5" aria-label={`${review.stars} / 5`}>
                     {Array.from({ length: review.stars }).map((_, i) => (
                       <StarIcon key={i} />
@@ -271,7 +290,7 @@ export default async function PortfolioPage({
                     “{tx(review.text, locale)}”
                   </blockquote>
                   <figcaption className="mt-5 border-t border-brand-rule pt-4">
-                    <p className="font-semibold text-neutral-900">{review.name}</p>
+                    <p className="font-semibold text-brand-dark">{review.name}</p>
                     <p className="text-sm text-brand-muted">
                       {tx(review.serviceName, locale)} · {review.cityName}
                     </p>
@@ -284,7 +303,7 @@ export default async function PortfolioPage({
       </section>
 
       {/* Final CTA */}
-      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+      <section className="mx-auto max-w-[92rem] px-6 py-16 sm:py-20">
         <div data-surface="dark" className="relative overflow-hidden rounded-card bg-brand-dark px-8 py-16 text-center">
           <div
             aria-hidden="true"
@@ -292,11 +311,11 @@ export default async function PortfolioPage({
           <h2 className="relative font-display text-3xl font-bold text-white sm:text-4xl">
             {c('ctaTitle', locale)}
           </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-base text-neutral-300">{c('ctaText', locale)}</p>
+          <p className="relative mx-auto mt-4 max-w-xl text-base text-brand-muted">{c('ctaText', locale)}</p>
           <div className="relative mt-9 flex flex-wrap justify-center gap-3">
             <Link
               href="/book"
-              className="rounded-chip bg-brand-orange-deep px-8 py-3.5 font-semibold text-white transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {c('book', locale)}
             </Link>
@@ -304,7 +323,7 @@ export default async function PortfolioPage({
               href={wa}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-chip border border-white/20 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {c('whatsapp', locale)}
             </a>

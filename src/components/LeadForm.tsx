@@ -139,19 +139,19 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
 
   if (done) {
     return (
-      <div className="rounded-card border border-brand-rule bg-white p-8 text-center">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-chip bg-brand-orange/10 text-brand-orange-deep">
+      <div className="tile p-8 text-center sm:p-10">
+        <div className="mx-auto flex size-14 items-center justify-center bg-brand-orange-deep text-white">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-7">
-            <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" />
           </svg>
         </div>
-        <h3 className="mt-5 font-display text-2xl font-bold">{t('successTitle', locale)}</h3>
-        <p className="mx-auto mt-3 max-w-md text-brand-muted">{t('successBody', locale)}</p>
+        <h3 className="font-display mt-6 text-2xl font-bold text-brand-dark">{t('successTitle', locale)}</h3>
+        <p className="mx-auto mt-3 max-w-md leading-relaxed text-brand-muted">{t('successBody', locale)}</p>
         <a
           href={whatsappLink(buildWhatsAppMessage())}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-chip bg-[#25D366] px-6 py-3 font-semibold text-brand-dark transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/50"
+          className="btn mt-7 bg-[#25D366] text-brand-dark hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
         >
           {t('whatsapp', locale)}
         </a>
@@ -160,7 +160,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="rounded-card border border-brand-rule bg-white p-6 sm:p-8">
+    <form onSubmit={handleSubmit} noValidate className="tile p-6 sm:p-8">
       {/* Honeypot: visually hidden, off-screen, not announced. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={`${baseId}-hp`}>Leave this field empty</label>
@@ -175,6 +175,13 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
         />
       </div>
 
+      {/*
+        Every control is the shared `.field` primitive, and the invalid state is
+        styled from `aria-invalid` in globals.css rather than from a second
+        class list here. The attribute has to be set for assistive technology
+        regardless, so styling from it means the two can never disagree — which
+        they did, with fields that looked fine and announced themselves invalid.
+      */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field id={`${baseId}-name`} label={t('name', locale)} error={errors.name}>
           <input
@@ -184,7 +191,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             aria-invalid={Boolean(errors.name)}
-            className={inputClass(Boolean(errors.name))}
+            className="field"
           />
         </Field>
         <Field id={`${baseId}-phone`} label={t('phone', locale)} error={errors.phone}>
@@ -195,7 +202,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             aria-invalid={Boolean(errors.phone)}
-            className={inputClass(Boolean(errors.phone))}
+            className="field"
           />
         </Field>
       </div>
@@ -209,7 +216,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             aria-invalid={Boolean(errors.email)}
-            className={inputClass(Boolean(errors.email))}
+            className="field"
           />
         </Field>
       </div>
@@ -220,7 +227,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             id={`${baseId}-service`}
             value={serviceSlug}
             onChange={(e) => setServiceSlug(e.target.value)}
-            className={inputClass(false)}
+            className="field"
           >
             <option value="">{t('choose', locale)}</option>
             {services.map((s) => (
@@ -233,7 +240,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             id={`${baseId}-city`}
             value={citySlug}
             onChange={(e) => setCitySlug(e.target.value)}
-            className={inputClass(false)}
+            className="field"
           >
             <option value="">{t('choose', locale)}</option>
             {cities.map((c) => (
@@ -251,13 +258,17 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             aria-invalid={Boolean(errors.message)}
-            className={`${inputClass(Boolean(errors.message))} resize-y`}
+            className="field resize-y"
           />
         </Field>
       </div>
 
       {formError && (
-        <p role="alert" aria-live="assertive" className="mt-5 rounded-chip bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+        <p
+          role="alert"
+          aria-live="assertive"
+          className="mt-5 border-l-[3px] border-brand-error bg-brand-error/8 px-4 py-3 text-sm font-medium text-brand-error"
+        >
           {formError}
         </p>
       )}
@@ -265,20 +276,17 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-6 inline-flex w-full items-center justify-center rounded-chip bg-brand-dark px-8 py-4 text-base font-semibold text-white transition hover:bg-brand-orange-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/50 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="btn btn-primary mt-7 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark sm:w-auto"
       >
         {submitting ? t('sending', locale) : t('submit', locale)}
+        {!submitting && (
+          <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="square" />
+          </svg>
+        )}
       </button>
     </form>
   );
-}
-
-function inputClass(hasError: boolean): string {
-  return `w-full rounded-card-sm border bg-brand-sand/40 px-4 py-3 text-base text-neutral-900 outline-none transition focus:bg-white focus:ring-2 ${
-    hasError
-      ? 'border-red-400 focus:border-red-500 focus:ring-red-200'
-      : 'border-brand-rule focus:border-brand-orange-deep focus:ring-brand-orange/30'
-  }`;
 }
 
 function Field({
@@ -294,12 +302,12 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-sm font-medium text-brand-dark">
+      <label htmlFor={id} className="field-label">
         {label}
       </label>
       {children}
       <p aria-live="polite" className="min-h-5">
-        {error && <span className="text-sm text-red-600">{error}</span>}
+        {error && <span className="text-sm text-brand-error">{error}</span>}
       </p>
     </div>
   );

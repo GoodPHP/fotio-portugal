@@ -39,9 +39,16 @@ const srcSet = (sources: ImageSlot['avif']): string =>
  * browser resolves. Here the URL is a static asset with a content hash, so a
  * preload is exact.
  *
- * A slot with no photograph renders a coloured box of the right shape rather
- * than a broken image, so the page holds its layout while the catalogue is
- * ahead of the photography.
+ * A slot with no photograph renders a tile of the right shape rather than a
+ * broken image, so the page holds its layout while the catalogue is ahead of
+ * the photography — which today is most of it: the manifest carries the twelve
+ * cities and their galleries and no service photographs at all, so every
+ * service card on the site is currently drawing this fallback.
+ *
+ * It is the azulejo lattice rather than a flat grey box, and that is the
+ * difference between a page that looks unfinished and a page that looks
+ * designed while it waits. A blank rectangle in a grid of photographs reads as
+ * a failure; a tile reads as a tile.
  */
 export default function Picture({
   slot,
@@ -84,10 +91,19 @@ export default function Picture({
   if (!image) {
     return (
       <div
-        className={classes}
+        className={`azulejo ${classes}`}
         role="img"
         aria-label={alt}
-        style={{ backgroundColor: 'var(--color-brand-cream)' }}
+        style={{
+          backgroundColor: 'var(--color-brand-cream)',
+          // A coarser weave and a lighter line than the lattice uses as
+          // ornament: at the default weight a placeholder the size of a hero
+          // reads as a pattern swatch rather than as a surface waiting for a
+          // photograph.
+          ['--azulejo-cell' as string]: '3.5rem',
+          ['--azulejo-ink' as string]:
+            'color-mix(in srgb, var(--color-brand-orange-deep) 16%, transparent)',
+        }}
       />
     );
   }

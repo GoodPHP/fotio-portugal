@@ -90,10 +90,10 @@ export default async function BookingPage({
     <main className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
       <JsonLd data={jsonLd} />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+        <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
           {c('title', locale)}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>

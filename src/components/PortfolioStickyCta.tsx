@@ -28,13 +28,18 @@ export default function PortfolioStickyCta({
   whatsappLabel,
 }: PortfolioStickyCtaProps) {
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2.5">
+    /*
+      Squared off and hung together as one bar, because a floating pill is the
+      one shape this design system does not have. The two actions share an edge
+      the way two tiles do.
+    */
+    <div className="fixed bottom-5 right-5 z-50 flex items-stretch shadow-none">
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={whatsappLabel}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-brand-dark transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+        className="flex w-12 items-center justify-center bg-[#25D366] text-brand-dark transition-colors hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-dark"
       >
         <svg
           viewBox="0 0 24 24"
@@ -51,7 +56,7 @@ export default function PortfolioStickyCta({
       </a>
       <Link
         href="/book"
-        className="rounded-chip bg-brand-dark px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+        className="font-display flex items-center bg-brand-dark px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-deep focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white"
       >
         {bookLabel}
       </Link>

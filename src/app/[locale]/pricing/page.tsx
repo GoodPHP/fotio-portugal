@@ -121,10 +121,10 @@ export default async function PricingPage({
     <main className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
       <JsonLd data={jsonLd} />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand-orange-deep">
+        <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
+        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-brand-dark sm:text-6xl">
           {c('title', locale)}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-brand-muted">{c('intro', locale)}</p>
@@ -143,11 +143,11 @@ export default async function PricingPage({
           </ul>
         </section>
 
-        <section className="rounded-card border border-brand-rule bg-white p-7 lg:col-span-2">
-          <h2 className="font-display text-xl font-bold text-neutral-900">{c('addonsTitle', locale)}</h2>
+        <section className="rounded-card border border-brand-rule bg-brand-tile p-7 lg:col-span-2">
+          <h2 className="font-display text-xl font-bold text-brand-dark">{c('addonsTitle', locale)}</h2>
           <ul className="mt-5 space-y-3">
             {[c('expressLabel', locale), c('secondLabel', locale), c('durationLabel', locale)].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm font-medium text-neutral-800">
+              <li key={item} className="flex items-start gap-3 text-sm font-medium text-brand-dark">
                 <span aria-hidden="true" className="mt-0.5 text-brand-orange-deep">✓</span>
                 {item}
               </li>
@@ -159,10 +159,10 @@ export default async function PricingPage({
       <section className="mt-16 space-y-12">
         {Array.from(grouped.entries()).map(([category, list]) => (
           <div key={category}>
-            <h2 className="font-display text-2xl font-bold text-neutral-900">
+            <h2 className="font-display text-2xl font-bold text-brand-dark">
               {getCategoryLabel(category, locale)}
             </h2>
-            <div className="mt-4 overflow-hidden rounded-card border border-brand-rule bg-white">
+            <div className="mt-4 overflow-hidden rounded-card border border-brand-rule bg-brand-tile">
               <table className="w-full border-collapse text-left">
                 <thead>
                   <tr className="border-b border-brand-rule bg-brand-sand/50 text-xs uppercase tracking-wide text-brand-muted">
@@ -171,13 +171,13 @@ export default async function PricingPage({
                     <th scope="col" className="px-5 py-3 text-right font-semibold">{c('tablePrice', locale)}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-black/5">
+                <tbody className="divide-y divide-brand-rule">
                   {list.map((s) => (
                     <tr key={s.slug} className="transition hover:bg-brand-sand/30">
                       <th scope="row" className="px-5 py-4 text-left">
                         <Link
                           href={serviceHref(s, locale)}
-                          className="font-medium text-neutral-900 underline-offset-4 hover:text-brand-orange-deep hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40"
+                          className="font-medium text-brand-dark underline-offset-4 hover:text-brand-orange-deep hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                         >
                           {tx(s.name, locale)}
                         </Link>
@@ -186,7 +186,7 @@ export default async function PricingPage({
                         {formatDuration(s.durationMinutes, locale)}
                       </td>
                       <td className="px-5 py-4 text-right">
-                        <span className="font-display text-lg font-bold text-neutral-900">
+                        <span className="font-display text-lg font-bold text-brand-dark">
                           {formatPrice(s.initialPrice, locale)}
                         </span>
                       </td>
@@ -215,7 +215,7 @@ export default async function PricingPage({
         </div>
         <Link
           href="/book"
-          className="inline-flex items-center rounded-chip bg-white px-7 py-3.5 font-semibold text-brand-dark transition hover:bg-brand-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
         >
           {c('cta', locale)}
         </Link>

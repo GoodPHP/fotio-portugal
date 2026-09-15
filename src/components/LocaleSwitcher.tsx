@@ -73,27 +73,29 @@ export default function LocaleSwitcher({ current, homeHrefs }: LocaleSwitcherPro
     window.location.assign(path);
   }
 
+  /*
+    Two cells sharing one border: the smallest possible tile pair, and the
+    switch reads as a state rather than as two links with a slash between them.
+    The active language is the filled cell.
+  */
+  const cell = 'flex h-7 w-9 items-center justify-center text-[0.6875rem] font-semibold uppercase tracking-[0.1em] transition-colors';
+
   return (
     <div
       role="group"
       aria-label="Language"
-      className="flex items-center gap-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em]"
+      className="font-mono flex items-center border border-brand-rule-strong divide-x divide-brand-rule-strong"
     >
-      {LOCALES.map((locale, i) => {
+      {LOCALES.map((locale) => {
         const { short, full } = LOCALE_LABELS[locale];
         return (
           <Fragment key={locale}>
-            {i > 0 && (
-              <span aria-hidden="true" className="text-brand-rule-strong">
-                /
-              </span>
-            )}
             {locale === current ? (
-              <span aria-current="true" className="text-brand-dark">
+              <span aria-current="true" className={`${cell} bg-brand-dark text-brand-sand`}>
                 {short}
               </span>
             ) : unavailable.includes(locale) ? (
-              <span aria-disabled="true" className="text-brand-rule-strong">
+              <span aria-disabled="true" className={`${cell} text-brand-rule-strong`}>
                 {short}
                 <span className="sr-only"> — {full} is not available for this page</span>
               </span>
@@ -103,7 +105,7 @@ export default function LocaleSwitcher({ current, homeHrefs }: LocaleSwitcherPro
                 onClick={() => selectLocale(locale)}
                 lang={locale}
                 aria-label={full}
-                className="text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                className={`${cell} text-brand-muted hover:bg-brand-orange-deep hover:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-orange-deep`}
               >
                 {short}
               </button>
