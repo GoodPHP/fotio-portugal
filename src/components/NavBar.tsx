@@ -10,28 +10,31 @@ import { WhatsAppIcon } from './Icons';
 import { hasPhotographers } from '@/lib/catalog';
 import { whatsappBookingLink } from '@/lib/site';
 
+/** An in-page anchor on the home page, not a route: never marked active. */
+const HOW_IT_WORKS = { pathname: '/', hash: 'how-it-works' } as const;
+
 /**
- * What a visitor comes to decide: where, what, who, how much, what it looks
- * like, how it works. Blog, About and Contact moved to the footer and the
- * bottom of the mobile menu — useful, but none of them is a step towards a
- * booking, and seven items in a row made the one that was hard to find.
+ * The main navigation, in reading order: home, then what a visitor comes to
+ * decide — where, what, who, how much, what it looks like, how it works —
+ * then the blog and the company. Contact stays in the footer and at the foot
+ * of the mobile menu, since the header's own actions already reach a person.
  */
-const PRIMARY_LINKS = [
+const NAV_ITEMS = [
+  { href: '/', key: 'home' },
   { href: '/cities', key: 'destinations' },
   { href: '/services', key: 'sessions' },
   { href: '/photographers', key: 'photographers' },
   { href: '/pricing', key: 'pricing' },
   { href: '/portfolio', key: 'portfolio' },
-] as const;
-
-const SECONDARY_LINKS = [
+  { href: HOW_IT_WORKS, key: 'howItWorks' },
   { href: '/blog', key: 'blog' },
   { href: '/about', key: 'about' },
-  { href: '/contact', key: 'contact' },
 ] as const;
 
-/** An in-page anchor on the home page, not a route: never marked active. */
-const HOW_IT_WORKS = { pathname: '/', hash: 'how-it-works' } as const;
+const SECONDARY_LINKS = [{ href: '/contact', key: 'contact' }] as const;
+
+/** Route links are marked active by <NavActive>; the anchor never is. */
+const navKey = (href: (typeof NAV_ITEMS)[number]['href']) => (typeof href === 'string' ? href : undefined);
 
 /**
  * The masthead — a server component.
@@ -64,7 +67,7 @@ export default async function NavBar({ locale }: { locale: Locale }) {
   ) as Record<Locale, string>;
 
   // The photographers link appears when there is a photographer to show.
-  const links = PRIMARY_LINKS.filter((l) => l.href !== '/photographers' || hasPhotographers());
+  const links = NAV_ITEMS.filter((l) => l.href !== '/photographers' || hasPhotographers());
 
   return (
     /*
@@ -101,27 +104,23 @@ export default async function NavBar({ locale }: { locale: Locale }) {
 
         {/* Nav and utilities share the right edge, so there is no centre gap. */}
         <div className="flex items-center gap-6 lg:gap-8">
-          <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
+          {/* Nine items no longer fit beside the utilities at 1024px, so the
+              row starts at 1280px and the menu button covers everything below. */}
+          <nav aria-label="Main navigation" className="hidden items-center gap-5 xl:flex 2xl:gap-6">
             {links.map((link) => (
               <Link
-                key={link.href}
+                key={link.key}
                 href={link.href}
-                data-nav={link.href}
-                className="nav-link py-1 text-sm text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+                data-nav={navKey(link.href)}
+                className="nav-link whitespace-nowrap py-1 text-sm text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
               >
                 {t(link.key)}
               </Link>
             ))}
-            <Link
-              href={HOW_IT_WORKS}
-              className="nav-link py-1 text-sm text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
-            >
-              {t('howItWorks')}
-            </Link>
           </nav>
 
           {/* A grout line marks where navigation ends and utilities begin. */}
-          <span aria-hidden="true" className="hidden h-5 self-center border-l border-brand-rule-strong lg:block" />
+          <span aria-hidden="true" className="hidden h-5 self-center border-l border-brand-rule-strong xl:block" />
 
           <div className="flex items-center gap-4 sm:gap-5">
             <LocaleSwitcher current={locale} homeHrefs={homeHrefs} />
@@ -179,7 +178,7 @@ export default async function NavBar({ locale }: { locale: Locale }) {
               works without JavaScript, and a navigation away resets it with no
               effect watching for the route to change.
             */}
-            <details className="nav-menu self-center lg:hidden">
+            <details className="nav-menu self-center xl:hidden">
               <summary
                 aria-label={t('menu')}
                 className="flex h-9 w-9 cursor-pointer items-center justify-center border border-brand-rule-strong text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
@@ -208,24 +207,16 @@ export default async function NavBar({ locale }: { locale: Locale }) {
               >
                 <ul className="mx-auto max-w-[92rem] px-6 py-3">
                   {links.map((link) => (
-                    <li key={link.href} className="border-b border-brand-rule">
+                    <li key={link.key} className="border-b border-brand-rule last:border-b-0">
                       <Link
                         href={link.href}
-                        data-nav={link.href}
+                        data-nav={navKey(link.href)}
                         className="nav-link block py-3.5 pl-5 font-display text-lg font-semibold text-brand-dark transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                       >
                         {t(link.key)}
                       </Link>
                     </li>
                   ))}
-                  <li>
-                    <Link
-                      href={HOW_IT_WORKS}
-                      className="nav-link block py-3.5 pl-5 font-display text-lg font-semibold text-brand-dark transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-                    >
-                      {t('howItWorks')}
-                    </Link>
-                  </li>
                 </ul>
                 <ul className="mx-auto flex max-w-[92rem] gap-6 border-t border-brand-rule px-6 py-4 pl-11 text-sm">
                   {SECONDARY_LINKS.map((link) => (

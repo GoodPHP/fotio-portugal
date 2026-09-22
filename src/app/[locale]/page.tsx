@@ -282,7 +282,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* The shortest way in, straight under the promise. */}
-      <section aria-labelledby="find-photographer-heading" className="mx-auto max-w-5xl px-6">
+      <section aria-labelledby="find-photographer-heading" className="mx-auto max-w-[92rem] px-6">
         <BookingFlow options={bookingOptions(locale)} locale={locale} variant="compact" />
       </section>
 

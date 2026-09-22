@@ -470,6 +470,15 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
     contact: t(UI.contact, locale),
   };
   const isLast = stepIndex === steps.length - 1;
+  // The home widget runs the full width of the page, so its choices spread
+  // into more columns; on /book the summary panel takes a third of the row.
+  const wide = variant === 'compact';
+  const grids = {
+    places: wide ? 'sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7' : 'sm:grid-cols-3 lg:grid-cols-4',
+    sessions: wide ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'sm:grid-cols-2',
+    people: wide ? 'sm:grid-cols-5 lg:max-w-4xl' : 'sm:grid-cols-5',
+    contact: wide ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2',
+  };
   // On the home page the widget's title is the section heading and each
   // question sits under it; on /book the page's h1 is above and the question
   // is the h2.
@@ -530,7 +539,7 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
 
         {step === 'where' && (
           <div className="mt-5">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+            <div className={`grid grid-cols-2 gap-2 ${grids.places}`}>
               {[...options.places, { slug: OTHER, name: t(UI.other, locale) }].map((p) => (
                 <Choice
                   key={p.slug}
@@ -551,7 +560,7 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
 
         {step === 'what' && (
           <div className="mt-5">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className={`grid grid-cols-1 gap-2 ${grids.sessions}`}>
               {options.sessions.map((s) => (
                 <Choice
                   key={s.slug}
@@ -609,7 +618,7 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
         )}
 
         {step === 'who' && (
-          <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-5">
+          <div className={`mt-5 grid grid-cols-2 gap-2 ${grids.people}`}>
             {options.groupSizes.map((g) => (
               <Choice key={g.value} name={`${id}-people`} value={g.value} checked={people === g.value} onPick={(v, d) => choose(setPeople, v, d)}>
                 {g.label}
@@ -644,10 +653,10 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
         )}
 
         {step === 'contact' && (
-          <div className="mt-2 grid gap-x-5 sm:grid-cols-2">
+          <div className={`mt-2 grid gap-x-5 ${grids.contact}`}>
             <TextField id={`${id}-name`} label={t(UI.name, locale)} value={name} onChange={setName} autoComplete="name" />
             <TextField id={`${id}-phone`} label={t(UI.phone, locale)} placeholder={t(UI.phoneHint, locale)} value={phone} onChange={setPhone} type="tel" autoComplete="tel" />
-            <div className="sm:col-span-2">
+            <div className={wide ? 'sm:col-span-2 lg:col-span-1' : 'sm:col-span-2'}>
               <TextField id={`${id}-email`} label={t(UI.email, locale)} value={email} onChange={setEmail} type="email" autoComplete="email" />
             </div>
           </div>
