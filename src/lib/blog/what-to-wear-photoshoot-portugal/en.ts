@@ -20,7 +20,7 @@ That rules out stilettos, not as a matter of style but because a thin heel catch
 - **A block heel or a wedge, if heels are part of the look**, and only for the frames that need them.
 - **The good shoes in a bag.** Walk between locations in comfortable shoes and change for the frames where the shoes will be seen. Much of a session happens in motion, and new shoes that pinch show up in how people walk.
 
-It counts double on a session in [Lisbon](/cities/lisboa). A ninety-minute route from Graça down to Alfama includes twenty minutes on foot on sloping stone, which is where bad shoes stop being a detail.
+It counts double on a session in [Lisbon](/cities/lisboa). A longer session that walks from Graça down to Alfama spends twenty minutes on foot on sloping stone, and even a thirty-minute one in Alfama is all steps — which is where bad shoes stop being a detail.
 
 ## Colours that work against Portuguese backgrounds
 
@@ -68,7 +68,7 @@ Identical white shirts and jeans for four people is the look that dates fastest,
 
 With children, comfort matters more than the outfit. Clothes that pinch or scratch show up in the photographs as a child who wants to go home, and on a [family session](/services/family) with small children the time before the mood changes is short. Bring a change of clothes for the child most likely to find a puddle or an ice cream.
 
-Couples follow the same rule at a smaller scale: two people in colours that complement each other, not the same colour. A [couple session](/services/couple) walks for part of its ninety minutes, so the shoe rule counts twice.
+Couples follow the same rule at a smaller scale: two people in colours that complement each other, not the same colour. A [couple session](/services/couple) is usually photographed partly on the move, so the shoe rule counts twice.
 
 ## Studio portraits
 

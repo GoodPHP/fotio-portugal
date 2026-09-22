@@ -10,8 +10,8 @@ import type { ServiceLanding } from './service-landing';
 export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
   portrait: {
     promise: {
-      en: 'A portrait you will actually use — on LinkedIn, a book jacket or a speaker page — made in one relaxed hour, chosen with you, at a price fixed before you arrive.',
-      pt: 'Um retrato que vai mesmo usar — no LinkedIn, numa badana de livro ou num site de oradores — feito numa hora descontraída, escolhido consigo, a preço fixo antes de chegar.',
+      en: 'A portrait you will actually use — on LinkedIn, a book jacket or a speaker page — made in 30 unhurried minutes, chosen with you, from €250 fixed before you arrive.',
+      pt: 'Um retrato que vai mesmo usar — no LinkedIn, numa badana de livro ou num site de oradores — feito em 30 minutos sem pressa, escolhido consigo, desde 250 €, preço fixo.',
     },
     audience: {
       en: [
@@ -21,7 +21,7 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Authors, speakers and artists',
-          text: 'A press kit needs one serious portrait, one warmer one and a horizontal crop that survives being placed behind a headline. Two lighting set-ups exist to produce exactly that range.',
+          text: 'A press kit needs one serious portrait, one warmer one and a horizontal crop that survives being placed behind a headline. Thirty minutes with one lighting set-up, adjusted between frames, covers that range; a second set-up can be quoted on request.',
         },
         {
           title: 'People who dislike being photographed',
@@ -35,7 +35,7 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Autores, oradores e artistas',
-          text: 'Um dossier de imprensa precisa de um retrato sério, de outro mais próximo e de um enquadramento horizontal que aguente um título por cima. Os dois esquemas de luz existem para dar exactamente essa amplitude.',
+          text: 'Um dossier de imprensa precisa de um retrato sério, de outro mais próximo e de um enquadramento horizontal que aguente um título por cima. Trinta minutos com um esquema de luz, ajustado entre fotografias, cobrem essa amplitude; um segundo esquema orçamenta-se a pedido.',
         },
         {
           title: 'Quem não gosta de ser fotografado',
@@ -54,12 +54,12 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'You get a named photographer in your city, the studio address and a short note on what to bring, usually the same working day.',
         },
         {
-          title: 'One hour, two looks',
-          text: 'Two lighting set-ups and two backgrounds — typically one clean and bright, one darker and more editorial. You see frames on the screen as you go and adjust together.',
+          title: '30 minutes, one set-up',
+          text: 'One lighting set-up and one background — clean and bright by default, darker and more editorial if you ask. You see frames on screen as you go and adjust together. A second look is quoted on request.',
         },
         {
           title: 'Choose together, receive in 48–72 hours',
-          text: 'The selection is made with the photographer before you leave. Twenty-five retouched photographs arrive in a private gallery within 48 to 72 hours, in full resolution and web sizes.',
+          text: 'The selection is made with the photographer before you leave. Fifteen to twenty retouched photographs arrive in a private gallery within 48 to 72 hours, in full resolution and web sizes.',
         },
       ],
       pt: [
@@ -72,12 +72,12 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Recebe o nome do fotógrafo na sua cidade, a morada do estúdio e uma nota curta sobre o que levar, normalmente no mesmo dia útil.',
         },
         {
-          title: 'Uma hora, dois registos',
-          text: 'Dois esquemas de luz e dois fundos — em regra um claro e limpo, outro mais escuro e editorial. Vê as fotografias no ecrã à medida que avançam e ajustam em conjunto.',
+          title: '30 minutos, um esquema de luz',
+          text: 'Um esquema de luz e um fundo — claro e limpo por defeito, mais escuro e editorial se pedir. Vê as fotografias no ecrã à medida que avançam e ajustam em conjunto. Um segundo registo orçamenta-se a pedido.',
         },
         {
           title: 'Escolha em conjunto, entrega em 48–72 horas',
-          text: 'A selecção faz-se com o fotógrafo antes de sair. Vinte e cinco fotografias retocadas chegam numa galeria privada em 48 a 72 horas, em alta resolução e em tamanhos para a web.',
+          text: 'A selecção faz-se com o fotógrafo antes de sair. Quinze a vinte fotografias retocadas chegam numa galeria privada em 48 a 72 horas, em alta resolução e em tamanhos para a web.',
         },
       ],
     },
@@ -104,8 +104,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Não sou fotogénico. Vai resultar comigo?',
         },
         answer: {
-          en: 'Almost nobody feels photogenic; what reads as awkward in a photograph is usually a lack of direction. The photographer tells you where to stand, where to look and what to do with your hands, and the first ten minutes are spent warming up rather than shooting for the final selection.',
-          pt: 'Quase ninguém se sente fotogénico; o que parece desajeitado numa fotografia é normalmente falta de orientação. O fotógrafo diz-lhe onde ficar, para onde olhar e o que fazer às mãos, e os primeiros dez minutos servem para aquecer, não para a selecção final.',
+          en: 'Almost nobody feels photogenic; what reads as awkward in a photograph is usually a lack of direction. The photographer tells you where to stand, where to look and what to do with your hands, and the first few minutes are spent warming up rather than shooting for the final selection.',
+          pt: 'Quase ninguém se sente fotogénico; o que parece desajeitado numa fotografia é normalmente falta de orientação. O fotógrafo diz-lhe onde ficar, para onde olhar e o que fazer às mãos, e os primeiros minutos servem para aquecer, não para a selecção final.',
         },
       },
       {
@@ -124,8 +124,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'E se não gostar de nenhuma fotografia?',
         },
         answer: {
-          en: 'You see the frames on the screen throughout the hour and choose before you leave, so there is no surprise a week later. If something is not working — a colour, a background, an expression — it is changed during the session rather than discovered afterwards.',
-          pt: 'Vê as fotografias no ecrã durante toda a hora e escolhe antes de sair, por isso não há surpresas uma semana depois. Se algo não está a resultar — uma cor, um fundo, uma expressão — muda-se durante a sessão em vez de se descobrir depois.',
+          en: 'You see the frames on the screen throughout the session and choose before you leave, so there is no surprise a week later. If something is not working — a colour, a background, an expression — it is changed during the session rather than discovered afterwards.',
+          pt: 'Vê as fotografias no ecrã durante toda a sessão e escolhe antes de sair, por isso não há surpresas uma semana depois. Se algo não está a resultar — uma cor, um fundo, uma expressão — muda-se durante a sessão em vez de se descobrir depois.',
         },
       },
       {
@@ -134,8 +134,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Que retoque está incluído?',
         },
         answer: {
-          en: 'Natural retouching on all twenty-five: skin evened out, temporary blemishes and stray hairs removed, colour and exposure balanced. Your face stays your face — nobody should meet you in person and wonder who was in the photograph.',
-          pt: 'Retoque natural nas vinte e cinco: pele uniformizada, imperfeições temporárias e cabelos soltos removidos, cor e exposição equilibradas. A sua cara continua a ser a sua — ninguém deve conhecê-lo pessoalmente e perguntar-se quem estava na fotografia.',
+          en: 'Natural retouching on every one you receive: skin evened out, temporary blemishes and stray hairs removed, colour and exposure balanced. Your face stays your face — nobody should meet you in person and wonder who was in the photograph.',
+          pt: 'Retoque natural em todas as que recebe: pele uniformizada, imperfeições temporárias e cabelos soltos removidos, cor e exposição equilibradas. A sua cara continua a ser a sua — ninguém deve conhecê-lo pessoalmente e perguntar-se quem estava na fotografia.',
         },
       },
       {
@@ -144,8 +144,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Duas pessoas podem partilhar a sessão?',
         },
         answer: {
-          en: 'The hour is built for one sitter. For two or more people from the same company who need matching portraits, corporate headshots is the better fit: it is priced per person and keeps the framing identical across the team.',
-          pt: 'A hora é pensada para uma pessoa. Para duas ou mais pessoas da mesma empresa que precisem de retratos coerentes, o retrato corporativo é mais adequado: tem preço por pessoa e mantém o mesmo enquadramento em toda a equipa.',
+          en: 'The session is built for one sitter. For two or more people from the same company who need matching portraits, corporate headshots is the better fit: it is priced per person and keeps the framing identical across the team.',
+          pt: 'A sessão é pensada para uma pessoa. Para duas ou mais pessoas da mesma empresa que precisem de retratos coerentes, o retrato corporativo é mais adequado: tem preço por pessoa e mantém o mesmo enquadramento em toda a equipa.',
         },
       },
     ],
@@ -153,8 +153,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'lifestyle-portrait': {
     promise: {
-      en: 'A portrait that looks like you on a good ordinary day — outdoors, walking, in two places near each other — thirty retouched photographs, price fixed beforehand.',
-      pt: 'Um retrato com ar de dia normal e bom — na rua, a andar, em dois sítios perto um do outro — trinta fotografias retocadas e preço fixo antes de começar.',
+      en: 'A portrait that looks like you on a good ordinary day — outdoors, walking, in one place you choose — 15–20 retouched photographs, from €250.',
+      pt: 'Um retrato com ar de dia normal e bom — na rua, a andar, num sítio à sua escolha — 15 a 20 fotografias retocadas, desde 250 €.',
     },
     audience: {
       en: [
@@ -164,11 +164,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Anyone whose work belongs to a place',
-          text: 'The owner of a shop, a guide, a ceramicist with a workshop near the market. The two locations can be your own street and the one round the corner rather than somewhere off a postcard — say so when booking.',
+          text: 'The owner of a shop, a guide, a ceramicist with a workshop near the market. The location can be your own street rather than somewhere off a postcard — say so when booking.',
         },
         {
           title: 'People who need more than one profile photograph',
-          text: 'A website, a newsletter, a speaker bio and a dating profile should not all use the same crop. Thirty photographs across two places give genuinely different images, not thirty versions of one.',
+          text: 'A website, a newsletter, a speaker bio and a dating profile should not all use the same crop. Fifteen to twenty photographs — standing, walking, close and wide — give genuinely different images, not twenty versions of one. A second place is quoted on request.',
         },
       ],
       pt: [
@@ -178,11 +178,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Quem trabalha num sítio concreto',
-          text: 'A dona de uma loja, um guia, uma ceramista com oficina ao pé do mercado. Os dois locais podem ser a sua rua e a do lado, e não um cenário tirado de um postal — basta dizê-lo ao reservar.',
+          text: 'A dona de uma loja, um guia, uma ceramista com oficina ao pé do mercado. O local pode ser a sua rua, e não um cenário tirado de um postal — basta dizê-lo ao reservar.',
         },
         {
           title: 'Quem precisa de mais do que uma fotografia de perfil',
-          text: 'Um site, uma newsletter, uma biografia de orador e um perfil numa aplicação de encontros não deviam usar todos o mesmo corte. Trinta fotografias em dois sítios dão imagens realmente diferentes, e não trinta versões da mesma.',
+          text: 'Um site, uma newsletter, uma biografia de orador e um perfil numa aplicação de encontros não deviam usar todos o mesmo corte. Quinze a vinte fotografias — parado, a andar, de perto e de longe — dão imagens realmente diferentes, e não vinte versões da mesma. Um segundo sítio orçamenta-se a pedido.',
         },
       ],
     },
@@ -190,51 +190,51 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
       en: [
         {
           title: 'Say where you would feel at ease',
-          text: 'A neighbourhood you know, a street near your work, or no idea at all. Write it on the booking form; if you leave it blank, the photographer proposes two spots within walking distance of each other.',
+          text: 'A neighbourhood you know, a street near your work, or no idea at all. Write it on the booking form; if you leave it blank, the photographer proposes one spot with good light and room to walk.',
         },
         {
           title: 'A start time set by the sun',
           text: 'We confirm the photographer, a meeting point and a start time, usually the same working day. The start is placed so the session finishes close to sunset, when the light is low and nobody is squinting.',
         },
         {
-          title: 'Seventy-five minutes, two places, one walk',
-          text: 'The first location is slower and composed: where to stand, where the light falls. The walk to the second is photographed too, and the looser frames from it tend to be the ones people end up using.',
+          title: '30 minutes, one place, on the move',
+          text: 'The first minutes are slower and composed: where to stand, where the light falls. Then you walk the same stretch a few times, and those looser frames tend to be the ones people end up using.',
         },
         {
-          title: 'Thirty photographs in 48–72 hours',
-          text: 'Thirty retouched photographs, from both locations and the walk between them, arrive in a private gallery within 48 to 72 hours.',
+          title: '15–20 photographs in 48–72 hours',
+          text: 'Fifteen to twenty retouched photographs, composed and walking frames together, arrive in a private gallery within 48 to 72 hours.',
         },
       ],
       pt: [
         {
           title: 'Diga onde se sentiria à vontade',
-          text: 'Um bairro que conhece, uma rua perto do trabalho, ou nenhuma ideia. Escreva-o no formulário de reserva; se deixar em branco, o fotógrafo propõe dois sítios a distância de caminhada um do outro.',
+          text: 'Um bairro que conhece, uma rua perto do trabalho, ou nenhuma ideia. Escreva-o no formulário de reserva; se deixar em branco, o fotógrafo propõe um sítio com boa luz e espaço para andar.',
         },
         {
           title: 'Uma hora de início marcada pelo sol',
           text: 'Confirmamos o fotógrafo, o ponto de encontro e a hora, normalmente no mesmo dia útil. O início é escolhido para a sessão acabar perto do pôr do sol, quando a luz é baixa e ninguém tem de semicerrar os olhos.',
         },
         {
-          title: 'Setenta e cinco minutos, dois sítios, um percurso',
-          text: 'O primeiro local é mais lento e composto: onde ficar, para onde cai a luz. O caminho até ao segundo também se fotografa, e as imagens mais soltas que saem dali costumam ser as que as pessoas acabam por usar.',
+          title: '30 minutos, um sítio, em movimento',
+          text: 'Os primeiros minutos são mais lentos e compostos: onde ficar, para onde cai a luz. Depois percorre o mesmo troço algumas vezes, e essas imagens mais soltas costumam ser as que as pessoas acabam por usar.',
         },
         {
-          title: 'Trinta fotografias em 48–72 horas',
-          text: 'Trinta fotografias retocadas, dos dois locais e do caminho entre eles, chegam numa galeria privada em 48 a 72 horas.',
+          title: '15 a 20 fotografias em 48–72 horas',
+          text: 'Quinze a vinte fotografias retocadas, compostas e em movimento, chegam numa galeria privada em 48 a 72 horas.',
         },
       ],
     },
     prepare: {
       en: [
-        'Wear shoes you can walk in for seventy-five minutes; Portuguese calçada is uneven and slippery.',
-        'Bring one layer you can add or take off — a jacket, an overshirt — so the two locations do not look like the same five minutes.',
+        'Wear shoes you can walk in; Portuguese calçada is uneven and slippery.',
+        'Bring one layer you can add or take off — a jacket, an overshirt — so the frames do not all look like the same five minutes.',
         'Avoid logos and slogans on clothing; they date a photograph and pull the eye away from your face.',
         'If your work has an object — a knife roll, a camera, a sketchbook — bring it. Holding something settles what to do with your hands.',
         'Empty your pockets before you start; a phone and keys show through fabric in walking frames.',
       ],
       pt: [
-        'Calce sapatos com que consiga andar setenta e cinco minutos; a calçada portuguesa é irregular e escorrega.',
-        'Leve uma peça que possa vestir ou tirar — um casaco, uma sobrecamisa — para os dois locais não parecerem os mesmos cinco minutos.',
+        'Calce sapatos com que consiga andar à vontade; a calçada portuguesa é irregular e escorrega.',
+        'Leve uma peça que possa vestir ou tirar — um casaco, uma sobrecamisa — para as fotografias não parecerem todas os mesmos cinco minutos.',
         'Evite logótipos e frases na roupa: datam a fotografia e tiram a atenção da cara.',
         'Se o seu trabalho tem um objecto — um estojo de facas, uma câmara, um caderno de esboços — traga-o. Segurar alguma coisa resolve o que fazer às mãos.',
         'Esvazie os bolsos antes de começar; o telemóvel e as chaves notam-se nas fotografias em movimento.',
@@ -257,8 +257,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Marco este ou o retrato de estúdio?',
         },
         answer: {
-          en: 'The studio, if the photograph has to sit beside colleagues’ on a company page or a designer needs a plain background to cut around. This one, if it is for your own site, a book or anywhere it should say something about how you work. The studio is an hour from €150; this is seventy-five minutes from €170.',
-          pt: 'O de estúdio, se a fotografia tiver de ficar ao lado das dos colegas numa página da empresa ou se um designer precisar de um fundo liso para recortar. Este, se for para o seu site, um livro ou qualquer sítio onde deva dizer alguma coisa sobre a forma como trabalha. O estúdio é uma hora, desde 150 €; este são setenta e cinco minutos, desde 170 €.',
+          en: 'The studio, if the photograph has to sit beside colleagues’ on a company page or a designer needs a plain background to cut around. This one, if it is for your own site, a book or anywhere it should say something about how you work. Both are 30 minutes from €250 with 15–20 retouched photographs; the difference is the setting, not the price.',
+          pt: 'O de estúdio, se a fotografia tiver de ficar ao lado das dos colegas numa página da empresa ou se um designer precisar de um fundo liso para recortar. Este, se for para o seu site, um livro ou qualquer sítio onde deva dizer alguma coisa sobre a forma como trabalha. Ambos são 30 minutos desde 250 €, com 15 a 20 fotografias retocadas; a diferença está no cenário, não no preço.',
         },
       },
       {
@@ -277,8 +277,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Posso escolher os locais?',
         },
         answer: {
-          en: 'Yes, as long as the two are within walking distance of each other. Somewhere private — a shop, a café terrace, a workshop — needs the owner’s permission, which is far easier for you to ask for than for us.',
-          pt: 'Pode, desde que fiquem a distância de caminhada um do outro. Um espaço privado — uma loja, a esplanada de um café, uma oficina — precisa de autorização do dono, e é bem mais fácil ser o próprio cliente a pedi-la.',
+          en: 'Yes — one place with room to walk a short stretch; a second location is quoted on request. Somewhere private — a shop, a café terrace, a workshop — needs the owner’s permission, which is far easier for you to ask for than for us.',
+          pt: 'Pode — um sítio com espaço para andar um pouco; um segundo local orçamenta-se a pedido. Um espaço privado — uma loja, a esplanada de um café, uma oficina — precisa de autorização do dono, e é bem mais fácil ser o próprio cliente a pedi-la.',
         },
       },
       {
@@ -303,11 +303,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
       en: [
         {
           title: 'The parent who is never in the photographs',
-          text: 'Whoever holds the phone is missing from the family album. Seventy-five minutes with someone else behind the camera puts both parents in the frame, holding the children rather than directing them.',
+          text: 'Whoever holds the phone is missing from the family album. Thirty minutes with someone else behind the camera puts both parents in the frame, holding the children rather than directing them.',
         },
         {
           title: 'Families with children too quick for a phone',
-          text: 'Under six, children move faster than a phone focuses and stop cooperating the moment they notice it. Nobody is asked to pose; the photographer follows what they are doing, and forty photographs leaves room for the few where everyone looks up at once.',
+          text: 'Under six, children move faster than a phone focuses and stop cooperating the moment they notice it. Nobody is asked to pose; the photographer follows what they are doing, and shooting far more frames than the 15–20 you receive leaves room for the few where everyone looks up at once.',
         },
         {
           title: 'Three generations in one place, for once',
@@ -317,11 +317,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
       pt: [
         {
           title: 'O pai ou a mãe que nunca aparece nas fotografias',
-          text: 'Quem segura o telemóvel falta sempre no álbum da família. Setenta e cinco minutos com outra pessoa atrás da câmara põem os dois no enquadramento, com as crianças ao colo em vez de a dar instruções.',
+          text: 'Quem segura o telemóvel falta sempre no álbum da família. Trinta minutos com outra pessoa atrás da câmara põem os dois no enquadramento, com as crianças ao colo em vez de a dar instruções.',
         },
         {
           title: 'Famílias com crianças rápidas demais para um telemóvel',
-          text: 'Abaixo dos seis anos, as crianças mexem-se mais depressa do que o telemóvel foca e deixam de colaborar assim que dão por ele. Ninguém tem de posar: o fotógrafo acompanha o que estão a fazer, e quarenta fotografias dão margem para as poucas em que todos olham ao mesmo tempo.',
+          text: 'Abaixo dos seis anos, as crianças mexem-se mais depressa do que o telemóvel foca e deixam de colaborar assim que dão por ele. Ninguém tem de posar: o fotógrafo acompanha o que estão a fazer, e fotografar muito mais do que as 15 a 20 que recebe dá margem para as poucas em que todos olham ao mesmo tempo.',
         },
         {
           title: 'Três gerações no mesmo sítio, desta vez',
@@ -340,11 +340,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Usually the same working day: a photographer, one location with shade and room to run, and an early start. If the forecast turns before the day, the session moves at no cost.',
         },
         {
-          title: 'Twenty minutes of play before the session proper',
-          text: 'Children spend the opening minutes performing for the camera. The photographer lets that run its course — a game, a walk, a snack — and the frames that count come after, in the same spot, without packing up to move.',
+          title: 'A few minutes of play first',
+          text: 'Children spend the opening minutes performing for the camera. The photographer lets that run its course — a game, a snack — and the frames that count come after, in the same spot, without packing up to move.',
         },
         {
-          title: 'Forty photographs in 48–72 hours',
+          title: '15–20 photographs in 48–72 hours',
           text: 'Retouched and delivered to a private gallery. Expect a handful where everyone looks at the camera and many more where nobody does; the second kind tend to be the ones that get printed.',
         },
       ],
@@ -358,11 +358,11 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Normalmente no mesmo dia útil: o fotógrafo, um local com sombra e espaço para correr, e uma hora cedo. Se a previsão mudar antes do dia, a sessão remarca-se sem custo.',
         },
         {
-          title: 'Vinte minutos de brincadeira antes da sessão a sério',
-          text: 'Nos primeiros minutos as crianças representam para a câmara. O fotógrafo deixa isso passar — um jogo, uma volta, um lanche — e as fotografias que contam vêm depois, no mesmo sítio, sem arrumar tudo para mudar.',
+          title: 'Uns minutos de brincadeira primeiro',
+          text: 'Nos primeiros minutos as crianças representam para a câmara. O fotógrafo deixa isso passar — um jogo, um lanche — e as fotografias que contam vêm depois, no mesmo sítio, sem arrumar tudo para mudar.',
         },
         {
-          title: 'Quarenta fotografias em 48–72 horas',
+          title: '15 a 20 fotografias em 48–72 horas',
           text: 'Retocadas e entregues numa galeria privada. Conte com meia dúzia em que todos olham para a câmara e muitas mais em que ninguém olha; costumam ser estas as que vão para a parede.',
         },
       ],
@@ -392,8 +392,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'E se o meu filho chorar ou não quiser participar?',
         },
         answer: {
-          en: 'It happens, and it does not cost you the session. The photographer stops, the child is comforted, and nobody is told to smile. A child on a parent’s lap five minutes after crying is a photograph worth having too, and seventy-five minutes leaves time to get back to the rest.',
-          pt: 'Acontece, e não se perde a sessão por isso. O fotógrafo pára, a criança é consolada, e ninguém a manda sorrir. Uma criança ao colo do pai cinco minutos depois de chorar também é uma fotografia que vale a pena, e setenta e cinco minutos dão tempo para voltar ao resto.',
+          en: 'It happens, and it does not cost you the session. The photographer stops, the child is comforted, and nobody is told to smile. A child on a parent’s lap five minutes after crying is a photograph worth having too. If thirty minutes looks tight for very small children, ask for a longer session; it is quoted in writing before you book.',
+          pt: 'Acontece, e não se perde a sessão por isso. O fotógrafo pára, a criança é consolada, e ninguém a manda sorrir. Uma criança ao colo do pai cinco minutos depois de chorar também é uma fotografia que vale a pena. Se trinta minutos parecerem pouco para crianças muito pequenas, peça uma sessão mais longa; é orçamentada por escrito antes de reservar.',
         },
       },
       {

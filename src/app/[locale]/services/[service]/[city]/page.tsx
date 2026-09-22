@@ -15,7 +15,7 @@ import {
 } from '@/lib/catalog';
 import { isLeafPublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { formatPrice, formatDuration, formatDelivery, whatsappBookingLink } from '@/lib/site';
+import { formatPrice, formatDuration, formatDelivery, formatPhotoCount, whatsappBookingLink } from '@/lib/site';
 import { CTA, checkAvailabilityIn, inPlace } from '@/lib/cta';
 import { FROM_PRICE, REPLY_TIME } from '@/lib/promises';
 import { trackAttrs } from '@/lib/analytics';
@@ -321,7 +321,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-brand-muted">{labels.photos}</dt>
-                <dd className="font-semibold">{service.editedPhotos}</dd>
+                <dd className="font-semibold">{formatPhotoCount(service)}</dd>
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-brand-muted">{labels.delivery}</dt>

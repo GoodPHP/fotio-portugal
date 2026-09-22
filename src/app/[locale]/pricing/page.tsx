@@ -36,8 +36,8 @@ const COPY = {
     pt: 'Com preço para a sua data e sítio, confirmado por escrito com o resto do orçamento — nunca acrescentado depois.',
   },
   addons: {
-    en: ['Express 24h delivery', 'Second photographer', 'Extended session (1.5× / 2×)'],
-    pt: ['Entrega expresso em 24 h', 'Segundo fotógrafo', 'Sessão alargada (1,5× / 2×)'],
+    en: ['Express 24h delivery', 'Second photographer', 'Longer session — 60 or 90 minutes'],
+    pt: ['Entrega expresso em 24 h', 'Segundo fotógrafo', 'Sessão mais longa — 60 ou 90 minutos'],
   },
   faqTitle: { en: 'Pricing questions', pt: 'Perguntas sobre preços' },
   ctaTitle: { en: 'Know your date? Check availability.', pt: 'Já sabe a data? Veja a disponibilidade.' },

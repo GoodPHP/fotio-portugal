@@ -4,7 +4,7 @@ import { localizedCityName } from './catalog';
 import { ptAt, ptOf, ptRegionAt } from './pt-grammar';
 import { LEAF_SEO } from './data/leaf-seo';
 import { TITLE_MAX } from './seo-text';
-import { formatDuration, formatPrice } from './site';
+import { formatDelivery, formatDuration, formatPhotoCount, formatPrice } from './site';
 import { SITE_NAME } from './site';
 
 export interface ProgrammaticFAQ {
@@ -48,7 +48,12 @@ export function generateProgrammaticContent(
   const regionName = tx(city.region, locale);
   const startingPrice = service.initialPrice;
   const duration = service.durationMinutes;
-  const photoCount = service.editedPhotos;
+  const photoCount = formatPhotoCount(service);
+  const delivery = formatDelivery(service.deliveryHours, locale);
+  // The base package is thirty minutes: one spot, not a walk between two.
+  const twoSpots = city.spots.length > 1 && duration >= 60;
+  // A session sold as a base package says that more time can be quoted.
+  const longerOnRequest = Boolean(service.editedPhotosMax);
 
   const spots = city.spots;
   const keySpot = spots[0];
@@ -74,7 +79,7 @@ export function generateProgrammaticContent(
 
   if (locale === 'pt') {
     return {
-      answerBox: `${serviceName} ${ptAt(city)} — desde ${priceLabel}. ${durationLabel} no local com um fotógrafo local verificado e ${photoCount} fotografias editadas entregues numa galeria privada em 48 a 72 horas. O preço é acordado antes de reservar e não muda.`,
+      answerBox: `${serviceName} ${ptAt(city)} — desde ${priceLabel}. ${durationLabel} no local com um fotógrafo local verificado e ${photoCount} fotografias editadas entregues numa galeria privada em ${delivery}.${longerOnRequest ? ' Sessões mais longas são orçamentadas a pedido.' : ''} O preço é acordado antes de reservar e não muda.`,
 
       introParagraph: authored
         ? tx(authored.angle, locale)
@@ -85,7 +90,7 @@ export function generateProgrammaticContent(
       // Hence "Ponto de partida:" rather than "Começamos em…".
       sampleRoute: isCoverage
         ? `A cobertura dura ${durationLabel} e segue o seu programa, não um percurso fixo. Quando abre um intervalo para fotografias compostas, saímos até ${keySpotName}${secondSpot ? ` ou ${secondSpot.name}` : ''} — poucos minutos a pé, que é outro tanto que não se tira ao dia.`
-        : secondSpot
+        : twoSpots && secondSpot
           ? `O percurso habitual dura ${durationLabel} e faz-se a pé. Ponto de partida: ${keySpotName}, depois ${secondSpot.name}. Dois locais em vez de um dão dois fundos distintos sem entrar no carro, e o caminho entre eles produz as fotografias feitas em movimento — muitas vezes as mais verdadeiras do conjunto.`
           : `O percurso habitual dura ${durationLabel} e faz-se a pé. Ponto de partida: ${keySpotName}. Alternamos enquadramentos compostos com sequências mais soltas a andar, para ter vários registos sem mudar de zona nem perder tempo em deslocações.`,
 
@@ -119,14 +124,14 @@ export function generateProgrammaticContent(
         },
         {
           question: `Quando recebemos as fotografias ${ptOf(city)}?`,
-          answer: `Em 48 a 72 horas, numa galeria privada online: ${photoCount} imagens editadas, para descarregar em resolução máxima a partir de qualquer país.`,
+          answer: `Em ${delivery}, numa galeria privada online: ${photoCount} imagens editadas, para descarregar em resolução máxima a partir de qualquer país.`,
         },
       ],
     };
   }
 
   return {
-    answerBox: `${serviceName} in ${cityName} — from ${priceLabel}. ${durationLabel} on location with a vetted local photographer, and ${photoCount} edited photos delivered to a private gallery within 48–72 hours. The price is agreed before you book and does not move.`,
+    answerBox: `${serviceName} in ${cityName} — from ${priceLabel}. ${durationLabel} on location with a vetted local photographer, and ${photoCount} edited photos delivered to a private gallery within ${delivery}.${longerOnRequest ? ' Longer sessions are quoted on request.' : ''} The price is agreed before you book and does not move.`,
 
     introParagraph: authored
       ? tx(authored.angle, locale)
@@ -134,7 +139,7 @@ export function generateProgrammaticContent(
 
     sampleRoute: isCoverage
       ? `Coverage runs ${durationLabel} and follows your schedule rather than a fixed route. When a gap opens for composed frames, we step out to ${keySpotName}${secondSpot ? ` or ${secondSpot.name}` : ''} — a few minutes on foot, which is that much less taken out of the day.`
-      : secondSpot
+      : twoSpots && secondSpot
         ? `The typical route runs ${durationLabel} and stays on foot. We start at ${keySpotName} and move on to ${secondSpot.name}. Two locations rather than one give you two distinct backdrops without getting into a car, and the walk between them produces the frames made in motion — frequently the truest of the set.`
         : `The typical route runs ${durationLabel} and stays on foot, around ${keySpotName}. We alternate composed frames with looser walking sequences, so you get several registers without changing neighbourhood or losing time in transit.`,
 
@@ -168,7 +173,7 @@ export function generateProgrammaticContent(
       },
       {
         question: `When do we get the photos from ${cityName}?`,
-        answer: `Within 48–72 hours, in a private online gallery: ${photoCount} edited images, downloadable at full resolution from any country.`,
+        answer: `Within ${delivery}, in a private online gallery: ${photoCount} edited images, downloadable at full resolution from any country.`,
       },
     ],
   };
@@ -194,7 +199,7 @@ export function getSeoMetadata(
   const cityName = localizedCityName(city, locale);
   const serviceName = tx(service.name, locale);
   const priceLabel = formatPrice(service.initialPrice, locale);
-  const photoCount = service.editedPhotos;
+  const photoCount = formatPhotoCount(service);
   const durationLabel = formatDuration(service.durationMinutes, locale);
 
   if (locale === 'pt') {
@@ -207,7 +212,7 @@ export function getSeoMetadata(
     const doublesUp = /^fot[oó]/i.test(serviceName);
     return {
       title: !doublesUp && prefixed.length <= TITLE_MAX ? prefixed : plain,
-      description: `${serviceName} ${ptAt(city)} com um fotógrafo local verificado. Desde ${priceLabel}, ${durationLabel} no local, ${photoCount} fotografias editadas, galeria privada em 48-72 h.`,
+      description: `${serviceName} ${ptAt(city)} com um fotógrafo local verificado. Desde ${priceLabel}, ${durationLabel} no local, ${photoCount} fotografias editadas, galeria privada em ${formatDelivery(service.deliveryHours, locale)}.`,
     };
   }
 
@@ -220,6 +225,6 @@ export function getSeoMetadata(
       withPhotographer.length <= TITLE_MAX
         ? withPhotographer
         : `${serviceName} in ${cityName} | ${SITE_NAME}`,
-    description: `${serviceName} in ${cityName} with a vetted local photographer. From ${priceLabel}, ${durationLabel} on location, ${photoCount} edited photos, gallery in 48-72h.`,
+    description: `${serviceName} in ${cityName} with a vetted local photographer. From ${priceLabel}, ${durationLabel} on location, ${photoCount} edited photos, gallery in ${formatDelivery(service.deliveryHours, locale)}.`,
   };
 }

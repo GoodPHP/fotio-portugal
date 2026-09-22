@@ -239,6 +239,11 @@ export function formatDuration(minutes: number, locale: Locale = DEFAULT_LOCALE)
   return DURATION_FORMAT[locale](Math.floor(minutes / 60), minutes % 60);
 }
 
+/** "15–20" for a range, "400" for a single count. */
+export function formatPhotoCount(photos: { editedPhotos: number; editedPhotosMax?: number }): string {
+  return photos.editedPhotosMax ? `${photos.editedPhotos}–${photos.editedPhotosMax}` : String(photos.editedPhotos);
+}
+
 const WEEKS_FORMAT: Record<Locale, (weeks: number) => string> = {
   en: (weeks) => (weeks === 1 ? '1 week' : `${weeks} weeks`),
   pt: (weeks) => (weeks === 1 ? '1 semana' : `${weeks} semanas`),

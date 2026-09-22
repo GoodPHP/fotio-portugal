@@ -24,7 +24,7 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Anyone who would rather not leave the house',
-          text: 'In the last weeks, getting to a location is the tiring part. The session can happen at home, by the best window with a sofa a step away, and it is the same thirty photographs.',
+          text: 'In the last weeks, getting to a location is the tiring part. The session can happen at home, by the best window with a sofa a step away, and it is the same 15–20 photographs.',
         },
       ],
       pt: [
@@ -38,7 +38,7 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Quem prefere não sair de casa',
-          text: 'Nas últimas semanas, o que cansa é chegar ao local. A sessão pode ser em casa, junto à melhor janela e com o sofá a um passo, e são as mesmas trinta fotografias.',
+          text: 'Nas últimas semanas, o que cansa é chegar ao local. A sessão pode ser em casa, junto à melhor janela e com o sofá a um passo, e são as mesmas 15 a 20 fotografias.',
         },
       ],
     },
@@ -53,11 +53,11 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Usually the same working day. If you need to move it later at short notice — a bad night, a check-up, swollen ankles — it moves at no cost.',
         },
         {
-          title: 'Seventy-five minutes, in bursts',
-          text: 'Ten or fifteen minutes of photographs, then a chair and some water. Standing frames come first while you are fresh; seated frames and close-ups come later, once standing has stopped being a pleasure.',
+          title: '30 minutes, with a break',
+          text: 'A stretch of photographs, then a chair and some water. Standing frames come first while you are fresh; seated frames and close-ups come after. If you would like more time in hand, a longer session is quoted on request.',
         },
         {
-          title: 'Thirty photographs in 48–72 hours',
+          title: '15–20 photographs in 48–72 hours',
           text: 'Retouched and delivered to a private gallery within 48 to 72 hours, so they are with you weeks before the birth rather than one more thing to chase afterwards.',
         },
       ],
@@ -71,18 +71,18 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Normalmente no mesmo dia útil. Se depois precisar de mudar em cima da hora — uma noite má, uma consulta, os pés inchados — muda sem custo.',
         },
         {
-          title: 'Setenta e cinco minutos, aos bocados',
-          text: 'Dez ou quinze minutos de fotografias, depois uma cadeira e água. As fotografias de pé fazem-se primeiro, com energia; as sentadas e os planos próximos ficam para quando estar de pé já não apetece.',
+          title: '30 minutos, com uma pausa',
+          text: 'Um bocado de fotografias, depois uma cadeira e água. As fotografias de pé fazem-se primeiro, com energia; as sentadas e os planos próximos vêm a seguir. Se quiser mais tempo, uma sessão mais longa orçamenta-se a pedido.',
         },
         {
-          title: 'Trinta fotografias em 48–72 horas',
+          title: '15 a 20 fotografias em 48–72 horas',
           text: 'Retocadas e entregues numa galeria privada em 48 a 72 horas, ou seja, semanas antes do parto e não mais uma coisa para tratar depois.',
         },
       ],
     },
     prepare: {
       en: [
-        'Bring one fitted outfit that follows the bump and one looser one; a loose dress on its own hides what the session is for.',
+        'Bring one fitted outfit that follows the bump, with a loose shirt or cardigan to open over it; a loose dress on its own hides what the session is for.',
         'Choose plain fabrics in solid colours; large prints compete with the shape.',
         'Wear flat shoes to get there. If you want heels in some frames, bring them and put them on only for those.',
         'At home, clear one corner by the largest window. The rest of the house does not need to be tidy.',
@@ -90,7 +90,7 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         'If your fingers are swelling, take rings off the night before; the marks they leave show in close-ups of hands.',
       ],
       pt: [
-        'Leve uma peça justa que acompanhe a barriga e outra mais larga; um vestido largo sozinho esconde aquilo que a sessão existe para fotografar.',
+        'Leve uma peça justa que acompanhe a barriga, com uma camisa ou um casaco largo para abrir por cima; um vestido largo sozinho esconde aquilo que a sessão existe para fotografar.',
         'Prefira tecidos lisos em cores sólidas; padrões grandes competem com a forma.',
         'Vá de sapatos rasos. Se quiser saltos em algumas fotografias, leve-os e calce-os só para essas.',
         'Em casa, arrume um canto junto à janela maior. O resto da casa não precisa de estar arrumado.',
@@ -115,8 +115,8 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Ao ar livre ou em casa — o que é melhor?',
         },
         answer: {
-          en: 'Outdoors gives more variety of background and suits the earlier part of the window, while walking is still easy. Home is calmer and warmer, with a sofa within reach, which counts for more in the last weeks. Both come to the same thirty photographs.',
-          pt: 'Ao ar livre há mais variedade de fundos, e resulta melhor no início da janela, enquanto andar ainda é fácil. Em casa é mais calmo e mais quente, com o sofá à mão, o que conta mais nas últimas semanas. Nos dois casos são as mesmas trinta fotografias.',
+          en: 'Outdoors gives more variety of background and suits the earlier part of the window, while walking is still easy. Home is calmer and warmer, with a sofa within reach, which counts for more in the last weeks. Both come to the same 15–20 photographs.',
+          pt: 'Ao ar livre há mais variedade de fundos, e resulta melhor no início da janela, enquanto andar ainda é fácil. Em casa é mais calmo e mais quente, com o sofá à mão, o que conta mais nas últimas semanas. Nos dois casos são as mesmas 15 a 20 fotografias.',
         },
       },
       {
@@ -155,7 +155,7 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Parents still recovering from the birth',
-          text: 'Two hours at home means you can stay on the sofa, stop to feed and step out of frame whenever you need to. Nobody has to be dressed for a photograph until they decide to be.',
+          text: 'At home you can stay on the sofa and step out of frame whenever you need to, and the 30 minutes are timed around a feed rather than against it. Nobody has to be dressed for a photograph until they decide to be.',
         },
         {
           title: 'Families with an older child meeting the baby',
@@ -169,7 +169,7 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Pais que ainda estão a recuperar do parto',
-          text: 'Duas horas em casa querem dizer que pode ficar no sofá, parar para dar de mamar e sair do enquadramento sempre que precisar. Ninguém tem de estar arranjado para uma fotografia antes de decidir que quer estar.',
+          text: 'Em casa pode ficar no sofá e sair do enquadramento sempre que precisar, e os 30 minutos marcam-se à volta de uma mamada e não contra ela. Ninguém tem de estar arranjado para uma fotografia antes de decidir que quer estar.',
         },
         {
           title: 'Famílias em que um irmão mais velho conhece o bebé',
@@ -184,15 +184,15 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Babies do not keep appointments, so tell us the due date and your city when you write. The day itself is set once the baby has arrived, inside the first two weeks.',
         },
         {
-          title: 'Two hours booked, photographer confirmed',
-          text: 'Confirmation usually comes the same working day. Two hours is booked on purpose, so a long feed or a nappy change in the middle does not eat into the photographs.',
+          title: '30 minutes, photographer confirmed',
+          text: 'Confirmation usually comes the same working day. The 30 minutes start just after a feed, when sleep comes easiest. If you want time in hand for a long feed or a nappy change, a longer session is quoted on request.',
         },
         {
           title: 'At home, around the baby',
           text: 'The photographer finds the room with the best window and then waits — for a feed to end, for sleep to deepen. No flash, no props, and no posing that requires handling the baby into position; if the baby needs moving, a parent does it.',
         },
         {
-          title: 'Thirty photographs within 72 hours',
+          title: '15–20 photographs within 72 hours',
           text: 'Retouched and delivered to a private gallery within 72 hours, while your baby still looks the way they do in the photographs.',
         },
       ],
@@ -202,15 +202,15 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Os bebés não cumprem marcações, por isso diga-nos a data prevista e a cidade quando escrever. O dia em si fixa-se depois de o bebé nascer, dentro das duas primeiras semanas.',
         },
         {
-          title: 'Duas horas marcadas, fotógrafo confirmado',
-          text: 'A confirmação chega normalmente no mesmo dia útil. As duas horas são de propósito, para uma mamada longa ou uma muda de fralda a meio não roubarem tempo às fotografias.',
+          title: '30 minutos, fotógrafo confirmado',
+          text: 'A confirmação chega normalmente no mesmo dia útil. Os 30 minutos começam logo a seguir a uma mamada, quando o sono vem mais fácil. Se quiser margem para uma mamada longa ou uma muda de fralda, uma sessão mais longa orçamenta-se a pedido.',
         },
         {
           title: 'Em casa, ao ritmo do bebé',
           text: 'O fotógrafo procura a divisão com a melhor janela e depois espera — que a mamada acabe, que o sono fique profundo. Sem flash, sem adereços e sem poses que obriguem a manipular o bebé; se for preciso mudá-lo de sítio, é um dos pais que o faz.',
         },
         {
-          title: 'Trinta fotografias em 72 horas',
+          title: '15 a 20 fotografias em 72 horas',
           text: 'Retocadas e entregues numa galeria privada em 72 horas, enquanto o bebé ainda está igual ao das fotografias.',
         },
       ],
@@ -260,8 +260,8 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'E se o bebé não sossegar?',
         },
         answer: {
-          en: 'Then the session waits; that is what the second hour is for. A long feed, a nappy change, ten minutes of walking up and down the corridor. Awake, frowning and yawning frames are part of the thirty, not failures.',
-          pt: 'Então a sessão espera; é para isso que serve a segunda hora. Uma mamada longa, uma muda de fralda, dez minutos a andar no corredor para trás e para a frente. Fotografias acordado, de sobrolho franzido ou a bocejar fazem parte das trinta, não são falhas.',
+          en: 'Then the photographer works with what the baby is doing: awake, frowning and yawning frames are part of the 15 to 20, not failures. If you want time in hand to wait out a long feed, ask for a longer session; it is quoted in writing before you book.',
+          pt: 'Então o fotógrafo trabalha com o que o bebé está a fazer: fotografias acordado, de sobrolho franzido ou a bocejar fazem parte das 15 a 20, não são falhas. Se quiser margem para esperar por uma mamada longa, peça uma sessão mais longa; é orçamentada por escrito antes de reservar.',
         },
       },
       {
@@ -432,8 +432,8 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   finalistas: {
     promise: {
-      en: 'Capa e batina photographed at the hour black cloth still shows texture, with individual and group portraits in the same ninety minutes, before the year disperses.',
-      pt: 'Capa e batina fotografadas à hora em que o preto ainda tem textura, com retratos individuais e de grupo na mesma hora e meia, antes de o curso se dispersar.',
+      en: 'Capa e batina photographed at the hour black cloth still shows texture, individual and group portraits in the same 30 minutes, from €250, before the year disperses.',
+      pt: 'Capa e batina fotografadas à hora em que o preto ainda tem textura, retratos individuais e de grupo nos mesmos 30 minutos, desde 250 €, antes de o curso se dispersar.',
     },
     audience: {
       en: [
@@ -477,11 +477,11 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Group first, individuals after',
-          text: 'The group frames are made while everyone is there and nobody has had to leave. Then each person gets a turn with the pasta and ribbons, and there is time left for the small groups — the two best friends, the flatmates.',
+          text: 'The group frames are made while everyone is there and nobody has had to leave. Then each person gets a turn with the pasta and ribbons. Small groups — the two best friends, the flatmates — need a longer session, quoted on request.',
         },
         {
-          title: '40 photographs within 72 hours',
-          text: 'Forty retouched photographs, individual and group, delivered to a private gallery within 72 hours.',
+          title: '15–20 photographs within 72 hours',
+          text: 'Fifteen to twenty retouched photographs, individual and group, delivered to a private gallery within 72 hours.',
         },
       ],
       pt: [
@@ -495,11 +495,11 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Grupo primeiro, individuais depois',
-          text: 'Os planos de grupo fazem-se enquanto estão todos e ninguém teve ainda de sair. Depois cada pessoa tem a sua vez, com a pasta e as fitas, e sobra tempo para os grupos pequenos — os dois melhores amigos, quem partilhou casa.',
+          text: 'Os planos de grupo fazem-se enquanto estão todos e ninguém teve ainda de sair. Depois cada pessoa tem a sua vez, com a pasta e as fitas. Grupos pequenos — os dois melhores amigos, quem partilhou casa — pedem uma sessão mais longa, orçamentada a pedido.',
         },
         {
-          title: '40 fotografias em 72 horas',
-          text: 'Quarenta fotografias retocadas, individuais e de grupo, entregues numa galeria privada em 72 horas.',
+          title: '15 a 20 fotografias em 72 horas',
+          text: 'Quinze a vinte fotografias retocadas, individuais e de grupo, entregues numa galeria privada em 72 horas.',
         },
       ],
     },
@@ -522,12 +522,12 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
     faqs: [
       {
         question: {
-          en: 'We are a big group. Is ninety minutes enough?',
-          pt: 'Somos um grupo grande. Noventa minutos chegam?',
+          en: 'We are a big group. Is 30 minutes enough?',
+          pt: 'Somos um grupo grande. 30 minutos chegam?',
         },
         answer: {
-          en: 'Enough for the group frames and individual portraits of everyone, but in a large group each person has less time alone. Tell us the number when booking and the session is planned around it rather than discovered halfway through.',
-          pt: 'Chegam para os planos de grupo e para retratos individuais de todos, mas num grupo grande cada pessoa tem menos tempo sozinha. Digam-nos o número ao reservar e a sessão é planeada para ele, em vez de se descobrir a meio.',
+          en: 'For a small group, enough for the group frames and a short portrait of each person, from 15 to 20 photographs shared across you. For a larger group, tell us the number when booking: a longer session is quoted in writing first, rather than discovered halfway through.',
+          pt: 'Para um grupo pequeno, chegam para os planos de grupo e um retrato curto de cada pessoa, com 15 a 20 fotografias repartidas por todos. Para um grupo maior, digam-nos o número ao reservar: uma sessão mais longa é orçamentada por escrito antes, em vez de se descobrir a meio.',
         },
       },
       {

@@ -77,8 +77,8 @@ export const WEDDING_SERVICE_SEO: Record<string, ServiceSeo> = {
   proposal: {
     title: { en: 'Proposal Photographer in Portugal', pt: 'Fotógrafo para pedido de casamento' },
     description: {
-      en: 'The moment photographed from a distance, then thirty minutes together once the surprise is over. 35 edited photographs, gallery in 48h. From €250.',
-      pt: 'O momento fotografado à distância, e depois trinta minutos juntos quando a surpresa passa. 35 fotografias editadas, galeria em 48 h. Desde 250 €.',
+      en: 'The moment photographed from a distance, then the rest of the thirty minutes together. 15–20 edited photographs, gallery in 48 hours. From €250, fixed.',
+      pt: 'O momento fotografado à distância, e depois o resto dos trinta minutos juntos. 15 a 20 fotografias editadas, galeria em 48 h. Desde 250 €, preço fixo.',
     },
     heading: {
       en: 'Agree the spot and the minute the day before',
@@ -87,11 +87,11 @@ export const WEDDING_SERVICE_SEO: Record<string, ServiceSeo> = {
     paragraphs: {
       en: [
         'Every proposal session that goes wrong goes wrong the same way: the signal was agreed on the day. A hand in a pocket, a particular phrase, a glance towards the photographer — all of them fail, because at the moment it matters you will be thinking about something else entirely and the photographer will be two hundred metres away trying to read a gesture. A fixed spot and a fixed minute, agreed the day before, removes the problem completely.',
-        'The rest is location and light. A viewpoint that is empty at seven in the morning has forty people on it by nine, and a proposal with an audience is a different photograph from the one you had in mind. Sunrise is the reliable answer in Lisbon and the Algarve; in the Douro and Madeira the constraint is the drive rather than the crowd. After the moment itself there are thirty minutes together, which is when the photographs of the two of you actually get made — the ones from the proposal are of a face reacting, and those are worth having but they are not a portrait.',
+        'The rest is location and light. A viewpoint that is empty at seven in the morning has forty people on it by nine, and a proposal with an audience is a different photograph from the one you had in mind. Sunrise is the reliable answer in Lisbon and the Algarve; in the Douro and Madeira the constraint is the drive rather than the crowd. After the moment itself the rest of the thirty minutes is spent together, which is when the photographs of the two of you actually get made — the ones from the proposal are of a face reacting, and those are worth having but they are not a portrait.',
       ],
       pt: [
         'Todos os pedidos de casamento que correm mal correm mal da mesma maneira: o sinal foi combinado no próprio dia. Uma mão no bolso, uma frase, um olhar para o fotógrafo — falham todos, porque no momento que interessa vai estar a pensar noutra coisa e o fotógrafo está a duzentos metros a tentar ler um gesto. Um sítio fixo e um minuto fixo, combinados na véspera, eliminam o problema por completo.',
-        'O resto é local e luz. Um miradouro que está vazio às sete da manhã tem quarenta pessoas às nove, e um pedido com plateia é uma fotografia diferente daquela que tinha em mente. O nascer do sol é a resposta fiável em Lisboa e no Algarve; no Douro e na Madeira a condicionante é a viagem e não a gente. Depois do momento ficam trinta minutos juntos, e é aí que se fazem de facto as fotografias dos dois — as do pedido são de uma cara a reagir, e valem a pena, mas não são um retrato.',
+        'O resto é local e luz. Um miradouro que está vazio às sete da manhã tem quarenta pessoas às nove, e um pedido com plateia é uma fotografia diferente daquela que tinha em mente. O nascer do sol é a resposta fiável em Lisboa e no Algarve; no Douro e na Madeira a condicionante é a viagem e não a gente. Depois do momento, o resto dos trinta minutos passa-se juntos, e é aí que se fazem de facto as fotografias dos dois — as do pedido são de uma cara a reagir, e valem a pena, mas não são um retrato.',
       ],
     },
   },
@@ -99,21 +99,21 @@ export const WEDDING_SERVICE_SEO: Record<string, ServiceSeo> = {
   couple: {
     title: { en: 'Couple Photo Session in Portugal', pt: 'Sessão de casal em Portugal' },
     description: {
-      en: 'Ninety minutes on foot through one neighbourhood, at the hour the light is low. 40 edited photographs, two locations, gallery in 48–72h. From €190.',
-      pt: 'Noventa minutos a pé por uma zona da cidade, à hora em que a luz é baixa. 40 fotografias editadas, dois locais, galeria em 48–72 h. Desde 190 €.',
+      en: 'Thirty minutes on foot through one neighbourhood, at the hour the light is low. 15–20 edited photographs, one location, gallery in 48–72 hours. From €250.',
+      pt: 'Trinta minutos a pé numa zona da cidade, à hora em que a luz é baixa. 15 a 20 fotografias editadas, um local, galeria em 48–72 horas. Desde 250 €, preço fixo.',
     },
     heading: {
-      en: 'The first fifteen minutes are not the session',
-      pt: 'Os primeiros quinze minutos não são a sessão',
+      en: 'The first few minutes are not the session',
+      pt: 'Os primeiros minutos não são a sessão',
     },
     paragraphs: {
       en: [
-        'Almost everyone says they are bad in front of a camera, and almost everyone is right for about fifteen minutes. That is the normal case rather than the exception, and the session is built around it: the first stretch is spent walking and talking rather than posing, and essentially nothing from it is kept. What comes after, once nobody is thinking about their hands any more, is the session. Booking ninety minutes rather than an hour is what makes that affordable.',
-        'The other half is the route. Two locations on foot give two distinct backdrops without anyone getting into a car, and the walk between them produces the frames made in motion, which are frequently the truest of the set. Which two depends on the city and the hour: in Lisbon the miradouros are a morning proposition and the riverfront an evening one, and in Porto the light is on Ribeira only at the end of the day. Getting that the wrong way round is the most common way an hour here is wasted.',
+        'Almost everyone says they are bad in front of a camera, and almost everyone is right for the first few minutes. That is the normal case rather than the exception, and the session is built around it: the first stretch is spent walking and talking rather than posing, and little from it is kept. What comes after, once nobody is thinking about their hands any more, is the session. The base thirty minutes allow for that; couples who know they take longer to settle can ask for a longer session, quoted in writing before booking.',
+        'The other half is the route. One location reached on foot gives one backdrop done properly without anyone getting into a car, and the walk to it produces the frames made in motion, which are frequently the truest of the set; a second location needs a longer session, quoted on request. Which one depends on the city and the hour: in Lisbon the miradouros are a morning proposition and the riverfront an evening one, and in Porto the light is on Ribeira only at the end of the day. Getting that the wrong way round is the most common way a session here is wasted.',
       ],
       pt: [
-        'Quase toda a gente diz que é má em frente à câmara, e quase toda a gente tem razão durante cerca de quinze minutos. É o caso normal e não a excepção, e a sessão constrói-se à volta disso: o primeiro bocado passa-se a andar e a conversar, não a posar, e praticamente nada dele fica. O que vem a seguir, quando já ninguém está a pensar nas mãos, é a sessão. Marcar noventa minutos em vez de uma hora é o que torna isso possível.',
-        'A outra metade é o percurso. Dois locais a pé dão dois fundos distintos sem ninguém entrar num carro, e o caminho entre eles produz as fotografias feitas em movimento, muitas vezes as mais verdadeiras do conjunto. Quais são os dois depende da cidade e da hora: em Lisboa os miradouros são de manhã e a frente ribeirinha é ao fim da tarde, e no Porto a luz só está na Ribeira no fim do dia. Trocar as voltas a isto é a forma mais comum de desperdiçar uma hora.',
+        'Quase toda a gente diz que é má em frente à câmara, e quase toda a gente tem razão durante os primeiros minutos. É o caso normal e não a excepção, e a sessão constrói-se à volta disso: o primeiro bocado passa-se a andar e a conversar, não a posar, e pouco dele fica. O que vem a seguir, quando já ninguém está a pensar nas mãos, é a sessão. Os trinta minutos base contam com isso; quem sabe que demora mais a descontrair pode pedir uma sessão mais longa, orçamentada por escrito antes da marcação.',
+        'A outra metade é o percurso. Um local a que se chega a pé dá um fundo bem feito sem ninguém entrar num carro, e o caminho até ele produz as fotografias feitas em movimento, muitas vezes as mais verdadeiras do conjunto; um segundo local pede uma sessão mais longa, orçamentada a pedido. Qual é depende da cidade e da hora: em Lisboa os miradouros são de manhã e a frente ribeirinha é ao fim da tarde, e no Porto a luz só está na Ribeira no fim do dia. Trocar as voltas a isto é a forma mais comum de desperdiçar uma sessão.',
       ],
     },
   },

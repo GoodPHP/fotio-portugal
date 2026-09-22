@@ -11,18 +11,18 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   headshots: {
     title: { en: 'Corporate Headshots', pt: 'Retrato corporativo' },
     description: {
-      en: 'One consistent look across a team, or one portrait that does not look like a passport photo. 45 minutes, 15 retouched images per person. From €150.',
-      pt: 'Um registo coerente para toda a equipa, ou um retrato que não pareça foto tipo passe. 45 minutos, 15 imagens retocadas por pessoa. Desde 150 €.',
+      en: 'One consistent look across a team, or one portrait that does not look like a passport photo. 30 minutes, 15–20 retouched images per person. From €250.',
+      pt: 'Um registo coerente para toda a equipa, ou um retrato que não pareça fotografia tipo passe. 30 minutos, 15 a 20 imagens retocadas por pessoa. Desde 250 €.',
     },
     heading: { en: 'Consistency is the product', pt: 'A coerência é o produto' },
     paragraphs: {
       en: [
         'A team page where every portrait was taken by a different person in a different room at a different time reads as exactly that, and it undercuts the thing the page exists to do. The work here is mostly discipline rather than artistry: the same framing, the same background, the same distance and the same light for everybody, so that forty portraits sit on a grid without one of them pulling the eye for the wrong reason.',
-        'Forty-five minutes per person covers a neutral background and a second, softer set-up, and fifteen retouched images is enough to choose from without turning the decision into a project. It happens at your office or in a studio; the office is usually better, because people are less self-conscious in a room they already work in. Delivered to a private gallery within 48 hours, with square and 4:5 crops of every keeper so nothing has to be recropped by hand for each platform.',
+        'Thirty minutes per person covers one neutral background, lit the same way for everybody, and fifteen to twenty retouched images is enough to choose from without turning the decision into a project; a second, softer set-up needs a longer session, quoted in writing on request. It happens at your office or in a studio; the office is usually better, because people are less self-conscious in a room they already work in. Delivered to a private gallery within 48 hours, with square and 4:5 crops of every keeper so nothing has to be recropped by hand for each platform.',
       ],
       pt: [
         'Uma página de equipa em que cada retrato foi feito por uma pessoa diferente, numa sala diferente e a uma hora diferente lê-se exactamente como isso, e destrói aquilo que a página existe para fazer. O trabalho aqui é sobretudo disciplina e não arte: o mesmo enquadramento, o mesmo fundo, a mesma distância e a mesma luz para toda a gente, para que quarenta retratos assentem numa grelha sem que um deles puxe o olho pela razão errada.',
-        'Quarenta e cinco minutos por pessoa dão para um fundo neutro e um segundo esquema mais suave, e quinze imagens retocadas chegam para escolher sem transformar a decisão num projecto. Faz-se no escritório ou em estúdio; o escritório costuma ser melhor, porque as pessoas estão menos constrangidas numa sala onde já trabalham. Entrega em galeria privada em 48 horas, com cortes quadrado e 4:5 de cada imagem escolhida.',
+        'Trinta minutos por pessoa dão para um fundo neutro, iluminado da mesma forma para todos, e quinze a vinte imagens retocadas chegam para escolher sem transformar a decisão num projecto; um segundo esquema mais suave pede uma sessão mais longa, orçamentada por escrito a pedido. Faz-se no escritório ou em estúdio; o escritório costuma ser melhor, porque as pessoas estão menos constrangidas numa sala onde já trabalham. Entrega em galeria privada em 48 horas, com cortes quadrado e 4:5 de cada imagem escolhida.',
       ],
     },
   },
@@ -49,18 +49,18 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   'digital-nomad-headshots': {
     title: { en: 'Remote-Work Headshots, Lisbon', pt: 'Retratos para trabalho remoto' },
     description: {
-      en: 'A profile photograph made where you actually are, not in a studio four time zones from your employer. One hour, 20 retouched images, delivered in 24h.',
-      pt: 'Uma fotografia de perfil feita onde está de facto. Uma hora, 20 imagens retocadas, entregues em 24 horas.',
+      en: 'A profile photograph made where you actually are, not in a studio four time zones from your employer. 30 minutes, 15–20 retouched images, delivered in 24h.',
+      pt: 'Uma fotografia de perfil feita onde está de facto, e não num estúdio a quatro fusos horários do empregador. 30 minutos, 15 a 20 imagens retocadas, em 24 h.',
     },
     heading: { en: 'For people whose office is a timezone away', pt: 'Para quem tem o escritório noutro fuso' },
     paragraphs: {
       en: [
         'Lisbon has a large population of people employed by companies that have never seen them, and the standard corporate headshot is wrong for all of them. A studio backdrop signals an office, and the whole point is that there is not one. This is the same discipline — consistent framing, good light, a face that looks like the person — done outdoors or in a co-working space, so that the result matches the working life it represents.',
-        'One hour, twenty retouched images, and delivery within twenty-four hours, because the usual reason for booking is a profile that needs updating this week rather than a project. Every keeper comes in square, 4:5 and banner crops, which covers every platform a remote worker actually uses without anyone opening an image editor. If a team is in town at the same time, the same session repeated back to back keeps the framing consistent across all of them.',
+        'Thirty minutes, fifteen to twenty retouched images, and delivery within twenty-four hours, because the usual reason for booking is a profile that needs updating this week rather than a project. Every keeper comes in square, 4:5 and banner crops, which covers every platform a remote worker actually uses without anyone opening an image editor. If a team is in town at the same time, the same session repeated back to back keeps the framing consistent across all of them.',
       ],
       pt: [
         'Lisboa tem muita gente empregada por empresas que nunca a viram, e o retrato corporativo habitual está errado para todas elas. Um fundo de estúdio sugere um escritório, e o ponto é precisamente não haver nenhum. Isto é a mesma disciplina — enquadramento coerente, boa luz, uma cara parecida com a pessoa — feita na rua ou num espaço de cowork.',
-        'Uma hora, vinte imagens retocadas e entrega em vinte e quatro horas, porque a razão habitual para marcar é um perfil que precisa de ser actualizado esta semana. Cada imagem escolhida vem em corte quadrado, 4:5 e banner, o que cobre todas as plataformas sem ninguém abrir um editor de imagem.',
+        'Trinta minutos, quinze a vinte imagens retocadas e entrega em vinte e quatro horas, porque a razão habitual para marcar é um perfil que precisa de ser actualizado esta semana. Cada imagem escolhida vem em corte quadrado, 4:5 e banner, o que cobre todas as plataformas sem ninguém abrir um editor de imagem.',
       ],
     },
   },
@@ -87,18 +87,18 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   'real-estate': {
     title: { en: 'Property & Alojamento Local Photos', pt: 'Fotografia imobiliária e AL' },
     description: {
-      en: 'Interiors shot at the hour the rooms actually get their light, verticals corrected and colour cast removed. 25 images, delivered in 24h. From €160.',
-      pt: 'Interiores fotografados à hora em que as divisões apanham luz, verticais corrigidas e dominantes removidas. 25 imagens em 24 h. Desde 160 €.',
+      en: 'Interiors shot at the hour the rooms get their light, verticals corrected and colour cast removed. 30 minutes, 15–20 images, delivered in 24h. From €250.',
+      pt: 'Interiores fotografados à hora em que as divisões apanham luz, verticais corrigidas e dominantes removidas. 30 minutos, 15 a 20 imagens em 24 h. Desde 250 €.',
     },
     heading: { en: 'Photograph the flat when the flat has light', pt: 'Fotografe a casa quando a casa tem luz' },
     paragraphs: {
       en: [
         'The single thing that separates a listing that performs from one that does not is whether the rooms were photographed when they face the sun. A south-facing flat shot at nine in the morning and the same flat shot at four are two different properties as far as a listing is concerned, and the difference is free — it costs a phone call to find out which way the windows point before anyone drives over.',
-        'Portugal’s Alojamento Local market makes this a recurring job rather than a one-off: a registered short-term rental competes on a thumbnail against a hundred others in the same postcode. Twenty-five images, verticals corrected so the walls are parallel, and the orange cast that tungsten lighting puts on every white wall removed rather than left to look like a filter. Delivered within twenty-four hours, because a listing that is not live is not earning.',
+        'Portugal’s Alojamento Local market makes this a recurring job rather than a one-off: a registered short-term rental competes on a thumbnail against a hundred others in the same postcode. Thirty minutes on site and fifteen to twenty images, verticals corrected so the walls are parallel, and the orange cast that tungsten lighting puts on every white wall removed rather than left to look like a filter; a larger property that needs longer is quoted in writing on request. Delivered within twenty-four hours, because a listing that is not live is not earning.',
       ],
       pt: [
         'A única coisa que separa um anúncio que funciona de um que não funciona é se as divisões foram fotografadas quando apanham sol. Uma casa virada a sul fotografada às nove da manhã e a mesma casa fotografada às quatro são, para efeitos de anúncio, dois imóveis diferentes, e a diferença é gratuita — custa um telefonema para saber para onde estão viradas as janelas antes de alguém se deslocar.',
-        'O mercado do Alojamento Local faz disto um trabalho recorrente e não pontual: um alojamento registado concorre numa miniatura contra uma centena de outros no mesmo código postal. Vinte e cinco imagens, verticais corrigidas para que as paredes fiquem paralelas, e a dominante alaranjada que a luz de tungsténio põe em todas as paredes brancas removida em vez de deixada com ar de filtro. Entrega em vinte e quatro horas, porque um anúncio que não está no ar não está a render.',
+        'O mercado do Alojamento Local faz disto um trabalho recorrente e não pontual: um alojamento registado concorre numa miniatura contra uma centena de outros no mesmo código postal. Trinta minutos no local e quinze a vinte imagens, verticais corrigidas para que as paredes fiquem paralelas, e a dominante alaranjada que a luz de tungsténio põe em todas as paredes brancas removida em vez de deixada com ar de filtro; um imóvel maior que precise de mais tempo orçamenta-se por escrito a pedido. Entrega em vinte e quatro horas, porque um anúncio que não está no ar não está a render.',
       ],
     },
   },
@@ -125,18 +125,18 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   'book-de-modelo': {
     title: { en: 'Model Portfolio Session', pt: 'Book de modelo' },
     description: {
-      en: 'Agency digitals and editorial frames in the same portfolio: three hours, three looks, 40 retouched photographs, private gallery within a week.',
-      pt: 'Polaroids de agência e imagens editoriais no mesmo book: três horas, três looks, 40 fotografias retocadas, galeria privada numa semana.',
+      en: 'Agency digitals and one editorial look in the same portfolio: 30 minutes, 15–20 retouched photographs, private gallery within a week. From €250, fixed.',
+      pt: 'Polaroids de agência e um look editorial no mesmo book: 30 minutos, 15 a 20 fotografias retocadas, galeria privada numa semana. Desde 250 €, preço fixo.',
     },
     heading: { en: 'Digitals and editorial are not the same job', pt: 'Polaroids e editorial não são o mesmo trabalho' },
     paragraphs: {
       en: [
         'An agency looks at two things and they contradict each other. Digitals are deliberately plain — flat light, no makeup, hair back, a white wall — and exist so that a booker can see the face and the proportions without anything in the way. Editorial frames are the opposite: styled, lit, and there to show what the face does when something is asked of it. A portfolio that contains only one of the two is answering half the question.',
-        'Three hours covers three looks and both registers, which is what makes a single session usable rather than a first instalment. Forty retouched photographs, delivered to a private gallery within a week, in the file sizes agencies actually ask for. The retouching on the digitals is deliberately minimal — they exist to be accurate, and a heavily worked digital is worse than none at all, because the first thing it does is raise a question at the casting.',
+        'Thirty minutes covers the digitals and one editorial look, which is both registers and enough for a first submission; more looks need a longer session, quoted in writing on request. Fifteen to twenty retouched photographs, delivered to a private gallery within a week, in the file sizes agencies actually ask for. The retouching on the digitals is deliberately minimal — they exist to be accurate, and a heavily worked digital is worse than none at all, because the first thing it does is raise a question at the casting.',
       ],
       pt: [
         'Uma agência olha para duas coisas e elas contradizem-se. As polaroids são propositadamente simples — luz chapada, sem maquilhagem, cabelo atrás, uma parede branca — e existem para que quem selecciona veja a cara e as proporções sem nada pelo meio. As imagens editoriais são o contrário: com styling, com luz, e servem para mostrar o que a cara faz quando se lhe pede alguma coisa. Um book que só tenha uma das duas está a responder a metade da pergunta.',
-        'Três horas dão para três looks e para os dois registos, e é isso que torna uma sessão utilizável em vez de uma primeira prestação. Quarenta fotografias retocadas, entregues em galeria privada numa semana, nos tamanhos de ficheiro que as agências pedem de facto. O retoque nas polaroids é deliberadamente mínimo — existem para ser exactas, e uma polaroid muito trabalhada é pior do que nenhuma, porque a primeira coisa que faz é levantar uma dúvida no casting.',
+        'Trinta minutos dão para as polaroids e um look editorial, ou seja, os dois registos, o que chega para uma primeira candidatura; mais looks pedem uma sessão mais longa, orçamentada por escrito a pedido. Quinze a vinte fotografias retocadas, entregues em galeria privada numa semana, nos tamanhos de ficheiro que as agências pedem de facto. O retoque nas polaroids é deliberadamente mínimo — existem para ser exactas, e uma polaroid muito trabalhada é pior do que nenhuma, porque a primeira coisa que faz é levantar uma dúvida no casting.',
       ],
     },
   },

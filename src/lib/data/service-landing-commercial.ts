@@ -154,8 +154,8 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'real-estate': {
     promise: {
-      en: 'Listing photographs shot when each room has its light, with straight walls and white walls that stay white — twenty-five images, ready within 24 hours.',
-      pt: 'Fotografias de anúncio feitas quando cada divisão tem luz, com paredes direitas e brancos que ficam brancos — vinte e cinco imagens, prontas em 24 horas.',
+      en: 'Listing photographs shot when each room has its light, straight walls and whites that stay white — 15–20 images from €250, ready within 24 hours.',
+      pt: 'Fotografias de anúncio feitas quando cada divisão tem luz, paredes direitas e brancos que ficam brancos — 15 a 20 imagens desde 250 €, prontas em 24 horas.',
     },
     audience: {
       en: [
@@ -165,7 +165,7 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Agents and owners selling or letting',
-          text: 'A property portal shows the first image at thumbnail size among dozens in the same search. Twenty-five images cover every room, the view and the building — what a buyer checks before asking for a visit.',
+          text: 'A property portal shows the first image at thumbnail size among dozens in the same search. Fifteen to twenty images cover the rooms and the view — what a buyer checks before asking for a visit.',
         },
         {
           title: 'Owners after a renovation',
@@ -179,7 +179,7 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Agentes e proprietários a vender ou arrendar',
-          text: 'Um portal imobiliário mostra a primeira imagem em miniatura entre dezenas na mesma pesquisa. Vinte e cinco imagens cobrem todas as divisões, a vista e o prédio — aquilo que um comprador verifica antes de pedir uma visita.',
+          text: 'Um portal imobiliário mostra a primeira imagem em miniatura entre dezenas na mesma pesquisa. Quinze a vinte imagens cobrem as divisões e a vista — aquilo que um comprador verifica antes de pedir uma visita.',
         },
         {
           title: 'Proprietários depois de uma obra',
@@ -198,11 +198,11 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'The time is chosen for the light rather than for the diary. The photographer and the slot are confirmed usually the same working day.',
         },
         {
-          title: 'Ninety minutes on site',
-          text: 'Every room from the angles that show its size honestly, then the details, the view, the common areas and the exterior, with the camera kept level so the walls start out straight.',
+          title: '30 minutes on site',
+          text: 'Each room from the angle that shows its size honestly, then the view, with the camera kept level so the walls start out straight. Common areas and exteriors are quoted on request as a longer session.',
         },
         {
-          title: 'Twenty-five images within 24 hours',
+          title: '15–20 images within 24 hours',
           text: 'Verticals corrected and colour casts removed, delivered to a private gallery in full resolution, ready to upload to the listing.',
         },
       ],
@@ -216,11 +216,11 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'A hora escolhe-se pela luz e não pela agenda. Fotógrafo e horário ficam confirmados normalmente no mesmo dia útil.',
         },
         {
-          title: 'Noventa minutos no local',
-          text: 'Cada divisão nos ângulos que mostram o tamanho com honestidade, depois os detalhes, a vista, as zonas comuns e o exterior, com a câmara nivelada para as paredes já saírem direitas.',
+          title: '30 minutos no local',
+          text: 'Cada divisão no ângulo que mostra o tamanho com honestidade, depois a vista, com a câmara nivelada para as paredes já saírem direitas. Zonas comuns e exteriores orçamentam-se a pedido, numa sessão mais longa.',
         },
         {
-          title: 'Vinte e cinco imagens em 24 horas',
+          title: '15 a 20 imagens em 24 horas',
           text: 'Verticais corrigidas e dominantes de cor removidas, entregues em galeria privada em alta resolução, prontas para carregar no anúncio.',
         },
       ],
@@ -246,12 +246,12 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
     faqs: [
       {
         question: {
-          en: 'How much of a property fits into ninety minutes?',
-          pt: 'Quanto de um imóvel cabe em noventa minutos?',
+          en: 'How much of a property fits into 30 minutes?',
+          pt: 'Quanto de um imóvel cabe em 30 minutos?',
         },
         answer: {
-          en: 'A flat of one to three bedrooms comfortably, with time left for details and the view. A large house with outdoor areas, or several units in one building, may need a longer session — quoted before you book, not discovered on the day.',
-          pt: 'Um apartamento de T1 a T3 com folga, e ainda com tempo para detalhes e para a vista. Uma moradia grande com exteriores, ou várias unidades no mesmo prédio, podem precisar de uma sessão mais longa — orçamentada antes de reservar, não descoberta no dia.',
+          en: 'A studio or a one-bedroom flat comfortably, with the view. A larger flat, a house with outdoor areas, or several units in one building need a longer session — quoted in writing before you book, not discovered on the day.',
+          pt: 'Um T0 ou um T1 com folga, e a vista. Um apartamento maior, uma moradia com exteriores, ou várias unidades no mesmo prédio precisam de uma sessão mais longa — orçamentada por escrito antes de reservar, não descoberta no dia.',
         },
       },
       {
@@ -434,8 +434,8 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'book-de-modelo': {
     promise: {
-      en: 'Digitals and editorial in one session: three hours, three looks and 40 retouched photographs, ready to send to agencies within a week.',
-      pt: 'Polaroids e editorial numa só sessão: três horas, três looks e 40 fotografias retocadas, prontas a enviar a agências numa semana.',
+      en: 'Digitals and editorial in one session: 30 minutes, one look and 15–20 retouched photographs from €250, ready to send to agencies within a week.',
+      pt: 'Polaroids e editorial numa só sessão: 30 minutos, um look e 15 a 20 fotografias retocadas desde 250 €, prontas a enviar a agências numa semana.',
     },
     audience: {
       en: [
@@ -471,36 +471,36 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
       en: [
         {
           title: 'Tell us where the book is going',
-          text: 'Fashion, commercial, advertising, or one agency in particular. Each wants a different balance of digitals and editorial, and that decides how the three hours are split.',
+          text: 'Fashion, commercial, advertising, or one agency in particular. Each wants a different balance of digitals and editorial, and that decides how the 30 minutes are split.',
         },
         {
-          title: 'Agree the looks and the references',
-          text: 'We confirm the photographer, usually the same working day, and settle the three looks and two or three reference images. Nothing about the wardrobe is improvised on the day.',
+          title: 'Agree the look and the references',
+          text: 'We confirm the photographer, usually the same working day, and settle the editorial look and two or three reference images. Nothing about the wardrobe is improvised on the day.',
         },
         {
-          title: 'Three hours, digitals first',
-          text: 'Digitals are made at the start, with a clean face and hair tied back, before any make-up or styling goes on. Then the three looks, each with its own light.',
+          title: '30 minutes, digitals first',
+          text: 'Digitals are made at the start, with a clean face and hair tied back, before any make-up or styling goes on. Then one editorial look, with its own light. More looks are quoted on request.',
         },
         {
-          title: 'Forty photographs within a week',
+          title: '15–20 photographs within a week',
           text: 'Retouched and delivered to a private gallery within a week, in full resolution and in the sizes you will send by email or upload to an agency form.',
         },
       ],
       pt: [
         {
           title: 'Diga-nos para onde vai o book',
-          text: 'Moda, comercial, publicidade, ou uma agência em concreto. Cada uma pede um equilíbrio diferente entre polaroids e editorial, e isso decide como se dividem as três horas.',
+          text: 'Moda, comercial, publicidade, ou uma agência em concreto. Cada uma pede um equilíbrio diferente entre polaroids e editorial, e isso decide como se dividem os 30 minutos.',
         },
         {
-          title: 'Combinamos looks e referências',
-          text: 'Confirmamos o fotógrafo, normalmente no mesmo dia útil, e fechamos os três looks e duas ou três imagens de referência. Nada do guarda-roupa é improvisado no dia.',
+          title: 'Combinamos o look e as referências',
+          text: 'Confirmamos o fotógrafo, normalmente no mesmo dia útil, e fechamos o look editorial e duas ou três imagens de referência. Nada do guarda-roupa é improvisado no dia.',
         },
         {
-          title: 'Três horas, primeiro as polaroids',
-          text: 'As polaroids fazem-se no início, com a cara lavada e o cabelo apanhado, antes de qualquer maquilhagem ou styling. Depois os três looks, cada um com a sua luz.',
+          title: '30 minutos, primeiro as polaroids',
+          text: 'As polaroids fazem-se no início, com a cara lavada e o cabelo apanhado, antes de qualquer maquilhagem ou styling. Depois um look editorial, com a sua luz. Mais looks orçamentam-se a pedido.',
         },
         {
-          title: 'Quarenta fotografias numa semana',
+          title: '15 a 20 fotografias numa semana',
           text: 'Retocadas e entregues em galeria privada no prazo de uma semana, em alta resolução e nos tamanhos que vai enviar por email ou carregar no formulário de uma agência.',
         },
       ],
@@ -509,7 +509,7 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
       en: [
         'For the digitals, bring fitted black jeans and a plain black vest top, with nothing printed on them.',
         'Arrive with a clean face, no make-up, and hair without product.',
-        'Bring the three looks ironed, with the shoes for each one.',
+        'Bring the editorial look ironed, with its shoes.',
         'Keep nails clean and unpainted, or in a neutral shade.',
         'Do not cut or colour your hair in the week before.',
         'Bring your current measurements — height, bust or chest, waist, hips, shoe size; agencies ask for them with the photographs.',
@@ -517,7 +517,7 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
       pt: [
         'Para as polaroids, leve calças de ganga pretas justas e uma camisola de alças preta lisa, sem nada estampado.',
         'Chegue com a cara lavada, sem maquilhagem, e o cabelo sem produto.',
-        'Leve os três looks passados a ferro, com os sapatos de cada um.',
+        'Leve o look editorial passado a ferro, com os sapatos.',
         'Unhas limpas e sem verniz, ou num tom neutro.',
         'Não corte nem pinte o cabelo na semana anterior.',
         'Leve as medidas actualizadas — altura, peito, cintura, anca, número de sapato; as agências pedem-nas com as fotografias.',
@@ -530,14 +530,14 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'A maquilhagem e o styling estão incluídos?',
         },
         answer: {
-          en: 'No. The price covers the photographer’s time, the selection, the colour work and the gallery. You can bring your own make-up artist for the editorial looks; the digitals are made before they start, with no make-up at all.',
-          pt: 'Não. O preço cobre o tempo do fotógrafo, a selecção, o tratamento de cor e a galeria. Pode levar maquilhador próprio para os looks editoriais; as polaroids fazem-se antes de ele começar, sem maquilhagem nenhuma.',
+          en: 'No. The price covers the photographer’s time, the selection, the colour work and the gallery. You can bring your own make-up artist for the editorial look; the digitals are made before they start, with no make-up at all.',
+          pt: 'Não. O preço cobre o tempo do fotógrafo, a selecção, o tratamento de cor e a galeria. Pode levar maquilhador próprio para o look editorial; as polaroids fazem-se antes de ele começar, sem maquilhagem nenhuma.',
         },
       },
       {
         question: {
-          en: 'How many of the forty are digitals and how many editorial?',
-          pt: 'Das quarenta, quantas são polaroids e quantas editoriais?',
+          en: 'How many of the photographs are digitals and how many editorial?',
+          pt: 'Das fotografias, quantas são polaroids e quantas editoriais?',
         },
         answer: {
           en: 'There is no fixed quota; it is set in the first step according to where the book is going. A first book usually leans towards digitals; a model who already works leans towards editorial.',
@@ -550,8 +550,8 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Vejo as fotografias durante a sessão?',
         },
         answer: {
-          en: 'Yes, between looks, so pose and expression can be corrected before changing clothes rather than discovered in the gallery a week later.',
-          pt: 'Sim, entre looks, para corrigir pose e expressão antes de mudar de roupa, em vez de descobrir na galeria uma semana depois.',
+          en: 'Yes, between the digitals and the editorial look, so pose and expression can be corrected before changing clothes rather than discovered in the gallery a week later.',
+          pt: 'Sim, entre as polaroids e o look editorial, para corrigir pose e expressão antes de mudar de roupa, em vez de descobrir na galeria uma semana depois.',
         },
       },
       {

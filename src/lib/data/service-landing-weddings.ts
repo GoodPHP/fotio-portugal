@@ -11,8 +11,8 @@ import type { ServiceLanding } from './service-landing';
 export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
   couple: {
     promise: {
-      en: 'Ninety minutes on foot between two places, at the hour the light is low — and forty photographs of the two of you that do not look posed.',
-      pt: 'Noventa minutos a pé entre dois sítios, à hora em que a luz é baixa — e quarenta fotografias dos dois que não parecem posadas.',
+      en: 'Thirty minutes on foot in one neighbourhood, at the hour the light is low — 15–20 photographs of the two of you, from €250, that do not look posed.',
+      pt: 'Trinta minutos a pé numa só zona, à hora em que a luz é baixa — 15 a 20 fotografias dos dois, desde 250 €, que não parecem posadas.',
     },
     audience: {
       en: [
@@ -22,11 +22,11 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Engaged couples who need a save-the-date',
-          text: 'A horizontal frame for the wedding website, a vertical one for the invitation and a few that are simply of the two of you. Forty photographs covers all three with room to spare.',
+          text: 'A horizontal frame for the wedding website, a vertical one for the invitation and a few that are simply of the two of you. Fifteen to twenty photographs cover all three; say which you need when booking.',
         },
         {
           title: 'Anniversaries, and couples passing through',
-          text: 'Ten years married, or three days in Lisbon on the way somewhere else. Ninety minutes fits into a morning without taking the day over.',
+          text: 'Ten years married, or three days in Lisbon on the way somewhere else. Thirty minutes fits into a morning without taking the day over.',
         },
       ],
       pt: [
@@ -36,11 +36,11 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Noivos que precisam de um save-the-date',
-          text: 'Um enquadramento horizontal para o site do casamento, um vertical para o convite e algumas que são só dos dois. Quarenta fotografias chegam para as três coisas e sobram.',
+          text: 'Um enquadramento horizontal para o site do casamento, um vertical para o convite e algumas que são só dos dois. Quinze a vinte fotografias chegam para as três coisas; diga-nos ao reservar quais precisa.',
         },
         {
           title: 'Aniversários de casamento, e casais de passagem',
-          text: 'Dez anos de casados, ou três dias em Lisboa a caminho de outro sítio. Noventa minutos cabem numa manhã sem tomar conta do dia.',
+          text: 'Dez anos de casados, ou três dias em Lisboa a caminho de outro sítio. Trinta minutos cabem numa manhã sem tomar conta do dia.',
         },
       ],
     },
@@ -51,15 +51,15 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Morning or evening matters more than the exact date. Tell us which, and whether there is a place you already have in mind.',
         },
         {
-          title: 'We choose the route to suit the light',
-          text: 'Two locations that face the right way for that hour and are walkable from one to the other. Confirmation with a meeting point, usually the same working day.',
+          title: 'We choose the spot to suit the light',
+          text: 'One location that faces the right way for that hour, with room to walk. A second place is quoted on request as a longer session. Confirmation with a meeting point, usually the same working day.',
         },
         {
           title: 'Walk first, photographs second',
-          text: 'The first fifteen minutes are conversation on the move. Direction comes in once you have stopped noticing the camera: where to stand, what to do with a hand, when to simply keep walking.',
+          text: 'The first few minutes are conversation on the move. Direction comes in once you have stopped noticing the camera: where to stand, what to do with a hand, when to simply keep walking.',
         },
         {
-          title: 'Forty photographs in 48–72 hours',
+          title: '15–20 photographs in 48–72 hours',
           text: 'Retouched, in a private gallery, in full resolution. They are yours to print, post and send to anyone you like.',
         },
       ],
@@ -69,15 +69,15 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Manhã ou fim de tarde conta mais do que a data exacta. Diga-nos qual, e se já tem algum sítio em mente.',
         },
         {
-          title: 'Escolhemos o percurso em função da luz',
-          text: 'Dois locais virados para o lado certo àquela hora e a uma distância que se faz a pé. A confirmação chega com o ponto de encontro, normalmente no mesmo dia útil.',
+          title: 'Escolhemos o sítio em função da luz',
+          text: 'Um local virado para o lado certo àquela hora, com espaço para andar. Um segundo sítio orçamenta-se a pedido, numa sessão mais longa. A confirmação chega com o ponto de encontro, normalmente no mesmo dia útil.',
         },
         {
           title: 'Primeiro anda-se, depois fotografa-se',
-          text: 'Os primeiros quinze minutos são conversa a caminhar. As indicações vêm quando já ninguém repara na câmara: onde ficar, o que fazer com uma mão, quando é só continuar a andar.',
+          text: 'Os primeiros minutos são conversa a caminhar. As indicações vêm quando já ninguém repara na câmara: onde ficar, o que fazer com uma mão, quando é só continuar a andar.',
         },
         {
-          title: 'Quarenta fotografias em 48 a 72 horas',
+          title: '15 a 20 fotografias em 48 a 72 horas',
           text: 'Retocadas, numa galeria privada, em alta resolução. São suas para imprimir, publicar e enviar a quem quiser.',
         },
       ],
@@ -85,24 +85,24 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
     prepare: {
       en: [
         'Coordinate, do not match: two tones that sit together, not the same shirt twice.',
-        'Wear shoes you can walk a kilometre in on polished stone; bring the good ones in a bag if they matter.',
+        'Wear shoes you can walk in on polished stone; bring the good ones in a bag if they matter.',
         'Avoid large logos and bright white tops, which pull the eye away from faces.',
-        'Eat beforehand. Ninety minutes of walking on an empty stomach shows by the second location.',
+        'Eat beforehand. Hunger shows on a face sooner than you would think, even in half an hour.',
         'Bring one thing that is yours — a jacket you always wear, the dog lead, a coffee from the place you go every morning.',
       ],
       pt: [
         'Combinem, não se vistam iguais: dois tons que funcionem juntos, não a mesma camisa duas vezes.',
-        'Calce sapatos com que consiga andar um quilómetro em calçada polida; se os bons forem importantes, leve-os num saco.',
+        'Calce sapatos com que consiga andar em calçada polida; se os bons forem importantes, leve-os num saco.',
         'Evite logótipos grandes e tops brancos muito vivos, que tiram a atenção das caras.',
-        'Coma antes. Noventa minutos a andar de estômago vazio notam-se logo no segundo local.',
+        'Coma antes. A fome nota-se na cara mais depressa do que se julga, mesmo em meia hora.',
         'Traga uma coisa que seja vossa — o casaco de sempre, a trela do cão, o café do sítio onde vão todas as manhãs.',
       ],
     },
     faqs: [
       {
         question: {
-          en: 'Can we choose the two locations ourselves?',
-          pt: 'Podemos escolher nós os dois locais?',
+          en: 'Can we choose the location ourselves?',
+          pt: 'Podemos escolher nós o local?',
         },
         answer: {
           en: 'Yes, and it helps to know which place means something. We will say if it faces the wrong way for the hour you want: in Lisbon, Senhora do Monte is a morning viewpoint and the Doca de Santo Amaro under the bridge an evening one, and swapping them costs you the light at both.',
@@ -115,8 +115,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'E se chover?',
         },
         answer: {
-          en: 'Overcast is not a problem — flat cloud is kinder to faces than July sun. For real rain the route has a covered alternative, such as the arcades of Praça do Comércio or São Bento station in Porto. Whether the date itself can move is something to raise when you book, not on the morning.',
-          pt: 'Céu encoberto não é problema — a nuvem é mais simpática para as caras do que o sol de Julho. Para chuva a sério, o percurso tem uma alternativa coberta, como as arcadas da Praça do Comércio ou a estação de São Bento, no Porto. Se a data pode mudar é assunto para falar ao reservar, não na própria manhã.',
+          en: 'Overcast is not a problem — flat cloud is kinder to faces than July sun. For real rain the plan has a covered alternative, such as the arcades of Praça do Comércio or São Bento station in Porto. Whether the date itself can move is something to raise when you book, not on the morning.',
+          pt: 'Céu encoberto não é problema — a nuvem é mais simpática para as caras do que o sol de Julho. Para chuva a sério, o plano tem uma alternativa coberta, como as arcadas da Praça do Comércio ou a estação de São Bento, no Porto. Se a data pode mudar é assunto para falar ao reservar, não na própria manhã.',
         },
       },
       {
@@ -154,8 +154,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   proposal: {
     promise: {
-      en: 'Your partner sees no photographer until the question is asked — then thirty minutes together, and 35 photographs in a private gallery within 48 hours.',
-      pt: 'A outra pessoa não vê fotógrafo nenhum até ao pedido — depois, trinta minutos juntos e 35 fotografias numa galeria privada em 48 horas.',
+      en: 'Your partner sees no photographer until the question is asked — then a few minutes together: 30 minutes in all, 15–20 photographs from €250, within 48 hours.',
+      pt: 'A outra pessoa não vê fotógrafo nenhum até ao pedido — depois, uns minutos juntos: 30 minutos ao todo, 15 a 20 fotografias desde 250 €, em 48 horas.',
     },
     audience: {
       en: [
@@ -169,7 +169,7 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Couples who have already agreed',
-          text: 'Not every proposal is a surprise. If you have decided together and want the moment staged properly — the ring, the view, the hug afterwards — the hour works just as well.',
+          text: 'Not every proposal is a surprise. If you have decided together and want the moment staged properly — the ring, the view, the hug afterwards — the session works just as well.',
         },
       ],
       pt: [
@@ -183,7 +183,7 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Casais que já decidiram',
-          text: 'Nem todos os pedidos são surpresa. Se já combinaram os dois e querem o momento bem feito — o anel, a vista, o abraço a seguir — a hora serve igualmente.',
+          text: 'Nem todos os pedidos são surpresa. Se já combinaram os dois e querem o momento bem feito — o anel, a vista, o abraço a seguir — a sessão serve igualmente.',
         },
       ],
     },
@@ -202,8 +202,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'In place before you arrive, dressed like anyone else on the viewpoint, photographing from a distance with a long lens. When the answer is given, they walk over.',
         },
         {
-          title: 'Thirty minutes, then 35 photographs in 48 hours',
-          text: 'Once the surprise is over there is half an hour together for the portraits of the two of you, with the ring in them. The gallery link comes to you, so you choose when to share it.',
+          title: '30 minutes in all, 15–20 photographs in 48 hours',
+          text: 'The session is 30 minutes from the first frame. Once the surprise is over, the rest of it is for portraits of the two of you, with the ring in them. The gallery link comes to you, so you choose when to share it.',
         },
       ],
       pt: [
@@ -220,8 +220,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'Chega antes de vocês, vestido como qualquer pessoa no miradouro, e fotografa à distância com uma teleobjectiva. Quando há resposta, aproxima-se.',
         },
         {
-          title: 'Trinta minutos, e 35 fotografias em 48 horas',
-          text: 'Passada a surpresa, há meia hora juntos para os retratos dos dois, já com o anel. O link da galeria chega-lhe a si, e é você quem decide quando o partilha.',
+          title: '30 minutos ao todo, 15 a 20 fotografias em 48 horas',
+          text: 'A sessão são 30 minutos desde a primeira fotografia. Passada a surpresa, o resto é para os retratos dos dois, já com o anel. O link da galeria chega-lhe a si, e é você quem decide quando o partilha.',
         },
       ],
     },
@@ -290,8 +290,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'A família ou os amigos podem juntar-se depois do pedido?',
         },
         answer: {
-          en: 'Yes, within the thirty minutes afterwards. Keep them out of sight until the moment is over — a café round the corner works — and they can walk up for a few group frames once the answer has been given.',
-          pt: 'Sim, dentro dos trinta minutos a seguir. Mantenha-os fora de vista até o momento passar — um café ao virar da esquina serve — e juntam-se para algumas fotografias de grupo depois de haver resposta.',
+          en: 'Yes, within the 30 minutes; if you want real time with them, a longer session is quoted on request. Keep them out of sight until the moment is over — a café round the corner works — and they can walk up for a few group frames once the answer has been given.',
+          pt: 'Sim, dentro dos 30 minutos; se quiser tempo a sério com eles, uma sessão mais longa orçamenta-se a pedido. Mantenha-os fora de vista até o momento passar — um café ao virar da esquina serve — e juntam-se para algumas fotografias de grupo depois de haver resposta.',
         },
       },
     ],

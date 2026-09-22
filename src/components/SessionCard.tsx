@@ -2,7 +2,7 @@ import { Link } from '@/i18n/navigation';
 import type { City, Service } from '@/lib/types';
 import { tx, type Locale } from '@/lib/locales';
 import { localizedCityName } from '@/lib/catalog';
-import { formatDelivery, formatDuration, formatPrice } from '@/lib/site';
+import { formatDelivery, formatDuration, formatPhotoCount, formatPrice } from '@/lib/site';
 import { serviceSlot } from '@/lib/images';
 import { serviceHref } from '@/lib/routes';
 import { trackAttrs } from '@/lib/analytics';
@@ -86,7 +86,7 @@ export default function SessionCard({ service, locale, pitch, places = [], featu
         {description && <p className="mt-2.5 text-sm leading-relaxed text-brand-muted">{description}</p>}
 
         <p className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-brand-dark">
-          {formatDuration(service.durationMinutes, locale)} · {service.editedPhotos} {LABELS.photos[locale]} ·{' '}
+          {formatDuration(service.durationMinutes, locale)} · {formatPhotoCount(service)} {LABELS.photos[locale]} ·{' '}
           {formatDelivery(service.deliveryHours, locale)} {LABELS.delivery[locale]}
         </p>
 

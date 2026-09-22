@@ -1,5 +1,5 @@
 import { tx, type Locale, type Localized } from '@/lib/locales';
-import { SITE_NAME, formatDuration, formatPrice } from '@/lib/site';
+import { SITE_NAME, formatDuration, formatPhotoCount, formatPrice } from '@/lib/site';
 import { CITIES, localizedCityName, servicesFor } from '@/lib/catalog';
 import { DELIVERY_TYPICAL, FROM_PRICE, REPLY_TIME, WEATHER } from '@/lib/promises';
 
@@ -53,13 +53,13 @@ export const SEO_PROSE = {
       'Hiring a photographer in a country you are only visiting usually means a week of email, a quote that arrives last, and a portfolio you have no way to verify. This inverts that order. You choose the place and the kind of session, you see the price before you commit to anything, and the photographer who answers already lives and works where you will be standing.',
       'Twelve places are covered: Lisboa, Porto, Sintra, Cascais, Braga, Coimbra and Évora, alongside the Algarve, Madeira, the Açores, the Douro and Comporta. Three of those are not cities at all, which is deliberate — the Algarve is one coastline photographed by the same people on the same mornings, and Madeira is an island whose best hour is at eighteen hundred metres rather than in Funchal.',
       'What a local photographer knows that a visiting one does not is the hour. Lisbon’s miradouros face north-east and hold light until about nine, then go flat; Porto’s Ribeira is in shadow all morning and only lights at the end of the day; an Algarve cove that is a beach at low tide is under water at high. None of that is findable in advance and all of it decides whether a session works.',
-      'Sessions run from a forty-five-minute headshot to a full wedding day, and take in couples, families, maternity, graduations, corporate work, property and food. The fee is agreed in writing beforehand, covers the editing, and includes a private gallery — delivered within forty-eight to seventy-two hours for most sessions. Nothing is billed per extra photograph. If the weather turns, the session moves at no cost.',
+      'Sessions run from a thirty-minute base session — €250, fifteen to twenty edited photographs — to a full wedding day, and take in couples, families, maternity, graduations, corporate work, property and food. The fee is agreed in writing beforehand, covers the editing, and includes a private gallery — delivered within forty-eight to seventy-two hours for most sessions. Nothing is billed per extra photograph. If the weather turns, the session moves at no cost.',
     ],
     pt: [
       'Contratar um fotógrafo costuma ser uma semana de e-mails, um orçamento que chega em último lugar e um portefólio que não há maneira de verificar. Aqui a ordem é a inversa: escolhe o sítio e o tipo de sessão, vê o preço antes de se comprometer com o que quer que seja, e quem lhe responde já vive e trabalha onde a sessão vai acontecer.',
       'São doze sítios: Lisboa, Porto, Sintra, Cascais, Braga, Coimbra e Évora, mais o Algarve, a Madeira, os Açores, o Douro e a Comporta. Três deles não são cidades, e isso é de propósito — o Algarve é uma costa só, fotografada pelas mesmas pessoas nas mesmas manhãs, e na Madeira a melhor hora está a mil e oitocentos metros e não no Funchal.',
       'O que um fotógrafo local sabe e um fotógrafo de fora não sabe é a hora. Os miradouros de Lisboa estão virados a nordeste e aguentam luz até cerca das nove, depois achatam; a Ribeira do Porto está à sombra toda a manhã e só acende ao fim do dia; uma praia do Algarve que existe com maré baixa está debaixo de água com maré cheia. Nada disso se descobre de antemão e tudo isso decide se a sessão resulta.',
-      'As sessões vão de um retrato corporativo de quarenta e cinco minutos a um dia inteiro de casamento, e passam por casais, famílias, gravidez, finalistas, trabalho de empresa, imobiliário e gastronomia. O valor é acordado por escrito antes, cobre a edição e inclui uma galeria privada — entregue em quarenta e oito a setenta e duas horas na maioria das sessões. Não se cobra por fotografia extra. Se o tempo mudar, a sessão muda sem custo.',
+      'As sessões vão de uma sessão base de trinta minutos — 250 €, quinze a vinte fotografias editadas — a um dia inteiro de casamento, e passam por casais, famílias, gravidez, finalistas, trabalho de empresa, imobiliário e gastronomia. O valor é acordado por escrito antes, cobre a edição e inclui uma galeria privada — entregue em quarenta e oito a setenta e duas horas na maioria das sessões. Não se cobra por fotografia extra. Se o tempo mudar, a sessão muda sem custo.',
     ],
   } as Localized<string[]>,
   facts: {
@@ -100,13 +100,12 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
   const wedding = byId('wedding');
   const elopement = byId('elopement');
   const proposal = byId('proposal');
-  const portrait = byId('portrait');
   const couple = byId('couple');
 
   const en: { question: string; answer: string }[] = [
     {
       question: 'How much does a photography session cost?',
-      answer: `Sessions start from ${formatPrice(cheapest, 'en')}. A couple session is from ${price('couple')}, a family session from ${price('family')} and a wedding from ${price('wedding')}. ${tx(FROM_PRICE.body, 'en')}`,
+      answer: `Sessions start from ${formatPrice(cheapest, 'en')} for ${couple ? formatDuration(couple.durationMinutes, 'en') : '30 min'} with ${couple ? formatPhotoCount(couple) : ''} edited photos — couples, families, proposals, portraits and more. Longer sessions are quoted on request, and weddings start from ${price('wedding')}. ${tx(FROM_PRICE.body, 'en')}`,
     },
     {
       question: 'How far in advance should I book?',
@@ -121,7 +120,7 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
     { question: 'How quickly will I receive my photos?', answer: tx(DELIVERY_TYPICAL.sentence, 'en') },
     {
       question: 'How many edited photos are included?',
-      answer: `Every session states its number: ${portrait?.editedPhotos} for a studio portrait, ${couple?.editedPhotos} for a couple session, ${wedding?.editedPhotos} for a wedding day. There is no per-image charge and no retouching sold separately afterwards.`,
+      answer: `Every session states its number: ${couple ? formatPhotoCount(couple) : ''} in the 30-minute base session, ${wedding?.editedPhotos} on a wedding day. More photos come with a longer session, quoted on request. There is no per-image charge and no retouching sold separately afterwards.`,
     },
     {
       question: 'Can I request a specific location?',
@@ -131,7 +130,7 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
     {
       question: 'Can I book a proposal?',
       answer: proposal
-        ? `Yes. ${tx(proposal.description ?? { en: '' }, 'en')} Proposal sessions are from ${price('proposal')} for ${proposal.durationMinutes} minutes, with ${proposal.editedPhotos} edited photos.`
+        ? `Yes. ${tx(proposal.description ?? { en: '' }, 'en')} Proposal sessions are from ${price('proposal')} for ${proposal.durationMinutes} minutes, with ${formatPhotoCount(proposal)} edited photos.`
         : 'Yes — tell us where and when, and we plan it with you.',
     },
     { question: 'Can I book a photographer outside Lisbon?', answer: `Yes. We cover ${places.length} places across Portugal: ${placeList}.` },
@@ -155,7 +154,7 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
   const pt: { question: string; answer: string }[] = [
     {
       question: 'Quanto custa uma sessão fotográfica?',
-      answer: `As sessões começam em ${formatPrice(cheapest, 'pt')}. Uma sessão de casal custa desde ${price('couple')}, uma sessão de família desde ${price('family')} e um casamento desde ${price('wedding')}. ${tx(FROM_PRICE.body, 'pt')}`,
+      answer: `As sessões começam em ${formatPrice(cheapest, 'pt')}, com ${couple ? formatDuration(couple.durationMinutes, 'pt') : '30 min'} e ${couple ? formatPhotoCount(couple) : ''} fotografias editadas — casais, famílias, pedidos, retratos e mais. Sessões mais longas são orçamentadas a pedido, e os casamentos começam em ${price('wedding')}. ${tx(FROM_PRICE.body, 'pt')}`,
     },
     {
       question: 'Com quanta antecedência devo reservar?',
@@ -170,7 +169,7 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
     { question: 'Em quanto tempo recebo as fotografias?', answer: tx(DELIVERY_TYPICAL.sentence, 'pt') },
     {
       question: 'Quantas fotografias editadas estão incluídas?',
-      answer: `Cada sessão indica o número: ${portrait?.editedPhotos} num retrato de estúdio, ${couple?.editedPhotos} numa sessão de casal, ${wedding?.editedPhotos} num dia de casamento. Não se cobra por fotografia nem se vende retoque à parte depois.`,
+      answer: `Cada sessão indica o número: ${couple ? formatPhotoCount(couple) : ''} na sessão base de 30 minutos, ${wedding?.editedPhotos} num dia de casamento. Mais fotografias vêm com uma sessão mais longa, orçamentada a pedido. Não se cobra por fotografia nem se vende retoque à parte depois.`,
     },
     {
       question: 'Posso pedir um local específico?',
@@ -180,7 +179,7 @@ export function homeFaqs(locale: Locale): { question: string; answer: string }[]
     {
       question: 'Posso reservar um pedido de casamento?',
       answer: proposal
-        ? `Sim. ${tx(proposal.description ?? { en: '' }, 'pt')} Os pedidos de casamento custam desde ${price('proposal')}, com ${proposal.durationMinutes} minutos e ${proposal.editedPhotos} fotografias editadas.`
+        ? `Sim. ${tx(proposal.description ?? { en: '' }, 'pt')} Os pedidos de casamento custam desde ${price('proposal')}, com ${proposal.durationMinutes} minutos e ${formatPhotoCount(proposal)} fotografias editadas.`
         : 'Sim — diga-nos onde e quando e planeamos consigo.',
     },
     { question: 'Posso reservar um fotógrafo fora de Lisboa?', answer: `Sim. Cobrimos ${places.length} sítios em Portugal: ${placeList}.` },

@@ -492,8 +492,8 @@ export const METRO_CITIES: City[] = [
       {
         question: { en: 'Is one session enough to see the town?', pt: 'Uma sessão chega para ver a vila?' },
         answer: {
-          en: 'Ninety minutes covers the temple, the square, the cathedral and the aqueduct on foot, with time to stop. That is unusual — in most cities that list would be a half day and two taxis.',
-          pt: 'Noventa minutos cobrem o templo, a praça, a Sé e o aqueduto a pé, com tempo para parar. É invulgar — na maior parte das cidades essa lista seria meio dia e dois táxis.',
+          en: 'The thirty-minute base session covers the temple and the square beside it. The whole list — temple, square, cathedral and aqueduct — is a walk rather than a drive, so a longer session covers it on foot with time to stop; it is quoted on request. In most cities that list would be a half day and two taxis.',
+          pt: 'A sessão base de trinta minutos cobre o templo e a praça ao lado. A lista inteira — templo, praça, Sé e aqueduto — faz-se a pé e não de carro, por isso uma sessão mais longa cobre-a com tempo para parar; é orçamentada a pedido. Na maior parte das cidades essa lista seria meio dia e dois táxis.',
         },
       },
       {

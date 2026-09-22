@@ -14,7 +14,7 @@ import {
 } from '@/lib/catalog';
 import { isServicePublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { SITE_NAME, formatPrice, formatDuration, formatDelivery, whatsappBookingLink } from '@/lib/site';
+import { SITE_NAME, formatPrice, formatDuration, formatDelivery, formatPhotoCount, whatsappBookingLink } from '@/lib/site';
 import { CTA } from '@/lib/cta';
 import { FROM_PRICE, REPLY_TIME } from '@/lib/promises';
 import { trackAttrs } from '@/lib/analytics';
@@ -327,7 +327,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-brand-muted">{labels.photos}</dt>
-                  <dd className="font-semibold">{service.editedPhotos}</dd>
+                  <dd className="font-semibold">{formatPhotoCount(service)}</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-brand-muted">{labels.delivery}</dt>
@@ -451,7 +451,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           facts={[
             { label: labels.from, value: price },
             { label: labels.duration, value: formatDuration(service.durationMinutes, locale) },
-            { label: labels.photos, value: `${service.editedPhotos}` },
+            { label: labels.photos, value: formatPhotoCount(service) },
             {
               label: { en: 'Cities', pt: 'Cidades' }[locale],
               value: `${cities.length}`,

@@ -165,6 +165,11 @@ export interface Service {
   durationMinutes: number;
   editedPhotos: number;
   /**
+   * Upper end of the photo count when it is a range — the base package is
+   * "15–20 edited photos". Absent when the count is a single number.
+   */
+  editedPhotosMax?: number;
+  /**
    * How long the gallery takes, in hours: a number, or a `[from, to]` window.
    *
    * Structured because the site used to promise "48–72h" for everything,

@@ -35,7 +35,7 @@ export function GET(): Response {
   push(
     `> ${SITE_NAME} connects travellers, couples, families and businesses with vetted local ` +
       `photographers across ${cities.length} cities and destinations in Portugal. Fixed prices from ` +
-      `€${minPrice}, agreed before booking. Private online gallery delivered in 48–72 hours.`,
+      `€${minPrice}, agreed before booking. Private online gallery, delivered in 48–72 hours for most sessions.`,
   );
   push();
 

@@ -20,7 +20,7 @@ Isso exclui os saltos agulha, não por uma questão de estilo mas porque um salt
 - **Salto largo ou compensado, se os saltos fizerem parte do visual**, e só para as fotografias que os pedem.
 - **Os sapatos bons num saco.** Anda-se entre locais com calçado confortável e troca-se para as fotografias em que os sapatos se vêem. Boa parte da sessão é feita em movimento, e sapatos novos que apertam notam-se na maneira de andar.
 
-Numa sessão em [Lisboa](/cities/lisboa) isto conta a dobrar. Um percurso de noventa minutos da Graça até Alfama inclui vinte minutos a pé sobre pedra inclinada, e é aí que uns sapatos maus deixam de ser um pormenor.
+Numa sessão em [Lisboa](/cities/lisboa) isto conta a dobrar. Uma sessão mais longa que desce da Graça até Alfama passa vinte minutos a pé sobre pedra inclinada, e mesmo uma de trinta minutos em Alfama é toda feita de degraus — é aí que uns sapatos maus deixam de ser um pormenor.
 
 ## Cores que resultam contra os fundos portugueses
 
@@ -68,7 +68,7 @@ Camisas brancas iguais e calças de ganga para quatro pessoas é o visual que en
 
 Com crianças, o conforto importa mais do que a roupa. Roupa que aperta ou pica aparece nas fotografias como uma criança que se quer ir embora, e numa [sessão de família](/services/family) com crianças pequenas o tempo antes de a disposição mudar é curto. Leve uma muda de roupa para a criança com mais probabilidade de encontrar uma poça ou um gelado.
 
-Nos casais a regra é a mesma em ponto pequeno: duas pessoas em cores que se completam, não na mesma cor. Numa [sessão de casal](/services/couple) anda-se a pé durante parte dos noventa minutos, por isso a regra dos sapatos conta duas vezes.
+Nos casais a regra é a mesma em ponto pequeno: duas pessoas em cores que se completam, não na mesma cor. Uma [sessão de casal](/services/couple) é quase sempre fotografada em parte a andar, por isso a regra dos sapatos conta duas vezes.
 
 ## Retratos de estúdio
 

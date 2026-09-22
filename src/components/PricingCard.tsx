@@ -2,7 +2,7 @@ import { Link } from '@/i18n/navigation';
 import type { Service } from '@/lib/types';
 import { tx, type Locale } from '@/lib/locales';
 import { CTA } from '@/lib/cta';
-import { formatDelivery, formatDuration, formatPrice } from '@/lib/site';
+import { formatDelivery, formatDuration, formatPhotoCount, formatPrice } from '@/lib/site';
 import { bookHref, serviceHref } from '@/lib/routes';
 import { trackAttrs } from '@/lib/analytics';
 import { ArrowIcon } from './Icons';
@@ -19,7 +19,7 @@ const LABELS = {
  * One session's price, with what the price buys written underneath it.
  *
  * The old pricing table said "from €190" and then, further down, that the
- * final cost "depends on the type of shoot". This card says what the €190
+ * final cost "depends on the type of shoot". This card says what the price
  * covers — the length, the photographs, the turnaround — so "from" has a
  * definition on the card itself rather than a disclaimer somewhere else.
  */
@@ -27,7 +27,7 @@ export default function PricingCard({ service, locale }: { service: Service; loc
   const name = tx(service.name, locale);
   const rows = [
     { k: LABELS.session[locale], v: formatDuration(service.durationMinutes, locale) },
-    { k: LABELS.photos[locale], v: String(service.editedPhotos) },
+    { k: LABELS.photos[locale], v: formatPhotoCount(service) },
     { k: LABELS.delivery[locale], v: formatDelivery(service.deliveryHours, locale) },
   ];
 

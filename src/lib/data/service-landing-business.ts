@@ -11,8 +11,8 @@ import type { ServiceLanding } from './service-landing';
 export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
   headshots: {
     promise: {
-      en: 'Portraits that sit on one team page as a set — same framing, same light, same background — photographed at your office, 45 minutes a head.',
-      pt: 'Retratos que assentam na página da equipa como um conjunto — mesmo enquadramento, mesma luz, mesmo fundo — feitos no escritório, 45 minutos por pessoa.',
+      en: 'Portraits that sit on one team page as a set — same framing, same light, same background — photographed at your office, 30 minutes a head, from €250.',
+      pt: 'Retratos que assentam na página da equipa como um conjunto — mesmo enquadramento, mesma luz, mesmo fundo — feitos no escritório, 30 minutos por pessoa, desde 250 €.',
     },
     audience: {
       en: [
@@ -26,7 +26,7 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'One person before a job move',
-          text: 'A new role, a board appointment, a conference bio. Forty-five minutes in a studio, fifteen retouched images to choose from, and the portrait is in the gallery two days later.',
+          text: 'A new role, a board appointment, a conference bio. Thirty minutes in a studio, 15–20 retouched images, and the portrait is in the gallery two days later.',
         },
       ],
       pt: [
@@ -40,7 +40,7 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Uma pessoa antes de mudar de emprego',
-          text: 'Um cargo novo, a entrada num conselho de administração, a biografia para uma conferência. Quarenta e cinco minutos em estúdio, quinze imagens retocadas para escolher, e o retrato está na galeria dois dias depois.',
+          text: 'Um cargo novo, a entrada num conselho de administração, a biografia para uma conferência. Trinta minutos em estúdio, 15 a 20 imagens retocadas, e o retrato está na galeria dois dias depois.',
         },
       ],
     },
@@ -52,14 +52,14 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'We confirm a photographer and the arithmetic',
-          text: 'Usually the same working day. The time is per person, so the schedule is simple: eight people is six hours of photographer time, and you can give everyone a slot before the day.',
+          text: 'Usually the same working day. The time is per person, so the schedule is simple: eight people is four hours of photographer time, and you can give everyone a slot before the day.',
         },
         {
           title: 'One room, set up once',
-          text: 'The neutral background and the softer second set-up are built in one room and left in place, so the first portrait of the morning and the last of the afternoon are lit the same way.',
+          text: 'The neutral background and the lights are built in one room and left in place, so the first portrait of the morning and the last of the afternoon are lit the same way.',
         },
         {
-          title: 'Fifteen images per person in 48 hours',
+          title: '15–20 images per person in 48 hours',
           text: 'Retouched and delivered to a private gallery in full resolution, with square and 4:5 crops ready for the website, the intranet and each person’s own profiles.',
         },
       ],
@@ -70,14 +70,14 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
         },
         {
           title: 'Confirmamos o fotógrafo e fazemos as contas',
-          text: 'Normalmente no mesmo dia útil. O tempo é por pessoa, por isso o horário é simples: oito pessoas são seis horas de fotógrafo, e cada pessoa pode ficar com a sua marcação antes do dia.',
+          text: 'Normalmente no mesmo dia útil. O tempo é por pessoa, por isso o horário é simples: oito pessoas são quatro horas de fotógrafo, e cada pessoa pode ficar com a sua marcação antes do dia.',
         },
         {
           title: 'Uma sala, montada uma vez',
-          text: 'O fundo neutro e o segundo esquema mais suave montam-se numa sala e não saem do lugar, para que o primeiro retrato da manhã e o último da tarde tenham a mesma luz.',
+          text: 'O fundo neutro e as luzes montam-se numa sala e não saem do lugar, para que o primeiro retrato da manhã e o último da tarde tenham a mesma luz.',
         },
         {
-          title: 'Quinze imagens por pessoa em 48 horas',
+          title: '15 a 20 imagens por pessoa em 48 horas',
           text: 'Retocadas e entregues em galeria privada em alta resolução, com cortes quadrado e 4:5 prontos para o site, a intranet e os perfis de cada pessoa.',
         },
       ],
@@ -87,14 +87,14 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
         'Book a meeting room about four metres deep; the background and the lights need space in front of and behind each person.',
         'Send the team a short dress note: solid mid-tones, no fine stripes or small checks, and no logos unless the company wants them.',
         'Decide beforehand whether jackets are on or off. A grid that mixes both is the most common inconsistency.',
-        'Give each person a time and stagger the slots by 45 minutes; people who have waited in a corridor photograph tense.',
+        'Give each person a time and stagger the slots by 30 minutes; people who have waited in a corridor photograph tense.',
         'List anyone who wears glasses, so the lights are placed to keep reflections off the lenses from the first slot.',
       ],
       pt: [
         'Reserve uma sala de reuniões com uns quatro metros de fundo; o fundo e as luzes precisam de espaço à frente e atrás de cada pessoa.',
         'Mande à equipa uma nota curta sobre roupa: cores lisas em tons médios, sem riscas finas nem xadrez pequeno, e sem logótipos a não ser que a empresa os queira.',
         'Decida antes se é com casaco ou sem casaco. Uma grelha que mistura os dois é a incoerência mais comum.',
-        'Dê a cada pessoa uma marcação própria, com intervalos de 45 minutos; quem esperou num corredor sai tenso na fotografia.',
+        'Dê a cada pessoa uma marcação própria, com intervalos de 30 minutos; quem esperou num corredor sai tenso na fotografia.',
         'Indique quem usa óculos, para as luzes ficarem montadas sem reflexos nas lentes desde a primeira marcação.',
       ],
     },
@@ -105,8 +105,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'O preço é por pessoa ou por visita?',
         },
         answer: {
-          en: 'Per person: from €150 for 45 minutes and fifteen retouched images each. There is no per-image charge on top and travel inside the area you booked is included, so the budget for a team is the headcount times the individual figure. If the day becomes too long for one photographer, a second is an option quoted before you book.',
-          pt: 'Por pessoa: desde 150 € por 45 minutos e quinze imagens retocadas cada. Não há cobrança por imagem e a deslocação dentro da área reservada está incluída, por isso o orçamento para uma equipa é o número de pessoas vezes o valor individual. Se o dia ficar demasiado longo para um fotógrafo, um segundo é uma opção orçamentada antes de reservar.',
+          en: 'Per person: from €250 for 30 minutes and 15–20 retouched images each. There is no per-image charge on top and travel inside the area you booked is included, so the budget for a team is the headcount times the individual figure. If the day becomes too long for one photographer, a second is an option quoted before you book.',
+          pt: 'Por pessoa: desde 250 € por 30 minutos e 15 a 20 imagens retocadas cada. Não há cobrança por imagem e a deslocação dentro da área reservada está incluída, por isso o orçamento para uma equipa é o número de pessoas vezes o valor individual. Se o dia ficar demasiado longo para um fotógrafo, um segundo é uma opção orçamentada antes de reservar.',
         },
       },
       {
@@ -115,8 +115,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'O que é que a equipa tem de fazer no dia?',
         },
         answer: {
-          en: 'Turn up at their slot dressed as they would for a client meeting. The photographer sets the position, the angle and the expression, so nobody needs to have practised anything, and each person is back at their desk within the 45 minutes.',
-          pt: 'Aparecer à hora marcada vestido como para uma reunião com um cliente. O fotógrafo define a posição, o ângulo e a expressão, por isso ninguém precisa de ter ensaiado nada, e cada pessoa está de volta à secretária dentro dos 45 minutos.',
+          en: 'Turn up at their slot dressed as they would for a client meeting. The photographer sets the position, the angle and the expression, so nobody needs to have practised anything, and each person is back at their desk within the 30 minutes.',
+          pt: 'Aparecer à hora marcada vestido como para uma reunião com um cliente. O fotógrafo define a posição, o ângulo e a expressão, por isso ninguém precisa de ter ensaiado nada, e cada pessoa está de volta à secretária dentro dos 30 minutos.',
         },
       },
       {
@@ -299,14 +299,14 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'digital-nomad-headshots': {
     promise: {
-      en: 'A headshot that looks like where you actually work — a street, a co-working desk, not a backdrop — photographed in an hour and on your profile tomorrow.',
-      pt: 'Um retrato com o ar do sítio onde trabalha de facto — uma rua, uma secretária de cowork, não um fundo — feito numa hora e no seu perfil no dia seguinte.',
+      en: 'A headshot that looks like where you actually work — a street, a co-working desk, not a backdrop — photographed in 30 minutes, from €250, on your profile tomorrow.',
+      pt: 'Um retrato com o ar do sítio onde trabalha de facto — uma rua, uma secretária de cowork, não um fundo — feito em 30 minutos, desde 250 €, no seu perfil no dia seguinte.',
     },
     audience: {
       en: [
         {
           title: 'Remote employees on a distributed team',
-          text: 'The company page is a grid of portraits made in offices, and yours was cropped from a holiday photograph. An hour here matches their framing without pretending you sit in their building.',
+          text: 'The company page is a grid of portraits made in offices, and yours was cropped from a holiday photograph. Thirty minutes here matches their framing without pretending you sit in their building.',
         },
         {
           title: 'Freelancers who are compared at thumbnail size',
@@ -320,7 +320,7 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
       pt: [
         {
           title: 'Trabalhadores remotos numa equipa distribuída',
-          text: 'A página da empresa é uma grelha de retratos feitos em escritórios, e o seu foi recortado de uma fotografia de férias. Uma hora chega para acertar o enquadramento com o dos colegas sem fingir que está no mesmo edifício.',
+          text: 'A página da empresa é uma grelha de retratos feitos em escritórios, e o seu foi recortado de uma fotografia de férias. Meia hora chega para acertar o enquadramento com o dos colegas sem fingir que está no mesmo edifício.',
         },
         {
           title: 'Freelancers comparados em miniatura',
@@ -343,11 +343,11 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'The photographer picks a street, a doorway or a corner of the co-working space that has soft light at your time, and sends the meeting point — usually the same working day.',
         },
         {
-          title: 'One hour, a few backgrounds close together',
-          text: 'A plain wall first for the formal profile, then a street or a desk with depth behind you for the rest, all a few minutes apart so the hour is spent photographing rather than walking.',
+          title: '30 minutes, one spot',
+          text: 'A plain wall for the formal profile, then a turn to put a street or a desk with depth behind you, without leaving the spot. More backgrounds need a longer session, quoted on request.',
         },
         {
-          title: 'Twenty images within 24 hours',
+          title: '15–20 images within 24 hours',
           text: 'Retouched, in a private gallery, with square, 4:5 and banner crops of every keeper: the square for avatars, the banner for profile headers, the 4:5 wherever a portrait is shown upright.',
         },
       ],
@@ -361,11 +361,11 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           text: 'O fotógrafo escolhe uma rua, uma entrada ou um canto do cowork com luz suave à hora combinada e envia o ponto de encontro — normalmente no mesmo dia útil.',
         },
         {
-          title: 'Uma hora, alguns fundos perto uns dos outros',
-          text: 'Primeiro uma parede lisa para o perfil formal, depois uma rua ou uma secretária com profundidade atrás, tudo a poucos minutos de distância para a hora ser passada a fotografar e não a andar.',
+          title: '30 minutos, um só sítio',
+          text: 'Uma parede lisa para o perfil formal, depois uma volta para ficar com uma rua ou uma secretária com profundidade atrás, sem sair do sítio. Mais fundos pedem uma sessão mais longa, orçamentada a pedido.',
         },
         {
-          title: 'Vinte imagens em 24 horas',
+          title: '15 a 20 imagens em 24 horas',
           text: 'Retocadas, em galeria privada, com cortes quadrado, 4:5 e banner de cada imagem escolhida: o quadrado para avatares, o banner para cabeçalhos de perfil, o 4:5 onde o retrato aparece na vertical.',
         },
       ],
@@ -403,8 +403,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Estamos vários na cidade ao mesmo tempo. Podemos marcar juntos?',
         },
         answer: {
-          en: 'Yes, as back-to-back sessions with the same photographer in the same spot. Each person is one hour and twenty images, so three people is a three-hour block, and the portraits match across all of you.',
-          pt: 'Sim, em sessões seguidas com o mesmo fotógrafo no mesmo sítio. Cada pessoa é uma hora e vinte imagens, por isso três pessoas são um bloco de três horas, e os retratos ficam coerentes entre todos.',
+          en: 'Yes, as back-to-back sessions with the same photographer in the same spot. Each person is 30 minutes and 15–20 images, so three people is three consecutive half-hour slots, and the portraits match across all of you.',
+          pt: 'Sim, em sessões seguidas com o mesmo fotógrafo no mesmo sítio. Cada pessoa são 30 minutos e 15 a 20 imagens, por isso três pessoas são três meias horas seguidas, e os retratos ficam coerentes entre todos.',
         },
       },
       {
@@ -413,8 +413,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'E se o tempo estiver mau no dia?',
         },
         answer: {
-          en: 'The session moves at no cost. If you work from a co-working space, the whole hour can also be done inside it, which keeps the 24-hour delivery on the week you needed it.',
-          pt: 'A sessão muda de dia sem custo. Se trabalhar num cowork, a hora inteira também pode ser feita lá dentro, o que mantém a entrega em 24 horas na semana em que precisava dela.',
+          en: 'The session moves at no cost. If you work from a co-working space, the whole session can also be done inside it, which keeps the 24-hour delivery on the week you needed it.',
+          pt: 'A sessão muda de dia sem custo. Se trabalhar num cowork, a sessão inteira também pode ser feita lá dentro, o que mantém a entrega em 24 horas na semana em que precisava dela.',
         },
       },
       {
