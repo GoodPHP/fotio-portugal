@@ -128,10 +128,11 @@ Each one exists because the thing it checks failed silently at least once.
 | `check-brand` | the brand name or the old domain outside `src/lib/site.ts` |
 | `check-pt-todo` | an untranslated string left by the locale codemod |
 | `check-legal` | a `TODO_` placeholder in a legal document |
+| `check-whatsapp` | a WhatsApp number that is unset, a placeholder, or not a phone number |
 | `check-seo` | a published place or service with no authored SERP copy |
 
-`ALLOW_LEGAL_TODO=1` downgrades the legal gate to a warning for pre-launch
-builds. The deploy script does not set it.
+`ALLOW_LEGAL_TODO=1` and `ALLOW_WHATSAPP_TODO=1` downgrade those two gates to
+warnings for pre-launch builds. The deploy script sets neither.
 
 ## Gradual rollout
 
@@ -164,7 +165,29 @@ ROLLOUT_WINDOW_DAYS  days over which every leaf releases (default 45)
 - Set `ROLLOUT_START` to the launch date.
 - Set `NEXT_PUBLIC_SITE_URL`, the WhatsApp number, the Telegram credentials and
   the Cloudflare Web Analytics token.
-- Run the photo pipeline with a real `UNSPLASH_KEY`.
+- Run the photo pipeline with a real `UNSPLASH_KEY`, and re-pick the frames in
+  `MISPLACED_SLOTS` (`src/lib/images.ts`) — they show a different place from
+  the one they are filed under, and are hidden until replaced.
+- Set `NEXT_PUBLIC_WHATSAPP_NUMBER` and **delete `ALLOW_WHATSAPP_TODO` from
+  `netlify.toml`**. `check-whatsapp` fails the build until the number is real;
+  until then every WhatsApp button opens WhatsApp with no recipient.
+- Wire a destination for the conversion events. They are pushed to
+  `window.dataLayer` (`src/lib/analytics.ts`) and nothing reads them yet.
+
+### Real content the redesign is waiting for
+
+The UI for each of these is built and hidden; adding real data turns it on.
+Never fill them with placeholders — see the comments on each type.
+
+- **Photographers** — `src/lib/data/photographers.ts`. Enables the nav item,
+  `/photographers`, profiles, and the blocks on the home, city and service
+  pages. Update the "ships with no profiles" test when the first is added.
+- **Reviews** — `src/lib/data/reviews.ts`, with the client's consent. Enables
+  client stories everywhere and the AggregateRating markup.
+- **Client galleries** — the portfolio is licensed stock, labelled and credited
+  as such. Real galleries can carry a `place`, which switches on the
+  destination filter.
+- **Blog clusters** — the planned articles are listed in `src/lib/data/blog.ts`.
 
 ## Deploy
 

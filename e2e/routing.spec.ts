@@ -157,7 +157,10 @@ test.describe('indexation', () => {
 
   test('legal pages are noindex', async ({ page }) => {
     await page.goto('/pt/informacao-legal');
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+    // Scoped to <head>. While the legal pages are hidden this URL is a 404,
+    // and Next streams a second robots tag into the body for it; which of the
+    // two the unscoped locator saw first depended on timing.
+    await expect(page.locator('head meta[name="robots"]')).toHaveAttribute('content', /noindex/);
   });
 });
 

@@ -1102,3 +1102,49 @@ select.field {
   --color-brand-rule-strong: #B3A893;
   --color-brand-tile: #FCFAF4;
 }
+
+/* ---------------------------------------------------------------------------
+ * Mobile and motion.
+ * ------------------------------------------------------------------------- */
+
+/*
+ * The header is sticky, so an in-page anchor — #how-it-works from the nav,
+ * #faq from the footer — would land its heading underneath it.
+ */
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+/*
+ * Touch targets. A filter chip is 32px tall, comfortable for a cursor and
+ * below the 44px a thumb needs; on a coarse pointer every chip, breadcrumb
+ * link and disclosure row grows to it. Declared here because `.chip` is
+ * unlayered and outranks a height utility at the call site.
+ */
+@media (pointer: coarse) {
+  .chip {
+    min-height: 2.75rem;
+  }
+  nav[aria-label='Breadcrumb'] a {
+    display: inline-block;
+    padding-block: 0.625rem;
+  }
+}
+
+/*
+ * Reduced motion: the entrance animations already opt in (see `.reveal`);
+ * this catches the rest — hover zooms on photographs, the sliding caption
+ * bar, the mobile bar stepping aside — so nothing moves that was not asked to.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [class*='group-hover:scale'] {
+    transform: none !important;
+    scale: none !important;
+  }
+}
