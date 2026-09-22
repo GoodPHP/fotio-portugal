@@ -11,6 +11,7 @@ import { graph, organizationNode, websiteNode } from '@/lib/jsonld';
 import JsonLd from '@/components/JsonLd';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import TrackClicks from '@/components/TrackClicks';
 import '../globals.css';
 
 /* Body and UI. Neutral on purpose: the display face carries the identity. */
@@ -86,6 +87,7 @@ export default async function LocaleLayout({
           <div className="flex-1">{children}</div>
           <Footer />
         </NextIntlClientProvider>
+        <TrackClicks />
         {/*
           Cloudflare Web Analytics: one deferred request, no cookies, no
           consent banner. Rendered as a plain script tag rather than through a

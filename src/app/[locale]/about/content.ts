@@ -25,8 +25,8 @@ export const COPY = {
     pt: 'Isto começou com uma queixa que ouvíamos sempre: reservar um fotógrafo num sítio onde não se vive é lento, pouco claro e o preço só aparece no fim. Invertemos a ordem — o preço é acordado primeiro, por escrito, e não muda.',
   },
   body: {
-    en: 'We hand-pick local photographers who know each place inside out. We set a clear price from the start and guarantee gallery delivery in 48-72 hours. If you are not satisfied, we refund you 100%.',
-    pt: 'Escolhemos a dedo fotógrafos locais que conhecem cada sítio de cor. Fixamos um preço claro desde o início e garantimos a entrega da galeria em 48-72 horas. Se não ficar satisfeito, devolvemos 100%.',
+    en: 'We hand-pick local photographers who know each place inside out. The price is confirmed in writing before you book, most galleries arrive within 48–72 hours, and if the gallery is not what was promised you are refunded in full.',
+    pt: 'Escolhemos a dedo fotógrafos locais que conhecem cada sítio de cor. O preço é confirmado por escrito antes de reservar, a maioria das galerias chega em 48 a 72 horas e, se a galeria não for o que foi prometido, é reembolsado na totalidade.',
   },
 
   // Our story / mission
@@ -95,10 +95,10 @@ export const COPY = {
   // CTA
   ctaTitle: { en: 'Ready to start?', pt: 'Pronto para começar?' },
   ctaSub: {
-    en: 'Lock your price, choose your place and trust a local photographer. We reply within 2 hours.',
-    pt: 'Fixe o preço, escolha o sítio e confie num fotógrafo local. Respondemos em 2 horas.',
+    en: 'Tell us where and when, and we’ll match you with a local photographer. We reply within about 2 hours during the working day.',
+    pt: 'Diga-nos onde e quando e encontramos um fotógrafo local. Respondemos em cerca de 2 horas, durante o dia útil.',
   },
-  cta: { en: 'Book now', pt: 'Reservar' },
+  cta: { en: 'Check availability', pt: 'Ver disponibilidade' },
   ctaContact: { en: 'Talk to us', pt: 'Fale connosco' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } satisfies Record<string, Localized>;
@@ -112,10 +112,10 @@ export interface Step {
 export const STEPS: Step[] = [
   {
     n: '01',
-    title: { en: 'Choose & book', pt: 'Escolher e reservar' },
+    title: { en: 'Tell us where and when', pt: 'Diga-nos onde e quando' },
     body: {
-      en: 'Pick a service, place and date. The price locks instantly — no quotes needed.',
-      pt: 'Escolha o serviço, o sítio e a data. O preço fica fixo de imediato — sem pedir orçamento.',
+      en: 'Pick a place, a session and a date. We confirm a photographer and the price in writing before you pay anything.',
+      pt: 'Escolha o sítio, a sessão e a data. Confirmamos o fotógrafo e o preço por escrito antes de pagar o que quer que seja.',
     },
   },
   {
@@ -130,8 +130,8 @@ export const STEPS: Step[] = [
     n: '03',
     title: { en: 'Get your gallery', pt: 'Receber a galeria' },
     body: {
-      en: 'Edited photos in a private gallery within 48-72 hours. 100% satisfaction guarantee.',
-      pt: 'Fotografias editadas numa galeria privada em 48-72 horas. Garantia de satisfação a 100%.',
+      en: 'Edited photos in a private gallery — within 48–72 hours for most sessions. If it is not what was promised, you are refunded in full.',
+      pt: 'Fotografias editadas numa galeria privada — em 48 a 72 horas na maioria das sessões. Se não for o que foi prometido, é reembolsado na totalidade.',
     },
   },
 ];
@@ -190,17 +190,17 @@ export const GUARANTEES: Guarantee[] = [
     body: { en: 'Locked at booking. Zero surprises.', pt: 'Fixado na reserva. Zero surpresas.' },
   },
   {
-    stat: '48-72h',
+    stat: '48–72h',
     title: { en: 'Fast delivery', pt: 'Entrega rápida' },
     body: {
-      en: 'Private gallery with edited photos in 48-72 hours.',
-      pt: 'Galeria privada com fotografias editadas em 48-72 horas.',
+      en: 'Private gallery with edited photos in 48–72 hours for most sessions.',
+      pt: 'Galeria privada com fotografias editadas em 48 a 72 horas na maioria das sessões.',
     },
   },
   {
     stat: '100%',
     title: { en: 'Money-back guarantee', pt: 'Garantia de reembolso' },
-    body: { en: 'Not happy? We refund you 100%.', pt: 'Não gostou? Devolvemos 100%.' },
+    body: { en: 'Gallery not what was promised? Full refund.', pt: 'A galeria não é o que foi prometido? Reembolso total.' },
   },
 ];
 
@@ -223,22 +223,22 @@ export const ABOUT_FAQ: AboutFaq[] = [
   {
     q: { en: 'Is the price really fixed?', pt: 'O preço é mesmo fixo?' },
     a: {
-      en: 'Yes. The price locks the moment you book and includes the shoot and edited photos. No hidden costs, no surprise add-ons.',
-      pt: 'Sim. O preço fica fixo no momento da reserva e inclui a sessão e as fotografias editadas. Sem custos escondidos nem extras inesperados.',
+      en: 'Yes. Each session has a “from” price that covers the listed duration, edited photos and delivery. Anything beyond that is quoted in writing before you book, and once confirmed the price does not move. No hidden costs.',
+      pt: 'Sim. Cada sessão tem um preço “desde” que cobre a duração, as fotografias editadas e o prazo indicados. O que for além disso é orçamentado por escrito antes de reservar e, depois de confirmado, o preço não muda. Sem custos escondidos.',
     },
   },
   {
     q: { en: 'When do I get my photos?', pt: 'Quando recebo as fotografias?' },
     a: {
-      en: 'We deliver a private gallery with edited photos within 48-72 hours of the shoot.',
-      pt: 'Entregamos uma galeria privada com as fotografias editadas em 48-72 horas após a sessão.',
+      en: 'Most sessions are delivered to a private gallery within 48–72 hours. Weddings and full-day events take longer, and each session lists its own turnaround.',
+      pt: 'A maioria das sessões é entregue numa galeria privada em 48 a 72 horas. Casamentos e eventos de dia inteiro levam mais tempo, e cada sessão indica o seu prazo.',
     },
   },
   {
-    q: { en: 'What if I’m not satisfied?', pt: 'E se não ficar satisfeito?' },
+    q: { en: 'What if the gallery is not what was promised?', pt: 'E se a galeria não for o que foi prometido?' },
     a: {
-      en: 'Your peace of mind comes first: if you’re not satisfied with the service, we refund you 100%.',
-      pt: 'A sua tranquilidade vem primeiro: se não ficar satisfeito com o serviço, devolvemos 100%.',
+      en: 'You are refunded in full. That is the guarantee, and it is on top of your statutory rights rather than instead of them.',
+      pt: 'É reembolsado na totalidade. É essa a garantia, e acresce aos seus direitos legais em vez de os substituir.',
     },
   },
   {
@@ -288,27 +288,27 @@ export const SEO_PROSE = {
     en: [
       'This is a booking network rather than a studio. Nobody is employed here and nobody is sent out from a head office; the people who answer already work professionally in the place you are going to be. What the network takes responsibility for is the part of a booking that usually goes wrong — the price, the schedule and the delivery.',
       'Admission turns on published work rather than on a portfolio assembled for the occasion. A portfolio shows what someone can do on their best day with unlimited time; published client work shows what they deliver on an ordinary one. The second is the useful question, and it is the harder one to fake.',
-      'What is promised is deliberately narrow and easy to check. The price is agreed in writing before anything is booked and does not move. The number of edited photographs is stated per service. The gallery arrives within forty-eight to seventy-two hours. If the weather turns, the session moves at no cost.',
+      'What is promised is deliberately narrow and easy to check. The price is agreed in writing before anything is booked and does not move. The number of edited photographs is stated per service. Most galleries arrive within forty-eight to seventy-two hours. If the weather turns, the session moves at no cost.',
       'If the work is not what was promised, it is refunded in full rather than argued about. That guarantee is the reason the vetting is strict: a network that pays for its own mistakes has to be careful about who it lets in.',
     ],
     pt: [
       'Isto é uma rede de reservas, não um estúdio. Ninguém aqui é empregado e ninguém é enviado a partir de uma sede; quem responde já trabalha profissionalmente no sítio onde vai estar. O que a rede assume é a parte de uma reserva que costuma correr mal — o preço, o horário e a entrega.',
       'A entrada depende do trabalho publicado e não de um portefólio montado para a ocasião. Um portefólio mostra o que alguém consegue fazer no melhor dia e com tempo ilimitado; o trabalho publicado para clientes mostra o que entrega num dia normal. A segunda é a pergunta útil, e é a mais difícil de falsear.',
-      'O que se promete é propositadamente estreito e fácil de verificar. O preço é acordado por escrito antes de se reservar e não muda. O número de fotografias editadas está indicado em cada serviço. A galeria chega em quarenta e oito a setenta e duas horas. Se o tempo mudar, a sessão passa para outro dia sem custo.',
+      'O que se promete é propositadamente estreito e fácil de verificar. O preço é acordado por escrito antes de se reservar e não muda. O número de fotografias editadas está indicado em cada serviço. A maioria das galerias chega em quarenta e oito a setenta e duas horas. Se o tempo mudar, a sessão passa para outro dia sem custo.',
       'Se o trabalho não for o que foi prometido, é reembolsado na totalidade em vez de se discutir gosto. É essa garantia que obriga a selecção a ser exigente: uma rede que paga os próprios erros tem de ter cuidado com quem deixa entrar.',
     ],
   } as Localized<string[]>,
   facts: {
     en: [
       { label: 'Cities & destinations', value: '12' },
-      { label: 'Session types', value: '22' },
-      { label: 'Gallery delivery', value: '48–72h' },
+      { label: 'Session types', value: '18' },
+      { label: 'Most galleries', value: '48–72h' },
       { label: 'Refund guarantee', value: '100%' },
     ],
     pt: [
       { label: 'Cidades & destinos', value: '12' },
-      { label: 'Tipos de sessão', value: '22' },
-      { label: 'Entrega da galeria', value: '48–72h' },
+      { label: 'Tipos de sessão', value: '18' },
+      { label: 'Maioria das galerias', value: '48–72h' },
       { label: 'Garantia de reembolso', value: '100%' },
     ],
   } as Localized<{ label: string; value: string }[]>,

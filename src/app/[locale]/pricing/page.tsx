@@ -41,8 +41,8 @@ const COPY = {
   tableService: { en: 'Service', pt: 'Serviço' },
   tableDuration: { en: 'Duration', pt: 'Duração' },
   tablePrice: { en: 'From', pt: 'Desde' },
-  cta: { en: 'Book now', pt: 'Reservar' },
-  ctaSub: { en: 'Custom quote, confirmed within hours.', pt: 'Orçamento à medida, confirmado em poucas horas.' },
+  cta: { en: 'Check availability', pt: 'Ver disponibilidade' },
+  ctaSub: { en: 'Your final price is confirmed in writing before you book. We reply within about 2 hours during the working day.', pt: 'O preço final é confirmado por escrito antes de reservar. Respondemos em cerca de 2 horas, durante o dia útil.' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
 

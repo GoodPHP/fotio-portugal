@@ -82,13 +82,11 @@ export const SEO_PROSE = {
     en: [
       { label: 'Average rating', value: '{rating}/5' },
       { label: 'Reviews published', value: '{count}' },
-      { label: 'Removed for criticism', value: '0' },
       { label: 'Money-back guarantee', value: '100%' },
     ],
     pt: [
       { label: 'Avaliação média', value: '{rating}/5' },
       { label: 'Avaliações publicadas', value: '{count}' },
-      { label: 'Removidas por serem críticas', value: '0' },
       { label: 'Garantia de reembolso', value: '100%' },
     ],
   } as Localized<{ label: string; value: string }[]>,

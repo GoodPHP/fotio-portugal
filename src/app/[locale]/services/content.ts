@@ -14,8 +14,8 @@ export const META_TITLE: Localized = {
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: '22 session types across Portugal: portraits, couples, families, weddings, corporate and food. The price is agreed before you book, the gallery in 48–72h.',
-  pt: '22 tipos de sessão em Portugal: retrato, casal, família, casamento, empresa e gastronomia. O preço é acordado antes de reservar, a galeria em 48–72 h.',
+  en: '18 session types across Portugal: couples, proposals, families, weddings, portraits and more. Clear prices confirmed before you book.',
+  pt: '18 tipos de sessão em Portugal: retrato, casal, família, casamento, empresa e gastronomia. Preços claros, confirmados antes de reservar.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
@@ -45,16 +45,16 @@ export const SEO_PROSE = {
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'Session types', value: '22' },
-      { label: 'Categories', value: '9' },
+      { label: 'Session types', value: '18' },
+      { label: 'Categories', value: '7' },
       { label: 'Cities covered', value: '12' },
-      { label: 'Gallery delivery', value: '48–72h' },
+      { label: 'Most galleries', value: '48–72h' },
     ],
     pt: [
-      { label: 'Tipos de sessão', value: '22' },
+      { label: 'Tipos de sessão', value: '18' },
       { label: 'Categorias', value: '9' },
       { label: 'Cidades cobertas', value: '12' },
-      { label: 'Entrega da galeria', value: '48–72h' },
+      { label: 'Maioria das galerias', value: '48–72h' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

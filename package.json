@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "opennextjs-cloudflare build",
-    "build:next": "NODE_ENV=production tsx scripts/check-brand.ts && NODE_ENV=production tsx scripts/check-pt-todo.ts && NODE_ENV=production tsx scripts/check-legal.ts && NODE_ENV=production tsx scripts/check-slots.ts && NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
+    "build:next": "NODE_ENV=production tsx scripts/check-brand.ts && NODE_ENV=production tsx scripts/check-pt-todo.ts && NODE_ENV=production tsx scripts/check-legal.ts && NODE_ENV=production tsx scripts/check-whatsapp.ts && NODE_ENV=production tsx scripts/check-slots.ts && NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
     "start": "next start",
     "preview": "npm run build && opennextjs-cloudflare preview",
     "deploy": "npm run build && opennextjs-cloudflare deploy --cacheChunkSize 5",
@@ -19,6 +19,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "check:brand": "tsx scripts/check-brand.ts",
     "check:legal": "tsx scripts/check-legal.ts",
+    "check:whatsapp": "tsx scripts/check-whatsapp.ts",
     "check:pt-todo": "tsx scripts/check-pt-todo.ts",
     "photos:search": "tsx scripts/photos/search.ts",
     "photos:select": "tsx scripts/photos/select.ts",

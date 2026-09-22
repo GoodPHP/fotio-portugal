@@ -46,13 +46,13 @@ export const SEO_PROSE = {
   facts: {
     en: [
       { label: 'From', value: '€150' },
-      { label: 'Full wedding day', value: '€2,200' },
+      { label: 'Wedding day, from', value: '€1,400' },
       { label: 'Per extra photo', value: '€0' },
       { label: 'Deposit to enquire', value: '€0' },
     ],
     pt: [
       { label: 'Desde', value: '150 €' },
-      { label: 'Dia completo de casamento', value: '2 200 €' },
+      { label: 'Casamento, desde', value: '1400 €' },
       { label: 'Por fotografia extra', value: '0 €' },
       { label: 'Sinal para orçamento', value: '0 €' },
     ],

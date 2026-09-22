@@ -22,11 +22,11 @@ const COPY = {
   title: { en: 'Contact', pt: 'Contacto' },
   eyebrow: { en: 'Let’s talk', pt: 'Vamos falar' },
   intro: {
-    en: 'Have a special request or a question? Write to us — we reply within a few hours. For the fastest answers, WhatsApp is the ideal channel.',
-    pt: 'Tem um pedido especial ou uma dúvida? Escreva-nos — respondemos dentro de poucas horas. Para a resposta mais rápida, o WhatsApp é o canal ideal.',
+    en: 'Have a special request or a question? Write to us — we reply within about 2 hours during the working day, by email or WhatsApp.',
+    pt: 'Tem um pedido especial ou uma dúvida? Escreva-nos — respondemos em cerca de 2 horas, durante o dia útil, por e-mail ou WhatsApp.',
   },
-  whatsappTitle: { en: 'Instant reply', pt: 'Resposta imediata' },
-  whatsappCta: { en: 'Message us on WhatsApp', pt: 'Escreva-nos no WhatsApp' },
+  whatsappTitle: { en: 'Prefer to chat?', pt: 'Prefere conversar?' },
+  whatsappCta: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' },
   whatsappMsg: { en: `Hi ${SITE_NAME}! I would like information about a photo service.`, pt: `Olá ${SITE_NAME}! Gostaria de informações sobre um serviço de fotografia.` },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;

@@ -1,27 +1,30 @@
 {
   "nav": {
     "home": "Início",
-    "services": "Serviços",
-    "cities": "Cidades",
+    "destinations": "Destinos",
+    "sessions": "Sessões",
+    "photographers": "Fotógrafos",
     "pricing": "Preços",
     "portfolio": "Portefólio",
+    "howItWorks": "Como funciona",
     "blog": "Blog",
     "about": "Sobre",
     "contact": "Contacto",
-    "book": "Reservar",
+    "checkAvailability": "Ver disponibilidade",
+    "whatsapp": "WhatsApp",
     "menu": "Menu"
   },
   "common": {
     "from": "desde",
-    "bookNow": "Reservar",
-    "discover": "Saber mais",
+    "checkAvailability": "Ver disponibilidade",
+    "chatWhatsapp": "Falar no WhatsApp",
     "viewAll": "Ver tudo",
     "search": "Pesquisar",
     "loading": "A carregar…"
   },
   "home": {
-    "heroBadge": "Profissionais locais verificados",
-    "heroTitle": "O seu fotógrafo em Portugal",
-    "heroSubtitle": "Fotógrafos profissionais verificados em 12 cidades e destinos portugueses. Preço fixo acordado antes de reservar. Galeria privada em 48 a 72 horas."
+    "heroEyebrow": "Fotógrafos locais em todo o Portugal",
+    "heroTitle": "Fotografia em Portugal, sem complicações.",
+    "heroSubtitle": "Reserve um fotógrafo profissional local para a sua família, o seu casamento, um pedido, um retrato ou a sua empresa."
   }
 }

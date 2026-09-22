@@ -36,3 +36,12 @@
   # real.
   # ---------------------------------------------------------------------------
   ALLOW_LEGAL_TODO = "1"
+
+  # ---------------------------------------------------------------------------
+  # DELETE THIS TOO, once NEXT_PUBLIC_WHATSAPP_NUMBER in .env.production is real.
+  #
+  # `check-whatsapp` refuses to build while the number is TODO_WHATSAPP, because
+  # every "Chat on WhatsApp" button would open WhatsApp with no recipient. Same
+  # reasoning as the legal flag above: visible here, absent from `npm run deploy`.
+  # ---------------------------------------------------------------------------
+  ALLOW_WHATSAPP_TODO = "1"

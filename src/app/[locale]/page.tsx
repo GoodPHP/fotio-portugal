@@ -235,7 +235,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 href="/book"
                 className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
               >
-                {tc('bookNow')}
+                {tc('checkAvailability')}
                 {arrow}
               </Link>
               <Link
@@ -565,14 +565,14 @@ export default async function HomePage({ params }: HomePageProps) {
                   href="/book"
                   className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  {tc('bookNow')}
+                  {tc('checkAvailability')}
                   {arrow}
                 </Link>
                 <Link
                   href="/services"
                   className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  {tc('discover')}
+                  {copy.explore}
                 </Link>
               </div>
             </div>

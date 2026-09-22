@@ -14,8 +14,8 @@ export const META_TITLE: Localized = {
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'Pick a place, a session and a date, and get a fixed price on WhatsApp in minutes. No deposit to request a quote, and nothing is charged until you confirm.',
-  pt: 'Escolha o sítio, a sessão e a data, e receba um preço fixo no WhatsApp em minutos. Sem sinal para pedir orçamento e sem nada a pagar até confirmar.',
+  en: 'Tell us where, when and what kind of session. We match you with a local photographer and confirm availability and price. No payment to check availability.',
+  pt: 'Diga-nos onde, quando e que sessão quer. Encontramos um fotógrafo local e confirmamos a disponibilidade e o preço. Sem pagamento para ver disponibilidade.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
@@ -45,15 +45,15 @@ export const SEO_PROSE = {
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'Quote turnaround', value: 'Under 2h' },
+      { label: 'Reply, working day', value: '~2h' },
       { label: 'Deposit for a quote', value: '€0' },
-      { label: 'Gallery delivery', value: '48–72h' },
+      { label: 'Most galleries', value: '48–72h' },
       { label: 'Weather reschedule', value: 'Free' },
     ],
     pt: [
-      { label: 'Resposta ao orçamento', value: 'Menos de 2h' },
+      { label: 'Resposta, dia útil', value: '~2h' },
       { label: 'Sinal para orçamento', value: '0 €' },
-      { label: 'Entrega da galeria', value: '48–72h' },
+      { label: 'Maioria das galerias', value: '48–72h' },
       { label: 'Remarcação por chuva', value: 'Grátis' },
     ],
   } as Localized<{ label: string; value: string }[]>,

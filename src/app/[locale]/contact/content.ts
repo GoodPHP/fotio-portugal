@@ -14,8 +14,8 @@ export const META_TITLE: Localized = {
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'Ask about a session in any of twelve places across Portugal. Reply within two hours by email or WhatsApp, a written quote, and no deposit to ask.',
-  pt: 'Pergunte sobre uma sessão em qualquer um dos doze sítios em Portugal. Resposta em duas horas por e-mail ou WhatsApp, orçamento por escrito, sem sinal.',
+  en: 'Ask about a session in any of twelve places across Portugal. Reply within about two hours on working days, by email or WhatsApp, a written quote, and no deposit to ask.',
+  pt: 'Pergunte sobre uma sessão em qualquer um dos doze sítios em Portugal. Resposta em cerca de duas horas nos dias úteis, por e-mail ou WhatsApp, orçamento por escrito, sem sinal.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
@@ -45,13 +45,13 @@ export const SEO_PROSE = {
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'Typical reply', value: 'Under 2h' },
+      { label: 'Reply, working day', value: '~2h' },
       { label: 'Cities covered', value: '12' },
       { label: 'Deposit to enquire', value: '€0' },
       { label: 'Quote format', value: 'In writing' },
     ],
     pt: [
-      { label: 'Resposta habitual', value: 'Menos de 2h' },
+      { label: 'Resposta, dia útil', value: '~2h' },
       { label: 'Cidades cobertas', value: '12' },
       { label: 'Sinal para orçamento', value: '0 €' },
       { label: 'Orçamento', value: 'Por escrito' },

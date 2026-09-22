@@ -54,7 +54,7 @@ export const SEO_PROSE = {
   facts: {
     en: [
       { label: 'Photographs shown', value: '{count}' },
-      { label: 'Categories', value: '9' },
+      { label: 'Categories', value: '7' },
       { label: 'Cities covered', value: '12' },
       { label: 'Photo credits', value: 'Published' },
     ],

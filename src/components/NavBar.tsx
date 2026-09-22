@@ -8,9 +8,8 @@ import NavActive from './NavActive';
 import TileMark from './TileMark';
 
 const NAV_LINKS = [
-  { href: '/', key: 'home' },
-  { href: '/services', key: 'services' },
-  { href: '/cities', key: 'cities' },
+  { href: '/cities', key: 'destinations' },
+  { href: '/services', key: 'sessions' },
   { href: '/pricing', key: 'pricing' },
   { href: '/portfolio', key: 'portfolio' },
   { href: '/blog', key: 'blog' },
@@ -109,7 +108,7 @@ export default async function NavBar({ locale }: { locale: Locale }) {
               href="/book"
               className="btn btn-primary btn-sm shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
             >
-              {t('book')}
+              {t('checkAvailability')}
               <svg className="h-3 w-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path
                   d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5"

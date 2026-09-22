@@ -30,6 +30,7 @@ export const SERVICES: Service[] = [
     initialPrice: 150,
     durationMinutes: 60,
     editedPhotos: 25,
+    deliveryHours: [48, 72],
     description: {
       en: 'A controlled-light portrait session for a profile, a press kit or a book.',
       pt: 'Uma sessão em luz controlada para um perfil, um dossier de imprensa ou um book.',
@@ -66,6 +67,7 @@ export const SERVICES: Service[] = [
     initialPrice: 170,
     durationMinutes: 75,
     editedPhotos: 30,
+    deliveryHours: [48, 72],
     description: {
       en: 'The same portrait, made outdoors and in motion rather than against a background.',
       pt: 'O mesmo retrato, feito na rua e em movimento em vez de contra um fundo.',
@@ -86,6 +88,7 @@ export const SERVICES: Service[] = [
     initialPrice: 190,
     durationMinutes: 90,
     editedPhotos: 40,
+    deliveryHours: [48, 72],
     description: {
       en: 'A walk through one neighbourhood at the hour the light is low, photographed as it happens.',
       pt: 'Um passeio por uma zona da cidade à hora em que a luz é baixa, fotografado à medida que acontece.',
@@ -125,6 +128,7 @@ export const SERVICES: Service[] = [
     initialPrice: 250,
     durationMinutes: 60,
     editedPhotos: 35,
+    deliveryHours: 48,
     description: {
       en: 'The moment itself, photographed from a distance, then a short session once the surprise is over.',
       pt: 'O momento em si, fotografado à distância, e depois uma sessão curta quando a surpresa já passou.',
@@ -163,6 +167,7 @@ export const SERVICES: Service[] = [
     initialPrice: 200,
     durationMinutes: 75,
     editedPhotos: 40,
+    deliveryHours: [48, 72],
     description: {
       en: 'Outdoors, at the children’s pace, with enough frames that the good ones are not an accident.',
       pt: 'Ao ar livre, ao ritmo das crianças, com fotografias suficientes para que as boas não sejam um acaso.',
@@ -189,6 +194,7 @@ export const SERVICES: Service[] = [
     initialPrice: 190,
     durationMinutes: 75,
     editedPhotos: 30,
+    deliveryHours: [48, 72],
     description: {
       en: 'Booked between 30 and 36 weeks, which is when it photographs best and is still comfortable.',
       pt: 'Marcada entre as 30 e as 36 semanas, que é quando fotografa melhor e ainda é confortável.',
@@ -207,6 +213,7 @@ export const SERVICES: Service[] = [
     initialPrice: 220,
     durationMinutes: 120,
     editedPhotos: 30,
+    deliveryHours: 72,
     description: {
       en: 'At home, in the first fortnight, working around feeds rather than against them.',
       pt: 'Em casa, nas primeiras duas semanas, a trabalhar à volta das mamadas e não contra elas.',
@@ -235,6 +242,7 @@ export const SERVICES: Service[] = [
     initialPrice: 350,
     durationMinutes: 240,
     editedPhotos: 120,
+    deliveryHours: 168,
     description: {
       en: 'Church ceremony and the meal that follows.',
       pt: 'A cerimónia na igreja e o almoço que se segue.',
@@ -268,6 +276,7 @@ export const SERVICES: Service[] = [
     initialPrice: 1400,
     durationMinutes: 600,
     editedPhotos: 400,
+    deliveryHours: 504,
     description: {
       en: 'Ten hours, from getting ready to the first hour of the party.',
       pt: 'Dez horas, dos preparativos à primeira hora da festa.',
@@ -307,6 +316,7 @@ export const SERVICES: Service[] = [
     initialPrice: 900,
     durationMinutes: 300,
     editedPhotos: 200,
+    deliveryHours: 336,
     description: {
       en: 'Two of you, or a dozen, and five hours with no schedule to defend.',
       pt: 'Os dois, ou uma dúzia, e cinco horas sem horário a cumprir.',
@@ -335,6 +345,7 @@ export const SERVICES: Service[] = [
     initialPrice: 1900,
     durationMinutes: 720,
     editedPhotos: 500,
+    deliveryHours: 504,
     description: {
       en: 'Twelve hours, two days on the ground, and the paperwork question answered before you book anything.',
       pt: 'Doze horas e dois dias no local.',
@@ -375,6 +386,7 @@ export const SERVICES: Service[] = [
     initialPrice: 180,
     durationMinutes: 60,
     editedPhotos: 30,
+    deliveryHours: 48,
     description: {
       en: 'An hour out of a trip, at the one time of day the place is worth photographing.',
       pt: 'Uma hora tirada a uma viagem, à única hora do dia em que o sítio vale a pena.',
@@ -393,6 +405,7 @@ export const SERVICES: Service[] = [
     initialPrice: 240,
     durationMinutes: 90,
     editedPhotos: 40,
+    deliveryHours: 48,
     description: {
       en: 'The one set of photographs of the two of you that is not from the wedding day.',
       pt: 'O único conjunto de fotografias dos dois que não é do dia do casamento.',
@@ -411,6 +424,7 @@ export const SERVICES: Service[] = [
     initialPrice: 190,
     durationMinutes: 90,
     editedPhotos: 40,
+    deliveryHours: 48,
     description: {
       en: 'A morning in the city, planned around where the light lands rather than around a list of sights.',
       pt: 'Uma manhã na cidade, planeada pela luz e não por uma lista de monumentos.',
@@ -448,6 +462,7 @@ export const SERVICES: Service[] = [
     initialPrice: 150,
     durationMinutes: 45,
     editedPhotos: 15,
+    deliveryHours: 48,
     description: {
       en: 'One consistent look across a team, or one portrait that does not look like a passport photo.',
       pt: 'Um registo coerente para toda a equipa, ou um retrato que não pareça uma foto tipo passe.',
@@ -476,6 +491,7 @@ export const SERVICES: Service[] = [
     initialPrice: 290,
     durationMinutes: 150,
     editedPhotos: 60,
+    deliveryHours: 72,
     description: {
       en: 'A library of images for a site, a deck and a year of posts, made in one afternoon.',
       pt: 'Um acervo de imagens para um site, uma apresentação e um ano de publicações, feito numa tarde.',
@@ -504,6 +520,7 @@ export const SERVICES: Service[] = [
     initialPrice: 150,
     durationMinutes: 60,
     editedPhotos: 20,
+    deliveryHours: 24,
     description: {
       en: 'A profile photograph made where you actually are, for people whose employer is four time zones away.',
       pt: 'Uma fotografia de perfil feita onde está mesmo.',
@@ -527,6 +544,7 @@ export const SERVICES: Service[] = [
     initialPrice: 450,
     durationMinutes: 300,
     editedPhotos: 200,
+    deliveryHours: 72,
     description: {
       en: 'Conferences, launches and the annual dinner.',
       pt: 'Conferências, lançamentos e o jantar de final de ano.',
@@ -552,6 +570,7 @@ export const SERVICES: Service[] = [
     initialPrice: 160,
     durationMinutes: 90,
     editedPhotos: 25,
+    deliveryHours: 24,
     description: {
       en: 'Interiors photographed at the hour the flat actually gets its light, for a listing that is not lying.',
       pt: 'Interiores fotografados à hora em que a casa recebe mesmo luz, para um anúncio que não engana.',
@@ -580,6 +599,7 @@ export const SERVICES: Service[] = [
     initialPrice: 320,
     durationMinutes: 180,
     editedPhotos: 30,
+    deliveryHours: 72,
     description: {
       en: 'A menu photographed in one service, in the room it is served in.',
       pt: 'Uma ementa fotografada num serviço, na sala onde é servida.',
@@ -605,6 +625,7 @@ export const SERVICES: Service[] = [
     initialPrice: 250,
     durationMinutes: 180,
     editedPhotos: 40,
+    deliveryHours: 168,
     description: {
       en: 'A portfolio an agency will actually look at.',
       pt: 'Um book que uma agência abre de facto.',
@@ -630,6 +651,7 @@ export const SERVICES: Service[] = [
     initialPrice: 160,
     durationMinutes: 90,
     editedPhotos: 40,
+    deliveryHours: 72,
     description: {
       en: 'Capa e batina, in the city the tradition belongs to.',
       pt: 'Capa e batina, na cidade a que a tradição pertence.',

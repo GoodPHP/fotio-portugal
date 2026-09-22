@@ -120,6 +120,60 @@ export function whatsappLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+/** What a visitor has told us so far, already in their language. */
+export interface BookingEnquiry {
+  where?: string;
+  session?: string;
+  date?: string;
+  people?: string;
+  /** The booking reference, when the message follows a form submission. */
+  reference?: string;
+}
+
+const BOOKING_MESSAGE: Record<
+  Locale,
+  { greeting: string; where: string; session: string; date: string; people: string }
+> = {
+  en: {
+    greeting: `Hi ${SITE_NAME}! I'd like to book a photography session in Portugal.`,
+    where: 'Where',
+    session: 'Session',
+    date: 'Date',
+    people: 'Number of people',
+  },
+  pt: {
+    greeting: `Olá ${SITE_NAME}! Gostaria de marcar uma sessão fotográfica em Portugal.`,
+    where: 'Onde',
+    session: 'Sessão',
+    date: 'Data',
+    people: 'Número de pessoas',
+  },
+};
+
+/**
+ * The prefilled WhatsApp message every "Chat on WhatsApp" button sends.
+ *
+ * The four labelled lines are always there, filled or blank: a blank line is
+ * a question the visitor can answer in the chat, and a message that already
+ * has the shape of a booking gets answered faster than "hi".
+ */
+export function whatsappBookingMessage(enquiry: BookingEnquiry, locale: Locale): string {
+  const m = BOOKING_MESSAGE[locale];
+  const greeting = enquiry.reference ? `${m.greeting} [${enquiry.reference}]` : m.greeting;
+  return [
+    greeting,
+    '',
+    `${m.where}: ${enquiry.where ?? ''}`.trimEnd(),
+    `${m.session}: ${enquiry.session ?? ''}`.trimEnd(),
+    `${m.date}: ${enquiry.date ?? ''}`.trimEnd(),
+    `${m.people}: ${enquiry.people ?? ''}`.trimEnd(),
+  ].join('\n');
+}
+
+export function whatsappBookingLink(enquiry: BookingEnquiry, locale: Locale): string {
+  return whatsappLink(whatsappBookingMessage(enquiry, locale));
+}
+
 // ------------------------------------------------------------------ formatting
 
 /**
@@ -183,4 +237,25 @@ export function formatDuration(minutes: number, locale: Locale = DEFAULT_LOCALE)
   // nothing to branch on below two hours.
   if (minutes < 120) return `${minutes} min`;
   return DURATION_FORMAT[locale](Math.floor(minutes / 60), minutes % 60);
+}
+
+const WEEKS_FORMAT: Record<Locale, (weeks: number) => string> = {
+  en: (weeks) => (weeks === 1 ? '1 week' : `${weeks} weeks`),
+  pt: (weeks) => (weeks === 1 ? '1 semana' : `${weeks} semanas`),
+};
+
+/**
+ * A gallery turnaround, as a card label: "48–72h", "24h", "3 weeks".
+ *
+ * Hours up to three days, because that is how the promise is made and how
+ * the reader compares it; whole weeks beyond, because "504h" is a number
+ * nobody converts in their head.
+ */
+export function formatDelivery(
+  hours: number | readonly [number, number],
+  locale: Locale = DEFAULT_LOCALE,
+): string {
+  if (typeof hours !== 'number') return `${hours[0]}–${hours[1]}h`;
+  if (hours >= 168 && hours % 168 === 0) return WEEKS_FORMAT[locale](hours / 168);
+  return `${hours}h`;
 }

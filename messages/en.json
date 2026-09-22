@@ -1,27 +1,30 @@
 {
   "nav": {
     "home": "Home",
-    "services": "Services",
-    "cities": "Cities",
+    "destinations": "Destinations",
+    "sessions": "Sessions",
+    "photographers": "Photographers",
     "pricing": "Pricing",
     "portfolio": "Portfolio",
+    "howItWorks": "How it works",
     "blog": "Blog",
     "about": "About",
     "contact": "Contact",
-    "book": "Book now",
+    "checkAvailability": "Check availability",
+    "whatsapp": "WhatsApp",
     "menu": "Menu"
   },
   "common": {
     "from": "from",
-    "bookNow": "Book now",
-    "discover": "Discover more",
+    "checkAvailability": "Check availability",
+    "chatWhatsapp": "Chat on WhatsApp",
     "viewAll": "View all",
     "search": "Search",
     "loading": "Loading…"
   },
   "home": {
-    "heroBadge": "Vetted local professionals",
-    "heroTitle": "Your photographer in Portugal",
-    "heroSubtitle": "Vetted professional photographers in 12 Portuguese cities and destinations. A fixed price agreed before you book. Private gallery in 48–72 hours."
+    "heroEyebrow": "Local photographers across Portugal",
+    "heroTitle": "Photography in Portugal, without the hassle.",
+    "heroSubtitle": "Book a professional local photographer for your trip, proposal, honeymoon, family or wedding."
   }
 }

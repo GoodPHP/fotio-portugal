@@ -164,6 +164,15 @@ export interface Service {
   description?: Localized;
   durationMinutes: number;
   editedPhotos: number;
+  /**
+   * How long the gallery takes, in hours: a number, or a `[from, to]` window.
+   *
+   * Structured because the site used to promise "48–72h" for everything,
+   * weddings included, while the wedding's own deliverables said three weeks.
+   * The value restates the delivery line in `deliverables`, and
+   * `catalog.test.ts` fails when the two disagree.
+   */
+  deliveryHours: number | readonly [number, number];
   deliverables: Localized<string[]>;
   faqs?: ServiceFAQ[];
 }

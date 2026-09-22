@@ -160,6 +160,17 @@ export function isValidLeaf(serviceSlug: string, citySlug: string): boolean {
   return Boolean(getServiceById(serviceSlug) && getCity(citySlug));
 }
 
+/**
+ * The counts a trust bar may show, computed rather than typed.
+ *
+ * The session count is per language. The catalogue holds 22 services but
+ * each language offers 18 of them, and "22 session types" on a page that
+ * links to 18 is a number the reader can check and find wrong.
+ */
+export function trustStats(locale: Locale): { places: number; sessionTypes: number } {
+  return { places: CITIES.length, sessionTypes: servicesFor(locale).length };
+}
+
 export function getReviewsForCity(citySlug: string): Review[] {
   return REVIEWS.filter((r) => r.citySlug === citySlug);
 }

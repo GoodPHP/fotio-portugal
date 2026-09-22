@@ -14,6 +14,7 @@ const service: Service = {
   initialPrice: 150,
   durationMinutes: 60,
   editedPhotos: 25,
+  deliveryHours: [48, 72],
   deliverables: both(['25 photographs']),
   faqs: [{ question: both('What should I bring?'), answer: both('Plain tops.') }],
 };
