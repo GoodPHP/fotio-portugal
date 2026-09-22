@@ -57,7 +57,9 @@ export default function MobileCtaBar({ checkLabel, whatsappLabel, whatsappHref }
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="btn btn-outline mr-3 min-h-12 flex-none px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+        className="btn btn-outline mr-2 min-h-12 flex-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+        // Inline, because `.btn` is unlayered CSS and outranks padding utilities.
+        style={{ paddingInline: '0.875rem' }}
         data-track="whatsapp_clicked"
         data-track-context="mobile-bar"
       >
@@ -66,7 +68,8 @@ export default function MobileCtaBar({ checkLabel, whatsappLabel, whatsappHref }
       </a>
       <Link
         href="/book"
-        className="btn btn-primary min-h-12 flex-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+        className="btn btn-primary min-h-12 flex-1 whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+        style={{ paddingInline: '0.875rem' }}
         data-track="cta_check_availability"
         data-track-context="mobile-bar"
       >

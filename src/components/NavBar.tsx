@@ -6,15 +6,32 @@ import { localizedPath } from '@/lib/urls';
 import LocaleSwitcher from './LocaleSwitcher';
 import NavActive from './NavActive';
 import TileMark from './TileMark';
+import { WhatsAppIcon } from './Icons';
+import { hasPhotographers } from '@/lib/catalog';
+import { whatsappBookingLink } from '@/lib/site';
 
-const NAV_LINKS = [
+/**
+ * What a visitor comes to decide: where, what, who, how much, what it looks
+ * like, how it works. Blog, About and Contact moved to the footer and the
+ * bottom of the mobile menu — useful, but none of them is a step towards a
+ * booking, and seven items in a row made the one that was hard to find.
+ */
+const PRIMARY_LINKS = [
   { href: '/cities', key: 'destinations' },
   { href: '/services', key: 'sessions' },
+  { href: '/photographers', key: 'photographers' },
   { href: '/pricing', key: 'pricing' },
   { href: '/portfolio', key: 'portfolio' },
+] as const;
+
+const SECONDARY_LINKS = [
   { href: '/blog', key: 'blog' },
   { href: '/about', key: 'about' },
+  { href: '/contact', key: 'contact' },
 ] as const;
+
+/** An in-page anchor on the home page, not a route: never marked active. */
+const HOW_IT_WORKS = { pathname: '/', hash: 'how-it-works' } as const;
 
 /**
  * The masthead — a server component.
@@ -45,6 +62,9 @@ export default async function NavBar({ locale }: { locale: Locale }) {
   const homeHrefs = Object.fromEntries(
     LOCALES.map((l) => [l, localizedPath(l, '/')]),
   ) as Record<Locale, string>;
+
+  // The photographers link appears when there is a photographer to show.
+  const links = PRIMARY_LINKS.filter((l) => l.href !== '/photographers' || hasPhotographers());
 
   return (
     /*
@@ -82,7 +102,7 @@ export default async function NavBar({ locale }: { locale: Locale }) {
         {/* Nav and utilities share the right edge, so there is no centre gap. */}
         <div className="flex items-center gap-6 lg:gap-8">
           <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
-            {NAV_LINKS.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -92,6 +112,12 @@ export default async function NavBar({ locale }: { locale: Locale }) {
                 {t(link.key)}
               </Link>
             ))}
+            <Link
+              href={HOW_IT_WORKS}
+              className="nav-link py-1 text-sm text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-orange-deep"
+            >
+              {t('howItWorks')}
+            </Link>
           </nav>
 
           {/* A grout line marks where navigation ends and utilities begin. */}
@@ -101,24 +127,51 @@ export default async function NavBar({ locale }: { locale: Locale }) {
             <LocaleSwitcher current={locale} homeHrefs={homeHrefs} />
 
             {/*
-              The action, at every width. It used to be hidden below 640px,
-              which left the phone header with nothing to do.
+              The secondary action, deliberately quiet: an icon beside the
+              primary button rather than a second button competing with it.
+              Hidden on phones, where the bottom bar carries it.
             */}
-            <Link
-              href="/book"
-              className="btn btn-primary btn-sm shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+            <a
+              href={whatsappBookingLink({}, locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('whatsapp')}
+              title={t('whatsapp')}
+              data-track="whatsapp_clicked"
+              data-track-context="header"
+              className="hidden h-9 w-9 items-center justify-center border border-brand-rule-strong text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep sm:flex"
             >
-              {t('checkAvailability')}
-              <svg className="h-3 w-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path
-                  d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
+              <WhatsAppIcon className="h-4 w-4" />
+            </a>
+
+            {/*
+              The action. Below 640px it steps aside for the fixed bottom bar
+              (MobileCtaBar), which carries the same button under the thumb:
+              with it here too, the four header controls overflowed a 390px
+              screen and pushed the menu button — the only way to navigate
+              there — half off the edge.
+            */}
+            {/* A wrapper does the hiding: `.btn` is unlayered CSS and its
+                display beats Tailwind's `hidden` on the link itself. */}
+            <div className="hidden shrink-0 sm:block">
+              <Link
+                href="/book"
+                data-track="cta_check_availability"
+                data-track-context="header"
+                className="btn btn-primary btn-sm shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+              >
+                {t('checkAvailability')}
+                <svg className="h-3 w-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </div>
 
             {/*
               The mobile menu. <details> rather than a button and a state hook:
@@ -154,12 +207,33 @@ export default async function NavBar({ locale }: { locale: Locale }) {
                 className="absolute inset-x-0 top-full border-y border-brand-rule bg-brand-sand"
               >
                 <ul className="mx-auto max-w-[92rem] px-6 py-3">
-                  {NAV_LINKS.map((link) => (
-                    <li key={link.href} className="border-b border-brand-rule last:border-b-0">
+                  {links.map((link) => (
+                    <li key={link.href} className="border-b border-brand-rule">
                       <Link
                         href={link.href}
                         data-nav={link.href}
                         className="nav-link block py-3.5 pl-5 font-display text-lg font-semibold text-brand-dark transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                      >
+                        {t(link.key)}
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link
+                      href={HOW_IT_WORKS}
+                      className="nav-link block py-3.5 pl-5 font-display text-lg font-semibold text-brand-dark transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                    >
+                      {t('howItWorks')}
+                    </Link>
+                  </li>
+                </ul>
+                <ul className="mx-auto flex max-w-[92rem] gap-6 border-t border-brand-rule px-6 py-4 pl-11 text-sm">
+                  {SECONDARY_LINKS.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        data-nav={link.href}
+                        className="nav-link block py-2 text-brand-muted transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                       >
                         {t(link.key)}
                       </Link>

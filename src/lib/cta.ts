@@ -22,9 +22,19 @@ export const CTA = {
   chatWhatsapp: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' } as Localized,
 };
 
-/** "in Lisbon" · "no Porto" · "nos Açores" — a place, as a location phrase. */
+/**
+ * Places English names with "the", as it would in a sentence: in the
+ * Algarve, the Azores, the Douro — but in Madeira, in Lisbon. Portuguese
+ * handles this through `City.ptArticle`; English has no field for it because
+ * three names is a list, not a model.
+ */
+const EN_WITH_ARTICLE = new Set(['algarve', 'acores', 'douro']);
+
+/** "in Lisbon" · "in the Azores" · "no Porto" · "nos Açores" — a place, as a location phrase. */
 export function inPlace(city: City, locale: Locale): string {
-  return locale === 'pt' ? ptAt(city) : `in ${city.nameLocalized ? tx(city.nameLocalized, locale) : city.name}`;
+  if (locale === 'pt') return ptAt(city);
+  const name = city.nameLocalized ? tx(city.nameLocalized, locale) : city.name;
+  return `in ${EN_WITH_ARTICLE.has(city.slug) ? 'the ' : ''}${name}`;
 }
 
 /** "Check availability in Lisbon" · "Ver disponibilidade no Porto". */

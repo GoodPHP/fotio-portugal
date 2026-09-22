@@ -170,7 +170,7 @@ export interface Service {
    * Structured because the site used to promise "48–72h" for everything,
    * weddings included, while the wedding's own deliverables said three weeks.
    * The value restates the delivery line in `deliverables`, and
-   * `catalog.test.ts` fails when the two disagree.
+   * `promises.test.ts` fails when the two disagree.
    */
   deliveryHours: number | readonly [number, number];
   deliverables: Localized<string[]>;
@@ -218,4 +218,43 @@ export interface Review {
   date: string;
   text: Localized;
   serviceName: Localized;
+}
+
+/**
+ * A photographer in the network, with a public profile.
+ *
+ * EVERY FIELD MUST COME FROM THE PHOTOGRAPHER. Nothing here may be invented,
+ * estimated or filled in "for now": a marketplace profile is a claim about a
+ * real person, and a made-up rating, session count or credential on one is
+ * both misleading and, under consumer-protection law, unlawful. The optional
+ * fields are optional precisely so a profile can go live without them; the
+ * pages render nothing where a value is absent.
+ *
+ * The list lives in `src/lib/data/photographers.ts` and is empty until real
+ * profiles are supplied. While it is empty every photographer surface — the
+ * nav item, the home section, the city blocks, the /photographers routes —
+ * is hidden rather than shown with placeholders.
+ */
+export interface Photographer {
+  /** URL slug, ASCII: `ana-silva`. Shared across locales. */
+  slug: string;
+  /** Name as the photographer wants it shown. */
+  name: string;
+  /** Image slot for the portrait, e.g. `photographers/ana-silva`. Must be their own photograph. */
+  portrait: string;
+  /** City slugs they work in — first is their base. Must exist in CITIES. */
+  cities: string[];
+  /** Service ids they offer. Must exist in SERVICES. */
+  services: string[];
+  /** Languages they work in, as ISO 639-1 codes: 'en', 'pt', 'es', 'fr'… */
+  languages: string[];
+  /** Short bio, in their own words or approved by them. */
+  bio: Localized;
+  /** Image slots of their own published work. */
+  portfolio: string[];
+  faqs?: { question: Localized; answer: Localized }[];
+  /** Only from verified client reviews on this site. Omit otherwise. */
+  rating?: { value: number; count: number };
+  /** Only a real, countable figure. Omit otherwise. */
+  sessionCount?: number;
 }

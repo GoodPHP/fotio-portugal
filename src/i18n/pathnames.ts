@@ -37,6 +37,11 @@ export const pathnames = {
   '/cities': { en: '/cities', pt: '/cidades' },
   '/cities/[city]': { en: '/cities/[city]', pt: '/cidades/[city]' },
 
+  // Profiles of the network's photographers. Routed now, generated only
+  // for entries in `src/lib/data/photographers.ts` — none yet.
+  '/photographers': { en: '/photographers', pt: '/fotografos' },
+  '/photographers/[slug]': { en: '/photographers/[slug]', pt: '/fotografos/[slug]' },
+
   '/pricing': { en: '/pricing', pt: '/precos' },
   '/portfolio': { en: '/portfolio', pt: '/portfolio' },
   '/reviews': { en: '/reviews', pt: '/avaliacoes' },

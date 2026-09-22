@@ -4,6 +4,7 @@ import { SERVICES, CITIES, servicesFor, trustStats } from './catalog';
 import { LOCALES, tx } from './locales';
 import { formatDelivery, whatsappBookingMessage } from './site';
 import { trackAttrs, isAnalyticsEvent } from './analytics';
+import { inPlace } from './cta';
 import { SEO_PROSE as HOME_PROSE } from '../app/[locale]/content';
 import { SEO_PROSE as ABOUT_PROSE } from '../app/[locale]/about/content';
 import { SEO_PROSE as SERVICES_PROSE } from '../app/[locale]/services/content';
@@ -110,5 +111,15 @@ describe('analytics', () => {
   test('only declared events are accepted', () => {
     assert.ok(isAnalyticsEvent('booking_completed'));
     assert.ok(!isAnalyticsEvent('book_now'));
+  });
+});
+
+describe('inPlace', () => {
+  test('English takes "the" where a sentence would', () => {
+    const city = (slug: string) => CITIES.find((c) => c.slug === slug)!;
+    assert.equal(inPlace(city('acores'), 'en'), 'in the Azores');
+    assert.equal(inPlace(city('madeira'), 'en'), 'in Madeira');
+    assert.equal(inPlace(city('lisboa'), 'en'), 'in Lisbon');
+    assert.equal(inPlace(city('porto'), 'pt'), 'no Porto');
   });
 });

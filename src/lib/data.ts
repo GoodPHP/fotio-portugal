@@ -10,3 +10,4 @@ export { SERVICES } from './data/services';
 export { CITIES } from './data/cities';
 export { BLOG_POSTS } from './data/blog';
 export { REVIEWS } from './data/reviews';
+export { PHOTOGRAPHERS } from './data/photographers';

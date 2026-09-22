@@ -1,5 +1,7 @@
-import type { Localized } from '@/lib/locales';
-import { SITE_NAME } from '@/lib/site';
+import { tx, type Locale, type Localized } from '@/lib/locales';
+import { SITE_NAME, formatDuration, formatPrice } from '@/lib/site';
+import { CITIES, localizedCityName, servicesFor } from '@/lib/catalog';
+import { DELIVERY_TYPICAL, FROM_PRICE, REPLY_TIME, WEATHER } from '@/lib/promises';
 
 /**
  * Search-facing copy for the home page: the SERP title and description, and the
@@ -75,3 +77,129 @@ export const SEO_PROSE = {
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;
+
+// ---------------------------------------------------------------------------
+// The home page FAQ.
+//
+// Every answer is either computed from the catalogue — prices, photo counts,
+// the list of places — or quoted from `promises.ts`, which is worded to match
+// the Terms. Where the business has no written policy (how far ahead to book)
+// the answer describes the process instead of inventing a rule.
+// ---------------------------------------------------------------------------
+
+export function homeFaqs(locale: Locale): { question: string; answer: string }[] {
+  const services = servicesFor(locale);
+  const byId = (id: string) => services.find((s) => s.slug === id);
+  const price = (id: string) => {
+    const s = byId(id);
+    return s ? formatPrice(s.initialPrice, locale) : '';
+  };
+  const cheapest = Math.min(...services.map((s) => s.initialPrice));
+  const places = CITIES.map((c) => localizedCityName(c, locale));
+  const placeList = `${places.slice(0, -1).join(', ')} ${locale === 'pt' ? 'e' : 'and'} ${places[places.length - 1]}`;
+  const wedding = byId('wedding');
+  const elopement = byId('elopement');
+  const proposal = byId('proposal');
+  const portrait = byId('portrait');
+  const couple = byId('couple');
+
+  const en: { question: string; answer: string }[] = [
+    {
+      question: 'How much does a photography session cost?',
+      answer: `Sessions start from ${formatPrice(cheapest, 'en')}. A couple session is from ${price('couple')}, a family session from ${price('family')} and a wedding from ${price('wedding')}. ${tx(FROM_PRICE.body, 'en')}`,
+    },
+    {
+      question: 'How far in advance should I book?',
+      answer: `As early as you know your dates — popular weekends and wedding days are the first to go. Send your dates and we confirm who is available. ${tx(REPLY_TIME, 'en')}`,
+    },
+    {
+      question: 'Can I choose my photographer?',
+      answer:
+        'Tell us any preference when you check availability — a language, a style or a specific photographer — and we match you with it wherever we can. You are told who will photograph you before you confirm anything.',
+    },
+    { question: 'What happens if it rains?', answer: tx(WEATHER.body, 'en') },
+    { question: 'How quickly will I receive my photos?', answer: tx(DELIVERY_TYPICAL.sentence, 'en') },
+    {
+      question: 'How many edited photos are included?',
+      answer: `Every session states its number: ${portrait?.editedPhotos} for a studio portrait, ${couple?.editedPhotos} for a couple session, ${wedding?.editedPhotos} for a wedding day. There is no per-image charge and no retouching sold separately afterwards.`,
+    },
+    {
+      question: 'Can I request a specific location?',
+      answer:
+        'Yes — tell us where when you check availability. Each destination page lists the spots our photographers use most, with the best time of day and whether a permit is needed.',
+    },
+    {
+      question: 'Can I book a proposal?',
+      answer: proposal
+        ? `Yes. ${tx(proposal.description ?? { en: '' }, 'en')} Proposal sessions are from ${price('proposal')} for ${proposal.durationMinutes} minutes, with ${proposal.editedPhotos} edited photos.`
+        : 'Yes — tell us where and when, and we plan it with you.',
+    },
+    { question: 'Can I book a photographer outside Lisbon?', answer: `Yes. We cover ${places.length} places across Portugal: ${placeList}.` },
+    {
+      question: 'What happens after I submit the booking request?',
+      answer: `We check which local photographers are free on your date and reply with a photographer and a confirmed price. ${tx(REPLY_TIME, 'en')} Nothing is paid until you confirm.`,
+    },
+    {
+      question: 'Do you offer wedding photography?',
+      answer: wedding
+        ? `Yes. Full wedding coverage is from ${price('wedding')} (${formatDuration(wedding.durationMinutes, 'en')}, ${wedding.editedPhotos} edited photos)${elopement ? `, and intimate elopements from ${price('elopement')}` : ''}${byId('destination-wedding') ? `. Destination weddings are from ${price('destination-wedding')}` : ''}.`
+        : 'Yes — tell us your date and place.',
+    },
+    {
+      question: 'Can I book through WhatsApp?',
+      answer:
+        'Yes. Chat with us on WhatsApp and tell us where, when and what kind of session. The availability form is simply the quickest way to give us all of that at once.',
+    },
+  ];
+
+  const pt: { question: string; answer: string }[] = [
+    {
+      question: 'Quanto custa uma sessão fotográfica?',
+      answer: `As sessões começam em ${formatPrice(cheapest, 'pt')}. Uma sessão de casal custa desde ${price('couple')}, uma sessão de família desde ${price('family')} e um casamento desde ${price('wedding')}. ${tx(FROM_PRICE.body, 'pt')}`,
+    },
+    {
+      question: 'Com quanta antecedência devo reservar?',
+      answer: `Assim que souber as datas — os fins de semana mais procurados e os dias de casamento são os primeiros a esgotar. Envie-nos as datas e confirmamos quem está disponível. ${tx(REPLY_TIME, 'pt')}`,
+    },
+    {
+      question: 'Posso escolher o fotógrafo?',
+      answer:
+        'Indique qualquer preferência quando pedir disponibilidade — uma língua, um estilo ou um fotógrafo em particular — e respeitamo-la sempre que possível. Fica a saber quem o vai fotografar antes de confirmar o que quer que seja.',
+    },
+    { question: 'E se chover?', answer: tx(WEATHER.body, 'pt') },
+    { question: 'Em quanto tempo recebo as fotografias?', answer: tx(DELIVERY_TYPICAL.sentence, 'pt') },
+    {
+      question: 'Quantas fotografias editadas estão incluídas?',
+      answer: `Cada sessão indica o número: ${portrait?.editedPhotos} num retrato de estúdio, ${couple?.editedPhotos} numa sessão de casal, ${wedding?.editedPhotos} num dia de casamento. Não se cobra por fotografia nem se vende retoque à parte depois.`,
+    },
+    {
+      question: 'Posso pedir um local específico?',
+      answer:
+        'Sim — diga-nos onde quando pedir disponibilidade. Cada página de destino indica os locais que os nossos fotógrafos mais usam, a melhor hora do dia e se é preciso autorização.',
+    },
+    {
+      question: 'Posso reservar um pedido de casamento?',
+      answer: proposal
+        ? `Sim. ${tx(proposal.description ?? { en: '' }, 'pt')} Os pedidos de casamento custam desde ${price('proposal')}, com ${proposal.durationMinutes} minutos e ${proposal.editedPhotos} fotografias editadas.`
+        : 'Sim — diga-nos onde e quando e planeamos consigo.',
+    },
+    { question: 'Posso reservar um fotógrafo fora de Lisboa?', answer: `Sim. Cobrimos ${places.length} sítios em Portugal: ${placeList}.` },
+    {
+      question: 'O que acontece depois de enviar o pedido?',
+      answer: `Verificamos que fotógrafos locais estão livres na sua data e respondemos com um fotógrafo e um preço confirmado. ${tx(REPLY_TIME, 'pt')} Não paga nada até confirmar.`,
+    },
+    {
+      question: 'Fazem fotografia de casamento?',
+      answer: wedding
+        ? `Sim. A cobertura completa de casamento custa desde ${price('wedding')} (${formatDuration(wedding.durationMinutes, 'pt')}, ${wedding.editedPhotos} fotografias editadas)${elopement ? `, e os casamentos íntimos desde ${price('elopement')}` : ''}.`
+        : 'Sim — diga-nos a data e o sítio.',
+    },
+    {
+      question: 'Posso reservar pelo WhatsApp?',
+      answer:
+        'Sim. Fale connosco no WhatsApp e diga-nos onde, quando e que tipo de sessão. O formulário de disponibilidade é apenas a forma mais rápida de nos dar tudo isso de uma vez.',
+    },
+  ];
+
+  return locale === 'pt' ? pt : en;
+}

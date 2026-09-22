@@ -1,5 +1,5 @@
-import { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS } from './data';
-import type { City, Service, BlogPost, Review, ServiceCategory } from './types';
+import { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS, PHOTOGRAPHERS } from './data';
+import type { City, Service, BlogPost, Review, ServiceCategory, Photographer } from './types';
 import { LOCALES, tx, type Locale } from './locales';
 import {
   isServicePublished,
@@ -9,7 +9,7 @@ import {
 } from './publishSchedule';
 import { curatedLeaves, isCuratedLeaf } from './curated';
 
-export { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS };
+export { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS, PHOTOGRAPHERS };
 
 // ---------------------------------------------------------------------------
 // Slug indexes, built once at module load.
@@ -304,4 +304,46 @@ export function publishedServicesForCity(citySlug: string, locale?: Locale, now?
   return SERVICES.filter(
     (s) => isLeafPublished(s.slug, citySlug, now) && (!locale || serviceExistsIn(s, locale)),
   );
+}
+
+// ---------------------------------------------------------------------------
+// Photographers.
+//
+// Validated at module load, like the service slugs: a profile naming a city
+// or a service that does not exist would link to a 404 from a page that
+// exists only to be trusted.
+// ---------------------------------------------------------------------------
+
+export function validatePhotographers(list: readonly Photographer[]): void {
+  const seen = new Set<string>();
+  for (const p of list) {
+    if (seen.has(p.slug)) throw new Error(`Duplicate photographer slug "${p.slug}".`);
+    seen.add(p.slug);
+    if (p.cities.length === 0) throw new Error(`Photographer "${p.slug}" works in no city.`);
+    for (const city of p.cities) {
+      if (!getCity(city)) throw new Error(`Photographer "${p.slug}" names unknown city "${city}".`);
+    }
+    for (const service of p.services) {
+      if (!getServiceById(service)) throw new Error(`Photographer "${p.slug}" names unknown service "${service}".`);
+    }
+  }
+}
+
+validatePhotographers(PHOTOGRAPHERS);
+
+/** Whether any photographer surface should be shown at all. */
+export function hasPhotographers(): boolean {
+  return PHOTOGRAPHERS.length > 0;
+}
+
+export function getPhotographer(slug: string): Photographer | undefined {
+  return PHOTOGRAPHERS.find((p) => p.slug === slug);
+}
+
+export function photographersIn(citySlug: string): Photographer[] {
+  return PHOTOGRAPHERS.filter((p) => p.cities.includes(citySlug));
+}
+
+export function photographersFor(serviceId: string): Photographer[] {
+  return PHOTOGRAPHERS.filter((p) => p.services.includes(serviceId));
 }

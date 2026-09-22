@@ -1,19 +1,38 @@
 import type { ComponentProps } from 'react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { publishedCities, publishedServices } from '@/lib/catalog';
+import { hasPhotographers, localizedCityName, publishedCities, publishedServices } from '@/lib/catalog';
 import { type Locale, tx } from '@/lib/locales';
-import { SITE_NAME, SOCIAL_LINKS, whatsappLink } from '@/lib/site';
+import { SITE_NAME, SOCIAL_LINKS, whatsappBookingLink } from '@/lib/site';
 import { cityHref, serviceHref } from '@/lib/routes';
 import { LEGAL_PAGES_VISIBLE } from '@/lib/legal';
+import { slugifyHeading } from '@/lib/article';
+import { CTA } from '@/lib/cta';
 import TileMark from './TileMark';
+import { WhatsAppIcon } from './Icons';
+
+/** The sessions people come for, in the order they ask for them. */
+const FOOTER_SESSIONS = ['couple', 'proposal', 'family', 'honeymoon', 'wedding', 'lifestyle-portrait', 'vacation', 'maternity'];
+
+/** The places people search for by name. */
+const FOOTER_PLACES = ['lisboa', 'porto', 'sintra', 'cascais', 'algarve', 'madeira', 'acores', 'douro'];
+
+/**
+ * The Terms heading the refund link lands on. Anchored rather than a page of
+ * its own: the refund policy is one clause of the Terms, and a separate page
+ * would be a second copy of it to keep in step.
+ */
+const REFUND_HEADING = {
+  en: 'If the work is not what was promised',
+  pt: 'Se o trabalho não for o que foi prometido',
+} as const;
 
 /**
  * The footer: the dado.
  *
  * In a tiled interior the dado is the band of azulejo that runs along the
  * bottom of the wall, and this is the site's. It opens on the lattice, inverts
- * to ink, and lays its five link columns out on the same grout grid the rest
+ * to ink, and lays its four link columns out on the same grout grid the rest
  * of the site uses, so the densest block of text on any page still reads as
  * part of the wall rather than as a sitemap bolted underneath one.
  */
@@ -22,36 +41,41 @@ export default async function Footer() {
   const t = await getTranslations('nav');
 
   const tagline = {
-    en: 'Vetted professional photographers across Portugal. Fixed pricing, private gallery in 48–72h.',
-    pt: 'Fotógrafos profissionais verificados em todo o Portugal. Preço fixo, galeria privada em 48–72 h.',
+    en: 'The easiest way to book a professional local photographer in Portugal. Clear prices, confirmed before you book.',
+    pt: 'A forma mais simples de reservar um fotógrafo profissional local em Portugal. Preços claros, confirmados antes de reservar.',
   }[locale];
 
   const labels = {
-    services: { en: 'Services', pt: 'Serviços' }[locale],
-    cities: { en: 'Cities', pt: 'Cidades' }[locale],
+    sessions: { en: 'Sessions', pt: 'Sessões' }[locale],
+    destinations: { en: 'Destinations', pt: 'Destinos' }[locale],
     company: { en: 'Company', pt: 'Empresa' }[locale],
+    support: { en: 'Support', pt: 'Apoio' }[locale],
     reviews: { en: 'Reviews', pt: 'Avaliações' }[locale],
-    legal: { en: 'Legal', pt: 'Legal' }[locale],
+    faq: { en: 'FAQ', pt: 'Perguntas frequentes' }[locale],
+    refund: { en: 'Refund policy', pt: 'Política de reembolso' }[locale],
     legalNotice: { en: 'Legal notice', pt: 'Informação legal' }[locale],
     privacy: { en: 'Privacy', pt: 'Privacidade' }[locale],
     terms: { en: 'Terms of sale', pt: 'Termos e condições' }[locale],
     imageRights: { en: 'Image rights', pt: 'Direito à imagem' }[locale],
     photoCredits: { en: 'Photo credits', pt: 'Créditos fotográficos' }[locale],
     complaints: { en: 'Complaints book', pt: 'Livro de reclamações' }[locale],
-    whatsapp: { en: 'Message us on WhatsApp', pt: 'Escreva-nos no WhatsApp' }[locale],
+    whatsapp: tx(CTA.chatWhatsapp, locale),
     rights: { en: 'All rights reserved.', pt: 'Todos os direitos reservados.' }[locale],
     madeIn: { en: 'Made in Portugal', pt: 'Feito em Portugal' }[locale],
   };
 
-  // Footer links appear site-wide, so only surface published pages.
-  const featuredServices = publishedServices(locale).slice(0, 6);
-  const featuredCities = publishedCities().slice(0, 6);
+  // Footer links appear site-wide, so only surface published pages, and only
+  // the sessions this language offers.
+  const services = publishedServices(locale);
+  const footerServices = FOOTER_SESSIONS.map((id) => services.find((s) => s.slug === id)).filter(
+    (s): s is NonNullable<typeof s> => Boolean(s),
+  );
+  const cities = publishedCities();
+  const footerCities = FOOTER_PLACES.map((slug) => cities.find((c) => c.slug === slug)).filter(
+    (c): c is NonNullable<typeof c> => Boolean(c),
+  );
   const year = new Date().getFullYear();
-
-  const waMessage = {
-    en: `Hi ${SITE_NAME}! I would like information about a photoshoot.`,
-    pt: `Olá ${SITE_NAME}! Gostaria de informações sobre uma sessão fotográfica.`,
-  }[locale];
+  const whatsappHref = whatsappBookingLink({}, locale);
 
   /*
     One link column. Four of them share a grout grid, so they share markup.
@@ -61,7 +85,9 @@ export default async function Footer() {
     not a path. Widening it here would have put the only untyped hrefs on the
     site in the one component that links to every section of it.
   */
-  type NavItem = { href: ComponentProps<typeof Link>['href']; label: string };
+  type NavItem =
+    | { href: ComponentProps<typeof Link>['href']; label: string }
+    | { external: string; label: string };
 
   const column = (heading: string, items: NavItem[]) => (
     <div className="px-6 py-8 sm:px-7">
@@ -71,12 +97,23 @@ export default async function Footer() {
       <ul className="mt-5 space-y-3 text-sm">
         {items.map((item) => (
           <li key={item.label}>
-            <Link
-              href={item.href}
-              className="text-brand-muted transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-            >
-              {item.label}
-            </Link>
+            {'external' in item ? (
+              <a
+                href={item.external}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-muted transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                href={item.href}
+                className="text-brand-muted transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+              >
+                {item.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -104,60 +141,75 @@ export default async function Footer() {
               </span>
             </Link>
             <p className="measure-tight mt-6 text-sm leading-relaxed text-brand-muted">{tagline}</p>
-            <a
-              href={whatsappLink(waMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline btn-sm mt-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.16c-.24.68-1.42 1.32-1.96 1.36-.5.05-.5.42-3.15-.66-2.66-1.08-4.31-3.83-4.44-4.01-.13-.18-1.06-1.41-1.06-2.69 0-1.27.67-1.9.91-2.16.24-.26.52-.32.7-.32.17 0 .35 0 .5.01.16.01.38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.13.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.22.61-.13.24.09 1.55.73 1.81.86.27.13.45.2.51.31.06.11.06.64-.18 1.32z" />
-              </svg>
-              {labels.whatsapp}
-            </a>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/book"
+                data-track="cta_check_availability"
+                data-track-context="footer"
+                className="btn btn-primary btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                {tx(CTA.checkAvailability, locale)}
+              </Link>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="whatsapp_clicked"
+                data-track-context="footer"
+                className="btn btn-outline btn-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                {labels.whatsapp}
+              </a>
+            </div>
           </div>
 
-          {/* Columns on a grout grid: the wall, in miniature. Three while the
-              legal pages are hidden, four once they are published. */}
-          <nav
-            aria-label="Footer"
-            className={`grout grid-cols-2 lg:col-span-8 ${
-              LEGAL_PAGES_VISIBLE
-                ? 'md:grid-cols-4'
-                : // An odd third column would leave an empty grout cell on the
-                  // two-up phone grid, so it takes the whole row there.
-                  'md:grid-cols-3 [&>:last-child]:col-span-2 md:[&>:last-child]:col-span-1'
-            }`}
-          >
+          {/* Columns on a grout grid: the wall, in miniature. The legal links
+              join Support once the legal pages are published. */}
+          <nav aria-label="Footer" className="grout grid-cols-2 md:grid-cols-4 lg:col-span-8">
             {column(
-              labels.services,
-              featuredServices.map((s) => ({ href: serviceHref(s, locale), label: tx(s.name, locale) })),
+              labels.sessions,
+              footerServices.map((s) => ({ href: serviceHref(s, locale), label: tx(s.name, locale) })),
             )}
             {column(
-              labels.cities,
-              featuredCities.map((c) => ({ href: cityHref(c), label: c.name })),
+              labels.destinations,
+              footerCities.map((c) => ({ href: cityHref(c), label: localizedCityName(c, locale) })),
             )}
             {column(labels.company, [
               { href: '/about', label: t('about') },
-              { href: '/blog', label: t('blog') },
-              { href: '/contact', label: t('contact') },
+              ...(hasPhotographers() ? [{ href: '/photographers' as const, label: t('photographers') }] : []),
+              { href: '/portfolio', label: t('portfolio') },
               { href: '/pricing', label: t('pricing') },
               { href: '/reviews', label: labels.reviews },
+              { href: '/blog', label: t('blog') },
+              { href: '/contact', label: t('contact') },
             ])}
-            {LEGAL_PAGES_VISIBLE && column(labels.legal, [
-              { href: '/legal/notice', label: labels.legalNotice },
-              { href: '/legal/privacy', label: labels.privacy },
-              { href: '/legal/terms', label: labels.terms },
-              { href: '/legal/image-rights', label: labels.imageRights },
-              { href: '/legal/photo-credits', label: labels.photoCredits },
+            {column(labels.support, [
+              { external: whatsappHref, label: 'WhatsApp' },
+              { href: { pathname: '/', hash: 'faq' }, label: labels.faq },
+              { href: '/book', label: tx(CTA.checkAvailability, locale) },
               /*
-                Not optional. A provider of services to consumers in Portugal
-                must make the electronic complaints book available, and the
-                link belongs on every page rather than inside a document
-                nobody opens. An e2e test asserts it is here, because this is
-                exactly the kind of thing a footer refactor drops silently.
+                The legal pages are hidden until the company details in
+                `src/lib/legal.ts` are real. When they are published, the
+                complaints book is not optional: a provider of services to
+                consumers in Portugal must link the electronic complaints book
+                from every page, and an e2e test asserts it is here, because this
+                is exactly the kind of thing a footer refactor drops silently.
               */
-              { href: '/legal/complaints', label: labels.complaints },
+              ...(LEGAL_PAGES_VISIBLE
+                ? [
+                    { href: '/legal/terms' as const, label: labels.terms },
+                    {
+                      href: { pathname: '/legal/terms' as const, hash: slugifyHeading(REFUND_HEADING[locale]) },
+                      label: labels.refund,
+                    },
+                    { href: '/legal/privacy' as const, label: labels.privacy },
+                    { href: '/legal/notice' as const, label: labels.legalNotice },
+                    { href: '/legal/image-rights' as const, label: labels.imageRights },
+                    { href: '/legal/photo-credits' as const, label: labels.photoCredits },
+                    { href: '/legal/complaints' as const, label: labels.complaints },
+                  ]
+                : []),
             ])}
           </nav>
         </div>
