@@ -18,8 +18,8 @@ export const META_TITLE: Localized = {
  * images and the description follows it.
  */
 const DESCRIPTION_TEMPLATE: Localized = {
-  en: 'Browse {count} photographs from sessions across twelve places in Portugal — weddings, portraits, families, corporate. Filter by category and book the same shoot.',
-  pt: 'Veja {count} fotografias de sessões em doze sítios de Portugal — casamentos, retratos, famílias, empresas. Filtre por categoria e reserve a mesma sessão.',
+  en: 'Browse {count} illustrative photographs of the sessions you can book in Portugal — couples, families, weddings, portraits. Filter by session and check availability.',
+  pt: 'Veja {count} fotografias ilustrativas das sessões que pode reservar em Portugal — casais, famílias, casamentos, retratos. Filtre por sessão e veja a disponibilidade.',
 };
 
 export function metaDescription(locale: Locale, photoCount: number): string {
@@ -27,8 +27,8 @@ export function metaDescription(locale: Locale, photoCount: number): string {
 }
 
 export const OG_IMAGE_ALT: Localized = {
-  en: 'A frame from the portfolio — sessions photographed across Portugal',
-  pt: 'Uma imagem do portefólio — sessões fotografadas em todo o Portugal',
+  en: 'A frame from the portfolio, illustrating a wedding session',
+  pt: 'Uma imagem do portefólio, a ilustrar uma sessão de casamento',
 };
 
 export const SEO_PROSE = {
@@ -40,15 +40,15 @@ export const SEO_PROSE = {
   paragraphs: {
     en: [
       'The gallery is grouped by the kind of session rather than by date, because that is how anyone looking for a photographer actually browses: you want to see couples, or families, or weddings, and you want to see them in the place you are going to be. Filtering by category and tapping any frame opens it full screen.',
-      'The credits matter more than a gallery page usually admits. Each image on this site is listed on the photo credits page with its photographer and its licence, and licensed stock is marked as such rather than passed off as client work. A portfolio that will not tell you where its photographs came from is telling you something.',
-      'What the gallery is for is calibration, not decoration. Looking at twenty couple sessions from the Algarve tells you what the light does on that coast at the hour those were made, and whether that is what you want. It is a more useful question than whether the photographs are good, because by this point almost everyone’s are.',
-      'If you see a frame you want a version of, the service pages say what each session includes, how long it runs and what it costs, and enquiring needs no deposit.',
+      'The credits matter more than a gallery page usually admits. The photographs here are licensed stock, shown to illustrate each kind of session, and every one is credited under the image to the photographer who made it rather than passed off as client work. Client galleries from our photographers are added as they are published, with the clients’ written consent. A portfolio that will not tell you where its photographs came from is telling you something.',
+      'What the gallery is for is calibration, not decoration. It shows the range each kind of session covers — how posed or candid, how close or wide, how much of the place is in the frame — so that when you check availability you can say what you want in a sentence.',
+      'If you see a frame you want a version of, the session named under it says what it includes, how long it runs and what it costs, and checking availability needs no deposit.',
     ],
     pt: [
       'A galeria está agrupada por tipo de sessão e não por data, porque é assim que quem procura um fotógrafo de facto navega: quer ver casais, ou famílias, ou casamentos, e quer vê-los no sítio onde vai estar. Filtre por categoria e toque numa imagem para a abrir em ecrã inteiro.',
-      'Os créditos importam mais do que uma página de galeria costuma admitir. Cada imagem deste site está listada na página de créditos fotográficos com o respectivo autor e licença, e as imagens de stock licenciadas estão identificadas como tal em vez de passarem por trabalho de cliente. Um portefólio que não lhe diz de onde vêm as fotografias está a dizer-lhe alguma coisa.',
-      'A galeria serve para calibrar, não para decorar. Ver vinte sessões de casal no Algarve diz-lhe o que a luz faz naquela costa à hora a que foram feitas, e se é isso que quer. É uma pergunta mais útil do que se as fotografias são boas, porque a esta altura as de quase toda a gente são.',
-      'Se vir uma imagem de que quer uma versão, as páginas de cada serviço dizem o que a sessão inclui, quanto dura e quanto custa, e pedir orçamento não obriga a sinal nenhum.',
+      'Os créditos importam mais do que uma página de galeria costuma admitir. As fotografias aqui são de stock licenciado, mostradas para ilustrar cada tipo de sessão, e cada uma está creditada por baixo a quem a fez, em vez de passar por trabalho de cliente. As galerias de clientes dos nossos fotógrafos são acrescentadas à medida que são publicadas, com consentimento escrito dos clientes. Um portefólio que não lhe diz de onde vêm as fotografias está a dizer-lhe alguma coisa.',
+      'A galeria serve para calibrar, não para decorar. Mostra o leque que cada tipo de sessão cobre — mais posado ou mais espontâneo, mais perto ou mais aberto, quanto do sítio entra na imagem — para que, quando pedir disponibilidade, consiga dizer numa frase o que quer.',
+      'Se vir uma imagem de que quer uma versão, a sessão indicada por baixo diz o que inclui, quanto dura e quanto custa, e ver disponibilidade não obriga a sinal nenhum.',
     ],
   } as Localized<string[]>,
   facts: {
@@ -56,13 +56,13 @@ export const SEO_PROSE = {
       { label: 'Photographs shown', value: '{count}' },
       { label: 'Categories', value: '7' },
       { label: 'Cities covered', value: '12' },
-      { label: 'Photo credits', value: 'Published' },
+      { label: 'Photo credits', value: 'On every image' },
     ],
     pt: [
       { label: 'Fotografias mostradas', value: '{count}' },
       { label: 'Categorias', value: '9' },
       { label: 'Cidades cobertas', value: '12' },
-      { label: 'Créditos das fotos', value: 'Publicados' },
+      { label: 'Créditos das fotos', value: 'Em cada imagem' },
     ],
   } as Localized<{ label: string; value: string }[]>,
 } as const;

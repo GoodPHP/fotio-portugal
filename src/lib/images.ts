@@ -44,9 +44,37 @@ export function ogImagePath(slot: string): string {
   return IMAGE_SLOTS[slot]?.og ?? DEFAULT_OG_IMAGE;
 }
 
-/** Whether a slot has a photograph at all. */
+/**
+ * Frames the photo pipeline filed under the wrong place, checked by eye: a
+ * river bridge under the Azores, Lisbon rooftops under Braga, Bom Jesus (in
+ * Braga) under Coimbra, the Carmo ruins and the Santa Justa lift (both in
+ * Lisbon) under Évora. Treated as missing until `npm run photos:select`
+ * replaces them — a page captioned with one place and showing another is the
+ * quickest way to lose a visitor who has been there.
+ */
+const MISPLACED_SLOTS = new Set([
+  'gallery/acores/2',
+  'gallery/braga/1',
+  'gallery/braga/2',
+  'gallery/coimbra/3',
+  'gallery/evora/1',
+  'gallery/evora/4',
+]);
+
+/** Whether a slot has a photograph at all — one that shows what it claims to. */
 export function hasImage(slot: string): boolean {
-  return slot in IMAGE_SLOTS;
+  return slot in IMAGE_SLOTS && !MISPLACED_SLOTS.has(slot);
+}
+
+/**
+ * The largest rendered file for a slot, as a root-relative path, for markup
+ * that needs a real image URL (ImageGallery, Person). A slot key is not a
+ * path: the gallery markup used to publish `https://…/portfolio/couple/1`,
+ * which is nothing.
+ */
+export function imagePath(slot: string): string | undefined {
+  const sources = IMAGE_SLOTS[slot]?.webp;
+  return sources?.[sources.length - 1]?.path;
 }
 
 /** Turn a root-relative (or already-absolute) image path into an absolute URL. */

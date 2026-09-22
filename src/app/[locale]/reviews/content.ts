@@ -94,8 +94,14 @@ export const SEO_PROSE = {
 
 /** SEO_PROSE facts with the live rating and review count substituted in. */
 export function seoFacts(locale: Locale, rating: number, count: number) {
-  return tx(SEO_PROSE.facts, locale).map((fact) => ({
-    ...fact,
-    value: fact.value.replace('{rating}', String(rating)).replace('{count}', String(count)),
-  }));
+  return (
+    tx(SEO_PROSE.facts, locale)
+      // With no reviews the rating and count facts would read "0/5" and "0" —
+      // a score that looks like a verdict. They are left out until they exist.
+      .filter((fact) => count > 0 || !/\{rating\}|\{count\}/.test(fact.value))
+      .map((fact) => ({
+        ...fact,
+        value: fact.value.replace('{rating}', String(rating)).replace('{count}', String(count)),
+      }))
+  );
 }

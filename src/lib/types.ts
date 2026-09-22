@@ -209,15 +209,33 @@ export interface BlogPost {
   faqs?: BlogFAQ[];
 }
 
+/**
+ * A client review, and the client story it can carry.
+ *
+ * Real only. Every field comes from a client who booked, with their consent
+ * to publish; `REVIEWS` stays empty until there are such reviews, and every
+ * surface that shows reviews renders nothing while it is. The optional fields
+ * turn a review into a client story — session, length, photographer, a few
+ * frames from the gallery — and are shown only when present.
+ */
 export interface Review {
   id: string;
+  /** As the client agreed to be named: "Sarah & James", "Ana C." */
   name: string;
   citySlug: string;
   cityName: string;
   stars: number;
+  /** ISO date of the session. */
   date: string;
   text: Localized;
   serviceName: Localized;
+  /** Service id, to link the story to the session page. */
+  serviceSlug?: string;
+  durationMinutes?: number;
+  /** Photographer slug, once profiles exist. */
+  photographerSlug?: string;
+  /** Image slots from the client's own gallery, released in writing. */
+  gallery?: string[];
 }
 
 /**

@@ -10,10 +10,14 @@ import {
   publishedCitiesForService,
   serviceSlug,
   serviceExistsIn,
+  localizedCityName,
 } from '@/lib/catalog';
 import { isServicePublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { SITE_NAME, formatPrice, formatDuration, whatsappLink } from '@/lib/site';
+import { SITE_NAME, formatPrice, formatDuration, formatDelivery, whatsappBookingLink } from '@/lib/site';
+import { CTA } from '@/lib/cta';
+import { FROM_PRICE, REPLY_TIME } from '@/lib/promises';
+import { trackAttrs } from '@/lib/analytics';
 import { serviceSlot, absoluteOgImage, ogImagePath, hasImage } from '@/lib/images';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
@@ -33,16 +37,13 @@ import Faq from '@/components/Faq';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
-import {
-  ServiceAudience,
-  ServiceCtaBand,
-  ServicePrepare,
-  ServiceProcess,
-  TrustList,
-  WhatsAppIcon,
-} from '@/components/ServiceLanding';
+import { ServiceAudience, ServicePrepare, ServiceProcess, TrustList } from '@/components/ServiceLanding';
+import { WhatsAppIcon } from '@/components/Icons';
+import CtaPair from '@/components/CtaPair';
+import CtaBand from '@/components/CtaBand';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { portfolioImages } from '@/lib/portfolio';
-import { leafHref, serviceAlternateParams } from '@/lib/routes';
+import { bookHref as bookHrefFor, leafHref, serviceAlternateParams } from '@/lib/routes';
 
 // Fully prerendered — see the note on the leaf route. Releasing the next batch
 // of drip-published pages is a rebuild, not a revalidation.
@@ -135,14 +136,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   // The booking form preselects the service, so the reader arrives at a form
   // that already knows what they came for.
-  const bookHref = { pathname: '/book', query: { service: service.slug } } as const;
+  const bookHref = bookHrefFor({ service });
+  // Places that name this session among their most-booked — the "Lisbon,
+  // Porto, the Algarve and beyond" line under the heading. Taken from each
+  // city's curated list, so it only names places that really offer it.
+  const signaturePlaces = cities.filter((c) => c.topServices.includes(service.slug));
 
   // Every reassurance here is a claim the site already makes elsewhere — the
   // contact page's reply time, the booking page's weather policy and quote —
   // so the service page cannot promise more than the terms do.
   const labels = {
     breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
-    breadcrumbServices: { en: 'Services', pt: 'Serviços' }[locale],
+    breadcrumbServices: { en: 'Sessions', pt: 'Sessões' }[locale],
+    inPortugal: { en: 'in Portugal', pt: 'em Portugal' }[locale],
+    delivery: { en: 'Gallery delivery', pt: 'Entrega da galeria' }[locale],
     includedTitle: { en: 'What’s included', pt: 'O que está incluído' }[locale],
     citiesTitle: { en: `Book ${name} in your city`, pt: `Reservar ${name.toLowerCase()} na sua cidade` }[locale],
     citiesIntro: { en: `Available in ${cities.length} Portuguese cities and destinations. Choose yours.`, pt: `Disponível em ${cities.length} cidades e destinos portugueses. Escolha o seu.` }[locale],
@@ -153,14 +160,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
     from: { en: 'Starting from', pt: 'Desde' }[locale],
     duration: { en: 'Duration', pt: 'Duração' }[locale],
     photos: { en: 'Edited photos', pt: 'Fotografias editadas' }[locale],
-    book: { en: 'Book now', pt: 'Reservar' }[locale],
-    checkDate: { en: 'Check your date', pt: 'Ver disponibilidade' }[locale],
-    whatsapp: { en: 'Ask on WhatsApp', pt: 'Perguntar no WhatsApp' }[locale],
-    noDeposit: { en: 'No deposit to ask for a quote.', pt: 'Pedir orçamento não obriga a sinal.' }[locale],
+    checkAvailability: tx(CTA.checkAvailability, locale),
+    whatsapp: tx(CTA.chatWhatsapp, locale),
+    noDeposit: { en: 'No payment to check availability.', pt: 'Ver disponibilidade não obriga a pagamento.' }[locale],
     trustLabel: { en: 'Booking terms', pt: 'Condições de reserva' }[locale],
     trust: {
-      en: ['Reply within about two hours', 'Price agreed before the session', 'Free reschedule for bad weather'],
-      pt: ['Resposta em cerca de duas horas', 'Preço acordado antes da sessão', 'Remarcação grátis por mau tempo'],
+      en: ['Reply within about 2 hours on working days', 'Price confirmed before you pay', 'Free weather rescheduling'],
+      pt: ['Resposta em cerca de 2 horas nos dias úteis', 'Preço confirmado antes de pagar', 'Remarcação gratuita por mau tempo'],
     }[locale],
     audienceEyebrow: { en: 'Who it is for', pt: 'Para quem é' }[locale],
     audienceHeading: { en: 'Who books this, and why', pt: 'Quem marca, e porquê' }[locale],
@@ -178,17 +184,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
     }[locale],
     ctaHeading: { en: `${name}, from ${price}`, pt: `${name}, desde ${price}` }[locale],
     ctaText: {
-      en: 'Tell us the place and the date. You get a written quote within about two hours during the working day, and the price you are quoted is the price you pay.',
-      pt: 'Diga-nos o sítio e a data. Recebe um orçamento por escrito em cerca de duas horas durante o dia útil, e o preço indicado é o preço que paga.',
+      en: `Tell us the place and the date and we’ll match you with a local photographer. ${tx(REPLY_TIME, 'en')}`,
+      pt: `Diga-nos o sítio e a data e encontramos um fotógrafo local. ${tx(REPLY_TIME, 'pt')}`,
     }[locale],
+    availableIn: { en: 'Popular in', pt: 'Procurada em' }[locale],
+    andMore: { en: 'and beyond', pt: 'e não só' }[locale],
   };
 
-  const waHref = whatsappLink(
-    {
-      en: `Hi ${SITE_NAME}! I’d like to book: ${name}. Could you share availability?`,
-      pt: `Olá ${SITE_NAME}! Gostaria de reservar: ${name}. Que disponibilidade têm?`,
-    }[locale],
-  );
+  const waHref = whatsappBookingLink({ session: name }, locale);
 
   // Catalogue questions first, then the buyer's questions from the landing
   // copy — one list, rendered once and emitted once as FAQPage.
@@ -223,7 +226,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     // advertise a leaf the page does not link to.
     itemListNode(
       cities.map((city) => ({
-        name: city.name,
+        name: localizedCityName(city, locale),
         url: absoluteUrl(locale, '/services/[service]/[city]', {
           ...leafHref(service, city, locale).params,
         }),
@@ -249,15 +252,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
       <section aria-labelledby="service-heading" className="relative overflow-hidden">
         <div className="relative mx-auto grid max-w-[92rem] gap-12 px-6 pb-12 pt-12 lg:grid-cols-12 lg:pt-16">
           <div className="lg:col-span-7">
-            <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
-              <ol className="flex flex-wrap items-center gap-1.5">
-                <li><Link href="/" className="hover:text-brand-orange-deep">{labels.breadcrumbHome}</Link></li>
-                <li aria-hidden="true">/</li>
-                <li><Link href="/services" className="hover:text-brand-orange-deep">{labels.breadcrumbServices}</Link></li>
-                <li aria-hidden="true">/</li>
-                <li className="font-medium text-brand-dark" aria-current="page">{name}</li>
-              </ol>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: labels.breadcrumbHome, href: '/' },
+                { name: labels.breadcrumbServices, href: '/services' },
+                { name },
+              ]}
+            />
 
             <FadeIn instant className="mt-6">
               <div className="relative isolate mb-7 flex aspect-[16/9] flex-col justify-end overflow-hidden rounded-card p-6 text-white sm:p-8">
@@ -272,30 +273,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                 <span className="font-mono text-xs uppercase tracking-widest text-brand-cream">{categoryLabel}</span>
               </div>
+              {/* The heading says what and where — "Couple session in Portugal" —
+                  because that is the query; the promise underneath sells it. */}
               <h1 id="service-heading" className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-brand-dark sm:text-6xl">
-                {name}
+                {name} <span className="text-brand-muted">{labels.inPortugal}</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-dark">
                 {landing ? tx(landing.promise, locale) : description}
               </p>
+              {signaturePlaces.length > 0 && (
+                <p className="mt-3 text-sm text-brand-muted">
+                  {labels.availableIn}{' '}
+                  {signaturePlaces
+                    .slice(0, 4)
+                    .map((c) => localizedCityName(c, locale))
+                    .join(', ')}{' '}
+                  {labels.andMore}
+                </p>
+              )}
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={bookHref}
-                  className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-                >
-                  {labels.checkDate}
-                </Link>
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-                >
-                  <WhatsAppIcon />
-                  {labels.whatsapp}
-                </a>
-              </div>
+              <CtaPair locale={locale} context="hero" service={service} className="mt-8" />
               <TrustList items={labels.trust} label={labels.trustLabel} />
             </FadeIn>
 
@@ -328,21 +325,28 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-brand-muted">{labels.photos}</dt>
-                  <dd className="font-semibold">{service.editedPhotos}+</dd>
+                  <dd className="font-semibold">{service.editedPhotos}</dd>
+                </div>
+                <div className="flex items-center justify-between">
+                  <dt className="text-sm text-brand-muted">{labels.delivery}</dt>
+                  <dd className="font-semibold">{formatDelivery(service.deliveryHours, locale)}</dd>
                 </div>
               </dl>
+              <p className="mt-5 text-xs leading-relaxed text-brand-muted">{tx(FROM_PRICE.body, locale)}</p>
 
               <Link
                 href={bookHref}
-                className="btn btn-primary mt-8 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="btn btn-primary mt-6 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                {...trackAttrs('cta_check_availability', { context: 'price-card', service: service.slug })}
               >
-                {labels.book}
+                {labels.checkAvailability}
               </Link>
               <a
                 href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline mt-3 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                {...trackAttrs('whatsapp_clicked', { context: 'price-card', service: service.slug })}
               >
                 <WhatsAppIcon />
                 {labels.whatsapp}
@@ -378,7 +382,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           eyebrow={labels.processEyebrow}
           heading={labels.processHeading}
           steps={tx(landing.process, locale)}
-          cta={{ href: bookHref, label: labels.checkDate, note: labels.processNote }}
+          cta={{ href: bookHref, label: labels.checkAvailability, note: labels.processNote }}
         />
       )}
 
@@ -410,7 +414,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   className="group flex items-center justify-between rounded-card-sm border border-brand-rule bg-brand-tile px-5 py-5 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
                 >
                   <span>
-                    <span className="block font-display text-lg font-semibold text-brand-dark">{city.name}</span>
+                    <span className="block font-display text-lg font-semibold text-brand-dark">{localizedCityName(city, locale)}</span>
                     <span className="block text-xs text-brand-muted">{tx(city.region, locale)}</span>
                   </span>
                   <span className="text-brand-muted transition-colors group-hover:text-brand-orange-deep" aria-hidden="true">→</span>
@@ -420,6 +424,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </Stagger>
         </div>
       </section>
+
+
+      <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
+
+      <CtaBand
+        headingId="service-cta-heading"
+        heading={labels.ctaHeading}
+        text={labels.ctaText}
+        locale={locale}
+        context="service-final"
+        service={service}
+      />
 
       {seoProse && (
         <SeoProse
@@ -438,25 +454,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
           ]}
         />
       )}
-
-      <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
-
-      <ServiceCtaBand
-        headingId="service-cta-heading"
-        heading={labels.ctaHeading}
-        text={labels.ctaText}
-        bookHref={bookHref}
-        bookLabel={labels.checkDate}
-        whatsappHref={waHref}
-        whatsappLabel={labels.whatsapp}
-      />
-
-      {/*
-        Below desktop only. On a wide screen the price card is already sticky
-        beside the content, and a second pinned bar would sit on top of it.
-      */}
-      <div className="lg:hidden">
-      </div>
     </main>
   );
 }

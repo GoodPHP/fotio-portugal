@@ -14,7 +14,13 @@ import { isCityPublished } from '@/lib/publishSchedule';
 import type { City } from '@/lib/types';
 import { type Locale, tx } from '@/lib/locales';
 import { SITE_NAME, formatPrice } from '@/lib/site';
-import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
+import { citySlot, gallerySlot, hasImage, absoluteOgImage, ogImagePath } from '@/lib/images';
+import { checkAvailabilityIn } from '@/lib/cta';
+import { DELIVERY_TYPICAL, REPLY_TIME, WEATHER } from '@/lib/promises';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CtaPair from '@/components/CtaPair';
+import CtaBand from '@/components/CtaBand';
+import TrackView from '@/components/TrackView';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import {
@@ -31,6 +37,7 @@ import JsonLd from '@/components/JsonLd';
 import Faq from '@/components/Faq';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { cityAlternateParams, leafHref } from '@/lib/routes';
+import { inPlace, placeName } from '@/lib/cta';
 import CityTheme from '@/components/CityTheme';
 
 interface CityPageProps {
@@ -97,7 +104,7 @@ function cityOgImageAlt(city: City, locale: Locale): string {
 
 function cityHeading(city: City, locale: Locale): string {
   return {
-    en: `Photographer in ${localizedCityName(city, 'en')}`,
+    en: `Photographer ${inPlace(city, 'en')}`,
     // "Fotógrafo em Porto" is wrong; `ptAt` contracts it to "no Porto", and
     // "na Madeira", "nos Açores" for the places that are not cities at all.
     pt: `Fotógrafo ${ptAt(city)}`,
@@ -134,42 +141,64 @@ export default async function CityPage({ params }: CityPageProps) {
   const labels = {
     spotsTitle: { en: 'The best photo spots', pt: 'Os melhores locais para fotografar' }[locale],
     spotsIntro: {
-      en: `Here is where to shoot in ${name}, with ideal times and permit notes.`,
+      en: `Here is where to shoot ${inPlace(city, 'en')}, with ideal times and permit notes.`,
       pt: `Onde fotografar ${ptAt(city)}, com as horas certas e as autorizações a ter em conta.`,
     }[locale],
     bestTime: { en: 'Best time', pt: 'Melhor hora' }[locale],
     permit: { en: 'Permits', pt: 'Autorizações' }[locale],
     galleryTitle: { en: 'Photographs of this city', pt: 'Fotografias deste sítio' }[locale],
     seasonTitle: {
-      en: `When to visit ${name} for photos?`,
+      en: `When to visit ${placeName(city)} for photos?`,
       pt: `Quando vir ${ptWith('a', city)} para fotografar?`,
     }[locale],
     servicesTitle: {
-      en: `Photography services in ${name}`,
-      pt: `Serviços de fotografia ${ptAt(city)}`,
+      en: `Sessions ${inPlace(city, 'en')}`,
+      pt: `Sessões ${ptAt(city)}`,
     }[locale],
     faqTitle: {
-      en: `Frequently asked questions about ${name}`,
+      en: `Frequently asked questions about ${placeName(city)}`,
       pt: `Perguntas frequentes sobre ${ptName(city)}`,
     }[locale],
     coverageTitle: {
-      en: `Also covered from ${name}`,
+      en: `Also covered from ${placeName(city)}`,
       pt: `${upperFirst(ptOf(city))}, também cobrimos`,
     }[locale],
     coverageIntro: {
-      en: `These come under the ${name} rate: a photographer travels out from the city at no extra charge, and the session is priced exactly as it would be in ${name} itself.`,
+      en: `These come under the ${name} rate: a photographer travels out at no extra charge, and the session is priced exactly as it would be ${inPlace(city, 'en')} itself.`,
       pt: `Ficam ao preço ${ptOf(city)}: o fotógrafo desloca-se sem custo adicional e a sessão custa exactamente o mesmo que custaria ${ptAt(city)}.`,
     }[locale],
     breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
-    breadcrumbCities: { en: 'Cities', pt: 'Cidades' }[locale],
+    breadcrumbCities: { en: 'Destinations', pt: 'Destinos' }[locale],
+    galleryNote: {
+      en: 'Illustrative photography of the place, not client work.',
+      pt: 'Fotografia ilustrativa do sítio, não trabalho de clientes.',
+    }[locale],
+    ctaHeading: {
+      en: `Planning photos ${inPlace(city, 'en')}?`,
+      pt: `Vai fotografar ${ptAt(city)}?`,
+    }[locale],
+    ctaText: {
+      en: `Tell us your date and the kind of session, and we’ll match you with a local photographer. ${tx(REPLY_TIME, 'en')}`,
+      pt: `Diga-nos a data e o tipo de sessão e encontramos um fotógrafo local. ${tx(REPLY_TIME, 'pt')}`,
+    }[locale],
+    weatherQ: { en: `What if it rains on the day?`, pt: 'E se chover no dia?' }[locale],
+    deliveryQ: { en: 'How soon do we get the photos?', pt: 'Quando recebemos as fotografias?' }[locale],
     from: { en: 'from', pt: 'desde' }[locale],
     popular: { en: 'Popular', pt: 'Popular' }[locale],
   };
 
-  const faqEntries = city.faqs.map((f) => ({
-    question: tx(f.question, locale),
-    answer: tx(f.answer, locale),
-  }));
+  // The city's own questions, then the two every visitor asks wherever they
+  // are going, answered in the words the Terms use.
+  const faqEntries = [
+    ...city.faqs.map((f) => ({ question: tx(f.question, locale), answer: tx(f.answer, locale) })),
+    { question: labels.weatherQ, answer: tx(WEATHER.body, locale) },
+    { question: labels.deliveryQ, answer: tx(DELIVERY_TYPICAL.sentence, locale) },
+  ];
+
+  // Photographs of the place itself. The catalogue's `gallery` field is empty
+  // everywhere, and the four frames the photo pipeline fetched for each city
+  // were never shown; they are illustrative, and labelled as such.
+  const gallery = (city.gallery?.length ? city.gallery.map((g) => g.src) : [1, 2, 3, 4].map((i) => gallerySlot(city.slug, i))).filter(hasImage);
 
   const cityUrl = absoluteUrl(locale, '/cities/[city]', { city: city.slug });
   const servicesListId = `${cityUrl}#services`;
@@ -220,19 +249,18 @@ export default async function CityPage({ params }: CityPageProps) {
     <CityTheme theme={city.theme}>
       <main>
       <JsonLd data={jsonLd} />
+      <TrackView event="destination_viewed" props={{ city: city.slug }} />
 
       {/* Hero */}
       <section aria-labelledby="city-heading" className="relative">
         <div className="mx-auto max-w-[92rem] px-6 pt-12 lg:pt-16">
-          <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
-            <ol className="flex flex-wrap items-center gap-1.5">
-              <li><Link href="/" className="hover:text-brand-orange-deep">{labels.breadcrumbHome}</Link></li>
-              <li aria-hidden="true">/</li>
-              <li><Link href="/cities" className="hover:text-brand-orange-deep">{labels.breadcrumbCities}</Link></li>
-              <li aria-hidden="true">/</li>
-              <li className="font-medium text-brand-dark" aria-current="page">{name}</li>
-            </ol>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { name: labels.breadcrumbHome, href: '/' },
+              { name: labels.breadcrumbCities, href: '/cities' },
+              { name },
+            ]}
+          />
 
           {/*
             The title above the photograph rather than on top of it.
@@ -253,6 +281,14 @@ export default async function CityPage({ params }: CityPageProps) {
             >
               {heading}
             </h1>
+            <p className="measure mt-5 text-lg leading-relaxed text-brand-muted">{tx(city.lede, locale)}</p>
+            <CtaPair
+              locale={locale}
+              context="hero"
+              city={city}
+              primaryLabel={checkAvailabilityIn(city, locale)}
+              className="mt-8"
+            />
           </FadeIn>
 
           <FadeIn instant delay={0.05} className="mt-8">
@@ -282,43 +318,72 @@ export default async function CityPage({ params }: CityPageProps) {
         </div>
       </section>
 
+      {/* Services in this city */}
+      <section aria-labelledby="city-services-heading" className="mx-auto max-w-[92rem] px-6 py-16">
+        <FadeIn>
+          <h2 id="city-services-heading" className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
+            {labels.servicesTitle}
+          </h2>
+        </FadeIn>
+        <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {orderedServices.map((service) => {
+            const isTop = topSet.has(service.slug);
+            return (
+              <StaggerItem key={service.slug}>
+                <Link
+                  href={leafHref(service, city, locale)}
+                  className="bento-card group flex h-full flex-col justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-lg font-semibold text-brand-dark">{tx(service.name, locale)}</h3>
+                      {isTop && (
+                        <span className="font-mono shrink-0 bg-brand-orange-deep px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-white">
+                          {labels.popular}
+                        </span>
+                      )}
+                    </div>
+                    {service.description && (
+                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-brand-muted">{tx(service.description, locale)}</p>
+                    )}
+                  </div>
+                  <span className="text-sm text-brand-muted">
+                    {labels.from} <strong className="text-brand-dark">{formatPrice(service.initialPrice, locale)}</strong>
+                  </span>
+                </Link>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
+      </section>
+
       {/*
         The city, photographed. An uneven strip so it reads as a spread rather
         than a row of thumbnails, with the caption under each frame where we
         know what it shows.
       */}
-      {city.gallery && city.gallery.length > 0 && (
+      {gallery.length > 0 && (
         <section aria-labelledby="gallery-heading" className="mx-auto max-w-[92rem] px-6 pt-[var(--space-band)]">
           <h2 id="gallery-heading" className="sr-only">
             {labels.galleryTitle}
           </h2>
           <Stagger className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-12">
-            {city.gallery.slice(0, 4).map((shot, i) => {
+            {gallery.slice(0, 4).map((slot, i) => {
               // 7/5 · 5/7 — the row breaks the other way each time.
               const span = ['lg:col-span-7', 'lg:col-span-5', 'lg:col-span-5', 'lg:col-span-7'][i % 4];
               const wide = span.endsWith('7');
               return (
-                <StaggerItem key={shot.src} className={`col-span-1 ${span}`}>
+                <StaggerItem key={slot} className={`col-span-1 ${span}`}>
                   <figure>
                     <div className={`relative overflow-hidden ${wide ? 'aspect-[3/2]' : 'aspect-[4/5]'}`}>
-                      <Picture
-                        slot={shot.src}
-                        alt={tx(shot.alt, locale)}
-                        sizes="(max-width: 1024px) 50vw, 40vw"
-                        className="object-cover"
-                        fill
-                      />
+                      <Picture slot={slot} alt={`${name} — ${i + 1}`} sizes="(max-width: 1024px) 50vw, 40vw" className="object-cover" fill />
                     </div>
-                    {shot.caption && (
-                      <figcaption className="mt-2.5 border-t border-brand-rule pt-2 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-brand-muted">
-                        {tx(shot.caption, locale)}
-                      </figcaption>
-                    )}
                   </figure>
                 </StaggerItem>
               );
             })}
           </Stagger>
+          <p className="mt-4 text-xs text-brand-muted">{labels.galleryNote}</p>
         </section>
       )}
 
@@ -365,44 +430,6 @@ export default async function CityPage({ params }: CityPageProps) {
         </div>
       </section>
 
-      {/* Services in this city */}
-      <section aria-labelledby="city-services-heading" className="mx-auto max-w-[92rem] px-6 py-16">
-        <FadeIn>
-          <h2 id="city-services-heading" className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
-            {labels.servicesTitle}
-          </h2>
-        </FadeIn>
-        <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {orderedServices.map((service) => {
-            const isTop = topSet.has(service.slug);
-            return (
-              <StaggerItem key={service.slug}>
-                <Link
-                  href={leafHref(service, city, locale)}
-                  className="bento-card group flex h-full flex-col justify-between gap-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-display text-lg font-semibold text-brand-dark">{tx(service.name, locale)}</h3>
-                      {isTop && (
-                        <span className="font-mono shrink-0 bg-brand-orange-deep px-2.5 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-white">
-                          {labels.popular}
-                        </span>
-                      )}
-                    </div>
-                    {service.description && (
-                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-brand-muted">{tx(service.description, locale)}</p>
-                    )}
-                  </div>
-                  <span className="text-sm text-brand-muted">
-                    {labels.from} <strong className="text-brand-dark">{formatPrice(service.initialPrice, locale)}</strong>
-                  </span>
-                </Link>
-              </StaggerItem>
-            );
-          })}
-        </Stagger>
-      </section>
 
       {/*
         Covered communes. Authored on every city but rendered nowhere until now:
@@ -459,6 +486,16 @@ export default async function CityPage({ params }: CityPageProps) {
       )}
 
       <Faq headingId="city-faq-heading" title={labels.faqTitle} entries={faqEntries} />
+
+      <CtaBand
+        headingId="city-cta-heading"
+        heading={labels.ctaHeading}
+        text={labels.ctaText}
+        locale={locale}
+        context="city-final"
+        city={city}
+        primaryLabel={checkAvailabilityIn(city, locale)}
+      />
       </main>
     </CityTheme>
   );

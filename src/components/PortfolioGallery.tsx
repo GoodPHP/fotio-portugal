@@ -4,6 +4,9 @@ import { useMemo, useState } from 'react';
 import Picture from '@/components/Picture';
 import { FadeIn } from '@/components/Motion';
 import Lightbox from '@/components/Lightbox';
+import { track } from '@/lib/analytics';
+import type { ComponentProps } from 'react';
+import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/lib/locales';
 
 export interface GalleryPhoto {
@@ -12,6 +15,16 @@ export interface GalleryPhoto {
   category: string;
   /** Per-image alt text. */
   alt: string;
+  /** The session this photograph illustrates, linked with its price. */
+  session?: { name: string; href: ComponentProps<typeof Link>['href']; price: string };
+  /**
+   * The place it was taken, when it is known. Stock photographs have none,
+   * and are not given one: the destination filter appears only once real,
+   * tagged client work exists.
+   */
+  place?: { value: string; label: string };
+  /** Photographer credit, shown under the image. */
+  credit?: { name: string; url: string };
 }
 
 export interface GalleryCategory {
@@ -36,6 +49,10 @@ const UI = {
   showing: { en: 'Showing', pt: 'A mostrar' },
   of: { en: 'of', pt: 'de' },
   zoom: { en: 'Open full screen', pt: 'Abrir em ecrã inteiro' },
+  bySession: { en: 'By session', pt: 'Por sessão' },
+  byPlace: { en: 'By destination', pt: 'Por destino' },
+  anywhere: { en: 'Anywhere', pt: 'Qualquer sítio' },
+  photo: { en: 'Photo', pt: 'Foto' },
 } as const;
 
 function t(key: keyof typeof UI, locale: Locale): string {
@@ -57,12 +74,22 @@ export default function PortfolioGallery({
   batch = 24,
 }: PortfolioGalleryProps) {
   const [active, setActive] = useState<string>('all');
+  const [place, setPlace] = useState<string>('all');
   const [visibleCount, setVisibleCount] = useState(initialCount);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const places = useMemo(() => {
+    const seen = new Map<string, string>();
+    for (const p of photos) if (p.place) seen.set(p.place.value, p.place.label);
+    return [...seen].map(([value, label]) => ({ value, label }));
+  }, [photos]);
+
   const filtered = useMemo(
-    () => (active === 'all' ? photos : photos.filter((p) => p.category === active)),
-    [photos, active],
+    () =>
+      photos.filter(
+        (p) => (active === 'all' || p.category === active) && (place === 'all' || p.place?.value === place),
+      ),
+    [photos, active, place],
   );
 
   const visible = filtered.slice(0, visibleCount);
@@ -71,6 +98,13 @@ export default function PortfolioGallery({
   function selectCategory(value: string) {
     setActive(value);
     setVisibleCount(initialCount);
+    track('portfolio_interaction', { action: 'filter-session', value });
+  }
+
+  function selectPlace(value: string) {
+    setPlace(value);
+    setVisibleCount(initialCount);
+    track('portfolio_interaction', { action: 'filter-destination', value });
   }
 
   return (
@@ -78,7 +112,7 @@ export default function PortfolioGallery({
       <FadeIn>
         <div
           role="group"
-          aria-label={t('all', locale)}
+          aria-label={t('bySession', locale)}
           className="flex flex-wrap justify-center gap-2"
         >
           <FilterChip active={active === 'all'} onClick={() => selectCategory('all')}>
@@ -94,6 +128,18 @@ export default function PortfolioGallery({
             </FilterChip>
           ))}
         </div>
+        {places.length > 0 && (
+          <div role="group" aria-label={t('byPlace', locale)} className="mt-3 flex flex-wrap justify-center gap-2">
+            <FilterChip active={place === 'all'} onClick={() => selectPlace('all')}>
+              {t('anywhere', locale)}
+            </FilterChip>
+            {places.map((p) => (
+              <FilterChip key={p.value} active={place === p.value} onClick={() => selectPlace(p.value)}>
+                {p.label}
+              </FilterChip>
+            ))}
+          </div>
+        )}
         <p className="font-mono mt-6 text-center text-[0.6875rem] uppercase tracking-[0.16em] text-brand-muted" aria-live="polite">
           {t('showing', locale)} {visible.length} {t('of', locale)} {filtered.length} {t('photos', locale)}
         </p>
@@ -101,12 +147,15 @@ export default function PortfolioGallery({
 
       <div className="mt-10 gap-3 [column-fill:_balance] columns-2 sm:columns-3 lg:columns-4">
         {visible.map((photo, i) => (
+          <figure key={`${photo.src}-${i}`} className="mb-4 break-inside-avoid">
           <button
-            key={`${photo.src}-${i}`}
             type="button"
-            onClick={() => setOpenIndex(i)}
+            onClick={() => {
+              setOpenIndex(i);
+              track('portfolio_interaction', { action: 'open', value: photo.src });
+            }}
             aria-label={`${t('zoom', locale)} — ${photo.alt}`}
-            className={`${TILE_CLASS} mb-3 break-inside-avoid`}
+            className={TILE_CLASS}
           >
             <span className={`relative block ${ASPECTS[i % ASPECTS.length]}`}>
               <Picture
@@ -128,6 +177,31 @@ export default function PortfolioGallery({
               </span>
             </span>
           </button>
+          {(photo.session || photo.credit) && (
+            <figcaption className="mt-1.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-xs">
+              {photo.session && (
+                <Link
+                  href={photo.session.href}
+                  className="font-medium text-brand-dark transition-colors hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
+                  data-track="session_selected"
+                  data-track-context="portfolio"
+                >
+                  {photo.session.name} · {photo.session.price}
+                </Link>
+              )}
+              {photo.credit && (
+                <a
+                  href={photo.credit.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-muted hover:text-brand-dark"
+                >
+                  {t('photo', locale)}: {photo.credit.name}
+                </a>
+              )}
+            </figcaption>
+          )}
+          </figure>
         ))}
       </div>
 

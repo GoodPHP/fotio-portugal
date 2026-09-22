@@ -69,8 +69,8 @@ export const WEATHER = {
 export const FROM_PRICE = {
   title: { en: 'What “from” means', pt: 'O que quer dizer “desde”' } as Localized,
   body: {
-    en: 'A “from” price covers exactly the session length, the number of edited photos and the delivery time listed with it. Anything beyond that — extra time, a second location further away, a second photographer, express delivery — is quoted in writing before you pay anything.',
-    pt: 'Um preço “desde” cobre exatamente a duração, o número de fotografias editadas e o prazo de entrega indicados. Tudo o que for além disso — mais tempo, um segundo local mais afastado, um segundo fotógrafo, entrega expresso — é orçamentado por escrito antes de pagar o que quer que seja.',
+    en: 'A “from” price covers exactly the session length, the number of edited photos and the delivery time listed with it. Anything beyond that — extra time, a second photographer, express delivery — is quoted in writing before you pay anything.',
+    pt: 'Um preço “desde” cobre exatamente a duração, o número de fotografias editadas e o prazo de entrega indicados. Tudo o que for além disso — mais tempo, um segundo fotógrafo, entrega expresso — é orçamentado por escrito antes de pagar o que quer que seja.',
   } as Localized,
   noHiddenFees: {
     en: 'No hidden fees. Your final price is confirmed before booking.',

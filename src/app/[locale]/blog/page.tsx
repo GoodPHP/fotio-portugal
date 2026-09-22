@@ -41,7 +41,7 @@ const COPY = {
     en: 'Tell us the place and the date. A written quote within about two hours during the working day, and nothing to pay to ask.',
     pt: 'Diga-nos o sítio e a data. Orçamento por escrito em cerca de duas horas durante o dia útil, e não paga nada para perguntar.',
   },
-  ctaBook: { en: 'Check your date', pt: 'Ver disponibilidade' },
+  ctaBook: { en: 'Check availability', pt: 'Ver disponibilidade' },
   ctaServices: { en: 'See the services', pt: 'Ver os serviços' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;

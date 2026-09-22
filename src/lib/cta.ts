@@ -30,11 +30,15 @@ export const CTA = {
  */
 const EN_WITH_ARTICLE = new Set(['algarve', 'acores', 'douro']);
 
+/** "Lisbon" · "the Azores" — an English place name as it sits mid-sentence. */
+export function placeName(city: City): string {
+  const name = city.nameLocalized ? tx(city.nameLocalized, 'en') : city.name;
+  return `${EN_WITH_ARTICLE.has(city.slug) ? 'the ' : ''}${name}`;
+}
+
 /** "in Lisbon" · "in the Azores" · "no Porto" · "nos Açores" — a place, as a location phrase. */
 export function inPlace(city: City, locale: Locale): string {
-  if (locale === 'pt') return ptAt(city);
-  const name = city.nameLocalized ? tx(city.nameLocalized, locale) : city.name;
-  return `in ${EN_WITH_ARTICLE.has(city.slug) ? 'the ' : ''}${name}`;
+  return locale === 'pt' ? ptAt(city) : `in ${placeName(city)}`;
 }
 
 /** "Check availability in Lisbon" · "Ver disponibilidade no Porto". */

@@ -8,6 +8,10 @@ import { absoluteUrl } from '@/lib/urls';
 import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CtaBand from '@/components/CtaBand';
+import GuaranteeBlock from '@/components/GuaranteeBlock';
+import { ClientStoryCard } from '@/components/ClientStories';
 import { OG_IMAGE_ALT, SEO_PROSE, metaTitle, metaDescription, seoFacts } from './content';
 import { SITE_NAME } from '@/lib/site';
 
@@ -102,9 +106,11 @@ export default async function ReviewsPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+    <main>
       <JsonLd data={jsonLd} />
-      <header className="max-w-3xl">
+      <div className="mx-auto max-w-[92rem] px-6 pt-8 sm:pt-10">
+      <Breadcrumbs items={[{ name: c('breadcrumbHome', locale), href: '/' }, { name: c('title', locale) }]} />
+      <header className="mt-8 max-w-3xl">
         <p className="eyebrow">
           {c('eyebrow', locale)}
         </p>
@@ -136,28 +142,37 @@ export default async function ReviewsPage({
         )}
       </header>
 
-      <section className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3">
-        {REVIEWS.map((r) => (
-          <article
-            key={r.id}
-            className="mb-5 break-inside-avoid rounded-card border border-brand-rule bg-brand-tile p-6 transition"
-          >
-            <Stars count={r.stars} />
-            <blockquote className="mt-4 text-brand-dark">
-              <p>“{tx(r.text, locale)}”</p>
-            </blockquote>
-            <footer className="mt-5 border-t border-brand-rule pt-4">
-              <p className="font-semibold text-brand-dark">{r.name}</p>
-              <p className="text-sm text-brand-muted">
-                {tx(r.serviceName, locale)} · {r.cityName}
-              </p>
-            </footer>
-          </article>
-        ))}
-      </section>
+      {REVIEWS.length > 0 && (
+        <section className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {REVIEWS.map((r) => (
+            <ClientStoryCard key={r.id} review={r} locale={locale} />
+          ))}
+        </section>
+      )}
+      </div>
+
+      {/* The guarantee does not depend on a review, and is the reason a review
+          can be honest: a refund and a bad review can coexist. */}
+      <div className="mt-[var(--space-band)]">
+        <GuaranteeBlock locale={locale} />
+      </div>
+
+      <CtaBand
+        headingId="reviews-cta-heading"
+        heading={
+          reviewCount > 0
+            ? { en: 'Ready for your own session?', pt: 'Pronto para a sua sessão?' }[locale]
+            : { en: 'Be one of the first stories here', pt: 'Seja uma das primeiras histórias aqui' }[locale]
+        }
+        text={{
+          en: 'Tell us where and when, and we’ll match you with a local photographer. We reply within about 2 hours during the working day.',
+          pt: 'Diga-nos onde e quando e encontramos um fotógrafo local. Respondemos em cerca de 2 horas, durante o dia útil.',
+        }[locale]}
+        locale={locale}
+        context="reviews-final"
+      />
 
       <SeoProse
-        nested
         headingId="reviews-seo-heading"
         eyebrow={tx(SEO_PROSE.eyebrow, locale)}
         heading={tx(SEO_PROSE.heading, locale)}

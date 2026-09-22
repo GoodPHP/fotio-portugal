@@ -15,7 +15,10 @@ import {
 } from '@/lib/catalog';
 import { isLeafPublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
-import { SITE_NAME, formatPrice, formatDuration, whatsappLink } from '@/lib/site';
+import { formatPrice, formatDuration, formatDelivery, whatsappBookingLink } from '@/lib/site';
+import { CTA, checkAvailabilityIn, inPlace } from '@/lib/cta';
+import { FROM_PRICE, REPLY_TIME } from '@/lib/promises';
+import { trackAttrs } from '@/lib/analytics';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import { serviceSlot, citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
@@ -31,7 +34,10 @@ import JsonLd from '@/components/JsonLd';
 import { FadeIn } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { portfolioImages } from '@/lib/portfolio';
-import { leafAlternateParams, leafHref, serviceHref } from '@/lib/routes';
+import { bookHref, leafAlternateParams, leafHref, serviceHref } from '@/lib/routes';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CtaBand from '@/components/CtaBand';
+import { WhatsAppIcon } from '@/components/Icons';
 import { ptAt } from '@/lib/pt-grammar';
 import CityTheme from '@/components/CityTheme';
 
@@ -109,28 +115,37 @@ export default async function LeafPage({ params }: LeafPageProps) {
   const labels = {
     answerEyebrow: { en: 'In short', pt: 'Em resumo' }[locale],
     breadcrumbHome: { en: 'Home', pt: 'Início' }[locale],
-    breadcrumbServices: { en: 'Services', pt: 'Serviços' }[locale],
+    breadcrumbServices: { en: 'Sessions', pt: 'Sessões' }[locale],
+    delivery: { en: 'Gallery delivery', pt: 'Entrega da galeria' }[locale],
+    ctaHeading: {
+      en: `${serviceName} ${inPlace(city, 'en')}, from ${formatPrice(service.initialPrice, 'en')}`,
+      pt: `${serviceName} ${inPlace(city, 'pt')}, desde ${formatPrice(service.initialPrice, 'pt')}`,
+    }[locale],
+    ctaText: {
+      en: `Tell us your date and we’ll match you with a local photographer. ${tx(REPLY_TIME, 'en')}`,
+      pt: `Diga-nos a data e encontramos um fotógrafo local. ${tx(REPLY_TIME, 'pt')}`,
+    }[locale],
     aboutTitle: {
-      en: `Why choose ${serviceName} in ${cityLabel}?`,
+      en: `Why choose ${serviceName} ${inPlace(city, 'en')}?`,
       pt: `Porquê ${serviceName.toLowerCase()} ${ptAt(city)}?`,
     }[locale],
     routeTitle: {
-      en: `What does the session in ${cityLabel} look like?`,
+      en: `What does the session ${inPlace(city, 'en')} look like?`,
       pt: `Como decorre a sessão ${ptAt(city)}?`,
     }[locale],
     detailsTitle: { en: 'What does the package include?', pt: 'O que inclui o pacote?' }[locale],
     faqTitle: {
-      en: `FAQ — ${serviceName} in ${cityLabel}`,
+      en: `FAQ — ${serviceName} ${inPlace(city, 'en')}`,
       pt: `Perguntas frequentes — ${serviceName.toLowerCase()} ${ptAt(city)}`,
     }[locale],
     from: { en: 'Starting from', pt: 'Desde' }[locale],
     duration: { en: 'Duration', pt: 'Duração' }[locale],
     photos: { en: 'Edited photos', pt: 'Fotografias editadas' }[locale],
-    book: { en: 'Book online', pt: 'Reservar online' }[locale],
-    whatsapp: { en: 'Ask on WhatsApp', pt: 'Perguntar no WhatsApp' }[locale],
+    book: checkAvailabilityIn(city, locale),
+    whatsapp: tx(CTA.chatWhatsapp, locale),
     portfolioEyebrow: { en: 'Portfolio', pt: 'Portefólio' }[locale],
     portfolioTitle: {
-      en: `${serviceName} in ${cityLabel}`,
+      en: `${serviceName} ${inPlace(city, 'en')}`,
       pt: `${serviceName} ${ptAt(city)}`,
     }[locale],
     portfolioSubtitle: {
@@ -138,7 +153,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
       pt: `Uma selecção de fotografias de ${serviceName.toLowerCase()} para inspirar a sua sessão.`,
     }[locale],
     relatedServicesTitle: {
-      en: `Other services in ${cityLabel}`,
+      en: `Other services ${inPlace(city, 'en')}`,
       pt: `Outros serviços ${ptAt(city)}`,
     }[locale],
     nearbyTitle: {
@@ -147,11 +162,8 @@ export default async function LeafPage({ params }: LeafPageProps) {
     }[locale],
   };
 
-  // WhatsApp prefilled message naming service + city.
-  const waMessage = {
-    en: `Hi ${SITE_NAME}! I’d like to book ${serviceName} in ${cityLabel}. Could you share more details?`,
-    pt: `Olá ${SITE_NAME}! Gostaria de reservar: ${serviceName} ${ptAt(city)}. Pode dar-me mais informações?`,
-  }[locale];
+  const waHref = whatsappBookingLink({ where: cityLabel, session: serviceName }, locale);
+  const track = { context: 'leaf-price-card', service: service.slug, city: city.slug };
 
   // Related: other tailored services in the same city (published leaves only),
   // offered in this language — a city's topServices mix English-only and
@@ -216,17 +228,14 @@ export default async function LeafPage({ params }: LeafPageProps) {
       <JsonLd data={jsonLd} />
 
       <div className="mx-auto max-w-[92rem] px-6 pt-12 lg:pt-16">
-        <nav aria-label="Breadcrumb" className="text-sm text-brand-muted">
-          <ol className="flex flex-wrap items-center gap-1.5">
-            <li><Link href="/" className="hover:text-brand-orange-deep">{labels.breadcrumbHome}</Link></li>
-            <li aria-hidden="true">/</li>
-            <li><Link href="/services" className="hover:text-brand-orange-deep">{labels.breadcrumbServices}</Link></li>
-            <li aria-hidden="true">/</li>
-            <li><Link href={serviceHref(service, locale)} className="hover:text-brand-orange-deep">{serviceName}</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="font-medium text-brand-dark" aria-current="page">{cityLabel}</li>
-          </ol>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { name: labels.breadcrumbHome, href: '/' },
+            { name: labels.breadcrumbServices, href: '/services' },
+            { name: serviceName, href: serviceHref(service, locale) },
+            { name: cityLabel },
+          ]}
+        />
       </div>
 
       <div className="mx-auto grid max-w-[92rem] gap-12 px-6 pb-12 pt-6 lg:grid-cols-12">
@@ -235,7 +244,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
           <FadeIn instant>
             <p className="eyebrow">{region}</p>
             <h1 className="mt-3 font-display text-4xl font-bold leading-[1.08] tracking-tight text-brand-dark sm:text-5xl">
-              {serviceName} <span className="text-brand-muted">·</span> {cityLabel}
+              {serviceName} <span className="text-brand-muted">{inPlace(city, locale)}</span>
             </h1>
           </FadeIn>
 
@@ -312,25 +321,30 @@ export default async function LeafPage({ params }: LeafPageProps) {
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-brand-muted">{labels.photos}</dt>
-                <dd className="font-semibold">{service.editedPhotos}+</dd>
+                <dd className="font-semibold">{service.editedPhotos}</dd>
+              </div>
+              <div className="flex items-center justify-between">
+                <dt className="text-sm text-brand-muted">{labels.delivery}</dt>
+                <dd className="font-semibold">{formatDelivery(service.deliveryHours, locale)}</dd>
               </div>
             </dl>
+            <p className="mt-5 text-xs leading-relaxed text-brand-muted">{tx(FROM_PRICE.body, locale)}</p>
 
             <Link
-              href="/book"
-              className="btn btn-primary mt-8 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              href={bookHref({ service, city })}
+              className="btn btn-primary mt-6 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              {...trackAttrs('cta_check_availability', track)}
             >
               {labels.book}
             </Link>
             <a
-              href={whatsappLink(waMessage)}
+              href={waHref}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline mt-3 w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              {...trackAttrs('whatsapp_clicked', track)}
             >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.16c-.24.68-1.42 1.32-1.96 1.36-.5.05-.5.42-3.15-.66-2.66-1.08-4.31-3.83-4.44-4.01-.13-.18-1.06-1.41-1.06-2.69 0-1.27.67-1.9.91-2.16.24-.26.52-.32.7-.32.17 0 .35 0 .5.01.16.01.38-.06.59.45.24.59.81 2.04.88 2.19.07.15.12.32.02.51-.09.18-.14.3-.28.46-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.13.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.22.61-.13.24.09 1.55.73 1.81.86.27.13.45.2.51.31.06.11.06.64-.18 1.32z" />
-              </svg>
+              <WhatsAppIcon />
               {labels.whatsapp}
             </a>
           </div>
@@ -391,13 +405,24 @@ export default async function LeafPage({ params }: LeafPageProps) {
                 href={leafHref(service, nearby, locale)}
                 className="group flex items-center justify-between rounded-chip border border-brand-rule bg-brand-tile px-4 py-4 transition-all hover:border-brand-orange/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
               >
-                <span className="font-display font-semibold text-brand-dark">{nearby.name}</span>
+                <span className="font-display font-semibold text-brand-dark">{localizedCityName(nearby, locale)}</span>
                 <span className="text-brand-muted transition-colors group-hover:text-brand-orange-deep" aria-hidden="true">→</span>
               </Link>
             ))}
           </div>
         </section>
       )}
+
+      <CtaBand
+        headingId="leaf-cta-heading"
+        heading={labels.ctaHeading}
+        text={labels.ctaText}
+        locale={locale}
+        context="leaf-final"
+        service={service}
+        city={city}
+        primaryLabel={labels.book}
+      />
       </main>
     </CityTheme>
   );

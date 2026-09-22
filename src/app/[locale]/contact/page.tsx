@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, webPageNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
 import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
-import { SITE_NAME, whatsappLink } from '@/lib/site';
+import { whatsappBookingLink } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
@@ -27,7 +27,6 @@ const COPY = {
   },
   whatsappTitle: { en: 'Prefer to chat?', pt: 'Prefere conversar?' },
   whatsappCta: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' },
-  whatsappMsg: { en: `Hi ${SITE_NAME}! I would like information about a photo service.`, pt: `Olá ${SITE_NAME}! Gostaria de informações sobre um serviço de fotografia.` },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
 
@@ -96,7 +95,7 @@ export default async function ContactPage({
           <div data-surface="dark" className="mt-8 rounded-card bg-brand-dark p-6 text-white">
             <h2 className="font-display text-lg font-semibold">{c('whatsappTitle', locale)}</h2>
             <a
-              href={whatsappLink(c('whatsappMsg', locale))}
+              href={whatsappBookingLink({}, locale)}
               target="_blank"
               rel="noopener noreferrer"
               className="btn mt-4 bg-[#25D366] text-brand-dark hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep"
