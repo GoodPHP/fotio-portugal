@@ -73,6 +73,20 @@ export function blogHref(slug: string) {
   return { pathname: '/blog/[slug]', params: { slug } } as const;
 }
 
+/**
+ * The booking form, prefilled with whatever the page already knows.
+ *
+ * The service goes by its stable id rather than its localized slug: the form
+ * lists services by id, and the id survives a language switch on /book.
+ */
+export function bookHref(context: { service?: Service; city?: City; photographer?: string } = {}) {
+  const query: Record<string, string> = {};
+  if (context.service) query.service = context.service.slug;
+  if (context.city) query.city = context.city.slug;
+  if (context.photographer) query.photographer = context.photographer;
+  return { pathname: '/book', query } as const;
+}
+
 // ---------------------------------------------------------------------------
 // Slug-only variants, for client components that receive projected data rather
 // than whole catalogue entries. The slug they are given must already be the one

@@ -24,7 +24,6 @@ const OG_PHOTO = '/images/portfolio/wedding/1.jpg';
 const MARKED_UP_PHOTOS = 24;
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGallery, { type GalleryCategory } from '@/components/PortfolioGallery';
-import PortfolioStickyCta from '@/components/PortfolioStickyCta';
 
 const COPY = {
   title: { en: 'Portfolio', pt: 'Portefólio' },
@@ -330,12 +329,6 @@ export default async function PortfolioPage({
           </div>
         </div>
       </section>
-
-      <PortfolioStickyCta
-        bookLabel={c('book', locale)}
-        whatsappHref={wa}
-        whatsappLabel={c('whatsapp', locale)}
-      />
     </main>
   );
 }

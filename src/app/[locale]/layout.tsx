@@ -6,12 +6,22 @@ import { setRequestLocale } from 'next-intl/server';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales';
-import { CF_ANALYTICS_TOKEN, HTML_LANG, SITE_NAME, SITE_TAGLINE, SITE_URL } from '@/lib/site';
+import {
+  CF_ANALYTICS_TOKEN,
+  HTML_LANG,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+  whatsappBookingLink,
+} from '@/lib/site';
+import { tx } from '@/lib/locales';
+import { CTA } from '@/lib/cta';
 import { graph, organizationNode, websiteNode } from '@/lib/jsonld';
 import JsonLd from '@/components/JsonLd';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import TrackClicks from '@/components/TrackClicks';
+import MobileCtaBar from '@/components/MobileCtaBar';
 import '../globals.css';
 
 /* Body and UI. Neutral on purpose: the display face carries the identity. */
@@ -63,7 +73,7 @@ export default async function LocaleLayout({
   return (
     <html lang={HTML_LANG[locale as Locale]} className={fontVars}>
       <body
-        className="flex min-h-screen flex-col bg-brand-sand text-brand-dark antialiased"
+        className="flex min-h-screen flex-col bg-brand-sand pb-[4.75rem] text-brand-dark antialiased md:pb-0"
         suppressHydrationWarning
       >
         {/* Site-wide Organization + WebSite graph: every page's JSON-LD references
@@ -86,6 +96,13 @@ export default async function LocaleLayout({
           <NavBar locale={locale as Locale} />
           <div className="flex-1">{children}</div>
           <Footer />
+          {/* The bottom padding on <body> above is this bar's height, so the
+              footer's last line is never underneath it. */}
+          <MobileCtaBar
+            checkLabel={tx(CTA.checkAvailability, locale as Locale)}
+            whatsappLabel="WhatsApp"
+            whatsappHref={whatsappBookingLink({}, locale as Locale)}
+          />
         </NextIntlClientProvider>
         <TrackClicks />
         {/*

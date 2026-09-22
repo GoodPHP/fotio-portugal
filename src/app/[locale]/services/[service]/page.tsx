@@ -33,7 +33,6 @@ import Faq from '@/components/Faq';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
-import PortfolioStickyCta from '@/components/PortfolioStickyCta';
 import {
   ServiceAudience,
   ServiceCtaBand,
@@ -457,12 +456,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
         beside the content, and a second pinned bar would sit on top of it.
       */}
       <div className="lg:hidden">
-        <PortfolioStickyCta
-          bookHref={bookHref}
-          bookLabel={labels.book}
-          whatsappHref={waHref}
-          whatsappLabel={labels.whatsapp}
-        />
       </div>
     </main>
   );
