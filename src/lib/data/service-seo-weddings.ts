@@ -77,8 +77,8 @@ export const WEDDING_SERVICE_SEO: Record<string, ServiceSeo> = {
   proposal: {
     title: { en: 'Proposal Photographer in Portugal', pt: 'Fotógrafo para pedido de casamento' },
     description: {
-      en: 'The moment photographed from a distance, then the rest of the thirty minutes together. 15–20 edited photographs, gallery in 48 hours. From €250, fixed.',
-      pt: 'O momento fotografado à distância, e depois o resto dos trinta minutos juntos. 15 a 20 fotografias editadas, galeria em 48 h. Desde 250 €, preço fixo.',
+      en: 'The moment photographed from a distance, then the rest of the thirty minutes together. 15–20 edited photographs, gallery in 48 hours. From €200, fixed.',
+      pt: 'O momento fotografado à distância, e depois o resto dos trinta minutos juntos. 15 a 20 fotografias editadas, galeria em 48 h. Desde 200 €, preço fixo.',
     },
     heading: {
       en: 'Agree the spot and the minute the day before',
@@ -99,8 +99,8 @@ export const WEDDING_SERVICE_SEO: Record<string, ServiceSeo> = {
   couple: {
     title: { en: 'Couple Photo Session in Portugal', pt: 'Sessão de casal em Portugal' },
     description: {
-      en: 'Thirty minutes on foot through one neighbourhood, at the hour the light is low. 15–20 edited photographs, one location, gallery in 48–72 hours. From €250.',
-      pt: 'Trinta minutos a pé numa zona da cidade, à hora em que a luz é baixa. 15 a 20 fotografias editadas, um local, galeria em 48–72 horas. Desde 250 €, preço fixo.',
+      en: 'Thirty minutes on foot through one neighbourhood, at the hour the light is low. 15–20 edited photographs, one location, gallery in 48–72 hours. From €200.',
+      pt: 'Trinta minutos a pé numa zona da cidade, à hora em que a luz é baixa. 15 a 20 fotografias editadas, um local, galeria em 48–72 horas. Desde 200 €, preço fixo.',
     },
     heading: {
       en: 'The first few minutes are not the session',

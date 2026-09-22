@@ -11,8 +11,8 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   headshots: {
     title: { en: 'Corporate Headshots', pt: 'Retrato corporativo' },
     description: {
-      en: 'One consistent look across a team, or one portrait that does not look like a passport photo. 30 minutes, 15–20 retouched images per person. From €250.',
-      pt: 'Um registo coerente para toda a equipa, ou um retrato que não pareça fotografia tipo passe. 30 minutos, 15 a 20 imagens retocadas por pessoa. Desde 250 €.',
+      en: 'One consistent look across a team, or one portrait that does not look like a passport photo. 30 minutes, 15–20 retouched images per person. From €200.',
+      pt: 'Um registo coerente para toda a equipa, ou um retrato que não pareça fotografia tipo passe. 30 minutos, 15 a 20 imagens retocadas por pessoa. Desde 200 €.',
     },
     heading: { en: 'Consistency is the product', pt: 'A coerência é o produto' },
     paragraphs: {
@@ -87,8 +87,8 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   'real-estate': {
     title: { en: 'Property & Alojamento Local Photos', pt: 'Fotografia imobiliária e AL' },
     description: {
-      en: 'Interiors shot at the hour the rooms get their light, verticals corrected and colour cast removed. 30 minutes, 15–20 images, delivered in 24h. From €250.',
-      pt: 'Interiores fotografados à hora em que as divisões apanham luz, verticais corrigidas e dominantes removidas. 30 minutos, 15 a 20 imagens em 24 h. Desde 250 €.',
+      en: 'Interiors shot at the hour the rooms get their light, verticals corrected and colour cast removed. 30 minutes, 15–20 images, delivered in 24h. From €200.',
+      pt: 'Interiores fotografados à hora em que as divisões apanham luz, verticais corrigidas e dominantes removidas. 30 minutos, 15 a 20 imagens em 24 h. Desde 200 €.',
     },
     heading: { en: 'Photograph the flat when the flat has light', pt: 'Fotografe a casa quando a casa tem luz' },
     paragraphs: {
@@ -125,8 +125,8 @@ export const BUSINESS_SERVICE_SEO: Record<string, ServiceSeo> = {
   'book-de-modelo': {
     title: { en: 'Model Portfolio Session', pt: 'Book de modelo' },
     description: {
-      en: 'Agency digitals and one editorial look in the same portfolio: 30 minutes, 15–20 retouched photographs, private gallery within a week. From €250, fixed.',
-      pt: 'Polaroids de agência e um look editorial no mesmo book: 30 minutos, 15 a 20 fotografias retocadas, galeria privada numa semana. Desde 250 €, preço fixo.',
+      en: 'Agency digitals and one editorial look in the same portfolio: 30 minutes, 15–20 retouched photographs, private gallery within a week. From €200, fixed.',
+      pt: 'Polaroids de agência e um look editorial no mesmo book: 30 minutos, 15 a 20 fotografias retocadas, galeria privada numa semana. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Digitals and editorial are not the same job', pt: 'Polaroids e editorial não são o mesmo trabalho' },
     paragraphs: {

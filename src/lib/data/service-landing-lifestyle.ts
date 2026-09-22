@@ -154,8 +154,8 @@ export const LIFESTYLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   honeymoon: {
     promise: {
-      en: 'Thirty minutes of the two of you, a week or two after the wedding, with nothing to organise — 15–20 photographs from €250, in your gallery within 48 hours.',
-      pt: 'Trinta minutos dos dois, uma ou duas semanas depois do casamento, sem nada para organizar — 15 a 20 fotografias desde 250 €, na galeria em 48 horas.',
+      en: 'Thirty minutes of the two of you, a week or two after the wedding, with nothing to organise — 15–20 photographs from €200, in your gallery within 48 hours.',
+      pt: 'Trinta minutos dos dois, uma ou duas semanas depois do casamento, sem nada para organizar — 15 a 20 fotografias desde 200 €, na galeria em 48 horas.',
     },
     audience: {
       en: [
@@ -287,8 +287,8 @@ export const LIFESTYLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'lisbon-photoshoot': {
     promise: {
-      en: 'Lisbon photographed before it fills up — 30 minutes at one miradouro, from €250, starting early enough that the viewpoint is still yours.',
-      pt: 'Lisboa fotografada antes de encher — 30 minutos num miradouro, desde 250 €, a começar cedo o suficiente para o miradouro ainda ser vosso.',
+      en: 'Lisbon photographed before it fills up — 30 minutes at one miradouro, from €200, starting early enough that the viewpoint is still yours.',
+      pt: 'Lisboa fotografada antes de encher — 30 minutos num miradouro, desde 200 €, a começar cedo o suficiente para o miradouro ainda ser vosso.',
     },
     audience: {
       en: [

@@ -10,8 +10,8 @@ import type { ServiceLanding } from './service-landing';
 export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
   portrait: {
     promise: {
-      en: 'A portrait you will actually use — on LinkedIn, a book jacket or a speaker page — made in 30 unhurried minutes, chosen with you, from €250 fixed before you arrive.',
-      pt: 'Um retrato que vai mesmo usar — no LinkedIn, numa badana de livro ou num site de oradores — feito em 30 minutos sem pressa, escolhido consigo, desde 250 €, preço fixo.',
+      en: 'A portrait you will actually use — on LinkedIn, a book jacket or a speaker page — made in 30 unhurried minutes, chosen with you, from €200 fixed before you arrive.',
+      pt: 'Um retrato que vai mesmo usar — no LinkedIn, numa badana de livro ou num site de oradores — feito em 30 minutos sem pressa, escolhido consigo, desde 200 €, preço fixo.',
     },
     audience: {
       en: [
@@ -153,8 +153,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'lifestyle-portrait': {
     promise: {
-      en: 'A portrait that looks like you on a good ordinary day — outdoors, walking, in one place you choose — 15–20 retouched photographs, from €250.',
-      pt: 'Um retrato com ar de dia normal e bom — na rua, a andar, num sítio à sua escolha — 15 a 20 fotografias retocadas, desde 250 €.',
+      en: 'A portrait that looks like you on a good ordinary day — outdoors, walking, in one place you choose — 15–20 retouched photographs, from €200.',
+      pt: 'Um retrato com ar de dia normal e bom — na rua, a andar, num sítio à sua escolha — 15 a 20 fotografias retocadas, desde 200 €.',
     },
     audience: {
       en: [
@@ -257,8 +257,8 @@ export const PEOPLE_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'Marco este ou o retrato de estúdio?',
         },
         answer: {
-          en: 'The studio, if the photograph has to sit beside colleagues’ on a company page or a designer needs a plain background to cut around. This one, if it is for your own site, a book or anywhere it should say something about how you work. Both are 30 minutes from €250 with 15–20 retouched photographs; the difference is the setting, not the price.',
-          pt: 'O de estúdio, se a fotografia tiver de ficar ao lado das dos colegas numa página da empresa ou se um designer precisar de um fundo liso para recortar. Este, se for para o seu site, um livro ou qualquer sítio onde deva dizer alguma coisa sobre a forma como trabalha. Ambos são 30 minutos desde 250 €, com 15 a 20 fotografias retocadas; a diferença está no cenário, não no preço.',
+          en: 'The studio, if the photograph has to sit beside colleagues’ on a company page or a designer needs a plain background to cut around. This one, if it is for your own site, a book or anywhere it should say something about how you work. Both are 30 minutes from €200 with 15–20 retouched photographs; the difference is the setting, not the price.',
+          pt: 'O de estúdio, se a fotografia tiver de ficar ao lado das dos colegas numa página da empresa ou se um designer precisar de um fundo liso para recortar. Este, se for para o seu site, um livro ou qualquer sítio onde deva dizer alguma coisa sobre a forma como trabalha. Ambos são 30 minutos desde 200 €, com 15 a 20 fotografias retocadas; a diferença está no cenário, não no preço.',
         },
       },
       {

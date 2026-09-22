@@ -154,8 +154,8 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'real-estate': {
     promise: {
-      en: 'Listing photographs shot when each room has its light, straight walls and whites that stay white — 15–20 images from €250, ready within 24 hours.',
-      pt: 'Fotografias de anúncio feitas quando cada divisão tem luz, paredes direitas e brancos que ficam brancos — 15 a 20 imagens desde 250 €, prontas em 24 horas.',
+      en: 'Listing photographs shot when each room has its light, straight walls and whites that stay white — 15–20 images from €200, ready within 24 hours.',
+      pt: 'Fotografias de anúncio feitas quando cada divisão tem luz, paredes direitas e brancos que ficam brancos — 15 a 20 imagens desde 200 €, prontas em 24 horas.',
     },
     audience: {
       en: [
@@ -434,8 +434,8 @@ export const COMMERCIAL_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'book-de-modelo': {
     promise: {
-      en: 'Digitals and editorial in one session: 30 minutes, one look and 15–20 retouched photographs from €250, ready to send to agencies within a week.',
-      pt: 'Polaroids e editorial numa só sessão: 30 minutos, um look e 15 a 20 fotografias retocadas desde 250 €, prontas a enviar a agências numa semana.',
+      en: 'Digitals and editorial in one session: 30 minutes, one look and 15–20 retouched photographs from €200, ready to send to agencies within a week.',
+      pt: 'Polaroids e editorial numa só sessão: 30 minutos, um look e 15 a 20 fotografias retocadas desde 200 €, prontas a enviar a agências numa semana.',
     },
     audience: {
       en: [

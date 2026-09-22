@@ -7,7 +7,7 @@ import { SERVICE_LANDING } from './data/service-landing';
 /**
  * Authored copy must not contradict the catalogue.
  *
- * The prices were raised to a €250 base package — thirty minutes, fifteen to
+ * The prices were raised to a €200 base package — thirty minutes, fifteen to
  * twenty edited photos — and the catalogue changed in one commit, but the
  * prose around each service states prices, lengths and photo counts in
  * hundreds of places, in two languages. This walks every string of every

@@ -432,8 +432,8 @@ export const MILESTONE_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   finalistas: {
     promise: {
-      en: 'Capa e batina photographed at the hour black cloth still shows texture, individual and group portraits in the same 30 minutes, from €250, before the year disperses.',
-      pt: 'Capa e batina fotografadas à hora em que o preto ainda tem textura, retratos individuais e de grupo nos mesmos 30 minutos, desde 250 €, antes de o curso se dispersar.',
+      en: 'Capa e batina photographed at the hour black cloth still shows texture, individual and group portraits in the same 30 minutes, from €200, before the year disperses.',
+      pt: 'Capa e batina fotografadas à hora em que o preto ainda tem textura, retratos individuais e de grupo nos mesmos 30 minutos, desde 200 €, antes de o curso se dispersar.',
     },
     audience: {
       en: [

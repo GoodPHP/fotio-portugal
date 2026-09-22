@@ -11,8 +11,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   portrait: {
     title: { en: 'Studio Portrait Session', pt: 'Retrato de estúdio' },
     description: {
-      en: 'Thirty minutes in controlled light, one lighting set-up and one background, 15–20 retouched photographs and a gallery in 48–72 hours. From €250, fixed.',
-      pt: 'Trinta minutos em luz controlada, um só esquema de luz e um só fundo, 15 a 20 fotografias retocadas e galeria em 48–72 horas. Desde 250 €, preço fixo.',
+      en: 'Thirty minutes in controlled light, one lighting set-up and one background, 15–20 retouched photographs and a gallery in 48–72 hours. From €200, fixed.',
+      pt: 'Trinta minutos em luz controlada, um só esquema de luz e um só fundo, 15 a 20 fotografias retocadas e galeria em 48–72 horas. Desde 200 €, preço fixo.',
     },
     heading: { en: 'What to wear, and why it matters here', pt: 'O que vestir, e porque é que aqui importa' },
     paragraphs: {
@@ -30,8 +30,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   'lifestyle-portrait': {
     title: { en: 'Lifestyle Portrait Session', pt: 'Retrato lifestyle' },
     description: {
-      en: 'The same portrait made outdoors and in motion: thirty minutes in one location, in the hour before sunset, 15–20 retouched photographs. From €250, fixed.',
-      pt: 'O mesmo retrato feito na rua e em movimento: 30 minutos num só local, na hora antes do pôr do sol, 15 a 20 fotografias retocadas. Desde 250 €, preço fixo.',
+      en: 'The same portrait made outdoors and in motion: thirty minutes in one location, in the hour before sunset, 15–20 retouched photographs. From €200, fixed.',
+      pt: 'O mesmo retrato feito na rua e em movimento: 30 minutos num só local, na hora antes do pôr do sol, 15 a 20 fotografias retocadas. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Outdoors instead of against a background', pt: 'Na rua em vez de contra um fundo' },
     paragraphs: {
@@ -49,8 +49,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   family: {
     title: { en: 'Family Photo Session', pt: 'Fotografia de família' },
     description: {
-      en: 'Outdoors, at the children’s pace: thirty minutes, one location, 15–20 retouched photographs and a gallery in 48–72 hours. From €250, agreed beforehand.',
-      pt: 'Ao ar livre, ao ritmo das crianças: trinta minutos, um só local, 15 a 20 fotografias retocadas e galeria em 48–72 horas. Desde 250 €, acordado de antemão.',
+      en: 'Outdoors, at the children’s pace: thirty minutes, one location, 15–20 retouched photographs and a gallery in 48–72 hours. From €200, agreed beforehand.',
+      pt: 'Ao ar livre, ao ritmo das crianças: trinta minutos, um só local, 15 a 20 fotografias retocadas e galeria em 48–72 horas. Desde 200 €, acordado de antemão.',
     },
     heading: { en: 'Book the mood, not the light', pt: 'Marque pela disposição, não pela luz' },
     paragraphs: {
@@ -68,8 +68,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   maternity: {
     title: { en: 'Maternity Photo Session', pt: 'Sessão de gravidez' },
     description: {
-      en: 'Booked between 30 and 36 weeks, which is when it photographs best and is still comfortable. 30 minutes, 15–20 retouched photographs. From €250, fixed.',
-      pt: 'Marcada entre as 30 e as 36 semanas, quando fotografa melhor e ainda é confortável. 30 minutos, 15 a 20 fotografias retocadas. Desde 250 €, preço fixo.',
+      en: 'Booked between 30 and 36 weeks, which is when it photographs best and is still comfortable. 30 minutes, 15–20 retouched photographs. From €200, fixed.',
+      pt: 'Marcada entre as 30 e as 36 semanas, quando fotografa melhor e ainda é confortável. 30 minutos, 15 a 20 fotografias retocadas. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Why thirty to thirty-six weeks', pt: 'Porquê entre as 30 e as 36 semanas' },
     paragraphs: {
@@ -87,8 +87,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   newborn: {
     title: { en: 'Newborn Photo Session', pt: 'Sessão de recém-nascido' },
     description: {
-      en: 'At home, in the first fortnight, working around feeds rather than against them. 30 minutes, timed to start after a feed. 15–20 photographs. From €250.',
-      pt: 'Em casa, nas primeiras duas semanas, à volta das mamadas e não contra elas. 30 minutos, a começar depois de uma mamada. 15 a 20 fotografias. Desde 250 €.',
+      en: 'At home, in the first fortnight, working around feeds rather than against them. 30 minutes, timed to start after a feed. 15–20 photographs. From €200.',
+      pt: 'Em casa, nas primeiras duas semanas, à volta das mamadas e não contra elas. 30 minutos, a começar depois de uma mamada. 15 a 20 fotografias. Desde 200 €.',
     },
     heading: { en: 'Thirty minutes, timed around a feed', pt: 'Trinta minutos, à volta de uma mamada' },
     paragraphs: {
@@ -125,8 +125,8 @@ export const PEOPLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   finalistas: {
     title: { en: 'Graduation Photographer, Coimbra', pt: 'Fotógrafo de finalistas' },
     description: {
-      en: 'Capa e batina, in the city the tradition belongs to. Thirty minutes of individual portraits, 15–20 retouched photographs, gallery in 72h. From €250, fixed.',
-      pt: 'Capa e batina, na cidade a que a tradição pertence. Trinta minutos de retratos individuais, 15 a 20 fotografias retocadas em 72 h. Desde 250 €, preço fixo.',
+      en: 'Capa e batina, in the city the tradition belongs to. Thirty minutes of individual portraits, 15–20 retouched photographs, gallery in 72h. From €200, fixed.',
+      pt: 'Capa e batina, na cidade a que a tradição pertence. Trinta minutos de retratos individuais, 15 a 20 fotografias retocadas em 72 h. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Book before May, or book October', pt: 'Marque antes de Maio, ou marque Outubro' },
     paragraphs: {

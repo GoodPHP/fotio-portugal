@@ -30,8 +30,8 @@ export const LIFESTYLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   honeymoon: {
     title: { en: 'Honeymoon Photo Session', pt: 'Sessão de lua de mel' },
     description: {
-      en: 'The one set of photographs of the two of you that is not from the wedding day. Thirty minutes, one location, 15–20 retouched photographs. From €250, fixed.',
-      pt: 'O único conjunto de fotografias dos dois que não é do dia do casamento. Trinta minutos, um local, 15 a 20 fotografias retocadas. Desde 250 €, preço fixo.',
+      en: 'The one set of photographs of the two of you that is not from the wedding day. Thirty minutes, one location, 15–20 retouched photographs. From €200, fixed.',
+      pt: 'O único conjunto de fotografias dos dois que não é do dia do casamento. Trinta minutos, um local, 15 a 20 fotografias retocadas. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Different from the wedding photographs on purpose', pt: 'Diferente das fotografias do casamento, de propósito' },
     paragraphs: {
@@ -49,8 +49,8 @@ export const LIFESTYLE_SERVICE_SEO: Record<string, ServiceSeo> = {
   'lisbon-photoshoot': {
     title: { en: 'Lisbon Photoshoot', pt: 'Sessão fotográfica em Lisboa' },
     description: {
-      en: 'An early start in the city, planned around where the light lands, not a list of sights. Thirty minutes at one miradouro, 15–20 edited photographs. From €250.',
-      pt: 'Uma manhã na cidade planeada pela luz e não por uma lista de monumentos. Trinta minutos num miradouro, 15 a 20 fotografias editadas. Desde 250 €, preço fixo.',
+      en: 'An early start in the city, planned around where the light lands, not a list of sights. Thirty minutes at one miradouro, 15–20 edited photographs. From €200.',
+      pt: 'Uma manhã na cidade planeada pela luz e não por uma lista de monumentos. Trinta minutos num miradouro, 15 a 20 fotografias editadas. Desde 200 €, preço fixo.',
     },
     heading: { en: 'Before eight, and not on the tram', pt: 'Antes das oito, e não dentro do eléctrico' },
     paragraphs: {

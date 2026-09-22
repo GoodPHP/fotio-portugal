@@ -11,8 +11,8 @@ import type { ServiceLanding } from './service-landing';
 export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
   headshots: {
     promise: {
-      en: 'Portraits that sit on one team page as a set — same framing, same light, same background — photographed at your office, 30 minutes a head, from €250.',
-      pt: 'Retratos que assentam na página da equipa como um conjunto — mesmo enquadramento, mesma luz, mesmo fundo — feitos no escritório, 30 minutos por pessoa, desde 250 €.',
+      en: 'Portraits that sit on one team page as a set — same framing, same light, same background — photographed at your office, 30 minutes a head, from €200.',
+      pt: 'Retratos que assentam na página da equipa como um conjunto — mesmo enquadramento, mesma luz, mesmo fundo — feitos no escritório, 30 minutos por pessoa, desde 200 €.',
     },
     audience: {
       en: [
@@ -105,8 +105,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
           pt: 'O preço é por pessoa ou por visita?',
         },
         answer: {
-          en: 'Per person: from €250 for 30 minutes and 15–20 retouched images each. There is no per-image charge on top and travel inside the area you booked is included, so the budget for a team is the headcount times the individual figure. If the day becomes too long for one photographer, a second is an option quoted before you book.',
-          pt: 'Por pessoa: desde 250 € por 30 minutos e 15 a 20 imagens retocadas cada. Não há cobrança por imagem e a deslocação dentro da área reservada está incluída, por isso o orçamento para uma equipa é o número de pessoas vezes o valor individual. Se o dia ficar demasiado longo para um fotógrafo, um segundo é uma opção orçamentada antes de reservar.',
+          en: 'Per person: from €200 for 30 minutes and 15–20 retouched images each. There is no per-image charge on top and travel inside the area you booked is included, so the budget for a team is the headcount times the individual figure. If the day becomes too long for one photographer, a second is an option quoted before you book.',
+          pt: 'Por pessoa: desde 200 € por 30 minutos e 15 a 20 imagens retocadas cada. Não há cobrança por imagem e a deslocação dentro da área reservada está incluída, por isso o orçamento para uma equipa é o número de pessoas vezes o valor individual. Se o dia ficar demasiado longo para um fotógrafo, um segundo é uma opção orçamentada antes de reservar.',
         },
       },
       {
@@ -299,8 +299,8 @@ export const BUSINESS_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   'digital-nomad-headshots': {
     promise: {
-      en: 'A headshot that looks like where you actually work — a street, a co-working desk, not a backdrop — photographed in 30 minutes, from €250, on your profile tomorrow.',
-      pt: 'Um retrato com o ar do sítio onde trabalha de facto — uma rua, uma secretária de cowork, não um fundo — feito em 30 minutos, desde 250 €, no seu perfil no dia seguinte.',
+      en: 'A headshot that looks like where you actually work — a street, a co-working desk, not a backdrop — photographed in 30 minutes, from €200, on your profile tomorrow.',
+      pt: 'Um retrato com o ar do sítio onde trabalha de facto — uma rua, uma secretária de cowork, não um fundo — feito em 30 minutos, desde 200 €, no seu perfil no dia seguinte.',
     },
     audience: {
       en: [

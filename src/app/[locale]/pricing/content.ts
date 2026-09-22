@@ -14,8 +14,8 @@ export const META_TITLE: Localized = {
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: 'Published starting prices for every session type, from €250 for 30 minutes and 15–20 edited photos. The final price is confirmed in writing before you book.',
-  pt: 'Preços de partida publicados para cada sessão, desde 250 € por 30 minutos e 15 a 20 fotografias. O preço final é confirmado por escrito antes de reservar.',
+  en: 'Published starting prices for every session type, from €200 for 30 minutes and 15–20 edited photos. The final price is confirmed in writing before you book.',
+  pt: 'Preços de partida publicados para cada sessão, desde 200 € por 30 minutos e 15 a 20 fotografias. O preço final é confirmado por escrito antes de reservar.',
 };
 
 export const OG_IMAGE_ALT: Localized = {
@@ -45,13 +45,13 @@ export const SEO_PROSE = {
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'From (30 min)', value: '€250' },
+      { label: 'From (30 min)', value: '€200' },
       { label: 'Wedding day, from', value: '€1,400' },
       { label: 'Per extra photo', value: '€0' },
       { label: 'Deposit to enquire', value: '€0' },
     ],
     pt: [
-      { label: 'Desde (30 min)', value: '250 €' },
+      { label: 'Desde (30 min)', value: '200 €' },
       { label: 'Casamento, desde', value: '1400 €' },
       { label: 'Por fotografia extra', value: '0 €' },
       { label: 'Sinal para orçamento', value: '0 €' },

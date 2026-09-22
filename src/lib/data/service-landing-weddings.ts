@@ -11,8 +11,8 @@ import type { ServiceLanding } from './service-landing';
 export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
   couple: {
     promise: {
-      en: 'Thirty minutes on foot in one neighbourhood, at the hour the light is low — 15–20 photographs of the two of you, from €250, that do not look posed.',
-      pt: 'Trinta minutos a pé numa só zona, à hora em que a luz é baixa — 15 a 20 fotografias dos dois, desde 250 €, que não parecem posadas.',
+      en: 'Thirty minutes on foot in one neighbourhood, at the hour the light is low — 15–20 photographs of the two of you, from €200, that do not look posed.',
+      pt: 'Trinta minutos a pé numa só zona, à hora em que a luz é baixa — 15 a 20 fotografias dos dois, desde 200 €, que não parecem posadas.',
     },
     audience: {
       en: [
@@ -154,8 +154,8 @@ export const WEDDING_SERVICE_LANDING: Record<string, ServiceLanding> = {
 
   proposal: {
     promise: {
-      en: 'Your partner sees no photographer until the question is asked — then a few minutes together: 30 minutes in all, 15–20 photographs from €250, within 48 hours.',
-      pt: 'A outra pessoa não vê fotógrafo nenhum até ao pedido — depois, uns minutos juntos: 30 minutos ao todo, 15 a 20 fotografias desde 250 €, em 48 horas.',
+      en: 'Your partner sees no photographer until the question is asked — then a few minutes together: 30 minutes in all, 15–20 photographs from €200, within 48 hours.',
+      pt: 'A outra pessoa não vê fotógrafo nenhum até ao pedido — depois, uns minutos juntos: 30 minutos ao todo, 15 a 20 fotografias desde 200 €, em 48 horas.',
     },
     audience: {
       en: [
