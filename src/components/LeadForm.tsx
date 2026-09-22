@@ -3,6 +3,8 @@
 import { useId, useState } from 'react';
 import type { Locale } from '@/lib/locales';
 import { SITE_NAME, whatsappLink } from '@/lib/site';
+import { track } from '@/lib/analytics';
+import { WhatsAppIcon } from './Icons';
 
 export interface LeadFormServiceOption {
   slug: string;
@@ -27,7 +29,7 @@ const UI = {
   city: { en: 'City (optional)', pt: 'Cidade (opcional)' },
   message: { en: 'Message', pt: 'Mensagem' },
   choose: { en: 'Select…', pt: 'Seleccionar…' },
-  submit: { en: 'Send request', pt: 'Enviar pedido' },
+  submit: { en: 'Send message', pt: 'Enviar mensagem' },
   sending: { en: 'Sending…', pt: 'A enviar…' },
   successTitle: { en: 'Request sent!', pt: 'Pedido enviado!' },
   successBody: { en: 'We reply within about 2 hours during the working day. You can also carry on the conversation on WhatsApp.', pt: 'Respondemos em cerca de 2 horas, durante o dia útil. Também pode continuar a conversa no WhatsApp.' },
@@ -36,7 +38,7 @@ const UI = {
   errEmail: { en: 'Enter a valid email address.', pt: 'Indique um endereço de e-mail válido.' },
   errPhone: { en: 'Enter a valid phone number.', pt: 'Indique um número de telemóvel válido.' },
   errMessage: { en: 'Write a short message.', pt: 'Escreva uma mensagem curta.' },
-  errSubmit: { en: 'Something went wrong. Try again or message us on WhatsApp.', pt: 'Ocorreu um erro. Tente de novo ou escreva-nos no WhatsApp.' },
+  errSubmit: { en: 'We couldn’t send your message just now. Try again, or send it on WhatsApp instead.', pt: 'Não conseguimos enviar a mensagem agora. Tente de novo, ou envie-a pelo WhatsApp.' },
   waService: { en: 'Service', pt: 'Serviço' },
   waCity: { en: 'City', pt: 'Cidade' },
 } as const;
@@ -116,17 +118,21 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
           name: name.trim(),
           email: email.trim(),
           phone: phone.trim(),
-          citySlug: citySlug || cities[0]?.slug,
-          serviceSlug: serviceSlug || services[0]?.slug,
+          // Left out when not chosen. Defaulting to the first entry made
+          // every general question arrive as a Lisbon studio-portrait lead.
+          citySlug: citySlug || undefined,
+          serviceSlug: serviceSlug || undefined,
           remarks: message.trim(),
           source: 'contact',
           locale,
           honeypot,
         }),
       });
-      // 502 = notify failed but submission was understood: still show success path.
-      if (res.ok || res.status === 502) {
+      // A 502 means nobody was notified, so it is a failure, not a success
+      // with a caveat: the visitor is told, and offered WhatsApp.
+      if (res.ok) {
         setDone(true);
+        track('contact_submitted', { city: citySlug || undefined, service: serviceSlug || undefined });
       } else {
         setFormError(t('errSubmit', locale));
       }
@@ -151,8 +157,9 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
           href={whatsappLink(buildWhatsAppMessage())}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn mt-7 bg-[#25D366] text-brand-dark hover:bg-[#1FB855] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+          className="btn btn-outline mt-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
         >
+          <WhatsAppIcon className="h-4 w-4" />
           {t('whatsapp', locale)}
         </a>
       </div>
@@ -269,7 +276,15 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
           aria-live="assertive"
           className="mt-5 border-l-[3px] border-brand-error bg-brand-error/8 px-4 py-3 text-sm font-medium text-brand-error"
         >
-          {formError}
+          {formError}{' '}
+          <a
+            href={whatsappLink(buildWhatsAppMessage())}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2"
+          >
+            WhatsApp
+          </a>
         </p>
       )}
 

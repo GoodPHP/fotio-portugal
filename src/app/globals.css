@@ -598,6 +598,58 @@ body {
   z-index: 1;
 }
 
+/*
+ * A choice: a chip with a real radio input inside it, for the booking flow.
+ *
+ * Larger than a filter chip because it is a thumb target on a phone, and a
+ * real <input type="radio"> rather than a button with aria-checked, so arrow
+ * keys, form semantics and screen-reader announcements are the browser's.
+ * The state is read with :has() for the same reason `.check-row` does it:
+ * the style cannot lag the control.
+ */
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-brand-rule-strong);
+  background-color: var(--color-brand-tile);
+  color: var(--color-brand-dark);
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.choice:hover {
+  border-color: var(--color-brand-orange-deep);
+}
+
+.choice:has(:checked) {
+  background-color: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+  color: var(--color-brand-sand);
+}
+
+.choice:has(:focus-visible) {
+  outline: 2px solid var(--color-brand-orange-deep);
+  outline-offset: 2px;
+}
+
+.choice-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-muted);
+  white-space: nowrap;
+}
+
+.choice:has(:checked) .choice-meta {
+  color: color-mix(in srgb, var(--color-brand-sand) 75%, transparent);
+}
+
 /* ---------------------------------------------------------------------------
  * Form controls.
  *
