@@ -27,4 +27,7 @@ export const BEST_TIME_PHOTOSHOOT_PORTUGAL: BlogPost = {
   section: localized((c) => c.section),
   content: localized((c) => c.body),
   faqs,
+  cluster: 'portugal',
+  relatedCities: ['lisboa', 'porto', 'algarve', 'douro', 'acores'],
+  relatedServices: ['couple', 'family', 'vacation', 'wedding'],
 };

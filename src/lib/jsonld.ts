@@ -301,7 +301,7 @@ function authorNode(author: string | undefined): Node {
 }
 
 /** Schema.org page subtypes we distinguish. Everything else is a plain WebPage. */
-export type WebPageType = 'WebPage' | 'CollectionPage' | 'AboutPage' | 'ContactPage';
+export type WebPageType = 'WebPage' | 'CollectionPage' | 'AboutPage' | 'ContactPage' | 'ProfilePage';
 
 export interface WebPageInput {
   url: string;

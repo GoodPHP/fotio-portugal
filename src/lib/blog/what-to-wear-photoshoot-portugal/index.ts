@@ -27,4 +27,7 @@ export const WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL: BlogPost = {
   section: localized((c) => c.section),
   content: localized((c) => c.body),
   faqs,
+  cluster: 'portugal',
+  relatedCities: ['lisboa', 'sintra', 'porto', 'algarve'],
+  relatedServices: ['couple', 'family', 'proposal', 'maternity'],
 };

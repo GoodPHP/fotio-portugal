@@ -23,6 +23,7 @@ import { ORG_ID } from '@/lib/jsonld-ids';
 import { absoluteUrl } from '@/lib/urls';
 import { citySlot, serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import SeoProse from '@/components/SeoProse';
 import Faq from '@/components/Faq';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
@@ -160,9 +161,10 @@ export default async function AboutPage({
   return (
     <main>
       <JsonLd data={jsonLd} />
+      <Breadcrumbs className="mx-auto max-w-[92rem] px-6 pt-8 sm:pt-10" items={[{ name: tx(COPY.breadcrumbHome, locale), href: '/' }, { name: tx(COPY.title, locale) }]} />
 
       {/* Header + hero image */}
-      <section className="mx-auto max-w-[92rem] px-6 pt-20 sm:pt-24">
+      <section className="mx-auto max-w-[92rem] px-6 pt-8">
         <FadeIn instant className="max-w-3xl">
           <p className="eyebrow">
             {tx(COPY.eyebrow, locale)}

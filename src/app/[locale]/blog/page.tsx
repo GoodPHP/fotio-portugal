@@ -3,7 +3,9 @@ import Picture from '@/components/Picture';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { type Locale, tx } from '@/lib/locales';
-import { publishedBlogPosts } from '@/lib/catalog';
+import { getCity, getServiceById, publishedBlogPosts, serviceExistsIn } from '@/lib/catalog';
+import { BLOG_CLUSTERS } from '@/lib/data/blog';
+import { inPlace } from '@/lib/cta';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, blogNode } from '@/lib/jsonld';
 import { absoluteUrl } from '@/lib/urls';
@@ -11,9 +13,10 @@ import { absoluteOgImage, ogImagePath } from '@/lib/images';
 import { formatDate } from '@/lib/site';
 import type { BlogPost } from '@/lib/types';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn } from '@/components/Motion';
-import { blogHref } from '@/lib/routes';
+import { blogHref, cityHref, leafHref, serviceHref } from '@/lib/routes';
 import {
   META_TITLE,
   OG_IMAGE_ALT,
@@ -42,6 +45,8 @@ const COPY = {
     pt: 'Diga-nos o sítio e a data. Orçamento por escrito em cerca de duas horas durante o dia útil, e não paga nada para perguntar.',
   },
   ctaBook: { en: 'Check availability', pt: 'Ver disponibilidade' },
+  topics: { en: 'Explore by topic', pt: 'Explorar por tema' },
+  photographer: { en: 'Photographer', pt: 'Fotógrafo' },
   ctaServices: { en: 'See the services', pt: 'Ver os serviços' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
@@ -130,8 +135,9 @@ export default async function BlogIndexPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-[92rem] px-6 py-16 sm:py-20">
+    <main className="mx-auto max-w-[92rem] px-6 pb-16 pt-8 sm:pb-20 sm:pt-10">
       <JsonLd data={jsonLd} />
+      <Breadcrumbs className="mb-8" items={[{ name: c('breadcrumbHome', locale), href: '/' }, { name: c('title', locale) }]} />
 
       <header className="grid gap-6 border-b border-brand-rule pb-12 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-8">
@@ -240,6 +246,58 @@ export default async function BlogIndexPage({
           </ul>
         </section>
       )}
+
+      {/*
+        Topic clusters. Each one ties its articles to the pages that sell the
+        answer — the place's photographer page and its sessions — so a cluster
+        is a hub even while it has only one article, or none yet.
+      */}
+      <section aria-labelledby="blog-topics" className="mt-16">
+        <h2 id="blog-topics" className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
+          {c('topics', locale)}
+        </h2>
+        <div className="mt-8 grid gap-10 lg:grid-cols-3">
+          {BLOG_CLUSTERS.map((cluster) => {
+            const city = cluster.city ? getCity(cluster.city) : undefined;
+            const articles = posts.filter((p) => p.cluster === cluster.id);
+            const sessions = cluster.services
+              .map(getServiceById)
+              .filter((s): s is NonNullable<typeof s> => Boolean(s) && serviceExistsIn(s!, locale));
+            return (
+              <div key={cluster.id} className="border-t-2 border-brand-dark pt-5">
+                <h3 className="font-display text-xl font-bold text-brand-dark">{tx(cluster.label, locale)}</h3>
+                <ul className="mt-4 space-y-2.5 text-[0.9375rem]">
+                  {city && (
+                    <li>
+                      <Link href={cityHref(city)} className={`font-medium text-brand-dark hover:text-brand-orange-deep ${LINK_FOCUS}`}>
+                        {c('photographer', locale)} {inPlace(city, locale)}
+                      </Link>
+                    </li>
+                  )}
+                  {sessions.map((s) => (
+                    <li key={s.slug}>
+                      <Link
+                        href={city ? leafHref(s, city, locale) : serviceHref(s, locale)}
+                        className={`text-brand-dark hover:text-brand-orange-deep ${LINK_FOCUS}`}
+                      >
+                        {tx(s.name, locale)}
+                        {city ? ` ${inPlace(city, locale)}` : ''}
+                      </Link>
+                    </li>
+                  ))}
+                  {articles.map((p) => (
+                    <li key={p.slug}>
+                      <Link href={blogHref(p.slug)} className={`text-brand-muted hover:text-brand-orange-deep ${LINK_FOCUS}`}>
+                        {tx(p.title, locale)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       <aside
         data-surface="dark"

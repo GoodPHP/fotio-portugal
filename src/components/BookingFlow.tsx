@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import type { Locale } from '@/lib/locales';
 import { tx } from '@/lib/locales';
 import type { BookingOptions } from '@/lib/booking-options';
-import { OTHER } from '@/lib/booking-options';
+import { OTHER } from '@/lib/booking-constants';
 import { CTA } from '@/lib/cta';
 import { GUARANTEE, MATCHING, REPLY_TIME, WEATHER } from '@/lib/promises';
 import { formatPrice, whatsappBookingLink } from '@/lib/site';

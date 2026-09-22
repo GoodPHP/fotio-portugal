@@ -30,6 +30,8 @@ import DestinationCard from '@/components/DestinationCard';
 import PricingCard from '@/components/PricingCard';
 import HowItWorks from '@/components/HowItWorks';
 import GuaranteeBlock from '@/components/GuaranteeBlock';
+import Photographers from '@/components/Photographers';
+import ClientStories from '@/components/ClientStories';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { CheckMark } from '@/components/Icons';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE, homeFaqs } from './content';
@@ -325,6 +327,10 @@ export default async function HomePage({ params }: HomePageProps) {
           </Stagger>
         </div>
       </section>
+
+      {/* Both render nothing until there are real profiles and real reviews. */}
+      <Photographers locale={locale} />
+      <ClientStories locale={locale} />
 
       {portfolio.length > 0 && (
         <section aria-labelledby="portfolio-heading" className="mx-auto max-w-[92rem] px-6 py-[var(--space-section)]">

@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/urls';
 import { serviceSlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { serviceHref } from '@/lib/routes';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
@@ -106,8 +107,9 @@ export default async function ServicesHubPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-[92rem] px-6 py-20 sm:py-24">
+    <main className="mx-auto max-w-[92rem] px-6 pb-20 pt-8 sm:pb-24 sm:pt-10">
       <JsonLd data={jsonLd} />
+      <Breadcrumbs className="mb-8" items={[{ name: c('breadcrumbHome', locale), href: '/' }, { name: c('title', locale) }]} />
       <header className="max-w-3xl">
         <p className="eyebrow">
           {c('eyebrow', locale)}

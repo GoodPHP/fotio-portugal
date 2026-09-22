@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/urls';
 import { citySlot, absoluteOgImage, ogImagePath } from '@/lib/images';
 import { whatsappBookingLink } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import SeoProse from '@/components/SeoProse';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
@@ -80,8 +81,9 @@ export default async function ContactPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+    <main className="mx-auto max-w-6xl px-6 pb-20 pt-8 sm:pb-24 sm:pt-10">
       <JsonLd data={jsonLd} />
+      <Breadcrumbs className="mb-8" items={[{ name: c('breadcrumbHome', locale), href: '/' }, { name: c('title', locale) }]} />
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.3fr]">
         <header className="lg:pt-2">
           <p className="eyebrow">

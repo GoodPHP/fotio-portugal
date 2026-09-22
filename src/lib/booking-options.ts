@@ -10,8 +10,7 @@ import { tx, type Locale, type Localized } from './locales';
  * catalogue, which would ship every city's prose to the browser.
  */
 
-/** Sent in place of a slug when the visitor picks "Other". The API accepts it. */
-export const OTHER = 'other';
+export { OTHER } from './booking-constants';
 
 export interface PlaceOption {
   slug: string;

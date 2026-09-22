@@ -3,8 +3,10 @@ import Picture from '@/components/Picture';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import RelatedLinks from '@/components/RelatedLinks';
+import CtaPair from '@/components/CtaPair';
 import { type Locale, tx } from '@/lib/locales';
-import { getBlogPost, publishedBlogPosts } from '@/lib/catalog';
+import { getBlogPost, getCity, getServiceById, publishedBlogPosts } from '@/lib/catalog';
 import { isBlogPostPublished } from '@/lib/publishSchedule';
 import { buildMetadata } from '@/lib/seo';
 import { graph, breadcrumbNode, articleNode, faqNode } from '@/lib/jsonld';
@@ -13,6 +15,7 @@ import { absoluteUrl } from '@/lib/urls';
 import { absoluteOgImage, ogImagePath } from '@/lib/images';
 import { SITE_NAME, formatDate } from '@/lib/site';
 import JsonLd from '@/components/JsonLd';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import ArticleBody from '@/components/ArticleBody';
 import { blogAlternateParams, blogHref } from '@/lib/routes';
 
@@ -25,6 +28,7 @@ const COPY = {
     pt: 'Diga-nos o sítio e a data. Orçamento por escrito em cerca de duas horas durante o dia útil, e não paga nada para perguntar.',
   },
   cta: { en: 'Check availability', pt: 'Ver disponibilidade' },
+  related: { en: 'Book what this article is about', pt: 'Reserve o que este artigo explica' },
   services: { en: 'See the services', pt: 'Ver os serviços' },
   home: { en: 'Home', pt: 'Início' },
   toc: { en: 'In this guide', pt: 'Neste guia' },
@@ -125,14 +129,15 @@ export default async function BlogPostPage({
   ]);
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
+    <main className="mx-auto max-w-3xl px-6 pb-16 pt-8 sm:pb-20 sm:pt-10">
       <JsonLd data={jsonLd} />
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-orange-deep focus-visible:outline-none focus-visible:underline"
-      >
-        <span aria-hidden="true">←</span> {c('back', locale)}
-      </Link>
+      <Breadcrumbs
+        items={[
+          { name: c('home', locale), href: '/' },
+          { name: c('blog', locale), href: '/blog' },
+          { name: tx(post.title, locale) },
+        ]}
+      />
 
       <article className="mt-8">
         <header>
@@ -199,15 +204,20 @@ export default async function BlogPostPage({
           {c('ctaTitle', locale)}
         </h2>
         <p className="mt-3 leading-relaxed text-white/75">{c('ctaText', locale)}</p>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <Link href="/book" className="btn btn-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-            {c('cta', locale)}
-          </Link>
-          <Link href="/services" className="btn btn-outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-            {c('services', locale)}
-          </Link>
-        </div>
+        <CtaPair locale={locale} context="blog-article" onDark className="mt-7" />
       </aside>
+
+      {/* Blog → destination, blog → session: the article's reader leaves
+          towards the pages that sell what it has just explained. */}
+      <div className="mt-16">
+        <RelatedLinks
+          locale={locale}
+          headingId="post-related"
+          title={c('related', locale)}
+          cities={(post.relatedCities ?? []).map(getCity).filter((x): x is NonNullable<typeof x> => Boolean(x))}
+          services={(post.relatedServices ?? []).map(getServiceById).filter((x): x is NonNullable<typeof x> => Boolean(x))}
+        />
+      </div>
 
       {related.length > 0 && (
         <nav aria-labelledby="post-more" className="mt-16 border-t border-brand-rule pt-10">

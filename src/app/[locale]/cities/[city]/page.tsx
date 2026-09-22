@@ -21,6 +21,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import CtaPair from '@/components/CtaPair';
 import CtaBand from '@/components/CtaBand';
 import TrackView from '@/components/TrackView';
+import Photographers from '@/components/Photographers';
+import ClientStories from '@/components/ClientStories';
 import { buildMetadata } from '@/lib/seo';
 import { absoluteUrl } from '@/lib/urls';
 import {
@@ -484,6 +486,13 @@ export default async function CityPage({ params }: CityPageProps) {
         </div>
       </section>
       )}
+
+      <Photographers
+        locale={locale}
+        citySlug={city.slug}
+        title={{ en: `Photographers ${inPlace(city, 'en')}`, pt: `Fotógrafos ${ptAt(city)}` }[locale]}
+      />
+      <ClientStories locale={locale} citySlug={city.slug} />
 
       <Faq headingId="city-faq-heading" title={labels.faqTitle} entries={faqEntries} />
 

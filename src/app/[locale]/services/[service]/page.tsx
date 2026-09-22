@@ -42,6 +42,8 @@ import { WhatsAppIcon } from '@/components/Icons';
 import CtaPair from '@/components/CtaPair';
 import CtaBand from '@/components/CtaBand';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Photographers from '@/components/Photographers';
+import ClientStories from '@/components/ClientStories';
 import { portfolioImages } from '@/lib/portfolio';
 import { bookHref as bookHrefFor, leafHref, serviceAlternateParams } from '@/lib/routes';
 
@@ -425,6 +427,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
       </section>
 
+
+      <Photographers locale={locale} serviceId={service.slug} />
+      <ClientStories locale={locale} serviceSlug={service.slug} />
 
       <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
 

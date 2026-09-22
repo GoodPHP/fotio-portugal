@@ -32,6 +32,7 @@ import {
   getServiceById,
   serviceSlug,
   serviceExistsIn,
+  PHOTOGRAPHERS,
 } from '../src/lib/catalog';
 import { LOCALES, type Locale } from '../src/lib/locales';
 import { absoluteUrl } from '../src/lib/urls';
@@ -112,6 +113,20 @@ function buildEntries(): Entry[] {
         params: { slug: post.slug },
         lastModified: blogPublishDate(post.slug),
       });
+    }
+
+    // Photographer profiles exist only once there are real photographers, and
+    // the index 404s until then; neither is listed before it exists.
+    if (PHOTOGRAPHERS.length > 0) {
+      entries.push({ locale, route: '/photographers', lastModified: hubLastmod });
+      for (const photographer of PHOTOGRAPHERS) {
+        entries.push({
+          locale,
+          route: '/photographers/[slug]',
+          params: { slug: photographer.slug },
+          lastModified: hubLastmod,
+        });
+      }
     }
 
     // Curated leaves only. The long tail renders on demand but is noindex, and

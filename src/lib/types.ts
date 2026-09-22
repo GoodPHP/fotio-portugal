@@ -207,7 +207,15 @@ export interface BlogPost {
   section?: Localized;
   /** Q&A block rendered after the body and emitted as a FAQPage node. */
   faqs?: BlogFAQ[];
+  /** The topic cluster the article belongs to; see `BLOG_CLUSTERS`. */
+  cluster?: BlogClusterId;
+  /** Place slugs the article is about, linked from its foot. */
+  relatedCities?: string[];
+  /** Service ids the article sells, linked from its foot. */
+  relatedServices?: string[];
 }
+
+export type BlogClusterId = 'lisbon' | 'algarve' | 'portugal';
 
 /**
  * A client review, and the client story it can carry.
