@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "opennextjs-cloudflare build",
-    "build:next": "NODE_ENV=production tsx scripts/check-brand.ts && NODE_ENV=production tsx scripts/check-pt-todo.ts && NODE_ENV=production tsx scripts/check-legal.ts && NODE_ENV=production tsx scripts/check-whatsapp.ts && NODE_ENV=production tsx scripts/check-slots.ts && NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
+    "build:next": "NODE_ENV=production tsx scripts/check-brand.ts && NODE_ENV=production tsx scripts/check-pt-todo.ts && NODE_ENV=production tsx scripts/check-legal.ts && NODE_ENV=production tsx scripts/check-whatsapp.ts && NODE_ENV=production tsx scripts/check-slots.ts && NODE_ENV=production tsx scripts/check-leaf-copy.ts && NODE_ENV=production tsx scripts/generate-public-images.ts && NODE_ENV=production tsx scripts/generate-sitemap.ts && next build",
     "start": "next start",
     "preview": "npm run build && opennextjs-cloudflare preview",
     "deploy": "npm run build && opennextjs-cloudflare deploy --cacheChunkSize 5",
@@ -24,7 +24,8 @@
     "photos:search": "tsx scripts/photos/search.ts",
     "photos:select": "tsx scripts/photos/select.ts",
     "photos:fetch": "tsx scripts/photos/fetch.ts",
-    "check:slots": "tsx scripts/check-slots.ts"
+    "check:slots": "tsx scripts/check-slots.ts",
+    "check:leaf-copy": "tsx scripts/check-leaf-copy.ts"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.20.6",

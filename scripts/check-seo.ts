@@ -17,12 +17,13 @@ import { absoluteUrl, languageAlternates } from '../src/lib/urls';
 import {
   publishedCities,
   publishedServices,
-  publishedCuratedLeaves,
+  publishedIndexableLeaves,
+  leafExists,
   publishedBlogPosts,
   getServiceById,
   serviceSlug,
   serviceExistsIn,
-  isCuratedLeaf,
+  isIndexableLeaf,
   CITIES,
   SERVICES,
 } from '../src/lib/catalog';
@@ -30,8 +31,6 @@ import { serviceAlternateParams, leafAlternateParams } from '../src/lib/routes';
 import { TITLE_MAX, DESCRIPTION_MAX } from '../src/lib/seo-text';
 import { CITY_SEO } from '../src/lib/data/city-seo';
 import { SERVICE_SEO } from '../src/lib/data/service-seo';
-import { LEAF_SEO } from '../src/lib/data/leaf-seo';
-import { CURATED_LEAVES } from '../src/lib/curated';
 import { SITE_NAME } from '../src/lib/site';
 import { SERVICE_LANDING } from '../src/lib/data/service-landing';
 import { IMAGE_SLOTS } from '../src/lib/data/image-manifest';
@@ -97,15 +96,16 @@ for (const city of publishedCities()) {
   );
 }
 
-// 4. Every curated leaf must be in the sitemap; nothing else may be.
+// 4. Every leaf with authored copy must be in the sitemap, in a reciprocal
+// hreflang cluster.
 for (const locale of LOCALES) {
-  for (const { serviceId, city } of publishedCuratedLeaves(locale)) {
+  for (const { serviceId, city } of publishedIndexableLeaves(locale)) {
     const service = getServiceById(serviceId)!;
     const url = absoluteUrl(locale, '/services/[service]/[city]', {
       service: serviceSlug(service, locale),
       city,
     });
-    if (!sitemapUrls.has(url)) fail(`curated leaf missing from sitemap: ${url}`);
+    if (!sitemapUrls.has(url)) fail(`indexable leaf missing from sitemap: ${url}`);
     checkCluster(`leaf ${serviceId}/${city}`, languageAlternates('/services/[service]/[city]', leafAlternateParams(service, getCityOrThrow(city))));
   }
 }
@@ -116,26 +116,19 @@ function getCityOrThrow(slug: string) {
   return city;
 }
 
-// 5. No uncurated combination may appear in the sitemap.
+// 5. No leaf without authored copy — noindex — may appear in the sitemap, and
+// no pairing that is not a page at all.
 for (const locale of LOCALES) {
   for (const service of SERVICES) {
     if (!serviceExistsIn(service, locale)) continue;
     for (const city of CITIES) {
-      if (isCuratedLeaf(service.slug, city.slug, locale)) continue;
+      if (leafExists(service, city.slug, locale) && isIndexableLeaf(service.slug, city.slug, locale)) continue;
       const url = absoluteUrl(locale, '/services/[service]/[city]', {
         service: serviceSlug(service, locale),
         city: city.slug,
       });
-      if (sitemapUrls.has(url)) fail(`noindex leaf listed in sitemap: ${url}`);
+      if (sitemapUrls.has(url)) fail(`non-indexable leaf listed in sitemap: ${url}`);
     }
-  }
-}
-
-// 6. Every curated leaf points at entries that exist.
-for (const locale of LOCALES) {
-  for (const { serviceId, city } of publishedCuratedLeaves(locale)) {
-    if (!getServiceById(serviceId)) fail(`curated leaf references unknown service "${serviceId}"`);
-    if (!CITIES.some((c) => c.slug === city)) fail(`curated leaf references unknown city "${city}"`);
   }
 }
 
@@ -200,29 +193,7 @@ for (const service of publishedServices()) {
   }
 }
 
-// 10. Authored leaf copy points at real, curated combinations and fits.
-//
-// A leaf entry keyed on a pairing that is not curated is copy written for a
-// noindex page — wasted, and a sign the key was mistyped.
-const curatedKeys = new Set(CURATED_LEAVES.map((leaf) => `${leaf.service}--${leaf.city}`));
-for (const [key, seo] of Object.entries(LEAF_SEO)) {
-  const [serviceId, citySlug] = key.split('--');
-  if (!getServiceById(serviceId)) fail(`leaf-seo key "${key}" references unknown service "${serviceId}"`);
-  if (!CITIES.some((c) => c.slug === citySlug)) fail(`leaf-seo key "${key}" references unknown city "${citySlug}"`);
-  if (!curatedKeys.has(key)) fail(`leaf-seo key "${key}" is not a curated leaf, so the page it is written for is noindex`);
-  for (const locale of LOCALES) {
-    const title = seo.title[locale] ?? seo.title.en;
-    const description = seo.description[locale] ?? seo.description.en;
-    // These titles carry the brand themselves rather than letting the layout
-    // append it, so the whole string counts against the limit.
-    if (title.length > TITLE_MAX) {
-      fail(`leaf ${key} (${locale}): title is ${title.length} chars, over ${TITLE_MAX}`);
-    }
-    if (description.length > DESCRIPTION_MAX) {
-      fail(`leaf ${key} (${locale}): description is ${description.length} chars, over ${DESCRIPTION_MAX}`);
-    }
-  }
-}
+// 10. Leaf copy — presence, SERP limits, uniqueness — is `check-leaf-copy.ts`.
 
 // 11. Every published service carries its conversion sections, complete in each
 // language it is sold in. A page without them still renders — the sections are
@@ -260,6 +231,5 @@ console.log(
     `${publishedServices().length} services (all with authored SERP copy), ` +
     `${publishedCities().length} cities ` +
     `(all with authored SERP copy), ` +
-    `${LOCALES.map((l) => `${l} ${publishedCuratedLeaves(l).length} curated leaves`).join(', ')}, ` +
-    `${Object.keys(LEAF_SEO).length} authored leaves`,
+    `${LOCALES.map((l) => `${l} ${publishedIndexableLeaves(l).length} indexable leaves`).join(', ')}`,
 );

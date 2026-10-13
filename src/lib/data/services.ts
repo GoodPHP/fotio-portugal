@@ -464,6 +464,7 @@ export const SERVICES: Service[] = [
   {
     slug: 'lisbon-photoshoot',
     availableIn: ['en'],
+    onlyIn: ['lisboa'],
     name: { en: 'Lisbon photoshoot', pt: 'Sessão fotográfica em Lisboa' },
     category: 'vacation',
     initialPrice: 200,

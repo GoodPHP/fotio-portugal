@@ -28,7 +28,7 @@ import {
   publishedServices,
   publishedCities,
   publishedBlogPosts,
-  publishedCuratedLeaves,
+  publishedIndexableLeaves,
   getServiceById,
   serviceSlug,
   serviceExistsIn,
@@ -129,9 +129,11 @@ function buildEntries(): Entry[] {
       }
     }
 
-    // Curated leaves only. The long tail renders on demand but is noindex, and
-    // a sitemap entry for a noindex page is a contradiction Google reports back.
-    for (const { serviceId, city } of publishedCuratedLeaves(locale)) {
+    // Leaves with authored copy only. One without renders from the template
+    // as noindex, and a sitemap entry for a noindex page is a contradiction
+    // Google reports back. `check-leaf-copy.ts` fails the build before that
+    // can happen, so in practice this is every leaf.
+    for (const { serviceId, city } of publishedIndexableLeaves(locale)) {
       const entity = getServiceById(serviceId);
       if (!entity) continue;
       entries.push({

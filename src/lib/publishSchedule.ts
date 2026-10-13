@@ -1,5 +1,5 @@
 import { CITIES, SERVICES } from './data';
-import { CURATED_LEAVES } from './curated';
+import { DRIP_LEAVES } from './curated';
 
 /**
  * Deterministic "drip" publishing schedule.
@@ -90,7 +90,7 @@ function buildOrder(): string[] {
   const order: string[] = [];
   const seen = new Set<string>();
 
-  for (const leaf of CURATED_LEAVES) {
+  for (const leaf of DRIP_LEAVES) {
     if (!serviceSlugs.has(leaf.service) || !citySlugs.has(leaf.city)) continue;
     const key = leafKey(leaf.service, leaf.city);
     if (seen.has(key)) continue;

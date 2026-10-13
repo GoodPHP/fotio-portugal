@@ -11,7 +11,9 @@ import {
   serviceSlug,
   serviceExistsIn,
   publishedLeafParams,
-  isCuratedLeaf,
+  isIndexableLeaf,
+  leafExists,
+  serviceSoldIn,
 } from '@/lib/catalog';
 import { isLeafPublished } from '@/lib/publishSchedule';
 import { type Locale, isLocale, tx } from '@/lib/locales';
@@ -85,9 +87,9 @@ export async function generateMetadata({ params }: LeafPageProps): Promise<Metad
     locale,
     route: '/services/[service]/[city]',
     alternates: leafAlternateParams(service, city),
-    // Combinations we have not written for are real pages, but they are
-    // composed from templates and do not deserve an index slot.
-    noindex: !isCuratedLeaf(service.slug, city.slug, locale),
+    // A pairing without authored copy renders from the template, and a page
+    // that differs from its siblings in two proper nouns has no index slot.
+    noindex: !isIndexableLeaf(service.slug, city.slug, locale),
     title,
     description,
     ogImage: ogImagePath(serviceSlot(service.slug)),
@@ -103,6 +105,8 @@ export default async function LeafPage({ params }: LeafPageProps) {
   const service = getServiceBySlug(serviceParam, locale);
   // An unknown slug, or a slug belonging to the other locale, is not a page.
   if (!city || !service) notFound();
+  // "Lisbon photoshoot" in Porto: a service sold in one place only.
+  if (!leafExists(service, city.slug, locale)) notFound();
   // Not yet at its drip-publish slot → behave as if it does not exist.
   if (!isLeafPublished(service.slug, city.slug)) notFound();
 
@@ -124,19 +128,6 @@ export default async function LeafPage({ params }: LeafPageProps) {
     ctaText: {
       en: `Tell us your date and we’ll match you with a local photographer. ${tx(REPLY_TIME, 'en')}`,
       pt: `Diga-nos a data e encontramos um fotógrafo local. ${tx(REPLY_TIME, 'pt')}`,
-    }[locale],
-    aboutTitle: {
-      en: `Why choose ${serviceName} ${inPlace(city, 'en')}?`,
-      pt: `Porquê ${serviceName.toLowerCase()} ${ptAt(city)}?`,
-    }[locale],
-    routeTitle: {
-      en: `What does the session ${inPlace(city, 'en')} look like?`,
-      pt: `Como decorre a sessão ${ptAt(city)}?`,
-    }[locale],
-    detailsTitle: { en: 'What does the package include?', pt: 'O que inclui o pacote?' }[locale],
-    faqTitle: {
-      en: `FAQ — ${serviceName} ${inPlace(city, 'en')}`,
-      pt: `Perguntas frequentes — ${serviceName.toLowerCase()} ${ptAt(city)}`,
     }[locale],
     from: { en: 'Starting from', pt: 'Desde' }[locale],
     duration: { en: 'Duration', pt: 'Duração' }[locale],
@@ -176,8 +167,11 @@ export default async function LeafPage({ params }: LeafPageProps) {
 
   // Nearby: same service in other cities that prioritise it, then any others —
   // restricted to leaves that are already published so links never 404.
-  const prioritised = CITIES.filter((c) => c.slug !== city.slug && c.topServices.includes(service.slug) && isLeafPublished(service.slug, c.slug));
-  const fallbackCities = CITIES.filter((c) => c.slug !== city.slug && !c.topServices.includes(service.slug) && isLeafPublished(service.slug, c.slug));
+  const otherCities = CITIES.filter(
+    (c) => c.slug !== city.slug && serviceSoldIn(service, c.slug) && isLeafPublished(service.slug, c.slug),
+  );
+  const prioritised = otherCities.filter((c) => c.topServices.includes(service.slug));
+  const fallbackCities = otherCities.filter((c) => !c.topServices.includes(service.slug));
   const nearbyCities = [...prioritised, ...fallbackCities].slice(0, 6);
 
   // Per-service portfolio gallery (empty until stock photos are fetched).
@@ -256,26 +250,23 @@ export default async function LeafPage({ params }: LeafPageProps) {
             </div>
           </FadeIn>
 
-          <FadeIn instant delay={0.05} className="mt-12">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">{labels.aboutTitle}</h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-dark">{content.introParagraph}</p>
-            {/*
-              When, rather than where. Composed from this city's spot hours and
-              this service's duration, so it differs across the matrix instead of
-              repeating one sentence on a hundred and twenty-five pages.
-            */}
-            <p className="mt-4 text-base leading-relaxed text-brand-dark">{content.timingParagraph}</p>
-          </FadeIn>
-
-          <FadeIn delay={0.05} className="mt-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">{labels.routeTitle}</h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-dark">{content.sampleRoute}</p>
-          </FadeIn>
-
-          <FadeIn delay={0.05} className="mt-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">{labels.detailsTitle}</h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-dark">{content.detailsText}</p>
-          </FadeIn>
+          {/*
+            Why, where, when, what's included. The first three are written for
+            this pairing (src/lib/data/leaf-copy); the package is the service's
+            deliverables. The first section renders instantly — it is above the
+            fold on a phone.
+          */}
+          {content.sections.map((section, index) => (
+            <FadeIn
+              key={section.id}
+              instant={index === 0}
+              delay={0.05}
+              className={index === 0 ? 'mt-12' : 'mt-10'}
+            >
+              <h2 className="font-display text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">{section.heading}</h2>
+              <p className="mt-4 text-base leading-relaxed text-brand-dark">{section.body}</p>
+            </FadeIn>
+          ))}
 
           {/*
             The only FAQ on the site that is not the shared <Faq> section: this
@@ -286,7 +277,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
           */}
           {content.customFAQs.length > 0 && (
             <FadeIn delay={0.05} className="mt-12">
-              <h2 className="font-display text-2xl font-bold text-brand-dark sm:text-3xl">{labels.faqTitle}</h2>
+              <h2 className="font-display text-2xl font-bold text-brand-dark sm:text-3xl">{content.faqTitle}</h2>
               <div className="mt-6 border-t border-brand-rule">
                 {content.customFAQs.map((faq) => (
                   <details key={faq.question} className="disclosure group border-b border-brand-rule">

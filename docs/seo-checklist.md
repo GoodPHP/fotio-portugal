@@ -184,6 +184,37 @@ Run after stage 5, across every file touched.
 - [x] `tsc --noUnusedLocals --noUnusedParameters` clean across the session's
       files (one pre-existing unused import in `check-seo.ts` predates this work).
 
+## Stage 6 — every `service × city` page indexable
+
+Indexation used to be a hand-picked list of ~106 pairings; the other ~250
+rendered from a template as `noindex`. Now every pairing carries copy written
+for it, in each language it is served in, and indexation follows the copy.
+
+- [x] **Authored copy for all 421 leaves** (en 205, pt 216) —
+      [src/lib/data/leaf-copy/](../src/lib/data/leaf-copy/), one file per place
+      and language. Each page has its own title, description, *why*, *where*,
+      *when* and three FAQs. Facts come from the city, service and blog data;
+      catalogue figures are tokens (`{price}`, `{duration}`, `{photos}`,
+      `{delivery}`) filled at render, so a price change cannot strand stale copy.
+- [x] **Uniqueness measured, not asserted** —
+      [check-leaf-copy.ts](../scripts/check-leaf-copy.ts) shingles each page's
+      main column (4-word shingles) against every other leaf and the city,
+      service and blog pages, and fails the build under 70%. Currently min
+      70.1%, median 76.1%. The shared template (answer box, headings, package
+      line) is ~12–16% of every page, so ~85% is the ceiling.
+- [x] **`Lisbon photoshoot` sold in Lisbon only** (`Service.onlyIn`). The
+      eleven "Lisbon photoshoot in Porto/Madeira/…" pages no longer exist.
+- [x] **Sitemap and `check-seo.ts`** list every leaf with copy; drip-scheduled
+      leaves join on the first build after their slot (window ends 2026-10-29).
+- [ ] **Native review** of the Portuguese copy.
+- [ ] **Data contradictions found while writing**, to fix at the source:
+      Porto narrative vs lede on which bank lights in the morning; Lisbon
+      narrative "hills look north and east" vs Senhora do Monte "looks
+      south-west"; finalistas deliverables (group fits in 30 min) vs its SEO
+      paragraph (groups need longer); finalistas deliverables name Coimbra's
+      Queima/Latada for every city; no studio exists in the data for the
+      studio-portrait and headshot services outside the booking process.
+
 ## Still open
 
 - [ ] **No `ContactPoint` in the `Organization` node.** `NEXT_PUBLIC_WHATSAPP_NUMBER`

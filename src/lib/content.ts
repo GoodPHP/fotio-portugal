@@ -2,28 +2,128 @@ import type { City, Service } from './types';
 import { type Locale, tx } from './locales';
 import { localizedCityName } from './catalog';
 import { ptAt, ptOf, ptRegionAt } from './pt-grammar';
-import { LEAF_SEO } from './data/leaf-seo';
+import { getLeafCopy, type LeafCopy } from './leaf-copy';
 import { TITLE_MAX } from './seo-text';
 import { formatDelivery, formatDuration, formatPhotoCount, formatPrice } from './site';
 import { SITE_NAME } from './site';
+import { inPlace } from './cta';
 
 export interface ProgrammaticFAQ {
   question: string;
   answer: string;
 }
 
+export interface LeafSection {
+  id: 'why' | 'where' | 'when' | 'package';
+  heading: string;
+  body: string;
+}
+
 export interface ProgrammaticContent {
+  /** Whether the copy is authored for this pairing — and so whether the page is indexable. */
+  authored: boolean;
+  h1: string;
   answerBox: string;
-  introParagraph: string;
-  sampleRoute: string;
-  /** When in the day and the year this combination works. Composed, not copied. */
-  timingParagraph: string;
-  detailsText: string;
+  sections: LeafSection[];
+  faqTitle: string;
   customFAQs: ProgrammaticFAQ[];
 }
 
+/** "fotografia imobiliária e Alojamento Local", not "… alojamento local": only the first letter drops. */
+function lowerFirst(text: string): string {
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
 /**
- * Composed copy for a `service × city` page.
+ * The headings, H1 included. Shared by every leaf, so they carry the query
+ * and nothing else: the uniqueness of a page has to come from its copy.
+ */
+function headings(city: City, service: Service, locale: Locale) {
+  const serviceName = tx(service.name, locale);
+  const at = inPlace(city, locale);
+  if (locale === 'pt') {
+    return {
+      h1: `${serviceName} ${at}`,
+      why: `Porquê ${lowerFirst(serviceName)} ${at}?`,
+      where: `Onde fotografamos ${at}`,
+      when: `A melhor altura ${at}`,
+      package: 'O que inclui o pacote?',
+      faq: `Perguntas frequentes — ${lowerFirst(serviceName)} ${at}`,
+    };
+  }
+  return {
+    h1: `${serviceName} ${at}`,
+    why: `Why choose ${serviceName} ${at}?`,
+    where: `Where we photograph ${at}`,
+    when: `The best time ${at}`,
+    package: 'What does the package include?',
+    faq: `FAQ — ${serviceName} ${at}`,
+  };
+}
+
+/** The price line every leaf opens with. Figures from the catalogue only. */
+function answerBox(city: City, service: Service, locale: Locale): string {
+  const serviceName = tx(service.name, locale);
+  const priceLabel = formatPrice(service.initialPrice, locale);
+  const durationLabel = formatDuration(service.durationMinutes, locale);
+  const photoCount = formatPhotoCount(service);
+  const delivery = formatDelivery(service.deliveryHours, locale);
+  const longerOnRequest = Boolean(service.editedPhotosMax);
+  if (locale === 'pt') {
+    return `${serviceName} ${ptAt(city)} — desde ${priceLabel}. ${durationLabel} no local com um fotógrafo local verificado e ${photoCount} fotografias editadas entregues numa galeria privada em ${delivery}.${longerOnRequest ? ' Sessões mais longas são orçamentadas a pedido.' : ''} O preço é acordado antes de reservar e não muda.`;
+  }
+  return `${serviceName} ${inPlace(city, 'en')} — from ${priceLabel}. ${durationLabel} on location with a vetted local photographer, and ${photoCount} edited photos delivered to a private gallery within ${delivery}.${longerOnRequest ? ' Longer sessions are quoted on request.' : ''} The price is agreed before you book and does not move.`;
+}
+
+/** What the package holds. The deliverables are the service's; the copy around them is one line. */
+function packageText(city: City, service: Service, locale: Locale): string {
+  const deliverables = tx(service.deliverables, locale);
+  if (locale === 'pt') {
+    return `O pacote ${ptAt(city)} inclui: ${deliverables.join('; ')}. Não há suplementos depois da sessão.`;
+  }
+  return `The package ${inPlace(city, 'en')} covers: ${deliverables.join('; ')}. Nothing is added to the price after the session.`;
+}
+
+function fromAuthored(city: City, service: Service, locale: Locale, copy: LeafCopy): ProgrammaticContent {
+  const h = headings(city, service, locale);
+  return {
+    authored: true,
+    h1: h.h1,
+    answerBox: answerBox(city, service, locale),
+    sections: [
+      { id: 'why', heading: h.why, body: copy.intro },
+      { id: 'where', heading: h.where, body: copy.where },
+      { id: 'when', heading: h.when, body: copy.when },
+      { id: 'package', heading: h.package, body: packageText(city, service, locale) },
+    ],
+    faqTitle: h.faq,
+    customFAQs: copy.faqs.map((faq) => ({ question: faq.question, answer: faq.answer })),
+  };
+}
+
+/**
+ * Every visible word of the page's main column, in reading order — what the
+ * uniqueness check measures. Blocks are separated by newlines so no shingle
+ * runs from one block into the next.
+ */
+export function leafPageText(content: ProgrammaticContent): string {
+  return [
+    content.h1,
+    content.answerBox,
+    ...content.sections.flatMap((section) => [section.heading, section.body]),
+    content.faqTitle,
+    ...content.customFAQs.flatMap((faq) => [faq.question, faq.answer]),
+  ].join('\n');
+}
+
+/**
+ * Copy for a `service × city` page: the authored copy where it exists, and a
+ * composition from city and service data where it does not.
+ *
+ * The composed path is a safety net for a pairing added before its copy is
+ * written. Such a page renders but is `noindex`, and
+ * `scripts/check-leaf-copy.ts` fails the build while it exists. What follows
+ * describes that composition.
  *
  * The previous version of this function took the city name, the service name
  * and three numbers and substituted them into a fixed paragraph, which made a
@@ -35,14 +135,43 @@ export interface ProgrammaticContent {
  * lede, the names and hours of its photo spots, their permit position, and the
  * service's own deliverables and figures. Two leaves in one city differ by the
  * service's deliverables and by which spots suit it; two cities for one service
- * differ by lede, spots and permits. `LEAF_SEO` overrides the framing paragraph
- * for the combinations we have actually written.
+ * differ by lede, spots and permits.
  */
 export function generateProgrammaticContent(
   city: City,
   service: Service,
   locale: Locale,
 ): ProgrammaticContent {
+  const copy = getLeafCopy(service, city.slug, locale);
+  if (copy) return fromAuthored(city, service, locale, copy);
+
+  const h = headings(city, service, locale);
+  const parts = composedParts(city, service, locale);
+  return {
+    authored: false,
+    h1: h.h1,
+    answerBox: parts.answerBox,
+    sections: [
+      { id: 'why', heading: h.why, body: parts.introParagraph },
+      { id: 'where', heading: h.where, body: parts.sampleRoute },
+      { id: 'when', heading: h.when, body: parts.timingParagraph },
+      { id: 'package', heading: h.package, body: parts.detailsText },
+    ],
+    faqTitle: h.faq,
+    customFAQs: parts.customFAQs,
+  };
+}
+
+interface ComposedParts {
+  answerBox: string;
+  introParagraph: string;
+  sampleRoute: string;
+  timingParagraph: string;
+  detailsText: string;
+  customFAQs: ProgrammaticFAQ[];
+}
+
+function composedParts(city: City, service: Service, locale: Locale): ComposedParts {
   const cityName = localizedCityName(city, locale);
   const serviceName = tx(service.name, locale);
   const regionName = tx(city.region, locale);
@@ -69,7 +198,6 @@ export function generateProgrammaticContent(
   const permitNotes = spots
     .map((s) => ({ name: s.name, cost: tx(s.permitCost, locale) }))
     .filter((s) => !/^(free|gr[aá]tis|gratuito|livre|sem custo)\b/i.test(s.cost));
-  const authored = LEAF_SEO[`${service.slug}--${city.slug}`];
 
   const durationLabel = formatDuration(duration, locale);
   const priceLabel = formatPrice(startingPrice, locale);
@@ -81,9 +209,7 @@ export function generateProgrammaticContent(
     return {
       answerBox: `${serviceName} ${ptAt(city)} — desde ${priceLabel}. ${durationLabel} no local com um fotógrafo local verificado e ${photoCount} fotografias editadas entregues numa galeria privada em ${delivery}.${longerOnRequest ? ' Sessões mais longas são orçamentadas a pedido.' : ''} O preço é acordado antes de reservar e não muda.`,
 
-      introParagraph: authored
-        ? tx(authored.angle, locale)
-        : `${lede} É isso que decide como se prepara aqui uma sessão de ${serviceName.toLowerCase()}: o fotógrafo que vai consigo vive ${ptAt(city)} e trabalha ${ptRegionAt(regionName)} o ano inteiro, por isso não está a conhecer o sítio ao mesmo tempo que você. Esse conhecimento prévio é a diferença entre uma sessão que cumpre o horário e uma sessão passada à procura de enquadramento.`,
+      introParagraph: `${lede} É isso que decide como se prepara aqui uma sessão de ${serviceName.toLowerCase()}: o fotógrafo que vai consigo vive ${ptAt(city)} e trabalha ${ptRegionAt(regionName)} o ano inteiro, por isso não está a conhecer o sítio ao mesmo tempo que você. Esse conhecimento prévio é a diferença entre uma sessão que cumpre o horário e uma sessão passada à procura de enquadramento.`,
 
       // Portuguese place names carry their own article — "a Ribeira", "o
       // Miradouro da Graça" — so no preposition can be glued in front of one.
@@ -133,9 +259,7 @@ export function generateProgrammaticContent(
   return {
     answerBox: `${serviceName} in ${cityName} — from ${priceLabel}. ${durationLabel} on location with a vetted local photographer, and ${photoCount} edited photos delivered to a private gallery within ${delivery}.${longerOnRequest ? ' Longer sessions are quoted on request.' : ''} The price is agreed before you book and does not move.`,
 
-    introParagraph: authored
-      ? tx(authored.angle, locale)
-      : `${lede} That is what decides how a ${serviceName} session is planned here: the photographer you work with lives in ${cityName} and shoots across ${regionName} all year, so they are not seeing the place for the first time alongside you. That prior knowledge is the difference between a session that keeps to its schedule and one spent looking for a frame.`,
+    introParagraph: `${lede} That is what decides how a ${serviceName} session is planned here: the photographer you work with lives in ${cityName} and shoots across ${regionName} all year, so they are not seeing the place for the first time alongside you. That prior knowledge is the difference between a session that keeps to its schedule and one spent looking for a frame.`,
 
     sampleRoute: isCoverage
       ? `Coverage runs ${durationLabel} and follows your schedule rather than a fixed route. When a gap opens for composed frames, we step out to ${keySpotName}${secondSpot ? ` or ${secondSpot.name}` : ''} — a few minutes on foot, which is that much less taken out of the day.`
@@ -182,19 +306,17 @@ export function generateProgrammaticContent(
 /**
  * SEO title & meta description for the `service × city` leaf pages.
  *
- * Authored in `leaf-seo.ts` for the combinations that carry the most demand;
- * composed from the catalogue for the rest, which are `noindex` anyway and so
- * are never competing on a meta description.
+ * Authored in `src/lib/data/leaf-copy/` — the title without the brand, which
+ * the layout appends. The composed fallback is for a pairing whose copy is not
+ * written yet; that page is `noindex`, so it never competes on a description.
  */
 export function getSeoMetadata(
   city: City,
   service: Service,
   locale: Locale,
 ): { title: string; description: string } {
-  const authored = LEAF_SEO[`${service.slug}--${city.slug}`];
-  if (authored) {
-    return { title: tx(authored.title, locale), description: tx(authored.description, locale) };
-  }
+  const authored = getLeafCopy(service, city.slug, locale);
+  if (authored) return { title: authored.title, description: authored.description };
 
   const cityName = localizedCityName(city, locale);
   const serviceName = tx(service.name, locale);

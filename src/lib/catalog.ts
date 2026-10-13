@@ -7,7 +7,7 @@ import {
   isBlogPostPublished,
   isLeafPublished,
 } from './publishSchedule';
-import { curatedLeaves, isCuratedLeaf } from './curated';
+import { isIndexableLeaf } from './curated';
 
 export { CITIES, SERVICES, BLOG_POSTS, REVIEWS, CATEGORY_LABELS, PHOTOGRAPHERS };
 
@@ -72,6 +72,16 @@ export function serviceLocales(service: Service): readonly Locale[] {
 
 export function serviceExistsIn(service: Service, locale: Locale): boolean {
   return serviceLocales(service).includes(locale);
+}
+
+/** Whether this service is sold in this place at all — see `Service.onlyIn`. */
+export function serviceSoldIn(service: Service, citySlug: string): boolean {
+  return !service.onlyIn || service.onlyIn.includes(citySlug);
+}
+
+/** Whether `service × city` is a page in `locale`, published or not. */
+export function leafExists(service: Service, citySlug: string, locale: Locale): boolean {
+  return serviceExistsIn(service, locale) && serviceSoldIn(service, citySlug) && Boolean(getCity(citySlug));
 }
 
 /**
@@ -231,44 +241,20 @@ export function publishedTailoredLeafParams(now?: Date): LeafParam[] {
 }
 
 /**
- * Curated, published leaves for one locale, with the service slug already
- * localized — the exact set to prerender and to put in the sitemap.
+ * Every published leaf for one locale, as route params — the prerender list.
  *
- * There is no accessor for "every valid combination" on purpose. The long tail
- * is reachable and rendered on demand, but it is noindex, and an enumeration of
- * it is only ever useful for putting it somewhere it does not belong.
- */
-export function publishedCuratedLeafParams(locale: Locale, now?: Date): LeafParam[] {
-  const params: LeafParam[] = [];
-  for (const leaf of curatedLeaves(locale)) {
-    const service = getServiceById(leaf.service);
-    if (!service || !serviceExistsIn(service, locale)) continue;
-    if (!getCity(leaf.city)) continue;
-    if (!isLeafPublished(leaf.service, leaf.city, now)) continue;
-    params.push({ service: serviceSlug(service, locale), city: leaf.city });
-  }
-  return params;
-}
-
-/**
- * Every published leaf for one locale, curated or not, as route params.
- *
- * This is the prerender list, and it is deliberately wider than the curated
- * set. `isLeafPublished` returns true for any combination not in the drip
- * schedule, and only curated leaves are scheduled — so `publishedServicesForCity`
- * already links to uncurated leaves from every city page. Prerendering only the
- * curated ones and then refusing to render anything else would 404 the site's
- * own internal links.
- *
- * Curation still does its actual job: it decides `noindex` and membership of
- * the sitemap. It is not a prerender list and conflating the two is what made
- * ISR look necessary.
+ * Wider than the indexable set only while a pairing lacks authored copy, which
+ * the build does not allow: `isLeafPublished` is true for any pairing outside
+ * the drip schedule, city pages link to all of them, and refusing to render
+ * one would 404 the site's own links. Authored copy decides `noindex` and the
+ * sitemap; this decides what exists.
  */
 export function publishedLeafParams(locale: Locale, now?: Date): LeafParam[] {
   const params: LeafParam[] = [];
   for (const service of SERVICES) {
     if (!serviceExistsIn(service, locale)) continue;
     for (const city of CITIES) {
+      if (!serviceSoldIn(service, city.slug)) continue;
       if (!isLeafPublished(service.slug, city.slug, now)) continue;
       params.push({ service: serviceSlug(service, locale), city: city.slug });
     }
@@ -276,33 +262,40 @@ export function publishedLeafParams(locale: Locale, now?: Date): LeafParam[] {
   return params;
 }
 
-/** Curated, published leaves for one locale, as stable ids. */
-export function publishedCuratedLeaves(
+/** Published leaves with authored copy in `locale`, as stable ids — the sitemap's leaf rows. */
+export function publishedIndexableLeaves(
   locale: Locale,
   now?: Date,
 ): Array<{ serviceId: string; city: string }> {
   const out: Array<{ serviceId: string; city: string }> = [];
-  for (const leaf of curatedLeaves(locale)) {
-    const service = getServiceById(leaf.service);
-    if (!service || !serviceExistsIn(service, locale)) continue;
-    if (!getCity(leaf.city)) continue;
-    if (!isLeafPublished(leaf.service, leaf.city, now)) continue;
-    out.push({ serviceId: leaf.service, city: leaf.city });
+  for (const service of SERVICES) {
+    for (const city of CITIES) {
+      if (!leafExists(service, city.slug, locale)) continue;
+      if (!isIndexableLeaf(service.slug, city.slug, locale)) continue;
+      if (!isLeafPublished(service.slug, city.slug, now)) continue;
+      out.push({ serviceId: service.slug, city: city.slug });
+    }
   }
   return out;
 }
 
-export { isCuratedLeaf };
+export { isIndexableLeaf };
 
 /** Cities for which the `service × city` leaf is published (live links only). */
 export function publishedCitiesForService(serviceSlug: string, now?: Date): City[] {
-  return CITIES.filter((c) => isLeafPublished(serviceSlug, c.slug, now));
+  const service = getServiceById(serviceSlug);
+  return CITIES.filter(
+    (c) => (!service || serviceSoldIn(service, c.slug)) && isLeafPublished(serviceSlug, c.slug, now),
+  );
 }
 
 /** Services for which the `service × city` leaf is published (live links only). */
 export function publishedServicesForCity(citySlug: string, locale?: Locale, now?: Date): Service[] {
   return SERVICES.filter(
-    (s) => isLeafPublished(s.slug, citySlug, now) && (!locale || serviceExistsIn(s, locale)),
+    (s) =>
+      serviceSoldIn(s, citySlug) &&
+      isLeafPublished(s.slug, citySlug, now) &&
+      (!locale || serviceExistsIn(s, locale)),
   );
 }
 

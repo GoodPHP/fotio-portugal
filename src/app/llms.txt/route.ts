@@ -128,8 +128,8 @@ export function GET(): Response {
     })} are the same page; city slugs are identical in both.`,
   );
   push(
-    '- Combinations without written copy still render, but carry noindex and are absent from ' +
-      'the sitemap. Only the pages listed in /sitemap.xml are intended for indexing.',
+    '- Every service and place combination carries copy written for it, in both languages. ' +
+      'Only the pages listed in /sitemap.xml are intended for indexing.',
   );
   push();
 

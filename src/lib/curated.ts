@@ -1,43 +1,36 @@
 import type { Locale } from './locales';
+import { hasLeafCopy } from './leaf-copy';
 
 /**
- * The `service × city` pages we have actually written.
+ * Which `service × city` pages are indexed, and the order the first of them
+ * were released in.
  *
- * There are 30 services and 20-odd cities, so the full matrix is ~600 pages per
- * language. Publishing all of them from one template is what produced the thin
- * content this site is being rebuilt to avoid: 600 pages that differ only in
- * two proper nouns are 600 pages Google has no reason to index.
+ * Indexation follows the copy. A pairing is indexable in a language when it
+ * has authored copy in that language (`src/lib/data/leaf-copy/`), and only
+ * then: a page composed from a template differs from its siblings in two
+ * proper nouns, and that is the thin content this site is built to avoid.
+ * Every valid pairing now has copy in both languages, and
+ * `scripts/check-leaf-copy.ts` fails the build when one is missing or drops
+ * under 70% unique against the rest of the site — so a new service or city
+ * cannot quietly ship a hundred template pages into the index.
  *
- * So indexation is a decision made here, per combination, rather than derived
- * from the matrix. A curated leaf is prerendered, listed in the sitemap and
- * indexable. Every other valid combination still renders — a reader who follows
- * a link to it gets a real page — but carries `noindex, follow`, stays out of
- * the sitemap, and passes its link equity on to the pages that earned it.
- *
- * This is deliberately kept apart from `City.topServices`, which is editorial
- * link priority: which services a city page puts forward. The two overlap today
- * but answer different questions, and conflating them is how a link rail ends
- * up dictating what gets indexed.
+ * The list below is no longer the index. It is the drip order of the first
+ * wave — the pairings people search for most, released one by one through
+ * `publishSchedule.ts` rather than in a single bulk drop. A pairing absent from
+ * it is live from launch.
  */
-export interface CuratedLeaf {
+export interface DripLeaf {
   /** Canonical service id, not a localized slug. */
   service: string;
   /** City slug — identical across locales. */
   city: string;
-  /** Locales this page is written in. Omit for every locale the service exists in. */
-  locales?: readonly Locale[];
 }
 
 /**
- * Chosen by demand rather than by matrix.
- *
- * Each entry is a combination somebody actually searches for: wedding work
- * where the venues are, corporate work where the offices are, honeymoons and
- * proposals where people travel to. The locale-restricted services carry their
- * restriction implicitly — a leaf for an English-only service is only ever
- * built in English, because `serviceExistsIn` filters it.
+ * Chosen by demand: wedding work where the venues are, corporate work where
+ * the offices are, honeymoons and proposals where people travel to.
  */
-export const CURATED_LEAVES: readonly CuratedLeaf[] = [
+export const DRIP_LEAVES: readonly DripLeaf[] = [
   // Lisboa — the largest market for every category at once, and the only city
   // here with both a tourist and a corporate side of any size.
   { service: 'lisbon-photoshoot', city: 'lisboa' },
@@ -172,26 +165,7 @@ export const CURATED_LEAVES: readonly CuratedLeaf[] = [
   { service: 'maternity', city: 'comporta' },
 ];
 
-const CURATED_KEYS: ReadonlySet<string> = new Set(
-  CURATED_LEAVES.map((leaf) => `${leaf.service}/${leaf.city}`),
-);
-
-const CURATED_LOCALES: ReadonlyMap<string, readonly Locale[] | undefined> = new Map(
-  CURATED_LEAVES.map((leaf) => [`${leaf.service}/${leaf.city}`, leaf.locales]),
-);
-
-/**
- * Whether this combination has authored copy in `locale` — and so whether it
- * belongs in the index and the sitemap.
- */
-export function isCuratedLeaf(serviceId: string, citySlug: string, locale: Locale): boolean {
-  const key = `${serviceId}/${citySlug}`;
-  if (!CURATED_KEYS.has(key)) return false;
-  const locales = CURATED_LOCALES.get(key);
-  return locales === undefined || locales.includes(locale);
-}
-
-/** Curated leaves for one locale. */
-export function curatedLeaves(locale: Locale): readonly CuratedLeaf[] {
-  return CURATED_LEAVES.filter((leaf) => leaf.locales === undefined || leaf.locales.includes(locale));
+/** Whether this pairing has authored copy in `locale` — and so belongs in the index and the sitemap. */
+export function isIndexableLeaf(serviceId: string, citySlug: string, locale: Locale): boolean {
+  return hasLeafCopy(serviceId, citySlug, locale);
 }

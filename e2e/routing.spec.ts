@@ -136,7 +136,7 @@ test.describe('asymmetric catalogue', () => {
 });
 
 test.describe('indexation', () => {
-  test('a curated leaf is indexable and fully linked', async ({ page }) => {
+  test('a leaf is indexable and fully linked', async ({ page }) => {
     await page.goto('/services/couple/porto');
     expect(await page.locator('meta[name="robots"]').count()).toBe(0);
     const alt = await alternates(page);
@@ -144,15 +144,17 @@ test.describe('indexation', () => {
     expect(alt.pt).toBeTruthy();
   });
 
-  test('an uncurated leaf renders but is noindex and unlinked', async ({ page }) => {
-    const response = await page.goto('/services/portrait/lisboa');
+  test('a leaf far from the obvious demand is indexable too, with its own copy', async ({ page }) => {
+    const response = await page.goto('/services/portrait/douro');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-    // follow, so the links out still pass equity to the pages that earned it.
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /follow/);
-    expect(await alternates(page)).toEqual({});
-    // Its canonical points at itself, not at a different page.
-    expect(await canonical(page)).toContain('/services/portrait/lisboa');
+    expect(await page.locator('meta[name="robots"]').count()).toBe(0);
+    expect(await canonical(page)).toContain('/services/portrait/douro');
+    await expect(page).toHaveTitle(/Douro/);
+  });
+
+  test('a service named after a place is a page only in that place', async ({ page }) => {
+    expect((await page.goto('/services/lisbon-photoshoot/lisboa'))?.status()).toBe(200);
+    expect((await page.goto('/services/lisbon-photoshoot/porto'))?.status()).toBe(404);
   });
 
   test('legal pages are noindex', async ({ page }) => {
@@ -202,9 +204,8 @@ test.describe('language switch', () => {
     await expect(page).toHaveURL(/\/services\/wedding\/lisboa$/);
   });
 
-  test('round-trips on a noindex leaf, which publishes no hreflang', async ({ page }) => {
+  test('round-trips on a leaf whose slug differs most between languages', async ({ page }) => {
     await page.goto('/services/portrait/lisboa');
-    expect(await alternates(page)).toEqual({});
     await clickTo(page, 'Português');
     await expect(page).toHaveURL(/\/pt\/fotografo\/retrato-estudio\/lisboa$/);
     await expect(page.locator('h1')).not.toContainText('não encontrada');

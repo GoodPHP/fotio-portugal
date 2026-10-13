@@ -8,12 +8,15 @@ import {
   serviceLocales,
   serviceExistsIn,
   getServiceById,
-  isCuratedLeaf,
+  isIndexableLeaf,
+  leafExists,
+  publishedLeafParams,
+  publishedIndexableLeaves,
   publishedServices,
   publishedServicesByCategory,
   publishedServicesForCity,
 } from './catalog';
-import { CURATED_LEAVES } from './curated';
+import { DRIP_LEAVES } from './curated';
 import { LOCALES } from './locales';
 
 /** A service shaped like the catalogue's, without depending on real content. */
@@ -112,30 +115,30 @@ describe('locale-filtered listings', () => {
   });
 });
 
-describe('curated leaves', () => {
-  test('a curated combination is indexable in both locales', () => {
-    const [first] = CURATED_LEAVES;
-    assert.ok(first, 'expected the curated list to be non-empty');
-    assert.equal(isCuratedLeaf(first.service, first.city, 'en'), true);
-    assert.equal(isCuratedLeaf(first.service, first.city, 'pt'), true);
+describe('indexable leaves', () => {
+  test('a pairing nobody wrote is not indexable', () => {
+    assert.equal(isIndexableLeaf('not-a-service', 'not-a-city', 'en'), false);
   });
 
-  test('a combination nobody wrote is not curated', () => {
-    assert.equal(isCuratedLeaf('not-a-service', 'not-a-city', 'en'), false);
+  test('a service that names a place is a page only in that place', () => {
+    const lisbon = getServiceById('lisbon-photoshoot')!;
+    assert.equal(leafExists(lisbon, 'lisboa', 'en'), true);
+    assert.equal(leafExists(lisbon, 'porto', 'en'), false);
+    const params = publishedLeafParams('en').filter((p) => p.service === 'lisbon-photoshoot');
+    assert.deepEqual(params.map((p) => p.city), ['lisboa']);
+    assert.equal(publishedServicesForCity('porto', 'en').some((s) => s.slug === 'lisbon-photoshoot'), false);
   });
 
-  test('the curated set is a strict subset of the full matrix', () => {
-    // The whole point: if these were equal we would be back to publishing
-    // every combination from a template.
-    const full = SERVICES.length * CITIES.length;
-    assert.ok(
-      CURATED_LEAVES.length < full,
-      `curated ${CURATED_LEAVES.length} should be fewer than the ${full} possible`,
-    );
+  test('every indexable leaf is a page that exists', () => {
+    for (const locale of ['en', 'pt'] as const) {
+      for (const { serviceId, city } of publishedIndexableLeaves(locale)) {
+        assert.ok(leafExists(getServiceById(serviceId)!, city, locale), `${serviceId}/${city} (${locale})`);
+      }
+    }
   });
 
-  test('every curated leaf points at a real service and city', () => {
-    for (const leaf of CURATED_LEAVES) {
+  test('every drip leaf points at a real service and city', () => {
+    for (const leaf of DRIP_LEAVES) {
       assert.ok(getServiceById(leaf.service), `unknown service "${leaf.service}"`);
       assert.ok(CITIES.some((c) => c.slug === leaf.city), `unknown city "${leaf.city}"`);
     }

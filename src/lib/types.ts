@@ -158,6 +158,12 @@ export interface Service {
    * reaches that locale's sitemap or listings.
    */
   availableIn?: readonly Locale[];
+  /**
+   * City slugs this service is sold in. Omit for every place. Only for a
+   * service whose name is a place — "Lisbon photoshoot" in Porto is not a page
+   * anybody searches for, and there is nothing true to write on it.
+   */
+  onlyIn?: readonly string[];
   name: Localized;
   category: ServiceCategory;
   initialPrice: number;
