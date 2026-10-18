@@ -99,7 +99,9 @@ async function main() {
   const now = sum(inWindow(daily, current));
   const before = sum(inWindow(daily, previous));
   const lastYear = sum(inWindow(daily, yearAgo));
-  const opportunities = findOpportunities(results['query-page-current']);
+  // A young site has no query with 50 impressions yet; lower the floor with GSC_MIN_IMPRESSIONS.
+  const minImpressions = Number(process.env.GSC_MIN_IMPRESSIONS) || 50;
+  const opportunities = findOpportunities(results['query-page-current'], minImpressions);
 
   const lines = [
     `# Search Console summary — ${siteUrl}`,
@@ -115,7 +117,7 @@ async function main() {
     '',
     `Clicks vs previous: ${pctChange(now.clicks, before.clicks)}; impressions vs previous: ${pctChange(now.impressions, before.impressions)}.`,
     '',
-    '## Opportunities (query × page, last 28 days, ≥50 impressions)',
+    `## Opportunities (query × page, last 28 days, ≥${minImpressions} impressions)`,
     '',
     '| Kind | Query | Impr. | Clicks | CTR | Pos. | Pages | Note |',
     '| --- | --- | --- | --- | --- | --- | --- | --- |',

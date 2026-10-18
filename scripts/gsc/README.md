@@ -19,6 +19,8 @@ plus an opportunity list (low CTR, positions 4–20, top 3, cannibalization).
    never in this repository, a `.env` file that is committed, or a chat.
 5. `npm run gsc:sites` should list the property. If more than one matches the
    host, set `GSC_SITE_URL` (for example `sc-domain:<domain>`).
+6. The opportunity lists skip queries under 50 impressions in the last 28 days.
+   While the site is young, set `GSC_MIN_IMPRESSIONS` lower (for example `5`).
 
 ## Limits worth knowing
 
