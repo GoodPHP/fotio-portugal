@@ -1,0 +1,28 @@
+# Search Console export
+
+`npm run gsc:export` pulls Search Console data with a service account and
+writes a dated folder under `seo-data/gsc/` (gitignored): raw CSVs for every
+pull, `meta.json` with the property, windows and row counts, and `summary.md`
+comparing the last 28 days with the previous 28 and the same days a year ago,
+plus an opportunity list (low CTR, positions 4–20, top 3, cannibalization).
+
+## One-time setup
+
+1. In Google Cloud Console, pick or create a project and enable the
+   **Google Search Console API**.
+2. Create a **service account** (no roles needed) and add a **JSON key**.
+3. In Search Console, open the property for the site → Settings → Users and
+   permissions → Add user: the service account's `client_email`, permission
+   **Restricted** (read-only is all the export needs).
+4. Base64-encode the key (`base64 -w0 key.json`) and provide it as the
+   environment variable `GOOGLE_SA_JSON` — in a secret store or CI secret,
+   never in this repository, a `.env` file that is committed, or a chat.
+5. `npm run gsc:sites` should list the property. If more than one matches the
+   host, set `GSC_SITE_URL` (for example `sc-domain:<domain>`).
+
+## Limits worth knowing
+
+- The most recent two to three days are incomplete; the windows end three
+  days before today.
+- The API omits anonymized queries, so query rows sum to less than the chart.
+- Search Console keeps about sixteen months; the daily pull asks for all of it.
