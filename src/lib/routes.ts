@@ -11,6 +11,7 @@ import type { BlogPost, City, Service } from './types';
 import { LOCALES, type Locale } from './locales';
 import { getServiceById, serviceExistsIn, serviceSlug, serviceLocales } from './catalog';
 import type { AlternateParams } from './urls';
+import { cityHrefBySlug, serviceHrefBySlug } from './routes-by-slug';
 
 /** Locales a service page exists in, with its slug in each. */
 export function serviceAlternateParams(service: Service): AlternateParams {
@@ -87,19 +88,8 @@ export function bookHref(context: { service?: Service; city?: City; photographer
   return { pathname: '/book', query } as const;
 }
 
-// ---------------------------------------------------------------------------
-// Slug-only variants, for client components that receive projected data rather
-// than whole catalogue entries. The slug they are given must already be the one
-// for the locale being rendered.
-// ---------------------------------------------------------------------------
-
-export function serviceHrefBySlug(slug: string) {
-  return { pathname: '/services/[service]', params: { service: slug } } as const;
-}
-
-export function cityHrefBySlug(slug: string) {
-  return { pathname: '/cities/[city]', params: { city: slug } } as const;
-}
+// Slug-only variants live in a module of their own; see `routes-by-slug.ts`.
+export { cityHrefBySlug, serviceHrefBySlug };
 
 /** Route keys that take no dynamic segments. */
 const STATIC_ROUTES = [
