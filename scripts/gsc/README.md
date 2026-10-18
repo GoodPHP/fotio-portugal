@@ -22,6 +22,21 @@ plus an opportunity list (low CTR, positions 4–20, top 3, cannibalization).
 6. The opportunity lists skip queries under 50 impressions in the last 28 days.
    While the site is young, set `GSC_MIN_IMPRESSIONS` lower (for example `5`).
 
+## Weekly cycle
+
+```bash
+npm run gsc:export    # search analytics → seo-data/gsc/<today>/
+npm run gsc:inspect   # index status of every live sitemap URL → same folder
+npm run gsc:compare   # the two newest folders → compare.md in the newer one
+```
+
+`gsc:compare` reads only saved files, so it needs no key. It compares the
+last 7 complete days with the 7 before (two weekly 28-day windows overlap by
+21 days, so their totals barely move), pages and queries across the newer
+pull's two 28-day windows, queries new since the older pull, and which
+sitemap URLs entered or left the index. URL Inspection allows about 2,000
+calls a day per property, enough for one full pass a day.
+
 ## Limits worth knowing
 
 - The most recent two to three days are incomplete; the windows end three

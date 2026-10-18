@@ -18,22 +18,8 @@
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { SITE_URL } from '../../src/lib/site';
-import { GscClient, type SearchAnalyticsRow } from './client';
+import { GscClient, resolveSite, type SearchAnalyticsRow } from './client';
 import { addDays, comparisonWindows, findOpportunities, inWindow, pctChange, sum, ymd, type Window } from './analysis';
-
-async function resolveSite(client: GscClient): Promise<string> {
-  const explicit = process.env.GSC_SITE_URL?.trim();
-  if (explicit) return explicit;
-  const host = new URL(SITE_URL).hostname.replace(/^www\./, '');
-  const candidates = (await client.sites()).filter((s) => s.siteUrl.includes(host) && s.permissionLevel !== 'siteUnverifiedUser');
-  if (candidates.length !== 1) {
-    throw new Error(
-      `Set GSC_SITE_URL: the key can read ${candidates.length} properties for ${host} (${candidates.map((c) => c.siteUrl).join(', ') || 'none'}).`,
-    );
-  }
-  return candidates[0].siteUrl;
-}
 
 function csv(rows: SearchAnalyticsRow[], dimensions: string[]): string {
   const cell = (v: string | number) => (typeof v === 'number' ? String(v) : `"${v.replace(/"/g, '""')}"`);

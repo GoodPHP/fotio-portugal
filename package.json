@@ -16,6 +16,8 @@
     "check:seo": "NODE_ENV=production tsx scripts/check-seo.ts",
     "gsc:sites": "tsx scripts/gsc/export.ts --sites",
     "gsc:export": "tsx scripts/gsc/export.ts",
+    "gsc:inspect": "tsx scripts/gsc/inspect.ts",
+    "gsc:compare": "tsx scripts/gsc/compare.ts",
     "build:e2e": "ROLLOUT_ENABLED=false next build",
     "start:e2e": "ROLLOUT_ENABLED=false next start",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",

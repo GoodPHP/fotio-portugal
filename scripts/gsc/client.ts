@@ -11,10 +11,12 @@
  * (Settings → Users and permissions → Restricted is enough).
  */
 import { createSign } from 'node:crypto';
+import { SITE_URL } from '../../src/lib/site';
 
 const SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const API = 'https://searchconsole.googleapis.com/webmasters/v3';
+const INSPECT = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect';
 
 interface ServiceAccount {
   client_email: string;
@@ -88,7 +90,7 @@ export class GscClient {
   }
 
   private async call<T>(path: string, init?: RequestInit): Promise<T> {
-    const response = await fetch(`${API}${path}`, {
+    const response = await fetch(path.startsWith('https://') ? path : `${API}${path}`, {
       ...init,
       headers: { authorization: `Bearer ${this.token}`, 'content-type': 'application/json' },
     });
@@ -120,4 +122,37 @@ export class GscClient {
       if (!body.rows || body.rows.length < rowLimit) return rows;
     }
   }
+
+  /**
+   * Google's index status for one URL of the property. Quota: about 2,000
+   * calls a day and 600 a minute per property.
+   */
+  async inspect(siteUrl: string, inspectionUrl: string): Promise<UrlInspectionResult> {
+    const body = await this.call<{ inspectionResult?: { indexStatusResult?: UrlInspectionResult } }>(INSPECT, {
+      method: 'POST',
+      body: JSON.stringify({ siteUrl, inspectionUrl }),
+    });
+    return body.inspectionResult?.indexStatusResult ?? {};
+  }
+}
+
+export interface UrlInspectionResult {
+  verdict?: string;
+  coverageState?: string;
+  lastCrawlTime?: string;
+  googleCanonical?: string;
+}
+
+/** GSC_SITE_URL, or the one property the key can read for the site's host. */
+export async function resolveSite(client: GscClient): Promise<string> {
+  const explicit = process.env.GSC_SITE_URL?.trim();
+  if (explicit) return explicit;
+  const host = new URL(SITE_URL).hostname.replace(/^www\./, '');
+  const candidates = (await client.sites()).filter((s) => s.siteUrl.includes(host) && s.permissionLevel !== 'siteUnverifiedUser');
+  if (candidates.length !== 1) {
+    throw new Error(
+      `Set GSC_SITE_URL: the key can read ${candidates.length} properties for ${host} (${candidates.map((c) => c.siteUrl).join(', ') || 'none'}).`,
+    );
+  }
+  return candidates[0].siteUrl;
 }
