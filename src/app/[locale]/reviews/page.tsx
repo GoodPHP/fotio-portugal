@@ -66,6 +66,11 @@ export async function generateMetadata({
     description: metaDescription(locale, ratingValue, reviewCount),
     ogImage: ogImagePath(serviceSlot(OG_SERVICE_SLUG)),
     ogImageAlt: tx(OG_IMAGE_ALT, locale),
+    // A review page with no reviews on it is the thinnest page on the site and
+    // answers its own query with nothing. It stays reachable from the menu and
+    // passes link equity on, but stays out of the index (and the sitemap, in
+    // `generate-sitemap.ts`) until the first real review is published.
+    noindex: REVIEWS.length === 0,
   });
 }
 
