@@ -37,6 +37,7 @@ import { CITY_SEO } from '@/lib/data/city-seo';
 import { ptName, ptAt, ptOf, ptWith, upperFirst } from '@/lib/pt-grammar';
 import JsonLd from '@/components/JsonLd';
 import Faq from '@/components/Faq';
+import RelatedGuides from '@/components/RelatedGuides';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { cityAlternateParams, leafHref } from '@/lib/routes';
 import { inPlace, placeName } from '@/lib/cta';
@@ -493,6 +494,8 @@ export default async function CityPage({ params }: CityPageProps) {
         title={{ en: `Photographers ${inPlace(city, 'en')}`, pt: `Fotógrafos ${ptAt(city)}` }[locale]}
       />
       <ClientStories locale={locale} citySlug={city.slug} />
+
+      <RelatedGuides locale={locale} headingId="city-guides-heading" citySlug={city.slug} />
 
       <Faq headingId="city-faq-heading" title={labels.faqTitle} entries={faqEntries} />
 
