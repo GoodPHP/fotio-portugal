@@ -6,7 +6,7 @@ import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/lib/locales';
 import { formatPrice } from '@/lib/site';
 import { serviceSlot } from '@/lib/images';
-import { serviceHrefBySlug } from '@/lib/routes';
+import { serviceHrefBySlug } from '@/lib/routes-by-slug';
 
 export interface ServiceFilterItem {
   /** Stable catalogue id: keys the list and names the image slot. */

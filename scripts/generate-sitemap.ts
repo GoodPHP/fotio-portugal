@@ -33,6 +33,7 @@ import {
   serviceSlug,
   serviceExistsIn,
   PHOTOGRAPHERS,
+  REVIEWS,
 } from '../src/lib/catalog';
 import { LOCALES, type Locale } from '../src/lib/locales';
 import { absoluteUrl } from '../src/lib/urls';
@@ -84,6 +85,8 @@ function buildEntries(): Entry[] {
 
   for (const locale of LOCALES) {
     for (const route of STATIC_ROUTES) {
+      // Noindex while it has nothing on it; see the reviews page's metadata.
+      if (route === '/reviews' && REVIEWS.length === 0) continue;
       entries.push({ locale, route, lastModified: hubLastmod });
     }
 

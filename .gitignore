@@ -36,3 +36,7 @@ public/sitemap.xml
 
 # Unsplash response cache — keeps a re-run from spending API requests.
 .cache/
+
+# Search Console pulls (scripts/gsc). Kept out of the repository: query data
+# is the business's own, and the folder grows every week.
+seo-data/

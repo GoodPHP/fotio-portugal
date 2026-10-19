@@ -5,7 +5,7 @@ import Picture from '@/components/Picture';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/lib/locales';
 import { citySlot } from '@/lib/images';
-import { cityHrefBySlug } from '@/lib/routes';
+import { cityHrefBySlug } from '@/lib/routes-by-slug';
 
 export interface CityFilterItem {
   slug: string;

@@ -65,10 +65,10 @@ export default function LocaleSwitcher({ current, homeHrefs }: LocaleSwitcherPro
     // Falls back to that language's home page, which always exists, rather
     // than to a guess at this page's address.
     const path = publishedPath(next) ?? homeHrefs[next];
-    // The middleware negotiates locale from NEXT_LOCALE, and a plain
-    // navigation does not touch it. Without this the cookie still names the
-    // old language and the request is redirected straight back — so once you
-    // switched to the prefixed language you could never switch out of it.
+    // Locale detection is off in `i18n/routing.ts`, so the middleware no
+    // longer redirects on NEXT_LOCALE. The cookie is still kept in step, so
+    // turning detection back on cannot strand a reader in the language they
+    // just left.
     document.cookie = `NEXT_LOCALE=${next};path=/;max-age=31536000;samesite=lax`;
     window.location.assign(path);
   }

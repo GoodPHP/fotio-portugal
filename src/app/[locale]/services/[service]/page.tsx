@@ -34,6 +34,7 @@ import { SERVICE_LANDING } from '@/lib/data/service-landing';
 import type { Service } from '@/lib/types';
 import JsonLd from '@/components/JsonLd';
 import Faq from '@/components/Faq';
+import RelatedGuides from '@/components/RelatedGuides';
 import SeoProse from '@/components/SeoProse';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import PortfolioGrid from '@/components/PortfolioGrid';
@@ -430,6 +431,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
       <Photographers locale={locale} serviceId={service.slug} />
       <ClientStories locale={locale} serviceSlug={service.slug} />
+
+      <RelatedGuides locale={locale} headingId="service-guides-heading" serviceId={service.slug} />
 
       <Faq headingId="service-faq-heading" title={labels.faqTitle} entries={faqEntries} />
 

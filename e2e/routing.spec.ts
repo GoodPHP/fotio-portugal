@@ -120,18 +120,19 @@ test.describe('asymmetric catalogue', () => {
   });
 
   /**
-   * A Portuguese-speaking visitor who lands on the English URL is sent to the
-   * page they can actually use, rather than shown a 404. This is next-intl's
-   * locale negotiation and it applies only to requests carrying a language
-   * preference, so it never affects what is indexed.
+   * The URL alone decides the language. Redirecting on Accept-Language used to
+   * send a Portuguese-speaking visitor from an English page to the /pt prefix
+   * with the English slug still in it, which 404s; the English page they asked
+   * for is the better answer, and hreflang and the switcher offer the other.
    */
-  test('a Portuguese-speaking visitor is redirected rather than refused', async ({ request }) => {
-    const response = await request.get('/services/finalistas', {
-      headers: { 'Accept-Language': 'pt-PT,pt;q=0.9' },
-      maxRedirects: 0,
-    });
-    expect(response.status()).toBe(307);
-    expect(response.headers()['location']).toBe('/pt/fotografo/finalistas');
+  test('a Portuguese-speaking visitor gets the English page they opened', async ({ request }) => {
+    for (const url of ['/services/wedding/lisboa', '/services/honeymoon']) {
+      const response = await request.get(url, {
+        headers: { 'Accept-Language': 'pt-PT,pt;q=0.9', Cookie: 'NEXT_LOCALE=pt' },
+        maxRedirects: 0,
+      });
+      expect(response.status(), url).toBe(200);
+    }
   });
 });
 
