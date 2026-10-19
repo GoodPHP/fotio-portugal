@@ -34,6 +34,7 @@ import {
   itemListNode,
 } from '@/lib/jsonld';
 import { CITY_SEO } from '@/lib/data/city-seo';
+import { CITY_FEATURED_LEAF } from '@/lib/data/city-featured';
 import { ptName, ptAt, ptOf, ptWith, upperFirst } from '@/lib/pt-grammar';
 import JsonLd from '@/components/JsonLd';
 import Faq from '@/components/Faq';
@@ -140,6 +141,10 @@ export default async function CityPage({ params }: CityPageProps) {
   ];
 
   const name = localizedCityName(city, locale);
+
+  // In-text link to the leaf search already ties to this city; only while that leaf is live here.
+  const feature = CITY_FEATURED_LEAF[city.slug];
+  const featuredService = feature && liveServices.find((s) => s.slug === feature.service);
 
   const labels = {
     spotsTitle: { en: 'The best photo spots', pt: 'Os melhores locais para fotografar' }[locale],
@@ -309,6 +314,15 @@ export default async function CityPage({ params }: CityPageProps) {
 
           <FadeIn instant delay={0.05} className="measure mt-8">
             <p className="text-lg leading-relaxed text-brand-dark">{tx(city.narrative, locale)}</p>
+            {feature && featuredService && (
+              <p className="mt-4 text-lg leading-relaxed text-brand-dark">
+                {tx(feature.before, locale)}
+                <Link href={leafHref(featuredService, city, locale)} className="underline underline-offset-4 hover:text-brand-orange-deep">
+                  {tx(feature.link, locale)}
+                </Link>
+                {tx(feature.after, locale)}
+              </p>
+            )}
           </FadeIn>
 
           {(city.stats.visitors || city.stats.weddings || city.stats.stays) && (
