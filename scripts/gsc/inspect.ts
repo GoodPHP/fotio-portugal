@@ -41,12 +41,23 @@ async function main() {
     while (next < urls.length) {
       const i = next++;
       const url = urls[i];
-      try {
-        const r = await client.inspect(siteUrl, url);
-        lines[i] = [url, classifyUrl(url), r.verdict ?? '', r.coverageState ?? '', r.lastCrawlTime ?? '', r.googleCanonical ?? ''].map(cell).join(',');
-      } catch (error) {
-        failed++;
-        lines[i] = [url, classifyUrl(url), 'ERROR', (error as Error).message.slice(0, 120), '', ''].map(cell).join(',');
+      // One retry: the API returns an occasional 500 for a single URL that succeeds a moment later.
+      for (let attempt = 1; ; attempt++) {
+        try {
+          const r = await client.inspect(siteUrl, url);
+          lines[i] = [url, classifyUrl(url), r.verdict ?? '', r.coverageState ?? '', r.lastCrawlTime ?? '', r.googleCanonical ?? ''].map(cell).join(',');
+          break;
+        } catch (error) {
+          if (attempt < 2) {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            continue;
+          }
+          failed++;
+          // The coverage column feeds a Markdown table in compare.md: one line, no pipes.
+          const reason = (error as Error).message.replace(/\s+/g, ' ').replace(/\|/g, '/').slice(0, 120);
+          lines[i] = [url, classifyUrl(url), 'ERROR', reason, '', ''].map(cell).join(',');
+          break;
+        }
       }
     }
   }
