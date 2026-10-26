@@ -8,8 +8,10 @@ import type { Localized } from '../locales';
  * next to a sentence in the page's own copy. A city gets an entry here only
  * when Search Console shows the hub ranking for a service query the leaf was
  * written for (Évora: "evora wedding photographer", the site's best query in
- * October 2026, landing on the hub). The sentence renders only while the leaf
- * is live in that locale, so it can never point at a 404.
+ * October 2026, landing on the hub; Lisbon: "lisbon photographer" and
+ * "lisbon photoshoot", landing on the hub at positions 20–60). The sentence
+ * renders only while the leaf is live in that locale, so it can never point
+ * at a 404.
  */
 
 export interface CityFeature {
@@ -28,5 +30,17 @@ export const CITY_FEATURED_LEAF: Record<string, CityFeature> = {
     },
     link: { en: 'wedding photographer in Évora', pt: 'fotógrafo de casamento em Évora' },
     after: { en: '.', pt: '.' },
+  },
+  lisboa: {
+    service: 'lisbon-photoshoot',
+    before: {
+      en: 'Most people who come for photographs in Lisbon want the same picture: the two of them, or the family, with the whole city below. That is the ',
+      pt: 'Quase toda a gente que vem fotografar a Lisboa quer a mesma imagem: os dois, ou a família, com a cidade inteira lá em baixo. É a ',
+    },
+    link: { en: 'Lisbon photoshoot', pt: 'sessão fotográfica em Lisboa' },
+    after: {
+      en: ': thirty minutes at Senhora do Monte in the first hour after sunrise, usually before anyone else is there.',
+      pt: ': trinta minutos na Senhora do Monte na primeira hora depois do nascer do sol, quase sempre antes de lá chegar mais alguém.',
+    },
   },
 };
