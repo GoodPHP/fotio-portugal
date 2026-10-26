@@ -2,6 +2,7 @@ import type { BlogClusterId, BlogPost } from '../types';
 import type { Localized } from '../locales';
 import { BEST_TIME_PHOTOSHOOT_PORTUGAL } from '../blog/best-time-photoshoot-portugal';
 import { WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL } from '../blog/what-to-wear-photoshoot-portugal';
+import { LISBON_PHOTOSHOOT_LOCATIONS } from '../blog/lisbon-photoshoot-locations';
 import { BLOG_GUIDES } from './blog-guides';
 
 /**
@@ -17,6 +18,7 @@ import { BLOG_GUIDES } from './blog-guides';
  * to photograph.
  */
 export const BLOG_POSTS: BlogPost[] = [
+  LISBON_PHOTOSHOOT_LOCATIONS,
   BEST_TIME_PHOTOSHOOT_PORTUGAL,
   WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL,
   ...BLOG_GUIDES,
@@ -30,7 +32,7 @@ export const BLOG_POSTS: BlogPost[] = [
  *
  * Planned articles, by cluster (content backlog, not yet written):
  * - lisbon: Lisbon couple, proposal, honeymoon and family photography; best
- *   Lisbon photoshoot locations; best time and what to wear for Lisbon photos.
+ *   time and what to wear for Lisbon photos.
  * - algarve: Algarve couple, proposal, family and honeymoon photography.
  * - portugal: best places for photos in Portugal; honeymoon and proposal
  *   photography in Portugal; photography prices in Portugal.
