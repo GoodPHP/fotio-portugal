@@ -4,10 +4,12 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
+import Script from 'next/script';
 import { routing } from '@/i18n/routing';
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales';
 import {
   CF_ANALYTICS_TOKEN,
+  GA_MEASUREMENT_ID,
   HTML_LANG,
   SITE_NAME,
   SITE_TAGLINE,
@@ -116,6 +118,21 @@ export default async function LocaleLayout({
             src="https://static.cloudflareinsights.com/beacon.min.js"
             data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
           />
+        ) : null}
+        {/* Google Analytics 4 (gtag.js), loaded once the page is interactive. */}
+        {GA_MEASUREMENT_ID ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`}
+            </Script>
+          </>
         ) : null}
       </body>
     </html>

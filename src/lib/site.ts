@@ -87,20 +87,20 @@ export const NUMBER_LOCALE: Record<Locale, string> = {
 export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '351000000000').replace(/[^0-9]/g, '');
 
 /**
- * Cloudflare Web Analytics token. Absent means no analytics at all, which is
- * what a preview deploy and a local run should do.
- *
- * This replaced GA4, and the reason is not ideology. gtag.js is around 50 KB
- * and was comfortably the largest single piece of JavaScript on the site —
- * more than everything removed from the masthead and the animations put
- * together. It also sets cookies, which under Lei 41/2004 means a consent
- * banner, which means more JavaScript, a layout shift and a worse first
- * impression, in exchange for numbers nobody was acting on.
- *
- * The beacon is about a kilobyte, sets nothing on the device and records no
- * personal data, so there is nothing to consent to and no banner to show.
+ * Cloudflare Web Analytics token. Absent means no beacon, which is what a
+ * preview deploy and a local run should do. The beacon is about a kilobyte,
+ * sets nothing on the device and records no personal data.
  */
 export const CF_ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN ?? '';
+
+/**
+ * Google Analytics 4 measurement ID. An empty NEXT_PUBLIC_GA_MEASUREMENT_ID
+ * turns the tag off, for a preview deploy or a local run.
+ *
+ * gtag.js is around 50 KB and sets cookies, so it loads after the page is
+ * interactive and is kept off the critical path.
+ */
+export const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-ZGZWL5KJWV').trim();
 
 /** Social profile URLs, configured via env. Empty entries are dropped. */
 export const SOCIAL_LINKS: string[] = [
