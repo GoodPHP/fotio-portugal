@@ -134,7 +134,7 @@ function main() {
       `| Change | Count | URLs (first 20) |`,
       '| --- | --- | --- |',
       `| Entered the index | ${changes.gained.length} | ${list(changes.gained)} |`,
-      `| Left the index | ${changes.lost.length} | ${list(changes.lost)} |`,
+      `| Left the index | ${changes.lost.length} | ${changes.lost.slice(0, 20).map((x) => `${path(x.url)} (${x.coverage}, last crawl ${x.lastCrawl.slice(0, 10) || 'never'})`).join('<br>') || '—'} |`,
       `| New in the sitemap | ${changes.added.length} | ${list(changes.added)} |`,
       `| Gone from the sitemap | ${changes.removed.length} | ${list(changes.removed)} |`,
       '',
