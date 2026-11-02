@@ -1,12 +1,10 @@
 /**
  * Conversion events, vendor-neutral.
  *
- * The site's only analytics is the Cloudflare beacon, which counts page views
- * and has no custom events. So nothing here talks to a vendor: `track()`
- * pushes onto `window.dataLayer`, the de-facto queue every tag manager reads,
- * and dispatches a `site:track` DOM event for anything else that wants to
- * listen. Wiring a real destination is then a snippet that drains the queue,
- * with no change to the components. No cookies are set by any of this.
+ * `track()` pushes onto `window.dataLayer`, the de-facto queue every tag
+ * manager reads, sends the event to Google Analytics when gtag.js is on the
+ * page, and dispatches a `site:track` DOM event for anything else that wants
+ * to listen. Nothing in this file sets cookies.
  *
  * Server components cannot attach handlers, so they mark elements with
  * `data-track="<event>"` (and optional `data-track-*` properties) and
@@ -39,7 +37,8 @@ export const TRACK_EVENT_NAME = 'site:track';
 
 declare global {
   interface Window {
-    dataLayer?: Array<Record<string, unknown>>;
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -52,6 +51,7 @@ export function track(event: AnalyticsEvent, props: AnalyticsProps = {}): void {
   if (typeof window === 'undefined') return;
   const payload = { event, ...props };
   (window.dataLayer ??= []).push(payload);
+  window.gtag?.('event', event, props);
   window.dispatchEvent(new CustomEvent(TRACK_EVENT_NAME, { detail: payload }));
 }
 

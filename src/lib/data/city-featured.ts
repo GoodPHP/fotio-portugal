@@ -9,7 +9,9 @@ import type { Localized } from '../locales';
  * when Search Console shows the hub ranking for a service query the leaf was
  * written for (Évora: "evora wedding photographer", the site's best query in
  * October 2026, landing on the hub; Lisbon: "lisbon photographer" and
- * "lisbon photoshoot", landing on the hub at positions 20–60). The sentence
+ * "lisbon photoshoot", landing on the hub at positions 20–60; Sintra:
+ * "fotógrafo casamento sintra", split between the proposal and couple leaves
+ * at position ~45 while the wedding leaf is not indexed). The sentence
  * renders only while the leaf is live in that locale, so it can never point
  * at a 404.
  */
@@ -42,5 +44,14 @@ export const CITY_FEATURED_LEAF: Record<string, CityFeature> = {
       en: ': thirty minutes at Senhora do Monte in the first hour after sunrise, usually before anyone else is there.',
       pt: ': trinta minutos na Senhora do Monte na primeira hora depois do nascer do sol, quase sempre antes de lá chegar mais alguém.',
     },
+  },
+  sintra: {
+    service: 'wedding',
+    before: {
+      en: 'For a wedding here, the couple portraits usually go to the forest road above the village, which is public, free and quiet; a palace in the frame needs written authorisation from Parques de Sintra, so it is planned early. Timing, permits and the summer traffic on the hill are on the page for our ',
+      pt: 'Num casamento aqui, os retratos dos noivos fazem-se quase sempre na estrada da serra acima da vila, que é pública, gratuita e calma; um palácio no enquadramento precisa de autorização escrita da Parques de Sintra, por isso planeia-se cedo. Horários, autorizações e o trânsito de Verão na serra estão na página do nosso ',
+    },
+    link: { en: 'wedding photographer in Sintra', pt: 'fotógrafo de casamento em Sintra' },
+    after: { en: '.', pt: '.' },
   },
 };
