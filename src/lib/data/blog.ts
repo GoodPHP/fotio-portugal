@@ -3,6 +3,7 @@ import type { Localized } from '../locales';
 import { BEST_TIME_PHOTOSHOOT_PORTUGAL } from '../blog/best-time-photoshoot-portugal';
 import { WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL } from '../blog/what-to-wear-photoshoot-portugal';
 import { LISBON_PHOTOSHOOT_LOCATIONS } from '../blog/lisbon-photoshoot-locations';
+import { REAL_ESTATE_PHOTOGRAPHY_PORTUGAL } from '../blog/real-estate-photography-portugal';
 import { BLOG_GUIDES } from './blog-guides';
 
 /**
@@ -18,6 +19,7 @@ import { BLOG_GUIDES } from './blog-guides';
  * to photograph.
  */
 export const BLOG_POSTS: BlogPost[] = [
+  REAL_ESTATE_PHOTOGRAPHY_PORTUGAL,
   LISBON_PHOTOSHOOT_LOCATIONS,
   BEST_TIME_PHOTOSHOOT_PORTUGAL,
   WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL,
