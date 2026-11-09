@@ -44,11 +44,12 @@ export function readServiceAccount(env: NodeJS.ProcessEnv = process.env): Servic
 
 const b64url = (input: string | Buffer) => Buffer.from(input).toString('base64url');
 
-async function accessToken(sa: ServiceAccount): Promise<string> {
+/** A bearer token for the service account; `scope` defaults to read-only Search Console. */
+export async function accessToken(sa: ServiceAccount, scope = SCOPE): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
   const claims = b64url(
-    JSON.stringify({ iss: sa.client_email, scope: SCOPE, aud: TOKEN_URL, iat: now, exp: now + 3600 }),
+    JSON.stringify({ iss: sa.client_email, scope, aud: TOKEN_URL, iat: now, exp: now + 3600 }),
   );
   const signature = createSign('RSA-SHA256').update(`${header}.${claims}`).sign(sa.private_key);
   const response = await fetch(TOKEN_URL, {
