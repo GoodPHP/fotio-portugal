@@ -70,8 +70,9 @@ export async function POST(request: Request): Promise<Response> {
     ...prefLines.map(([label, value]) => (value ? `<b>${label}:</b> ${escapeHtml(value)}` : null)),
     '',
     `<b>Name:</b> ${escapeHtml(data.name)}`,
-    `<b>Email:</b> ${escapeHtml(data.email)}`,
-    `<b>Phone:</b> ${escapeHtml(data.phone)}`,
+    data.email ? `<b>Email:</b> ${escapeHtml(data.email)}` : null,
+    data.phone ? `<b>Phone:</b> ${escapeHtml(data.phone)}` : null,
+    data.budget ? `<b>Budget:</b> ${escapeHtml(data.budget)}` : null,
     data.remarks ? `<b>Notes:</b> ${escapeHtml(data.remarks)}` : null,
     `<b>Language:</b> ${data.locale}`,
   ].filter((l): l is string => l !== null);

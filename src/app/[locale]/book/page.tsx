@@ -9,7 +9,7 @@ import { bookingOptions } from '@/lib/booking-options';
 import { REPLY_TIME, MATCHING } from '@/lib/promises';
 import JsonLd from '@/components/JsonLd';
 import SeoProse from '@/components/SeoProse';
-import BookingFlow from '@/components/BookingFlow';
+import QuickRequestForm from '@/components/QuickRequestForm';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import HowItWorks from '@/components/HowItWorks';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
@@ -100,7 +100,7 @@ export default async function BookingPage({
         </header>
 
         <section aria-label={COPY.title[locale]} className="mt-10">
-          <BookingFlow options={bookingOptions(locale)} locale={locale} variant="full" readQuery />
+          <QuickRequestForm options={bookingOptions(locale)} locale={locale} />
         </section>
       </div>
 

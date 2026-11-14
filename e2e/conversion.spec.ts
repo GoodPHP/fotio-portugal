@@ -75,9 +75,22 @@ test.describe('the home booking widget', () => {
 });
 
 test.describe('/book', () => {
-  test('starts at the first unanswered question when the URL answers the rest', async ({ page }) => {
+  test('asks only for a name and a phone or email', async ({ page }) => {
+    let sent: Record<string, unknown> = {};
+    await page.route('**/api/lead', async (route) => {
+      sent = route.request().postDataJSON();
+      await route.fulfill({ json: { ok: true } });
+    });
     await page.goto('/book?city=porto&service=family');
-    await expect(page.getByRole('heading', { name: 'When?' })).toBeVisible();
+    await page.getByRole('button', { name: 'Check availability' }).click();
+    await expect(page.getByText('Enter your name.')).toBeVisible();
+
+    await page.getByLabel('Name').fill('Ana Costa');
+    await page.getByLabel('Phone or email').fill('ana@example.com');
+    await page.getByRole('button', { name: 'Check availability' }).click();
+    await expect(page.getByRole('status')).toContainText('Thanks!');
+    expect(sent).toMatchObject({ name: 'Ana Costa', email: 'ana@example.com', citySlug: 'porto', serviceSlug: 'family' });
+    expect(sent).not.toHaveProperty('phone');
   });
 });
 

@@ -67,6 +67,17 @@ describe('LeadSchema', () => {
     assert.ok(!LeadSchema.safeParse({ ...base, preferences: { location: 'x'.repeat(201) } }).success);
   });
 
+  test('accepts just one way to reply, with a budget', () => {
+    const { email: _e, ...phoneOnly } = base;
+    const { phone: _p, ...emailOnly } = base;
+    assert.ok(LeadSchema.safeParse({ ...phoneOnly, budget: '€300', source: 'booking' }).success);
+    assert.ok(LeadSchema.safeParse({ ...emailOnly, source: 'booking' }).success);
+  });
+
+  test('rejects a lead with neither phone nor email', () => {
+    assert.ok(!LeadSchema.safeParse({ name: 'Ana Costa', locale: 'en' }).success);
+  });
+
   test('accepts a Portuguese service slug', () => {
     assert.ok(LeadSchema.safeParse({ ...base, serviceSlug: 'casamento', locale: 'pt' }).success);
   });
