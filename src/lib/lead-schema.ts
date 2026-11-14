@@ -13,10 +13,12 @@ const note = (max: number) => z.string().trim().max(max).optional();
  * contact form. Kept out of the route file so it can be tested: a Next route
  * module may only export handlers.
  */
-export const LeadSchema = z.object({
+export const LeadSchema = z
+  .object({
   name: z.string().min(2).max(100),
-  email: z.string().email(),
-  phone: z.string().min(6).max(30),
+  // Either is enough: /book asks for one "phone or email" field.
+  email: z.string().email().optional(),
+  phone: z.string().min(6).max(30).optional(),
   // Optional because the contact form may name neither. It used to send the
   // first city and service in the catalogue instead, so every general
   // question arrived in Telegram as a Lisbon studio-portrait enquiry.
@@ -49,11 +51,16 @@ export const LeadSchema = z.object({
     })
     .optional(),
   remarks: z.string().max(2000).optional(),
+  budget: note(100),
   reference: z.string().max(20).optional(),
   source: z.enum(['booking', 'quick-match', 'contact']).default('contact'),
   locale: z.enum(LOCALES),
   // Spam trap: legitimate clients leave this empty.
   honeypot: z.string().optional(),
-});
+  })
+  .refine((lead) => Boolean(lead.email || lead.phone), {
+    message: 'email_or_phone_required',
+    path: ['email'],
+  });
 
 export type Lead = z.infer<typeof LeadSchema>;
