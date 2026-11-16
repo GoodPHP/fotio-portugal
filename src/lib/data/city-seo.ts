@@ -79,9 +79,12 @@ export const CITY_SEO: Record<string, CitySeo> = {
     },
   },
   evora: {
-    title: { en: 'Photographer in Évora', pt: 'Fotógrafo em Évora' },
+    // EN names weddings: 56 of the hub's 71 impressions (28 days to 2026-11-13)
+    // were "evora wedding photographer", at position ~11, while the wedding
+    // leaf it links from the copy was still not crawled four weeks on.
+    title: { en: 'Évora Wedding Photographer & Photo Sessions', pt: 'Fotógrafo em Évora' },
     description: {
-      en: 'Book a photographer in Évora. A walled town you cross in eleven minutes, so one session uses six locations. Not between eleven and six in summer.',
+      en: 'Wedding photographer and photo sessions in Évora: a walled town you cross in eleven minutes, so portraits are a walk, not a drive. Not 11–6 in summer.',
       pt: 'Fotógrafo em Évora. Uma vila intramuros que se atravessa em onze minutos, por isso uma sessão usa seis locais. No Verão, não entre as onze e as seis.',
     },
   },
