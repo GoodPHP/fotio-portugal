@@ -168,7 +168,7 @@ export default async function LeafPage({ params }: LeafPageProps) {
   // Nearby: same service in other cities that prioritise it, then any others —
   // restricted to leaves that are already published so links never 404.
   const otherCities = CITIES.filter(
-    (c) => c.slug !== city.slug && serviceSoldIn(service, c.slug) && isLeafPublished(service.slug, c.slug),
+    (c) => c.slug !== city.slug && serviceSoldIn(service, c.slug, locale) && isLeafPublished(service.slug, c.slug),
   );
   const prioritised = otherCities.filter((c) => c.topServices.includes(service.slug));
   const fallbackCities = otherCities.filter((c) => !c.topServices.includes(service.slug));

@@ -135,7 +135,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const portfolio = portfolioImages(service.slug);
   // Only link to leaf pages (service × city) that are already published, so the
   // grid never points at a 404.
-  const cities = publishedCitiesForService(service.slug);
+  const cities = publishedCitiesForService(service.slug, locale);
 
   // The booking form preselects the service, so the reader arrives at a form
   // that already knows what they came for.

@@ -14,7 +14,7 @@ export const META_TITLE: Localized = {
 };
 
 export const META_DESCRIPTION: Localized = {
-  en: '18 session types across Portugal: couples, proposals, families, weddings, portraits and more. Clear prices confirmed before you book.',
+  en: '19 session types across Portugal: couples, proposals, families, weddings, portraits and more. Clear prices confirmed before you book.',
   pt: '18 tipos de sessão em Portugal: retrato, casal, família, casamento, empresa e gastronomia. Preços claros, confirmados antes de reservar.',
 };
 
@@ -45,7 +45,7 @@ export const SEO_PROSE = {
   } as Localized<string[]>,
   facts: {
     en: [
-      { label: 'Session types', value: '18' },
+      { label: 'Session types', value: '19' },
       { label: 'Categories', value: '7' },
       { label: 'Cities covered', value: '12' },
       { label: 'Most galleries', value: '48–72h' },
