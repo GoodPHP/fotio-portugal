@@ -9,7 +9,7 @@
  */
 import type { BlogPost, City, Service } from './types';
 import { LOCALES, type Locale } from './locales';
-import { getServiceById, serviceExistsIn, serviceSlug, serviceLocales } from './catalog';
+import { getServiceById, serviceExistsIn, serviceSlug, serviceLocales, serviceSoldIn } from './catalog';
 import type { AlternateParams } from './urls';
 import { cityHrefBySlug, serviceHrefBySlug } from './routes-by-slug';
 
@@ -30,6 +30,7 @@ export function serviceAlternateParams(service: Service): AlternateParams {
 export function leafAlternateParams(service: Service, city: City): AlternateParams {
   const out: AlternateParams = {};
   for (const locale of serviceLocales(service)) {
+    if (!serviceSoldIn(service, city.slug, locale)) continue;
     out[locale] = { service: serviceSlug(service, locale), city: city.slug };
   }
   return out;

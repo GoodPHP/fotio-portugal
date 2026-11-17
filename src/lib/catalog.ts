@@ -74,14 +74,21 @@ export function serviceExistsIn(service: Service, locale: Locale): boolean {
   return serviceLocales(service).includes(locale);
 }
 
-/** Whether this service is sold in this place at all — see `Service.onlyIn`. */
-export function serviceSoldIn(service: Service, citySlug: string): boolean {
-  return !service.onlyIn || service.onlyIn.includes(citySlug);
+/**
+ * Whether this service is sold in this place — see `Service.onlyIn`. With a
+ * locale, also `Service.onlyInByLocale`; without one, whether it is sold there
+ * in any language.
+ */
+export function serviceSoldIn(service: Service, citySlug: string, locale?: Locale): boolean {
+  if (service.onlyIn && !service.onlyIn.includes(citySlug)) return false;
+  if (!locale) return true;
+  const local = service.onlyInByLocale?.[locale];
+  return !local || local.includes(citySlug);
 }
 
 /** Whether `service × city` is a page in `locale`, published or not. */
 export function leafExists(service: Service, citySlug: string, locale: Locale): boolean {
-  return serviceExistsIn(service, locale) && serviceSoldIn(service, citySlug) && Boolean(getCity(citySlug));
+  return serviceExistsIn(service, locale) && serviceSoldIn(service, citySlug, locale) && Boolean(getCity(citySlug));
 }
 
 /**
@@ -254,7 +261,7 @@ export function publishedLeafParams(locale: Locale, now?: Date): LeafParam[] {
   for (const service of SERVICES) {
     if (!serviceExistsIn(service, locale)) continue;
     for (const city of CITIES) {
-      if (!serviceSoldIn(service, city.slug)) continue;
+      if (!serviceSoldIn(service, city.slug, locale)) continue;
       if (!isLeafPublished(service.slug, city.slug, now)) continue;
       params.push({ service: serviceSlug(service, locale), city: city.slug });
     }
@@ -282,10 +289,10 @@ export function publishedIndexableLeaves(
 export { isIndexableLeaf };
 
 /** Cities for which the `service × city` leaf is published (live links only). */
-export function publishedCitiesForService(serviceSlug: string, now?: Date): City[] {
+export function publishedCitiesForService(serviceSlug: string, locale?: Locale, now?: Date): City[] {
   const service = getServiceById(serviceSlug);
   return CITIES.filter(
-    (c) => (!service || serviceSoldIn(service, c.slug)) && isLeafPublished(serviceSlug, c.slug, now),
+    (c) => (!service || serviceSoldIn(service, c.slug, locale)) && isLeafPublished(serviceSlug, c.slug, now),
   );
 }
 
@@ -293,7 +300,7 @@ export function publishedCitiesForService(serviceSlug: string, now?: Date): City
 export function publishedServicesForCity(citySlug: string, locale?: Locale, now?: Date): Service[] {
   return SERVICES.filter(
     (s) =>
-      serviceSoldIn(s, citySlug) &&
+      serviceSoldIn(s, citySlug, locale) &&
       isLeafPublished(s.slug, citySlug, now) &&
       (!locale || serviceExistsIn(s, locale)),
   );

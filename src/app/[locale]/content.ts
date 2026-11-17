@@ -65,7 +65,7 @@ export const SEO_PROSE = {
   facts: {
     en: [
       { label: 'Cities covered', value: '12' },
-      { label: 'Session types', value: '18' },
+      { label: 'Session types', value: '19' },
       { label: 'Most galleries', value: '48–72h' },
       { label: 'Deposit to enquire', value: '€0' },
     ],

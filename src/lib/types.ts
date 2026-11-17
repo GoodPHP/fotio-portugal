@@ -164,6 +164,13 @@ export interface Service {
    * anybody searches for, and there is nothing true to write on it.
    */
   onlyIn?: readonly string[];
+  /**
+   * City slugs this service is sold in, per locale, on top of `onlyIn`. A
+   * locale missing here follows `onlyIn`. For a service whose demand in one
+   * language is in one place only — English searches for a model portfolio
+   * are all Lisbon — so that language gets that page and no thin copies.
+   */
+  onlyInByLocale?: Partial<Record<Locale, readonly string[]>>;
   name: Localized;
   category: ServiceCategory;
   initialPrice: number;

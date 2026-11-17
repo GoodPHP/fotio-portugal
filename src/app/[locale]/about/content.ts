@@ -301,7 +301,7 @@ export const SEO_PROSE = {
   facts: {
     en: [
       { label: 'Cities & destinations', value: '12' },
-      { label: 'Session types', value: '18' },
+      { label: 'Session types', value: '19' },
       { label: 'Most galleries', value: '48–72h' },
       { label: 'Refund guarantee', value: '100%' },
     ],

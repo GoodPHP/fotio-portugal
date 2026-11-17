@@ -350,6 +350,35 @@ export const LISBOA_EN: CityLeafCopy = {
     ],
   },
 
+  'book-de-modelo': {
+    title: 'Editorial & Model Portfolio Shoot in Lisbon',
+    description:
+      'Model portfolio and editorial photographer in Lisbon: plain agency digitals and one editorial look under the Terreiro do Paço arcades, in {duration}. From {price}.',
+    intro:
+      'A model portfolio in Lisbon is made for one reader: the booker at an agency who opens the file, looks for a few seconds and decides whether to ask for a meeting. That reader needs two things. First the digitals: straight, unretouched frames with no make-up, front, profile and full length, in neutral light, because they show the raw material and are the first thing an agency checks. Then a short editorial look, which shows how you move, how you hold a gaze and what kind of work you could do. The session lasts {duration} in a single location and delivers {photos} retouched images within {delivery}. It is not a fashion production with a stylist and assistants; it is the essential set, done properly, for a first submission or to replace an old book that no longer matches your face.',
+    where:
+      'Digitals want a plain background and even light, and on the shaded side of the Terreiro do Paço arcades you get both without a studio: a pale wall behind, soft daylight coming in off the open square. For the editorial part, the same place gives the rhythm of the columns and, a few steps away, the wide space facing the river, so the framing changes without losing minutes to a move. If you want something more urban, with the texture of an old neighbourhood, Escolas Gerais in Alfama is the alternative, with two catches: the street is only clear until nine, and the slope makes straight full-length frames awkward. Pick one place. In half an hour, every minute spent walking is a minute without photographs.',
+    when:
+      'Early, before the square fills: at six it is empty, by mid-morning it is one of the busiest places in the country. The half hour after sunset is beautiful too, but digitals need neutral daylight, so the morning is the safe choice. October and November have the softest light; in summer the useful window closes around eight. If you already have an agency meeting booked, count back from the delivery time and book with at least ten days to spare.',
+    faqs: [
+      {
+        question: 'What should I wear for the digitals?',
+        answer:
+          'Fitted jeans or black leggings, a plain fitted T-shirt or top, and neutral shoes or none. No patterns, logos or accessories. The agency needs to see your shape and your face as they are; the clothes you chose belong to the editorial look.',
+      },
+      {
+        question: 'I have never modelled. Will I know how to pose?',
+        answer:
+          'Digitals need no posing at all: you stand facing the camera and in profile with a neutral expression, and the photographer tells you exactly where to put your feet and where to look. Movement is worked on in the editorial part, with direction throughout. Many agencies prefer new faces without posing habits.',
+      },
+      {
+        question: 'Can I bring a make-up artist for the editorial look?',
+        answer:
+          'Yes, and many people do. The digitals are shot first, with no make-up; the artist then works while the photographer sets up the next frame. That time comes out of the {duration}, so agree on a quick look.',
+      },
+    ],
+  },
+
   'lisbon-photoshoot': {
     title: 'Lisbon Photoshoot from {price}',
     description:

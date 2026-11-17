@@ -15,7 +15,9 @@ import {
   publishedServices,
   publishedServicesByCategory,
   publishedServicesForCity,
+  getCity,
 } from './catalog';
+import { leafAlternateParams } from './routes';
 import { DRIP_LEAVES } from './curated';
 import { LOCALES } from './locales';
 
@@ -127,6 +129,16 @@ describe('indexable leaves', () => {
     const params = publishedLeafParams('en').filter((p) => p.service === 'lisbon-photoshoot');
     assert.deepEqual(params.map((p) => p.city), ['lisboa']);
     assert.equal(publishedServicesForCity('porto', 'en').some((s) => s.slug === 'lisbon-photoshoot'), false);
+  });
+
+  test('onlyInByLocale narrows the places for one language only', () => {
+    const model = getServiceById('book-de-modelo')!;
+    assert.equal(leafExists(model, 'lisboa', 'en'), true);
+    assert.equal(leafExists(model, 'porto', 'en'), false);
+    assert.equal(leafExists(model, 'porto', 'pt'), true);
+    assert.deepEqual(Object.keys(leafAlternateParams(model, getCity('porto')!)), ['pt']);
+    assert.deepEqual(Object.keys(leafAlternateParams(model, getCity('lisboa')!)).sort(), ['en', 'pt']);
+    assert.equal(publishedServicesForCity('porto', 'en').some((s) => s.slug === 'book-de-modelo'), false);
   });
 
   test('every indexable leaf is a page that exists', () => {

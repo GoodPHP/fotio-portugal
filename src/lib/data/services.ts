@@ -675,7 +675,10 @@ export const SERVICES: Service[] = [
   // ----------------------------------------------------------------- fashion
   {
     slug: 'book-de-modelo',
-    availableIn: ['pt'],
+    // English since 2026-11: 58 impressions a month for editorial, beauty and
+    // fashion photographer in Lisbon had no English page to land on.
+    slugs: { en: 'model-portfolio' },
+    onlyInByLocale: { en: ['lisboa'] },
     name: { en: 'Model portfolio', pt: 'Book de modelo' },
     category: 'fashion',
     initialPrice: 200,
