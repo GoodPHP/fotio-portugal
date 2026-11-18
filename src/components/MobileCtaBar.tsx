@@ -11,7 +11,7 @@ interface MobileCtaBarProps {
 }
 
 /** Pages that already are the conversion, where the bar would only cover the form. */
-const HIDDEN_ON = new Set(['/book', '/contact']);
+const HIDDEN_ON = new Set(['/book', '/contact', '/gift-card']);
 
 /**
  * The two actions, pinned to the bottom of a phone screen.

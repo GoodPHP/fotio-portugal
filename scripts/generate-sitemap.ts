@@ -77,6 +77,8 @@ const STATIC_ROUTES: AppPathname[] = [
   '/contact',
   '/blog',
   '/book',
+  '/services/christmas-proposal',
+  '/gift-card',
 ];
 
 function buildEntries(): Entry[] {

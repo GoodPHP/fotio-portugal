@@ -49,6 +49,14 @@ export const pathnames = {
   '/contact': { en: '/contact', pt: '/contacto' },
   '/book': { en: '/book', pt: '/reservar' },
 
+  // Seasonal pages. Static folders, so they win over `/services/[service]`;
+  // the Portuguese URL of the Christmas page is top-level on purpose.
+  '/services/christmas-proposal': {
+    en: '/services/christmas-proposal',
+    pt: '/pedido-de-casamento-natal',
+  },
+  '/gift-card': { en: '/gift-card', pt: '/vale-presente' },
+
   '/blog': { en: '/blog', pt: '/blog' },
   '/blog/[slug]': { en: '/blog/[slug]', pt: '/blog/[slug]' },
 

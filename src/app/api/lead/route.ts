@@ -51,7 +51,28 @@ export async function POST(request: Request): Promise<Response> {
     ['Accessibility', prefs.accessibility],
   ];
 
-  const sourceLabel = { booking: 'Booking', 'quick-match': 'Home widget', contact: 'Contact' }[data.source];
+  const sourceLabel = {
+    booking: 'Booking',
+    'quick-match': 'Home widget',
+    contact: 'Contact',
+    'gift-card': 'Gift card',
+  }[data.source];
+
+  const gift = data.gift;
+  const giftLines: Array<string | null> = gift
+    ? [
+        `<b>Gift card:</b> ${escapeHtml(getServiceByAnySlug(gift.type)?.name.en ?? gift.type)}`,
+        `<b>Recipient:</b> ${escapeHtml(gift.recipientName)}`,
+        `<b>Send to:</b> ${
+          gift.delivery === 'buyer'
+            ? 'the buyer'
+            : `the recipient${gift.sendDate ? ` on ${escapeHtml(gift.sendDate)}` : ''}${
+                gift.recipientContact ? ` (${escapeHtml(gift.recipientContact)})` : ''
+              }`
+        }`,
+        gift.message ? `<b>Gift message:</b> ${escapeHtml(gift.message)}` : null,
+      ]
+    : [];
   const dateLine = data.date
     ? `${escapeHtml(data.date)}${data.time ? ` ${escapeHtml(data.time)}` : ''}${data.flexibleDates ? ' (flexible)' : ''}`
     : data.flexibleDates
@@ -61,6 +82,8 @@ export async function POST(request: Request): Promise<Response> {
   const lines = [
     `<b>New ${SITE_NAME} enquiry</b>${data.reference ? ` · ${escapeHtml(data.reference)}` : ''}`,
     `<b>Type:</b> ${sourceLabel}`,
+    data.promoId ? `<b>Promo:</b> ${escapeHtml(data.promoId)}` : null,
+    ...giftLines,
     `<b>Service:</b> ${escapeHtml(serviceName)}`,
     `<b>City:</b> ${escapeHtml(cityName)}`,
     dateLine ? `<b>Date:</b> ${dateLine}` : null,

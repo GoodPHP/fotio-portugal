@@ -104,6 +104,8 @@ const STATIC_ROUTES = [
   '/contact',
   '/book',
   '/blog',
+  '/services/christmas-proposal',
+  '/gift-card',
 ] as const;
 
 type StaticRoute = (typeof STATIC_ROUTES)[number];

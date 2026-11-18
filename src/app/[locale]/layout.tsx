@@ -24,6 +24,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import TrackClicks from '@/components/TrackClicks';
 import MobileCtaBar from '@/components/MobileCtaBar';
+import PromoBanner from '@/components/promo/PromoBanner';
 import '../globals.css';
 
 /* Body and UI. Neutral on purpose: the display face carries the identity. */
@@ -95,6 +96,8 @@ export default async function LocaleLayout({
           shipping the dictionary.
         */}
         <NextIntlClientProvider locale={locale as Locale}>
+          {/* Seasonal strip; renders in the browser only, inside its dates. */}
+          <PromoBanner locale={locale as Locale} />
           <NavBar locale={locale as Locale} />
           <div className="flex-1">{children}</div>
           <Footer />
