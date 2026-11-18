@@ -10,6 +10,7 @@ import { CTA } from '@/lib/cta';
 import { GUARANTEE, MATCHING, REPLY_TIME, WEATHER } from '@/lib/promises';
 import { whatsappBookingLink } from '@/lib/site';
 import { track } from '@/lib/analytics';
+import { OCCASIONS, OCCASION_LABELS, OCCASION_PROMO, leadPromoId, parseOccasion, rememberPromo, type Occasion } from '@/lib/promo';
 import { ArrowIcon, CheckMark, WhatsAppIcon } from './Icons';
 
 const UI = {
@@ -22,6 +23,8 @@ const UI = {
     pt: 'Local, data, tipo de sessão, quantas pessoas…',
   },
   budget: { en: 'Budget', pt: 'Orçamento' },
+  occasion: { en: 'Occasion', pt: 'Ocasião' },
+  occasionNone: { en: 'Choose…', pt: 'Escolher…' },
   budgetHint: { en: 'e.g. €300', pt: 'p. ex. 300 €' },
   optional: { en: 'optional', pt: 'opcional' },
   sending: { en: 'Sending…', pt: 'A enviar…' },
@@ -61,6 +64,8 @@ interface Prefill {
   city?: string;
   service?: string;
   photographer?: string;
+  /** `?occasion=christmas` from a promo page pre-selects the Occasion field. */
+  occasion?: Occasion;
 }
 
 export interface QuickRequestFormProps {
@@ -102,6 +107,7 @@ function WithQuery(props: QuickRequestFormProps) {
     city: params.get('city') ?? undefined,
     service: params.get('service') ?? undefined,
     photographer: params.get('photographer') ?? undefined,
+    occasion: parseOccasion(params.get('occasion')) ?? undefined,
   };
   return <Form {...props} prefill={prefill} />;
 }
@@ -112,6 +118,14 @@ function Form({ options, locale, prefill }: QuickRequestFormProps & { prefill: P
   const [contact, setContact] = useState('');
   const [details, setDetails] = useState('');
   const [budget, setBudget] = useState('');
+  const [occasion, setOccasion] = useState<Occasion | ''>(prefill.occasion ?? '');
+  // The Suspense fallback renders first without the query; pick it up when it arrives.
+  useEffect(() => {
+    if (!prefill.occasion) return;
+    setOccasion(prefill.occasion);
+    const promo = OCCASION_PROMO[prefill.occasion];
+    if (promo) rememberPromo(promo);
+  }, [prefill.occasion]);
   const [honeypot, setHoneypot] = useState('');
   const [errors, setErrors] = useState<{ name?: string; contact?: string }>({});
   const [status, setStatus] = useState<Status>('idle');
@@ -153,6 +167,7 @@ function Form({ options, locale, prefill }: QuickRequestFormProps & { prefill: P
     if (nextErrors.name || nextErrors.contact || !parsedContact) return;
 
     setStatus('sending');
+    const promoId = leadPromoId(occasion || null);
     const remarks = [details.trim(), prefill.photographer ? `Photographer: ${prefill.photographer}` : '']
       .filter(Boolean)
       .join('\n');
@@ -163,6 +178,8 @@ function Form({ options, locale, prefill }: QuickRequestFormProps & { prefill: P
       serviceSlug: session?.slug,
       budget: budget.trim() || undefined,
       remarks: remarks || undefined,
+      preferences: occasion ? { occasion: OCCASION_LABELS[occasion].en } : undefined,
+      promoId: promoId ?? undefined,
       reference,
       source: 'booking',
       locale,
@@ -177,7 +194,14 @@ function Form({ options, locale, prefill }: QuickRequestFormProps & { prefill: P
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus('done');
-      track('booking_completed', { variant: 'simple', city: place?.slug, service: session?.slug });
+      const leadProps = {
+        city: place?.slug,
+        service: session?.slug,
+        occasion: occasion || undefined,
+        promo_id: promoId ?? undefined,
+      };
+      track('booking_completed', { variant: 'simple', ...leadProps });
+      track('generate_lead', { form: 'book', ...leadProps });
     } catch (e) {
       setStatus('failed');
       track('booking_failed', { variant: 'simple', reason: e instanceof Error ? e.message : 'network' });
@@ -299,6 +323,24 @@ function Form({ options, locale, prefill }: QuickRequestFormProps & { prefill: P
             className="field resize-y"
           />
         </Field>
+
+        <div className="sm:max-w-sm">
+          <Field id={`${id}-occasion`} label={<>{t(UI.occasion, locale)}{optional}</>}>
+            <select
+              id={`${id}-occasion`}
+              value={occasion}
+              onChange={(e) => setOccasion(parseOccasion(e.target.value) ?? '')}
+              className="field"
+            >
+              <option value="">{t(UI.occasionNone, locale)}</option>
+              {OCCASIONS.map((o) => (
+                <option key={o} value={o}>
+                  {OCCASION_LABELS[o][locale]}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
 
         <div className="sm:max-w-xs">
           <Field id={`${id}-budget`} label={<>{t(UI.budget, locale)}{optional}</>}>

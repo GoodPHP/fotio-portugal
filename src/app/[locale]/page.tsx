@@ -32,6 +32,7 @@ import HowItWorks from '@/components/HowItWorks';
 import GuaranteeBlock from '@/components/GuaranteeBlock';
 import Photographers from '@/components/Photographers';
 import ClientStories from '@/components/ClientStories';
+import HomeGiftBlock from '@/components/promo/HomeGiftBlock';
 import { FadeIn, Stagger, StaggerItem } from '@/components/Motion';
 import { CheckMark } from '@/components/Icons';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE, homeFaqs } from './content';
@@ -287,6 +288,9 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       <TrustBar locale={locale} />
+
+      {/* 20 Nov – 24 Dec only, switched on in the browser. */}
+      <HomeGiftBlock locale={locale} />
 
       <section aria-labelledby="sessions-heading" className="mx-auto max-w-[92rem] px-6 py-[var(--space-section)]">
         <SectionHeading

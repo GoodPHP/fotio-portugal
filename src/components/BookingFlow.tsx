@@ -10,6 +10,7 @@ import { CTA } from '@/lib/cta';
 import { GUARANTEE, MATCHING, REPLY_TIME, WEATHER } from '@/lib/promises';
 import { formatPrice, whatsappBookingLink } from '@/lib/site';
 import { track } from '@/lib/analytics';
+import { rememberedPromo } from '@/lib/promo';
 import { ArrowIcon, CheckMark, WhatsAppIcon } from './Icons';
 
 // ---------------------------------------------------------------------- copy
@@ -343,6 +344,7 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
         accessibility: prefAccessibility.trim() || undefined,
       },
       remarks: extra || undefined,
+      promoId: rememberedPromo() ?? undefined,
       reference,
       source: variant === 'compact' ? 'quick-match' : 'booking',
       locale,
@@ -358,6 +360,7 @@ function Flow({ options, locale, variant = 'full', prefill }: BookingFlowProps &
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus('done');
       track('booking_completed', { variant, city: place, service: session, people });
+      track('generate_lead', { form: variant === 'compact' ? 'home' : 'booking', city: place, service: session });
     } catch (e) {
       setStatus('failed');
       track('booking_failed', { variant, reason: e instanceof Error ? e.message : 'network' });

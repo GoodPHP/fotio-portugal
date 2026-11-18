@@ -17,6 +17,8 @@ import CtaBand from '@/components/CtaBand';
 import TrackView from '@/components/TrackView';
 import { CheckMark } from '@/components/Icons';
 import { serviceHref } from '@/lib/routes';
+import { PROMO_IDS } from '@/lib/promo';
+import PromoLink from '@/components/promo/PromoLink';
 import { META_TITLE, META_DESCRIPTION, OG_IMAGE_ALT, SEO_PROSE } from './content';
 
 /** The session that fronts the price list on social previews. */
@@ -46,6 +48,11 @@ const COPY = {
     pt: 'O preço final é confirmado por escrito antes de reservar. Respondemos em cerca de 2 horas, durante o dia útil.',
   },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
+  giftNote: {
+    en: 'Giving a session as a present? A couple, family or proposal session is also available as a gift card.',
+    pt: 'Quer oferecer uma sessão? A sessão de casal, de família ou de pedido de casamento também existe como vale-presente.',
+  },
+  giftLink: { en: 'Gift card', pt: 'Vale-presente' },
 } as const;
 
 function c(key: Exclude<keyof typeof COPY, 'addons'>, locale: Locale): string {
@@ -188,6 +195,13 @@ export default async function PricingPage({
             </ul>
           </section>
         </div>
+
+        <p className="mt-8 text-brand-muted">
+          {c('giftNote', locale)}{' '}
+          <PromoLink href="/gift-card" promoId={PROMO_IDS.gift} placement="pricing" className="link-ruled">
+            {c('giftLink', locale)}
+          </PromoLink>
+        </p>
 
         <div className="mt-16 space-y-14">
           {Array.from(grouped.entries()).map(([category, list]) => (

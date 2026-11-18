@@ -9,7 +9,7 @@ import { isAnalyticsEvent, track, type AnalyticsProps } from '@/lib/analytics';
  * Server components mark their links instead of becoming client components
  * to attach an onClick. Clicks on any `wa.me` link are recorded as
  * `whatsapp_clicked` even when unmarked, so no WhatsApp entry point can be
- * missed by forgetting an attribute. FAQ disclosures report `faq_opened`
+ * missed by forgetting an attribute; each also sends `whatsapp_click`. FAQ disclosures report `faq_opened`
  * through the `toggle` event, which does not bubble and is caught on capture.
  */
 export default function TrackClicks() {
@@ -28,6 +28,8 @@ export default function TrackClicks() {
       const isWhatsApp = el instanceof HTMLAnchorElement && el.href.includes('wa.me/');
       if (declared && isAnalyticsEvent(declared)) track(declared, props);
       if (isWhatsApp && declared !== 'whatsapp_clicked') track('whatsapp_clicked', props);
+      // The GA4-style name as well, so a report built on either name sees every click.
+      if (isWhatsApp || declared === 'whatsapp_clicked') track('whatsapp_click', props);
     }
 
     function onToggle(event: Event) {

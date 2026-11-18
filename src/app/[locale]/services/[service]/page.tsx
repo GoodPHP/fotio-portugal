@@ -47,6 +47,8 @@ import Photographers from '@/components/Photographers';
 import ClientStories from '@/components/ClientStories';
 import { portfolioImages } from '@/lib/portfolio';
 import { bookHref as bookHrefFor, leafHref, serviceAlternateParams } from '@/lib/routes';
+import { PROMO_IDS } from '@/lib/promo';
+import PromoLink from '@/components/promo/PromoLink';
 
 // Fully prerendered — see the note on the leaf route. Releasing the next batch
 // of drip-published pages is a rebuild, not a revalidation.
@@ -397,6 +399,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
           intro={labels.prepareIntro}
           items={tx(landing.prepare, locale)}
         />
+      )}
+
+      {service.slug === 'proposal' && (
+        <section aria-labelledby="service-xmas-heading" className="mx-auto max-w-[92rem] px-6 pb-12">
+          <div className="tile flex flex-col gap-4 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <h2 id="service-xmas-heading" className="font-display text-2xl font-bold text-brand-dark">
+                {{ en: 'Proposing at Christmas or New Year?', pt: 'Vai pedir em casamento no Natal ou no Ano Novo?' }[locale]}
+              </h2>
+              <p className="mt-2 text-brand-muted">
+                {{
+                  en: 'Where the lights are in Lisbon, Sintra and Porto, the December sunset, and the plan B for rain.',
+                  pt: 'Onde estão as luzes em Lisboa, Sintra e no Porto, o pôr do sol de dezembro e o plano B para a chuva.',
+                }[locale]}
+              </p>
+            </div>
+            <PromoLink href="/services/christmas-proposal" promoId={PROMO_IDS.proposal} placement="proposal_service" className="btn btn-outline justify-center">
+              {{ en: 'Christmas proposal', pt: 'Pedido de casamento no Natal' }[locale]}
+            </PromoLink>
+          </div>
+        </section>
       )}
 
       {/* Cities grid */}

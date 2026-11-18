@@ -4,6 +4,7 @@ import { useId, useState } from 'react';
 import type { Locale } from '@/lib/locales';
 import { SITE_NAME, whatsappLink } from '@/lib/site';
 import { track } from '@/lib/analytics';
+import { rememberedPromo } from '@/lib/promo';
 import { WhatsAppIcon } from './Icons';
 
 export interface LeadFormServiceOption {
@@ -124,6 +125,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
           serviceSlug: serviceSlug || undefined,
           remarks: message.trim(),
           source: 'contact',
+          promoId: rememberedPromo() ?? undefined,
           locale,
           honeypot,
         }),
@@ -133,6 +135,7 @@ export default function LeadForm({ services, cities, locale }: LeadFormProps) {
       if (res.ok) {
         setDone(true);
         track('contact_submitted', { city: citySlug || undefined, service: serviceSlug || undefined });
+        track('generate_lead', { form: 'contact', city: citySlug || undefined, service: serviceSlug || undefined });
       } else {
         setFormError(t('errSubmit', locale));
       }

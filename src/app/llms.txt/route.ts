@@ -61,6 +61,8 @@ export function GET(): Response {
     ['/about', 'how the network is vetted and how booking works'],
     ['/contact', 'enquiries'],
     ['/book', 'the booking form'],
+    ['/services/christmas-proposal', 'Christmas and New Year proposal photography in Lisbon, Sintra and Porto'],
+    ['/gift-card', 'gift cards for a couple, family or proposal session'],
   ] as const;
   for (const [route, note] of hubs) {
     push(`- [${route}](${absoluteUrl(DEFAULT_LOCALE, route)}): ${note}`);

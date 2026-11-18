@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { getCity, getServiceByAnySlug } from './catalog';
 import { LOCALES } from './locales';
 import { GROUP_SIZE_VALUES, OTHER } from './booking-options';
+import { GIFT_TYPES, PROMO_IDS } from './promo';
 
 export { OTHER };
 
@@ -53,7 +54,22 @@ export const LeadSchema = z
   remarks: z.string().max(2000).optional(),
   budget: note(100),
   reference: z.string().max(20).optional(),
-  source: z.enum(['booking', 'quick-match', 'contact']).default('contact'),
+  source: z.enum(['booking', 'quick-match', 'contact', 'gift-card']).default('contact'),
+  // The promotion the visitor came through, for the alert. Same ids as GA4.
+  promoId: z.enum(Object.values(PROMO_IDS) as [string, ...string[]]).optional(),
+  // A gift card request (source 'gift-card'). The buyer is `name` and
+  // `email`/`phone`; the card itself is sent by hand as a PDF.
+  gift: z
+    .object({
+      type: z.enum(GIFT_TYPES),
+      recipientName: z.string().trim().min(1).max(100),
+      delivery: z.enum(['buyer', 'recipient']),
+      // Only when the card goes straight to the recipient: when to send it.
+      sendDate: z.string().max(40).optional(),
+      recipientContact: note(200),
+      message: note(1000),
+    })
+    .optional(),
   locale: z.enum(LOCALES),
   // Spam trap: legitimate clients leave this empty.
   honeypot: z.string().optional(),
@@ -61,6 +77,10 @@ export const LeadSchema = z
   .refine((lead) => Boolean(lead.email || lead.phone), {
     message: 'email_or_phone_required',
     path: ['email'],
+  })
+  .refine((lead) => lead.source !== 'gift-card' || Boolean(lead.gift), {
+    message: 'gift_required',
+    path: ['gift'],
   });
 
 export type Lead = z.infer<typeof LeadSchema>;
