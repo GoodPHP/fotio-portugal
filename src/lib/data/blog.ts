@@ -4,6 +4,7 @@ import { BEST_TIME_PHOTOSHOOT_PORTUGAL } from '../blog/best-time-photoshoot-port
 import { WHAT_TO_WEAR_PHOTOSHOOT_PORTUGAL } from '../blog/what-to-wear-photoshoot-portugal';
 import { LISBON_PHOTOSHOOT_LOCATIONS } from '../blog/lisbon-photoshoot-locations';
 import { REAL_ESTATE_PHOTOGRAPHY_PORTUGAL } from '../blog/real-estate-photography-portugal';
+import { GETTING_MARRIED_IN_PORTUGAL } from '../blog/getting-married-in-portugal';
 import { BLOG_GUIDES } from './blog-guides';
 
 /**
@@ -15,10 +16,10 @@ import { BLOG_GUIDES } from './blog-guides';
  * enquiries — when to come, and what to wear — and each links into the
  * services and places that sell the answer.
  *
- * Still planned: marrying here as a foreigner, and where permission is needed
- * to photograph.
+ * Still planned: where permission is needed to photograph.
  */
 export const BLOG_POSTS: BlogPost[] = [
+  GETTING_MARRIED_IN_PORTUGAL,
   REAL_ESTATE_PHOTOGRAPHY_PORTUGAL,
   LISBON_PHOTOSHOOT_LOCATIONS,
   BEST_TIME_PHOTOSHOOT_PORTUGAL,
