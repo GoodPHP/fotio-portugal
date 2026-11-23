@@ -17,7 +17,16 @@ export function windows(today: string, days: number): { current: Window; previou
 }
 
 /** The events that mean a visitor tried to book or get in touch. */
-export const CONVERSIONS = ['booking_started', 'booking_completed', 'whatsapp_clicked', 'contact_submitted'] as const;
+export const CONVERSIONS = [
+  'booking_started',
+  'booking_completed',
+  'whatsapp_clicked',
+  'contact_submitted',
+  // Gift-card requests since the 2026 Christmas promo. `generate_lead` is not
+  // listed: it fires alongside booking_completed and contact_submitted, so it
+  // would count the same lead twice.
+  'gift_card_request',
+] as const;
 
 export interface DayChannel {
   date: string;
