@@ -13,7 +13,7 @@ const AI_CRAWLERS = [
 ];
 
 /** Endpoints that answer to forms, not to readers. */
-const DISALLOW = ['/api/'];
+const DISALLOW = ['/api/', '/wa'];
 
 export default function robots(): MetadataRoute.Robots {
   return {

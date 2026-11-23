@@ -19,7 +19,7 @@ import { ptAt } from './pt-grammar';
  */
 export const CTA = {
   checkAvailability: { en: 'Check availability', pt: 'Ver disponibilidade' } as Localized,
-  chatWhatsapp: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' } as Localized,
+  chatWhatsapp: { en: 'WhatsApp', pt: 'WhatsApp' } as Localized,
 };
 
 /**

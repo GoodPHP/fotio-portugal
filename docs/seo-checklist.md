@@ -217,10 +217,10 @@ for it, in each language it is served in, and indexation follows the copy.
 
 ## Still open
 
-- [ ] **No `ContactPoint` in the `Organization` node.** `NEXT_PUBLIC_WHATSAPP_NUMBER`
-      is still the `33000000000` placeholder, and publishing a fake telephone in
-      structured data is worse than publishing none. Add it once the real number
-      is configured.
+- [ ] **No `ContactPoint` in the `Organization` node.** Deliberate since
+      2026-11-23: the owner wants the WhatsApp number kept off the pages (every
+      button goes through `/wa`), so it is not published in structured data
+      either.
 
 
 ## Measured on the built output

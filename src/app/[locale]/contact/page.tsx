@@ -27,7 +27,7 @@ const COPY = {
     pt: 'Tem um pedido especial ou uma dúvida? Escreva-nos — respondemos em cerca de 2 horas, durante o dia útil, por e-mail ou WhatsApp.',
   },
   whatsappTitle: { en: 'Prefer to chat?', pt: 'Prefere conversar?' },
-  whatsappCta: { en: 'Chat on WhatsApp', pt: 'Falar no WhatsApp' },
+  whatsappCta: { en: 'WhatsApp', pt: 'WhatsApp' },
   breadcrumbHome: { en: 'Home', pt: 'Início' },
 } as const;
 
