@@ -126,22 +126,27 @@ export default async function NavBar({ locale }: { locale: Locale }) {
             <LocaleSwitcher current={locale} homeHrefs={homeHrefs} />
 
             {/*
-              The secondary action, deliberately quiet: an icon beside the
-              primary button rather than a second button competing with it.
-              Hidden on phones, where the bottom bar carries it.
+              WhatsApp, in its own green and named, because the owner wants it
+              seen on every page. Icon only between 640 and 1024px, where the
+              header has no room for the word; hidden on phones, where the
+              bottom bar carries it. A wrapper does the hiding, as below.
             */}
-            <a
-              href={whatsappBookingLink({}, locale)}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t('whatsapp')}
-              title={t('whatsapp')}
-              data-track="whatsapp_clicked"
-              data-track-context="header"
-              className="hidden h-9 w-9 items-center justify-center border border-brand-rule-strong text-brand-dark transition-colors hover:border-brand-orange-deep hover:text-brand-orange-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange-deep sm:flex"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-            </a>
+            <div className="hidden shrink-0 sm:block">
+              <a
+                href={whatsappBookingLink({}, locale)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('whatsapp')}
+                title={t('whatsapp')}
+                data-track="whatsapp_clicked"
+                data-track-context="header"
+                className="btn btn-whatsapp btn-sm shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-dark"
+                style={{ paddingInline: '0.75rem' }}
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                <span className="hidden lg:inline">{t('whatsapp')}</span>
+              </a>
+            </div>
 
             {/*
               The action. Below 640px it steps aside for the fixed bottom bar

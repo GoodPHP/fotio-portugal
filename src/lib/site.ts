@@ -83,8 +83,16 @@ export const NUMBER_LOCALE: Record<Locale, string> = {
 
 // -------------------------------------------------------------------- contact
 
-/** WhatsApp business number, international format; non-digits are stripped. */
-export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '351000000000').replace(/[^0-9]/g, '');
+/**
+ * WhatsApp business number, international format, digits only (+33 7 58 54 31 38,
+ * set by the owner 2026-11-23).
+ *
+ * A constant rather than an env variable: a value set in the hosting
+ * dashboard silently overrode `.env.production`, so the number on the live
+ * site was not the one in the repository. It is never printed on a page;
+ * every button links to `/wa`, which redirects here (see `whatsappLink`).
+ */
+export const WHATSAPP_NUMBER = '33758543138';
 
 /**
  * Cloudflare Web Analytics token. Absent means no beacon, which is what a
@@ -115,9 +123,21 @@ export const SOCIAL_LINKS: string[] = [
  */
 export const TWITTER_HANDLE = (process.env.NEXT_PUBLIC_TWITTER_HANDLE ?? '').trim();
 
-/** Build a WhatsApp click-to-chat deep link with a prefilled message. */
+/** The site's own WhatsApp hop. `src/app/wa/route.ts` redirects it to `wa.me`. */
+export const WHATSAPP_PATH = '/wa';
+
+/**
+ * A WhatsApp link with a prefilled message, through `/wa` so the number never
+ * appears in the page source.
+ */
 export function whatsappLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `${WHATSAPP_PATH}?text=${encodeURIComponent(message)}`;
+}
+
+/** The `wa.me` deep link `/wa` redirects to. */
+export function whatsappDeepLink(message: string): string {
+  const text = message ? `?text=${encodeURIComponent(message)}` : '';
+  return `https://wa.me/${WHATSAPP_NUMBER}${text}`;
 }
 
 /** What a visitor has told us so far, already in their language. */

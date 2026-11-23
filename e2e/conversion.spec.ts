@@ -42,7 +42,7 @@ test.describe('the two actions', () => {
 
   test('the hero WhatsApp link carries a structured message', async ({ page }) => {
     await page.goto('/');
-    const href = await page.locator('main a[href*="wa.me/"]').first().getAttribute('href');
+    const href = await page.locator('main a[href^="/wa?"]').first().getAttribute('href');
     const text = decodeURIComponent(href!.split('text=')[1]);
     expect(text).toMatch(/I'd like to book a photography session in Portugal/);
     expect(text).toMatch(/Where:/);

@@ -7,7 +7,7 @@ import { isAnalyticsEvent, track, type AnalyticsProps } from '@/lib/analytics';
  * One delegated listener for every `data-track` element on the page.
  *
  * Server components mark their links instead of becoming client components
- * to attach an onClick. Clicks on any `wa.me` link are recorded as
+ * to attach an onClick. Clicks on any WhatsApp link (`/wa` or `wa.me`) are recorded as
  * `whatsapp_clicked` even when unmarked, so no WhatsApp entry point can be
  * missed by forgetting an attribute; each also sends `whatsapp_click`. FAQ disclosures report `faq_opened`
  * through the `toggle` event, which does not bubble and is caught on capture.
@@ -16,7 +16,7 @@ export default function TrackClicks() {
   useEffect(() => {
     function onClick(event: MouseEvent) {
       const target = event.target as Element | null;
-      const el = target?.closest?.('[data-track], a[href*="wa.me/"]');
+      const el = target?.closest?.('[data-track], a[href*="wa.me/"], a[href^="/wa?"], a[href="/wa"]');
       if (!el) return;
 
       const props: AnalyticsProps = { path: window.location.pathname };
@@ -25,7 +25,8 @@ export default function TrackClicks() {
       }
 
       const declared = el.getAttribute('data-track');
-      const isWhatsApp = el instanceof HTMLAnchorElement && el.href.includes('wa.me/');
+      const isWhatsApp =
+        el instanceof HTMLAnchorElement && (el.href.includes('wa.me/') || el.pathname === '/wa');
       if (declared && isAnalyticsEvent(declared)) track(declared, props);
       if (isWhatsApp && declared !== 'whatsapp_clicked') track('whatsapp_clicked', props);
       // The GA4-style name as well, so a report built on either name sees every click.
